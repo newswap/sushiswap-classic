@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { NavLink } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 interface MobileMenuProps {
   onDismiss: () => void
@@ -9,13 +10,15 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
+  const { t } = useTranslation()
+
   if (visible) {
     return (
       <StyledMobileMenuWrapper>
         <StyledBackdrop onClick={onDismiss} />
         <StyledMobileMenu>
           <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
-            Home
+            {t('Home')}
           </StyledLink>
           <StyledLink
             exact
@@ -23,7 +26,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             to="/farms"
             onClick={onDismiss}
           >
-            Farms
+            {t('Farms')}           
           </StyledLink>
           <StyledLink
             exact
@@ -31,7 +34,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             to="/staking"
             onClick={onDismiss}
           >
-            Staking
+            {t('Staking')}    
           </StyledLink>
         </StyledMobileMenu>
       </StyledMobileMenuWrapper>

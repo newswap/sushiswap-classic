@@ -2,13 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import chef from '../../assets/img/chef.png'
+import { useTranslation } from 'react-i18next'
 
 const Logo: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <StyledLogo to="/">
       <img src={chef} height="32" style={{ marginTop: -4 }} />
       <StyledText>
-        SushiSwap <MasterChefText>MasterChef</MasterChefText>
+        NewSwap <MasterChefText>{t('Farm')}</MasterChefText>
       </StyledText>
     </StyledLogo>
   )

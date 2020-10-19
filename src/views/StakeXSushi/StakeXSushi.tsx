@@ -12,15 +12,19 @@ import {contractAddresses} from '../../sushi/lib/constants'
 import {getXSushiSupply} from "../../sushi/utils";
 import BigNumber from "bignumber.js";
 import {getBalanceNumber} from "../../utils/formatBalance";
+import { useTranslation } from 'react-i18next'
+
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
 
 const StakeXSushi: React.FC = () => {
   const {
     tokenAddress,
   } = {
-    tokenAddress: contractAddresses.xSushi[1],
+    tokenAddress: contractAddresses.xSushi[CHAIN_ID],
   }
 
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const { t } = useTranslation()
 
   const sushi = useSushi()
   const {ethereum} = useWallet()
@@ -65,10 +69,7 @@ const StakeXSushi: React.FC = () => {
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <StyledInfo>
-              ℹ️️ You will earn a portion of the swaps fees based on the amount
-              of xSushi held relative the weight of the staking. xSushi can be minted
-              by staking Sushi. To redeem Sushi staked plus swap fees convert xSushi
-              back to Sushi. {totalSupply ? `There are currently ${getBalanceNumber(totalSupply)} xSUSHI in the whole pool.` : '' }
+              ℹ️️ {t('xNSTTips')} {totalSupply ? t('There are currently') + ` ${getBalanceNumber(totalSupply)} ` + t('xNST in the whole pool.') : '' }
             </StyledInfo>
           </StyledCardWrapper>
         </StyledCardsWrapper>

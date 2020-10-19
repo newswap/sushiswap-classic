@@ -14,9 +14,13 @@ import ModalContent from '../../ModalContent'
 import ModalTitle from '../../ModalTitle'
 import Spacer from '../../Spacer'
 import Value from '../../Value'
+import { useTranslation } from 'react-i18next'
+
+const EXPLORER_URL = process.env.REACT_APP_EXPLORER_URL
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, reset } = useWallet()
+  const { t } = useTranslation()
 
   const handleSignOutClick = useCallback(() => {
     onDismiss!()
@@ -28,7 +32,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   return (
     <Modal>
-      <ModalTitle text="My Account" />
+      <ModalTitle text={t('My Account')} />
       <ModalContent>
         <Spacer />
 
@@ -39,26 +43,26 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
             </CardIcon>
             <StyledBalance>
               <Value value={getBalanceNumber(sushiBalance)} />
-              <Label text="SUSHI Balance" />
+              <Label text={t('NST Balance')} />
             </StyledBalance>
           </StyledBalanceWrapper>
         </div>
 
         <Spacer />
         <Button
-          href={`https://etherscan.io/address/${account}`}
-          text="View on Etherscan"
+          href={EXPLORER_URL + `/address/${account}`}
+          text={t('View on NewtonExplorer')}
           variant="secondary"
         />
         <Spacer />
         <Button
           onClick={handleSignOutClick}
-          text="Sign out"
+          text={t('Sign out')}
           variant="secondary"
         />
       </ModalContent>
       <ModalActions>
-        <Button onClick={onDismiss} text="Cancel" />
+        <Button onClick={onDismiss} text={t('Cancel')} />
       </ModalActions>
     </Modal>
   )

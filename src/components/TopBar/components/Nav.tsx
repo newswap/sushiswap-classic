@@ -1,30 +1,36 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
+
+const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
+const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
 
 const Nav: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <StyledNav>
       <StyledLink exact activeClassName="active" to="/">
-        Home
+        { t('Home') }
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/farms">
-        Menu
+        { t('Menu') }
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/staking">
-        Staking
+        { t('Staking') }
       </StyledLink>
       <StyledAbsoluteLink
-        href="https://exchange.sushiswapclassic.org"
+        href={ EXCHANGE_URL }
         target="_blank"
       >
-        Exchange
+        { t('Exchange') }
       </StyledAbsoluteLink>
       <StyledAbsoluteLink
-        href="https://help.sushidocs.com/"
+        href={ NEWSWAP_URL }
         target="_blank"
       >
-        About
+        { t('About') }
       </StyledAbsoluteLink>
     </StyledNav>
   )

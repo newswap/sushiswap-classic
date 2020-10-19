@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, Suspense } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import { UseWalletProvider } from 'use-wallet'
@@ -15,6 +15,9 @@ import Farms from './views/Farms'
 import Home from './views/Home'
 import Staking from "./views/Staking";
 
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
+
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
 
@@ -27,24 +30,26 @@ const App: React.FC = () => {
   }, [setMobileMenu])
 
   return (
-    <Providers>
-      <Router>
-        <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/farms">
-            <Farms />
-          </Route>
-          <Route path="/staking">
-            <Staking />
-          </Route>
-        </Switch>
-      </Router>
-      <Disclaimer />
-    </Providers>
+    <Suspense fallback={null}>
+      <Providers>
+        <Router>
+          <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
+          <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+          <Switch>
+            <Route path="/" exact>
+              <Home />
+            </Route>
+            <Route path="/farms">
+              <Farms />
+            </Route>
+            <Route path="/staking">
+              <Staking />
+            </Route>
+          </Switch>
+        </Router>
+        {/* <Disclaimer /> */}
+      </Providers>
+    </Suspense>
   )
 }
 
@@ -52,9 +57,9 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <UseWalletProvider
-        chainId={1}
+        chainId={CHAIN_ID}
         connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
+          walletconnect: { rpcUrl: NEWCHAIN_RPC },
         }}
       >
         <SushiProvider>

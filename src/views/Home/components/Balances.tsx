@@ -16,6 +16,9 @@ import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
 import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
+import { useTranslation } from 'react-i18next'
+
+const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
@@ -74,6 +77,7 @@ const Balances: React.FC = () => {
   const sushi = useSushi()
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
+  const { t } = useTranslation()
 
   useEffect(() => {
     async function fetchTotalSupply() {
@@ -94,18 +98,18 @@ const Balances: React.FC = () => {
               <SushiIcon />
               <Spacer />
               <div style={{ flex: 1 }}>
-                <Label text="Your SUSHI Balance" />
+                <Label text={t('Your NST Balance')} />
                 <Value
-                  value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
+                  value={!!account ? getBalanceNumber(sushiBalance) : t('Locked')}
                 />
               </div>
             </StyledBalance>
           </StyledBalances>
         </CardContent>
         <Footnote>
-          Pending harvest
+          {t('Pending harvest')}
           <FootnoteValue>
-            <PendingRewards /> SUSHI
+            <PendingRewards /> NST
           </FootnoteValue>
         </Footnote>
       </Card>
@@ -113,14 +117,14 @@ const Balances: React.FC = () => {
 
       <Card>
         <CardContent>
-          <Label text="Total SUSHI Supply" />
+          <Label text={t('Total NST Supply')} />
           <Value
-            value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
+            value={totalSupply ? getBalanceNumber(totalSupply) : t('Locked')}
           />
         </CardContent>
         <Footnote>
-          New rewards per block
-          <FootnoteValue>100 SUSHI</FootnoteValue>
+          {t('New rewards per block')}
+          <FootnoteValue>{NST_PER_BLOCK} NST</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

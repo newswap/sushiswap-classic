@@ -11,8 +11,11 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
 import StakeXSushi from "../StakeXSushi";
+import { useTranslation } from 'react-i18next'
 
 const Staking: React.FC = () => {
+  const { t } = useTranslation()
+
   const {path} = useRouteMatch()
   const {account} = useWallet()
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal/>)
@@ -24,8 +27,8 @@ const Staking: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={chef} height="120"/>}
-                subtitle="Welcome to the Sushi Bar, stake Sushi to earn Sushi."
-                title="Irasshaimase!"
+                subtitle={t('welcomeNSTBar')}
+                title={t('Irasshaimase!')}
               />
             </Route>
             <StakeXSushi/>
@@ -41,7 +44,7 @@ const Staking: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text="🔓 Unlock Wallet"
+              text={`🔓 ` + t('Unlock Wallet')}
             />
           </div>
         )}

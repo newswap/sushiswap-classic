@@ -16,18 +16,21 @@ import useEnter from "../../../hooks/useEnter";
 import useLeave from "../../../hooks/useLeave";
 import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
 import useApproveStaking from "../../../hooks/useApproveStaking";
+import { useTranslation } from 'react-i18next'
 
 interface StakeProps {
 }
 
-const StakeSushi: React.FC<StakeProps> = ({}) => {
-  const tokenName = "SUSHI"
-  const [requestedApproval, setRequestedApproval] = useState(false)
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
 
+const StakeSushi: React.FC<StakeProps> = ({}) => {
+  const tokenName = "NST"
+  const [requestedApproval, setRequestedApproval] = useState(false)
   const allowance = useAllowanceStaking()
   const {onApprove} = useApproveStaking()
+  const { t } = useTranslation()
 
-  const tokenBalance = useTokenBalance(contractAddresses.sushi[1])
+  const tokenBalance = useTokenBalance(contractAddresses.sushi[CHAIN_ID])
 
   const {onEnter} = useEnter()
   const {onLeave} = useLeave()
@@ -60,20 +63,20 @@ const StakeSushi: React.FC<StakeProps> = ({}) => {
           <StyledCardHeader>
             <CardIcon>👨🏻‍🍳</CardIcon>
             <Value value={getBalanceNumber(tokenBalance)}/>
-            <Label text={`SUSHI Tokens Available`}/>
+            <Label text={t('NST Tokens Available')}/>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={`Approve SUSHI`}
+                text={t('Approve NST')}
               />
             ) : (
               <>
                 <Button
                   disabled={tokenBalance.eq(new BigNumber(0))}
-                  text="Convert to xSUSHI"
+                  text={t('Convert to xNST')}
                   onClick={onPresentDeposit}
                 />
                 <StyledActionSpacer/>

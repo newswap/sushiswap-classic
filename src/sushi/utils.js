@@ -14,9 +14,15 @@ const GAS_LIMIT = {
 }
 
 export const getMasterChefAddress = (sushi) => {
+  console.log('====getMasterChefAddress========')
+  console.log(sushi?.masterChefAddress)
+
   return sushi && sushi.masterChefAddress
 }
 export const getSushiAddress = (sushi) => {
+  console.log('====getSushiAddress========')
+  console.log(sushi?.sushiAddress)
+
   return sushi && sushi.sushiAddress
 }
 export const getWethContract = (sushi) => {
@@ -57,7 +63,7 @@ export const getFarms = (sushi) => {
           tokenAddress,
           tokenSymbol,
           tokenContract,
-          earnToken: 'sushi',
+          earnToken: 'nst',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
         }),
@@ -84,6 +90,9 @@ export const getTotalLPWethValue = async (
   tokenContract,
   pid,
 ) => {
+  console.log('getTotalLPWethValue========')
+  console.log(lpContract.options.address)
+
   // Get balance of the token address
   const tokenAmountWholeLP = await tokenContract.methods
     .balanceOf(lpContract.options.address)
@@ -133,6 +142,9 @@ export const approveAddress = async (lpContract, address, account) => {
 }
 
 export const getSushiSupply = async (sushi) => {
+  console.log('====getSushiSupply========')
+  console.log(sushi?.contracts.sushi)
+
   return new BigNumber(await sushi.contracts.sushi.methods.totalSupply().call())
 }
 

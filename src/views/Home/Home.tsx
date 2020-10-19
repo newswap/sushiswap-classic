@@ -7,31 +7,34 @@ import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
+import { useTranslation } from 'react-i18next'
 
 const Home: React.FC = () => {
+  const { t } = useTranslation()
+
   return (
     <Page>
       <PageHeader
         icon={<img src={chef} height={120} />}
-        title="MasterChef is Ready"
-        subtitle="Stake SushiSwap LP tokens to claim your very own yummy SUSHI!"
+        title={t('MasterChef is Ready')}
+        subtitle={t('stakeLP')}
       />
 
       <Container>
         <Balances />
       </Container>
       <Spacer size="lg" />
-      <StyledInfo>
+      {/* <StyledInfo>
         🏆<b>Pro Tip</b>: SUSHI-ETH SLP token pool yields 4.8x more token
         rewards per block.
-      </StyledInfo>
+      </StyledInfo> */}
       <Spacer size="lg" />
       <div
         style={{
           margin: '0 auto',
         }}
       >
-        <Button text="🔪 See the Menu" to="/farms" variant="secondary" />
+        <Button text={`🔪 ` + t('See the Menu')} to="/farms" variant="secondary" />
       </div>
     </Page>
   )

@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'
+import './i18n'
 
 import ReactGA from "react-ga";
 import { isMobile } from "react-device-detect";

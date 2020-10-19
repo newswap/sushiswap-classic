@@ -13,19 +13,21 @@ import {Contract} from "web3-eth-contract";
 import useModal from "../../../hooks/useModal";
 import WithdrawModal from "./WithdrawModal";
 import useLeave from "../../../hooks/useLeave";
+import { useTranslation } from 'react-i18next'
 
 interface HarvestProps {
   lpContract: Contract
 }
 
 const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
+  const { t } = useTranslation()
 
   const xSushiBalance = useTokenBalance(lpContract.options.address)
   const [pendingTx, setPendingTx] = useState(false)
 
   const {onLeave} = useLeave()
 
-  const tokenName = "xSUSHI"
+  const tokenName = "xNST" 
 
   const [onPresentLeave] = useModal(
     <WithdrawModal
@@ -42,12 +44,12 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
           <StyledCardHeader>
             <CardIcon>🍣</CardIcon>
             <Value value={getBalanceNumber(xSushiBalance)}/>
-            <Label text="xSUSHI (SushiBar) Available"/>
+            <Label text={t('xNST (NSTBar) Available')}/>
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               disabled={!xSushiBalance.toNumber() || pendingTx}
-              text={pendingTx ? 'Converting to SUSHI' : 'Convert to SUSHI'}
+              text={pendingTx ? t('Converting to NST') : t('Convert to NST')}
               onClick={async () => {
                 setPendingTx(true)
                 await onPresentLeave()

@@ -14,8 +14,11 @@ import useModal from '../../hooks/useModal'
 import Farm from '../Farm'
 
 import FarmCards from './components/FarmCards'
+import { useTranslation } from 'react-i18next'
 
 const Farms: React.FC = () => {
+  const { t } = useTranslation()
+
   const { path } = useRouteMatch()
   const { account } = useWallet()
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
@@ -27,8 +30,9 @@ const Farms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={chef} height="120" />}
-                subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
-                title="Select Your Favorite Dishes"
+                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
+                subtitle={t('Earn NST tokens by staking NewSwap LP Tokens.')}
+                title={t('Select Your Favorite Dishes')}
               />
               <FarmCards />
             </Route>
@@ -47,7 +51,7 @@ const Farms: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text="🔓 Unlock Wallet"
+              text={`🔓 ` + t('Unlock Wallet')}
             />
           </div>
         )}

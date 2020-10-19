@@ -12,6 +12,9 @@ import { getMasterChefContract } from '../../sushi/utils'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
+import { useTranslation } from 'react-i18next'
+
+const INFO_URL = process.env.REACT_APP_INFO_URL
 
 const Farm: React.FC = () => {
   const { farmId } = useParams()
@@ -39,6 +42,7 @@ const Farm: React.FC = () => {
 
   const sushi = useSushi()
   const { ethereum } = useWallet()
+  const { t } = useTranslation()
 
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
@@ -58,7 +62,7 @@ const Farm: React.FC = () => {
     <>
       <PageHeader
         icon={icon}
-        subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
+        subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
         title={name}
       />
       <StyledFarm>
@@ -77,15 +81,14 @@ const Farm: React.FC = () => {
         </StyledCardsWrapper>
         <Spacer size="lg" />
         <StyledInfo>
-          ⭐️ Every time you stake and unstake LP tokens, the contract will
-          automagically harvest SUSHI rewards for you!
+          {t('depositTips')}
         </StyledInfo>
         <Spacer size="md" />
         <StyledLink
           target="__blank"
-          href={`https://sushiswap.vision/pair/${lpTokenAddress}`}
+          href={INFO_URL + `/pair/${lpTokenAddress}`}
         >
-          {lpTokenName} Info
+          {lpTokenName} {t('Info')}
         </StyledLink>
       </StyledFarm>
     </>

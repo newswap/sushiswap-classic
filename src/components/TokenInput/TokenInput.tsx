@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import Button from '../Button'
 import Input, { InputProps } from '../Input'
+import { useTranslation } from 'react-i18next'
 
 interface TokenInputProps extends InputProps {
   max: number | string,
@@ -17,9 +18,11 @@ const TokenInput: React.FC<TokenInputProps> = ({
   onSelectMax,
   value,
 }) => {
+  const { t } = useTranslation()
+
   return (
     <StyledTokenInput>
-      <StyledMaxText>{max.toLocaleString()} {symbol} Available</StyledMaxText>
+      <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
       <Input
         endAdornment={(
           <StyledTokenAdornmentWrapper>

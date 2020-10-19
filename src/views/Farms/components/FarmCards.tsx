@@ -17,6 +17,9 @@ import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
 import { getEarned, getMasterChefContract } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
+import { useTranslation } from 'react-i18next'
+
+const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
 interface FarmWithStakedValue extends Farm, StakedValue {
   apy: BigNumber
@@ -26,9 +29,10 @@ const FarmCards: React.FC = () => {
   const [farms] = useFarms()
   const { account } = useWallet()
   const stakedValue = useAllStakedValue()
+  const { t } = useTranslation()
 
   const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'SUSHI',
+    ({ tokenSymbol }) => tokenSymbol === 'NST',
   )
 
   console.log(stakedValue);
@@ -38,8 +42,8 @@ const FarmCards: React.FC = () => {
       ? stakedValue[sushiIndex].tokenPriceInWeth
       : new BigNumber(0)
 
-  const BLOCKS_PER_YEAR = new BigNumber(2336000)
-  const SUSHI_PER_BLOCK = new BigNumber(100)
+  const BLOCKS_PER_YEAR = new BigNumber(10512000)
+  const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -80,7 +84,7 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <Loader text={t('Cooking the rice ...')} />
         </StyledLoadingWrapper>
       )}
     </StyledCards>
@@ -94,6 +98,7 @@ interface FarmCardProps {
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, setStartTime] = useState(0)
   const [harvestable, setHarvestable] = useState(0)
+  const { t } = useTranslation()
 
   const { account } = useWallet()
   const { lpTokenAddress } = farm
@@ -130,20 +135,20 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'SUSHI' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'NST' && <StyledCardAccent />} 
       <Card>
         <CardContent>
           <StyledContent>
             <CardIcon>{farm.icon}</CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
-              <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
-              <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>{t('Deposit')} {farm.lpToken}</StyledDetail>
+              <StyledDetail>{t('Earn')} {farm.earnToken.toUpperCase()}</StyledDetail>
             </StyledDetails>
             <Spacer />
             <Button
               disabled={!poolActive}
-              text={poolActive ? 'Select' : undefined}
+              text={poolActive ? t('Select') : undefined}
               to={`/farms/${farm.id}`}
             >
               {!poolActive && (
@@ -154,7 +159,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <StyledInsight>
-              <span>APY</span>
+              <span>{t('APY')}</span>
               <span>
                 {farm.apy
                   ? `${farm.apy
@@ -163,7 +168,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
-                  : 'Loading ...'}
+                  : t('Loading ...')}
               </span>
               {/* <span>
                 {farm.tokenAmount
