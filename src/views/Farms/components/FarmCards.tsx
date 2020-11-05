@@ -35,8 +35,6 @@ const FarmCards: React.FC = () => {
     ({ tokenSymbol }) => tokenSymbol === 'NST',
   )
 
-  console.log(stakedValue);
-
   const sushiPrice =
     sushiIndex >= 0 && stakedValue[sushiIndex]
       ? stakedValue[sushiIndex].tokenPriceInWeth
@@ -44,6 +42,39 @@ const FarmCards: React.FC = () => {
 
   const BLOCKS_PER_YEAR = new BigNumber(10512000)
   const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
+
+  console.log('====FarmCards=====')
+  console.log(Number(sushiPrice))
+  console.log(farms)
+  console.log(stakedValue)
+  // console.log('=========')
+  // if(stakedValue[0]){
+  //   console.log(Number(stakedValue[0].poolWeight))
+  //   console.log(Number(stakedValue[0].tokenAmount))
+  //   console.log(Number(stakedValue[0].tokenPriceInWeth))
+  //   console.log(Number(stakedValue[0].totalWethValue))
+  //   console.log(Number(stakedValue[0].wethAmount))
+  //   const a = sushiPrice
+  //     .times(SUSHI_PER_BLOCK)
+  //     .times(BLOCKS_PER_YEAR)
+  //     .times(stakedValue[0].poolWeight)
+  //     .div(stakedValue[0].totalWethValue)
+  //   console.log(Number(a))
+    
+  //   console.log('=========')
+  //   console.log(Number(stakedValue[1].poolWeight))
+  //   console.log(Number(stakedValue[1].tokenAmount))
+  //   console.log(Number(stakedValue[1].tokenPriceInWeth))
+  //   console.log(Number(stakedValue[1].totalWethValue))
+  //   console.log(Number(stakedValue[1].wethAmount))
+
+  //   const b = sushiPrice
+  //   .times(SUSHI_PER_BLOCK)
+  //   .times(BLOCKS_PER_YEAR)
+  //   .times(stakedValue[1].poolWeight)
+  //   .div(stakedValue[1].totalWethValue)
+  //   console.log(Number(b))
+  // }
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -164,7 +195,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 {farm.apy
                   ? `${farm.apy
                       .times(new BigNumber(100))
-                      .times(new BigNumber(3))
+                      // .times(new BigNumber(3))
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`

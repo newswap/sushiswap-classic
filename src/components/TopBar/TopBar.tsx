@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 
 import Container from '../Container'
@@ -7,11 +7,23 @@ import Logo from '../Logo'
 import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
 
+import { isMobile } from "react-device-detect"
+import { useWallet } from 'use-wallet'
+
 interface TopBarProps {
   onPresentMobileMenu: () => void
 }
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
+  const { account, connect } = useWallet()
+
+  useEffect(() => {
+    if (!account && isMobile) {
+      console.log("=========TopBar:mobile connect=============")
+      connect('injected')
+    }
+  }, [])
+
   return (
     <StyledTopBar>
       <Container size="lg">

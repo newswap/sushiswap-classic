@@ -79,6 +79,18 @@ const Balances: React.FC = () => {
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
   const { t } = useTranslation()
 
+  console.log("=============Balances")
+  console.log(account)
+  const wallet = useWallet()
+  console.log(wallet)
+  console.log(wallet.status)
+  // console.log(wallet.getBlockNumber())
+  if(wallet.status === 'connected') {
+    console.log(wallet.balance)
+    console.log(wallet.chainId)
+    console.log(wallet.connector)
+  } 
+
   useEffect(() => {
     async function fetchTotalSupply() {
       const supply = await getSushiSupply(sushi)

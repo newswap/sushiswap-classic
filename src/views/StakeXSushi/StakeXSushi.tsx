@@ -46,7 +46,7 @@ const StakeXSushi: React.FC = () => {
 
 
   const lpContract = useMemo(() => {
-    debugger
+    // debugger
     return getContract(ethereum as provider, tokenAddress)
   }, [ethereum, tokenAddress])
 

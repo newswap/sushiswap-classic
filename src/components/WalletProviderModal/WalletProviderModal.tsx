@@ -19,8 +19,45 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, connect } = useWallet()
   const { t } = useTranslation()
 
+  // console.log("=====WalletProviderModal======")
+  // console.log(account)
+  // const wallet = useWallet()
+  // console.log(wallet)
+  // console.log(wallet.status)
+  // console.log(wallet.getBlockNumber())
+  // if(wallet.status === 'connected') {
+  //   console.log(wallet.balance)
+  //   console.log(wallet.chainId)
+  //   console.log(wallet.connector)
+  // } 
+
+
+  // account: string | null
+  // balance: string
+  // chainId: number | null
+  // connect(connectorId: keyof Connectors): Promise<void>
+  // connector: keyof Connectors
+  // connectors: Connectors
+  // error: UnsupportedChainError | UnsupportedChainError | RejectedActivationError | ConnectorConfigError
+  // ethereum: T
+  // networkName: string
+  // getBlockNumber(): number
+  // reset(): void
+  // status: string
+  // type: string | null
+
   useEffect(() => {
     if (account) {
+      // console.log("account:"+account)
+      // console.log(wallet)
+      // console.log(wallet.status)
+      // console.log(wallet.getBlockNumber())
+      // if(wallet.status === 'connected') {
+      //   console.log(wallet.balance)
+      //   console.log(wallet.chainId)
+      //   console.log(wallet.connector)
+      // } 
+
       onDismiss()
     }
   }, [account, onDismiss])

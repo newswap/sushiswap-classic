@@ -30,8 +30,8 @@ const App: React.FC = () => {
   }, [setMobileMenu])
 
   return (
-    <Suspense fallback={null}>
-      <Providers>
+    <Providers>
+      <Suspense fallback={null}>
         <Router>
           <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
           <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
@@ -48,8 +48,8 @@ const App: React.FC = () => {
           </Switch>
         </Router>
         {/* <Disclaimer /> */}
-      </Providers>
-    </Suspense>
+      </Suspense>
+    </Providers>
   )
 }
 
