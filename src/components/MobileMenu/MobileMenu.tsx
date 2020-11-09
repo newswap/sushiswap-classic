@@ -31,10 +31,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
-            to="/staking"
+            to="/nst"
             onClick={onDismiss}
           >
-            {t('Staking')}    
+            {t('NST')}    
           </StyledLink>
         </StyledMobileMenu>
       </StyledMobileMenuWrapper>

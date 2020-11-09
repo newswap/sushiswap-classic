@@ -13,7 +13,8 @@ import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
-import Staking from "./views/Staking";
+import NST from "./views/NST";
+import NSP from "./views/NSP";
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
@@ -42,8 +43,11 @@ const App: React.FC = () => {
             <Route path="/farms">
               <Farms />
             </Route>
-            <Route path="/staking">
-              <Staking />
+            <Route path="/nst">
+              <NST />
+            </Route>
+            <Route path="/nsp">
+              <NSP />
             </Route>
           </Switch>
         </Router>

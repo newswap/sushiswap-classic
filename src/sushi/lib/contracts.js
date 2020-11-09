@@ -5,6 +5,9 @@ import XSushiAbi from './abi/xsushi.json'
 import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
+import NSPAbi from './abi/nsp.json'
+import XNSPAbi from './abi/xnsp.json'
+
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
@@ -26,6 +29,9 @@ export class Contracts {
     this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
     this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
+
+    this.nsp = new this.web3.eth.Contract(NSPAbi)
+    this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
@@ -51,6 +57,8 @@ export class Contracts {
     setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
+    setProvider(this.nsp, contractAddresses.nsp[networkId])
+    setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

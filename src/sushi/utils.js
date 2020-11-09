@@ -19,6 +19,10 @@ export const getMasterChefAddress = (sushi) => {
 export const getSushiAddress = (sushi) => {
   return sushi && sushi.sushiAddress
 }
+export const getNSPAddress = (sushi) => {
+  return sushi && sushi.nspAddress
+}
+
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
 }
@@ -29,9 +33,15 @@ export const getMasterChefContract = (sushi) => {
 export const getSushiContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.sushi
 }
-
 export const getXSushiStakingContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.xSushiStaking
+}
+
+export const getNSPContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.nsp
+}
+export const getXNSPStakingContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.xNSPStaking
 }
 
 export const getFarms = (sushi) => {
@@ -144,6 +154,10 @@ export const getSushiSupply = async (sushi) => {
 
 export const getXSushiSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.xSushiStaking.methods.totalSupply().call())
+}
+
+export const getXNSPSupply = async (sushi) => {
+  return new BigNumber(await sushi.contracts.xNSPStaking.methods.totalSupply().call())
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {

@@ -39,7 +39,7 @@ export const addressMap = {
 }
 
 export const contractAddresses = {
-  sushi: {
+  sushi: {  //nst
     // 1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
     1007: '0xea8c987f9bf1688c714a5b9d9e2f4f9ef294f328',  //小写
     1012: 'TODO',  
@@ -54,9 +54,17 @@ export const contractAddresses = {
     1007: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf',
     1012: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf'
   },
-  xSushi: {
+  xSushi: { // nstbar
     // 1: '0x8798249c2e607446efb7ad49ec89dd1865ff4272',   
     1007: '0x986a646d9522a9cde91f551bb08c0d78fd72c83d',    //小写
+    1012: 'TODO'
+  },
+  nsp: {
+    1007: '0xf3fc63f6293b5e33e87351cb3bfdd21e1348a9c1',    //小写
+    1012: 'TODO'
+  },
+  xNSP: {
+    1007: '0xc2e7ccf4602d9aad33d851d082cbcddaf7a63c19',    //小写
     1012: 'TODO'
   }
 }

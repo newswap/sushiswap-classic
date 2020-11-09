@@ -17,8 +17,11 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/farms">
         { t('Menu') }
       </StyledLink>
-      <StyledLink exact activeClassName="active" to="/staking">
-        { t('Staking') }
+      <StyledLink exact activeClassName="active" to="/nst">
+        { t('NST') }
+      </StyledLink>
+      <StyledLink exact activeClassName="active" to="/nsp">
+        { t('NSP') }
       </StyledLink>
       <StyledAbsoluteLink
         href={ EXCHANGE_URL }

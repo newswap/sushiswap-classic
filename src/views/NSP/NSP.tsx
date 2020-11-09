@@ -10,10 +10,10 @@ import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
-import StakeXSushi from "../StakeXSushi";
+import StakeXNSP from "../StakeXNSP";
 import { useTranslation } from 'react-i18next'
 
-const Staking: React.FC = () => {
+const NSP: React.FC = () => {
   const { t } = useTranslation()
 
   const {path} = useRouteMatch()
@@ -27,11 +27,11 @@ const Staking: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={chef} height="120"/>}
-                subtitle={t('welcomeNSTBar')}
+                subtitle={t('welcomeNSPBar')}
                 title={t('Irasshaimase!')}
               />
             </Route>
-            <StakeXSushi/>
+            <StakeXNSP/>
           </>
         ) : (
           <div
@@ -53,4 +53,4 @@ const Staking: React.FC = () => {
   )
 }
 
-export default Staking
+export default NSP
