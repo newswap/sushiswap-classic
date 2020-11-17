@@ -41,12 +41,12 @@ export const addressMap = {
 export const contractAddresses = {
   sushi: {  //nst
     // 1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-    1007: '0xea8c987f9bf1688c714a5b9d9e2f4f9ef294f328',  //小写
+    1007: '0xb627764e8833ad2b4dc4f53ddbce57611801ae1c',  //小写
     1012: 'TODO',  
   },
   masterChef: {
     // 1: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
-    1007: '0x82a8fbeec9f1706944f1a750eaca0ce6817edcb7',  //小写
+    1007: '0x78260098c307b381fff9ee21ad22425a4f26c832',  //小写
     1012: 'TODO'
   },
   weth: {
@@ -56,15 +56,15 @@ export const contractAddresses = {
   },
   xSushi: { // nstbar
     // 1: '0x8798249c2e607446efb7ad49ec89dd1865ff4272',   
-    1007: '0x986a646d9522a9cde91f551bb08c0d78fd72c83d',    //小写
+    1007: '0x85b7f8c9a4b0b8498a877478b3acd3c2849b0fca',    //小写
     1012: 'TODO'
   },
   nsp: {
-    1007: '0xf3fc63f6293b5e33e87351cb3bfdd21e1348a9c1',    //小写
+    1007: '0x5c0334c357b490fb0aad55d00970e172610cf415',    //小写
     1012: 'TODO'
   },
   xNSP: {
-    1007: '0xc2e7ccf4602d9aad33d851d082cbcddaf7a63c19',    //小写
+    1007: '0x7669cb4b484fd6da7333ad67412000b8cb2e8a12',    //小写
     1012: 'TODO'
   }
 }
@@ -91,10 +91,10 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1007: '0xffb1f3c23fe8ec28cd4e11711f6321f828f9cb60',
+      1007: '0xba8aba8385c6b84a291cfe55e47594c58e53708c',
     },
     tokenAddresses: {
-      1007: '0xea8c987f9bf1688c714a5b9d9e2f4f9ef294f328', //NST
+      1007: '0xb627764e8833ad2b4dc4f53ddbce57611801ae1c', //NST
     },
     name: 'NST Party!',
     symbol: 'NST-NEW LP',
