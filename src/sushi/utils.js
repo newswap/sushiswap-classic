@@ -22,11 +22,16 @@ export const getSushiAddress = (sushi) => {
 export const getNSPAddress = (sushi) => {
   return sushi && sushi.nspAddress
 }
+export const getNewMineAddress = (sushi) => {
+  return sushi && sushi.newMineAddress
+}
+export const getXNewAddress = (sushi) => {
+  return sushi && sushi.xNewAddress
+}
 
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
 }
-
 export const getMasterChefContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.masterChef
 }
@@ -42,6 +47,13 @@ export const getNSPContract = (sushi) => {
 }
 export const getXNSPStakingContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.xNSPStaking
+}
+
+export const getNewMineContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.newMine
+}
+export const getXNewContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.xnew
 }
 
 export const getFarms = (sushi) => {
@@ -75,6 +87,37 @@ export const getFarms = (sushi) => {
     : []
 }
 
+export const getNewFarms = (sushi) => {
+  return sushi
+    ? sushi.contracts.newPools.map(
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          lpAddress,
+          lpContract,
+        }) => ({
+          pid,
+          id: symbol,
+          name,
+          lpToken: symbol,
+          lpTokenAddress: lpAddress,
+          lpContract,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          earnToken: 'new',
+          earnTokenAddress: sushi.contracts.xNew.options.address,
+          icon,
+        }),
+      )
+    : []
+}
+
 export const getPoolWeight = async (masterChefContract, pid) => {
   const { allocPoint } = await masterChefContract.methods.poolInfo(pid).call()
   const totalAllocPoint = await masterChefContract.methods
@@ -83,8 +126,12 @@ export const getPoolWeight = async (masterChefContract, pid) => {
   return new BigNumber(allocPoint).div(new BigNumber(totalAllocPoint))
 }
 
-export const getEarned = async (masterChefContract, pid, account) => {
+export const getNSTEarned = async (masterChefContract, pid, account) => {
   return masterChefContract.methods.pendingSushi(pid, account).call()
+}
+
+export const getNewEarned = async (newMineContract, pid, account) => {
+  return newMineContract.methods.pendingXNew(pid, account).call()
 }
 
 export const getTotalLPWethValue = async (
@@ -133,9 +180,9 @@ export const getTotalLPWethValue = async (
   }
 }
 
-export const approve = async (lpContract, masterChefContract, account) => {
+export const approve = async (lpContract, spenderContract, account) => {
   return lpContract.methods
-    .approve(masterChefContract.options.address, ethers.constants.MaxUint256)
+    .approve(spenderContract.options.address, ethers.constants.MaxUint256)
     .send({ from: account })
 }
 
@@ -173,6 +220,19 @@ export const stake = async (masterChefContract, pid, amount, account) => {
     })
 }
 
+export const stakeNewMine = async (newMineContract, pid, amount, account) => {
+  return newMineContract.methods
+    .deposit(
+      pid,
+      new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
+    )
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+
 export const unstake = async (masterChefContract, pid, amount, account) => {
   return masterChefContract.methods
     .withdraw(
@@ -185,8 +245,33 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
       return tx.transactionHash
     })
 }
+
+export const unstakeNewMine = async (newMineContract, pid, amount, account) => {
+  return newMineContract.methods
+    .withdraw(
+      pid,
+      new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
+    )
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+
+// harvest NST 
 export const harvest = async (masterChefContract, pid, account) => {
   return masterChefContract.methods
+    .deposit(pid, '0')
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+// harvest NEW
+export const harvestNew = async (newMineContract, pid, account) => {
+  return newMineContract.methods
     .deposit(pid, '0')
     .send({ from: account })
     .on('transactionHash', (tx) => {
@@ -198,6 +283,17 @@ export const harvest = async (masterChefContract, pid, account) => {
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
     const { amount } = await masterChefContract.methods
+      .userInfo(pid, account)
+      .call()
+    return new BigNumber(amount)
+  } catch {
+    return new BigNumber(0)
+  }
+}
+
+export const getStakedNewMine = async (newMineContract, pid, account) => {
+  try {
+    const { amount } = await newMineContract.methods
       .userInfo(pid, account)
       .call()
     return new BigNumber(amount)

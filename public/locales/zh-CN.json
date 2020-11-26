@@ -3,6 +3,9 @@
   "Home": "Home",
   "Menu": "Menu",
   "Farms": "Farms",
+  "NSTFarms": "NSTFarms",
+  "NewFarms": "NewFarms",
+  "TokenFarms": "TokenFarms",
   "Staking": "Staking",
   "NST": "NST",
   "NSP": "NSP",
@@ -29,6 +32,7 @@
   "Withdraw": "Withdraw",
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
+  "depositTipsNewMine": "⭐️ Every time you stake and unstake LP tokens, the contract will automagically harvest NEW rewards for you!",
   "Info": "Info",
   "Cooking the rice ...": "Cooking the rice ...",
   "Earn": "Earn",
@@ -65,7 +69,9 @@
   "xNSP in the whole pool.": "xNSP in the whole pool.",
   "welcomeNSTBar": "Welcome to the NST Bar, stake NST to earn NST.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
-  "Irasshaimase!": "Irasshaimase!"
+  "Irasshaimase!": "Irasshaimase!",
+
+  "Earn New by staking NewSwap LP Tokens.": "Earn New by staking NewSwap LP Tokens."
 }
 
 

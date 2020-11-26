@@ -7,16 +7,20 @@ import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
+import XNew from './abi/xnew.json'
+import NewMine from './abi/newmine.json'
 
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
+  newSupportedPools
 } from './constants.js'
 import * as Types from './types.js'
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
+    console.log("=====new Contracts======")
     this.web3 = web3
     this.defaultConfirmations = options.defaultConfirmations
     this.autoGasMultiplier = options.autoGasMultiplier || 1.5
@@ -24,16 +28,30 @@ export class Contracts {
       options.confirmationType || Types.ConfirmationType.Confirmed
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
-
-    this.sushi = new this.web3.eth.Contract(SushiAbi)
+    // nst矿区
+    this.sushi = new this.web3.eth.Contract(SushiAbi) // nst
     this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
     this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
-
+    // nsp理财区
     this.nsp = new this.web3.eth.Contract(NSPAbi)
     this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
+    // new矿区
+    this.xNew = new this.web3.eth.Contract(XNew)
+    this.newMine = new this.web3.eth.Contract(NewMine)
+
+    // NST Pools
     this.pools = supportedPools.map((pool) =>
+      Object.assign(pool, {
+        lpAddress: pool.lpAddresses[networkId],
+        tokenAddress: pool.tokenAddresses[networkId],
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+        tokenContract: new this.web3.eth.Contract(ERC20Abi),
+      }),
+    )
+    // New Pools
+    this.newPools = newSupportedPools.map((pool) =>
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
@@ -60,7 +78,17 @@ export class Contracts {
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
 
+    setProvider(this.xNew, contractAddresses.xNew[networkId])
+    setProvider(this.newMine, contractAddresses.newMine[networkId])
+
     this.pools.forEach(
+      ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
+        setProvider(lpContract, lpAddress)
+        setProvider(tokenContract, tokenAddress)
+      },
+    )
+
+    this.newPools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)

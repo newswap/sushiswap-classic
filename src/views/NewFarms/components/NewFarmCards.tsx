@@ -9,88 +9,41 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
-import { Farm } from '../../../contexts/Farms'
-import useAllStakedValue, {
-  StakedValue,
-} from '../../../hooks/useAllStakedValue'
-import useFarms from '../../../hooks/useFarms'
+import { NewFarm } from '../../../contexts/NewFarms'
+// import useAllStakedValue, {
+//   StakedValue,
+// } from '../../../hooks/useAllStakedValue'
+import useNewFarms from '../../../hooks/useNewFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getNSTEarned, getMasterChefContract } from '../../../sushi/utils'
+import { getNewEarned, getNewMineContract } from '../../../sushi/utils'
+
 import { bnToDec } from '../../../utils'
 import { useTranslation } from 'react-i18next'
 
-const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
-
-interface FarmWithStakedValue extends Farm, StakedValue {
-  apy: BigNumber
+// interface FarmWithStakedValue extends Farm, StakedValue {
+//   apy: BigNumber
+// }
+interface FarmWithStakedValue extends NewFarm {
 }
 
-const FarmCards: React.FC = () => {
-  const [farms] = useFarms()
+const NewFarmCards: React.FC = () => {
+  const [newFarms] = useNewFarms()
   const { account } = useWallet()
-  const stakedValue = useAllStakedValue()
+  // const stakedValue = useAllStakedValue()
   const { t } = useTranslation()
 
-  const sushiIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'NST',
-  )
+  console.log('====NewFarmCards=====')
+  console.log(newFarms)
 
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
-      : new BigNumber(0)
-
-  const BLOCKS_PER_YEAR = new BigNumber(10512000)
-  const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
-
-  console.log('====FarmCards=====')
-  console.log(Number(sushiPrice))
-  console.log(farms)
-  console.log(stakedValue)
-  // console.log('=========')
-  // if(stakedValue[0]){
-  //   console.log(Number(stakedValue[0].poolWeight))
-  //   console.log(Number(stakedValue[0].tokenAmount))
-  //   console.log(Number(stakedValue[0].tokenPriceInWeth))
-  //   console.log(Number(stakedValue[0].totalWethValue))
-  //   console.log(Number(stakedValue[0].wethAmount))
-  //   const a = sushiPrice
-  //     .times(SUSHI_PER_BLOCK)
-  //     .times(BLOCKS_PER_YEAR)
-  //     .times(stakedValue[0].poolWeight)
-  //     .div(stakedValue[0].totalWethValue)
-  //   console.log(Number(a))
-    
-  //   console.log('=========')
-  //   console.log(Number(stakedValue[1].poolWeight))
-  //   console.log(Number(stakedValue[1].tokenAmount))
-  //   console.log(Number(stakedValue[1].tokenPriceInWeth))
-  //   console.log(Number(stakedValue[1].totalWethValue))
-  //   console.log(Number(stakedValue[1].wethAmount))
-
-  //   const b = sushiPrice
-  //   .times(SUSHI_PER_BLOCK)
-  //   .times(BLOCKS_PER_YEAR)
-  //   .times(stakedValue[1].poolWeight)
-  //   .div(stakedValue[1].totalWethValue)
-  //   console.log(Number(b))
-  // }
-
-  const rows = farms.reduce<FarmWithStakedValue[][]>(
+  const rows = newFarms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
       const farmWithStakedValue = {
         ...farm,
-        ...stakedValue[i],
-        apy: stakedValue[i]
-          ? sushiPrice
-              .times(SUSHI_PER_BLOCK)
-              .times(BLOCKS_PER_YEAR)
-              .times(stakedValue[i].poolWeight)
-              .div(stakedValue[i].totalWethValue)
-          : null,
+        // ...stakedValue[i],
+        // apy: null,
       }
       const newFarmRows = [...farmRows]
-      if (newFarmRows[newFarmRows.length - 1].length === 3) {
+      if (newFarmRows[newFarmRows.length - 1].length === 3) {  // TODO 什么逻辑？？？？？？
         newFarmRows.push([farmWithStakedValue])
       } else {
         newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
@@ -147,11 +100,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
     )
   }
 
+  // TODO 无需计算APY，改成获得用户的质押？？？  同时把最底部的APY UI加回来改成用户的质押数
   useEffect(() => {
     async function fetchEarned() {
       if (sushi) return
-      const earned = await getNSTEarned(
-        getMasterChefContract(sushi),
+      const earned = await getNewEarned(
+        getNewMineContract(sushi),
         lpTokenAddress,
         account,
       )
@@ -166,7 +120,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'NST' && <StyledCardAccent />} 
+      {/* {farm.tokenSymbol === 'NST' && <StyledCardAccent />}  */}
       <Card>
         <CardContent>
           <StyledContent>
@@ -180,7 +134,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <Button
               disabled={!poolActive}
               text={poolActive ? t('Select') : undefined}
-              to={`/nstFarms/${farm.id}`}
+              to={`/newFarms/${farm.id}`}
             >
               {!poolActive && (
                 <Countdown
@@ -189,31 +143,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 />
               )}
             </Button>
-            <StyledInsight>
-              <span>{t('APY')}</span>
-              <span>
-                {farm.apy
-                  ? `${farm.apy
-                      .times(new BigNumber(100))
-                      // .times(new BigNumber(3))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : t('Loading ...')}
-              </span>
-              {/* <span>
-                {farm.tokenAmount
-                  ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
-                  : '-'}{' '}
-                {farm.tokenSymbol}
-              </span>
-              <span>
-                {farm.wethAmount
-                  ? (farm.wethAmount.toNumber() || 0).toLocaleString('en-US')
-                  : '-'}{' '}
-                ETH
-              </span> */}
-            </StyledInsight>
           </StyledContent>
         </CardContent>
       </Card>
@@ -336,4 +265,4 @@ const StyledInsight = styled.div`
   padding: 0 12px;
 `
 
-export default FarmCards
+export default NewFarmCards

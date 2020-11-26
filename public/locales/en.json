@@ -1,6 +1,7 @@
 {
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
+  "depositTipsNewMine": "⭐️ Every time you stake and unstake LP tokens, the contract will automagically harvest NEW rewards for you!",
   "stakeLP": "Stake NewSwap LP tokens to claim your very own yummy NST!",
   "xNSTTips": "You will earn a portion of the swaps fees based on the amount of xNST held relative the weight of the staking. xNST can be minted by staking NST. To redeem NST staked plus swap fees convert xNST back to NST.",
   "xNSPTips": "You will earn a portion of the swaps fees based on the amount of xNSP held relative the weight of the staking. xNSP can be minted by staking NSP. To redeem NSP staked plus swap fees convert xNSP back to NSP.",

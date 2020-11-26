@@ -22,6 +22,7 @@ export const INTEGERS = {
   INTEREST_RATE_BASE: new BigNumber('1e18'),
 }
 
+// DEL 未使用
 export const addressMap = {
   uniswapFactory: '0xc0a47dFe034B400B47bDaD5FecDa2621de6c4d95',
   uniswapFactoryV2: '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f',
@@ -49,9 +50,9 @@ export const contractAddresses = {
     1007: '0x78260098c307b381fff9ee21ad22425a4f26c832',  //小写
     1012: 'TODO'
   },
-  weth: {
+  weth: { // wnew
     // 1: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
-    1007: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf',
+    1007: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf', //小写
     1012: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf'
   },
   xSushi: { // nstbar
@@ -66,7 +67,15 @@ export const contractAddresses = {
   xNSP: {
     1007: '0x7669cb4b484fd6da7333ad67412000b8cb2e8a12',    //小写
     1012: 'TODO'
-  }
+  },
+  newMine: {
+    1007: '0xd58560e0af6c64264abbecf3450c901bf922d927',  //小写
+    1012: 'TODO'
+  },
+  xNew: {
+    1007: '0xd38fb4cd414f46d3017906e9e6cef64600a1065f',  //小写
+    1012: 'TODO'
+  },
 }
 
 /*
@@ -87,6 +96,7 @@ SLP Address on mainnet for reference
 12 SUSHI 0xce84867c3c02b05dc570d0135103d3fb9cc19433
 */
 
+// nstFarms supported Polls
 export const supportedPools = [
   {
     pid: 1,
@@ -491,4 +501,21 @@ export const supportedPools = [
 //    tokenSymbol: 'renBTC',
 //    icon: '👨🏻‍🍳',
 //  },
+]
+
+// newFarms supported Polls
+export const newSupportedPools = [
+  {
+    pid: 0,
+    lpAddresses: {
+      1007: '0x56aE975581a382193FF36579C81281E179486c43',
+    },
+    tokenAddresses: {
+      1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
+    },
+    name: 'NUSDT Party!',
+    symbol: 'NUSDT-NEW LP',
+    tokenSymbol: 'NUSDT',
+    icon: '👨🏻‍🍳',
+  }
 ]

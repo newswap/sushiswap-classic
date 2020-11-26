@@ -11,6 +11,7 @@ export class Sushi {
     var realProvider
 
     if (typeof provider === 'string') {
+      console.log("====new Sushi 1=====provider:" + provider)
       if (provider.includes('wss')) {
         realProvider = new Web3.providers.WebsocketProvider(
           provider,
@@ -23,6 +24,8 @@ export class Sushi {
         )
       }
     } else {
+      console.log("====new Sushi 2=====provider:")
+      console.log(provider)
       realProvider = provider
     }
 
@@ -41,6 +44,9 @@ export class Sushi {
     this.nspAddress = contractAddresses.nsp[networkId]
     this.masterChefAddress = contractAddresses.masterChef[networkId]
     this.wethAddress = contractAddresses.weth[networkId]
+
+    this.newMineAddress = contractAddresses.newMine[networkId]
+    this.xNewAddress = contractAddresses.xNew[networkId]
   }
 
   async resetEVM() {
