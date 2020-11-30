@@ -69,7 +69,7 @@ export const contractAddresses = {
     1012: 'TODO'
   },
   newMine: {
-    1007: '0x6ac6fb89bcc39283907f14d9f0af416084dfde88',  //小写
+    1007: '0x665d01b3757d530dc136942b94b16b27bf1d1c8b',  //小写
     1012: 'TODO'
   },
 }
@@ -512,6 +512,32 @@ export const newSupportedPools = [
     name: 'NUSDT Party!',
     symbol: 'NUSDT-NEW LP',
     tokenSymbol: 'NUSDT',
+    icon: '👨🏻‍🍳',
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',
+    },
+    tokenAddresses: {
+      1007: '0xed4e695e436a4fce38bba9fb66d980afd66b0e3e', //IMX
+    },
+    name: 'IMX Party!',
+    symbol: 'IMX-NEW LP',
+    tokenSymbol: 'IMX',
+    icon: '👨🏻‍🍳',
+  },
+  {
+    pid: 2,
+    lpAddresses: {
+      1007: '0xdda2c1d6237dab9351af93e1f3f81047f897e45b',
+    },
+    tokenAddresses: {
+      1007: '0xd1eb8bfd4e6af831fa3c7e726e21e9b56a032727', //NBTC
+    },
+    name: 'NBTC Party!',
+    symbol: 'NBTC-NEW LP',
+    tokenSymbol: 'NBTC',
     icon: '👨🏻‍🍳',
   }
 ]
