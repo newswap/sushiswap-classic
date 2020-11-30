@@ -7,7 +7,6 @@ import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
-import XNew from './abi/xnew.json'
 import NewMine from './abi/newmine.json'
 
 import {
@@ -38,7 +37,6 @@ export class Contracts {
     this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
     // new矿区
-    this.xNew = new this.web3.eth.Contract(XNew)
     this.newMine = new this.web3.eth.Contract(NewMine)
 
     // NST Pools
@@ -78,7 +76,6 @@ export class Contracts {
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
 
-    setProvider(this.xNew, contractAddresses.xNew[networkId])
     setProvider(this.newMine, contractAddresses.newMine[networkId])
 
     this.pools.forEach(

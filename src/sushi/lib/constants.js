@@ -69,11 +69,7 @@ export const contractAddresses = {
     1012: 'TODO'
   },
   newMine: {
-    1007: '0xd58560e0af6c64264abbecf3450c901bf922d927',  //小写
-    1012: 'TODO'
-  },
-  xNew: {
-    1007: '0xd38fb4cd414f46d3017906e9e6cef64600a1065f',  //小写
+    1007: '0x6ac6fb89bcc39283907f14d9f0af416084dfde88',  //小写
     1012: 'TODO'
   },
 }

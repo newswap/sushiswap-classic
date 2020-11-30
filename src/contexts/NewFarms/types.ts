@@ -8,7 +8,6 @@ export interface NewFarm {
   lpContract: Contract
   tokenAddress: string
   earnToken: string
-  earnTokenAddress: string
   icon: React.ReactNode
   id: string
   tokenSymbol: string

@@ -46,7 +46,6 @@ export class Sushi {
     this.wethAddress = contractAddresses.weth[networkId]
 
     this.newMineAddress = contractAddresses.newMine[networkId]
-    this.xNewAddress = contractAddresses.xNew[networkId]
   }
 
   async resetEVM() {

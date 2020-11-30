@@ -2,18 +2,13 @@
   {
     "inputs": [
       {
-        "internalType": "contract XNew",
-        "name": "_xNew",
-        "type": "address"
-      },
-      {
         "internalType": "address",
         "name": "_wNew",
         "type": "address"
       },
       {
         "internalType": "uint256",
-        "name": "_xNewPerBlock",
+        "name": "_newPerBlock",
         "type": "uint256"
       },
       {
@@ -42,7 +37,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_xNewPerBlock",
+        "name": "_newPerBlock",
         "type": "uint256"
       }
     ],
@@ -159,6 +154,20 @@
   },
   {
     "inputs": [],
+    "name": "newPerBlock",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
     "name": "owner",
     "outputs": [
       {
@@ -198,7 +207,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accXNewPerShare",
+        "name": "accNewPerShare",
         "type": "uint256"
       },
       {
@@ -309,32 +318,9 @@
     "constant": true
   },
   {
-    "inputs": [],
-    "name": "xNew",
-    "outputs": [
-      {
-        "internalType": "contract XNew",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "xNewPerBlock",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "stateMutability": "payable",
+    "type": "receive",
+    "payable": true
   },
   {
     "inputs": [
@@ -345,7 +331,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_xNewPerBlock",
+        "name": "_newPerBlock",
         "type": "uint256"
       },
       {
@@ -480,7 +466,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingXNew",
+    "name": "pendingNew",
     "outputs": [
       {
         "internalType": "uint256",

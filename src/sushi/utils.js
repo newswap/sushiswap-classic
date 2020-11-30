@@ -25,9 +25,6 @@ export const getNSPAddress = (sushi) => {
 export const getNewMineAddress = (sushi) => {
   return sushi && sushi.newMineAddress
 }
-export const getXNewAddress = (sushi) => {
-  return sushi && sushi.xNewAddress
-}
 
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
@@ -51,9 +48,6 @@ export const getXNSPStakingContract = (sushi) => {
 
 export const getNewMineContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMine
-}
-export const getXNewContract = (sushi) => {
-  return sushi && sushi.contracts && sushi.contracts.xnew
 }
 
 export const getFarms = (sushi) => {
@@ -111,7 +105,6 @@ export const getNewFarms = (sushi) => {
           tokenSymbol,
           tokenContract,
           earnToken: 'new',
-          earnTokenAddress: sushi.contracts.xNew.options.address,
           icon,
         }),
       )
@@ -131,7 +124,7 @@ export const getNSTEarned = async (masterChefContract, pid, account) => {
 }
 
 export const getNewEarned = async (newMineContract, pid, account) => {
-  return newMineContract.methods.pendingXNew(pid, account).call()
+  return newMineContract.methods.pendingNew(pid, account).call()
 }
 
 export const getTotalLPWethValue = async (
