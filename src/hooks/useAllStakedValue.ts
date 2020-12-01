@@ -8,7 +8,7 @@ import { Contract } from 'web3-eth-contract'
 import {
   getMasterChefContract,
   getWethContract,
-  getFarms,
+  getNSTFarms,
   getTotalLPWethValue,
 } from '../sushi/utils'
 import useSushi from './useSushi'
@@ -26,7 +26,7 @@ const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const farms = getFarms(sushi)
+  const farms = getNSTFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
   const wethContact = getWethContract(sushi)
   const block = useBlock()

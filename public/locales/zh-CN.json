@@ -44,7 +44,7 @@
   "Unlock Wallet": "Unlock Wallet",
   "Your NST Balance": "Your NST Balance",
   "Locked": "Locked",
-  "Pending harvest": "Pending harvest",
+  "Pending harvest": "待领取",
   "Total NST Supply": "Total NST Supply",
   "New rewards per block": "New rewards per block",
   "MasterChef is Ready": "MasterChef is Ready",
@@ -71,7 +71,10 @@
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
   "Irasshaimase!": "Irasshaimase!",
 
-  "Earn New by staking NewSwap LP Tokens.": "Earn New by staking NewSwap LP Tokens."
+  "New Farms": "NEW 矿区",
+  "newFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
+  "Your NEW Balance": "我当前的NEW",
+  "Total NEW Supply": "总挖矿NEW"
 }
 
 

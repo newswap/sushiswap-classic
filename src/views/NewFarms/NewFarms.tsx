@@ -3,16 +3,16 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
 import chef from '../../assets/img/chef.png'
-
+import Container from '../../components/Container'
 import Button from '../../components/Button'
 import Page from '../../components/Page'
+import Spacer from '../../components/Spacer'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
-
 import NewFarm from '../NewFarm'
-
+import Balances from './components/Balances'
 import NewFarmCards from './components/NewFarmCards'
 import { useTranslation } from 'react-i18next'
 
@@ -31,9 +31,13 @@ const NewFarms: React.FC = () => {
               <PageHeader
                 icon={<img src={chef} height="120" />}
                 // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
-                subtitle={t('Earn New by staking NewSwap LP Tokens.')}
-                title={t('Select Your Favorite Dishes')}
+                title={t('New Farms')}
+                subtitle={t('newFarmsTips')}
               />
+              <Container>
+                <Balances />
+              </Container>
+              <Spacer size="lg" />
               <NewFarmCards />
             </Route>
             <Route path={`${path}/:farmId`}>
