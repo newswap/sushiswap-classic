@@ -17,6 +17,7 @@ import useStake from '../../../hooks/useStake'
 import useStakedBalance from '../../../hooks/useStakedBalance'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useUnstake from '../../../hooks/useUnstake'
+import useNSTPerBlock from '../../../hooks/useNSTPerBlock'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
@@ -33,6 +34,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   const { t } = useTranslation()
 
   const allowance = useAllowance(lpContract)
+  const nstPerBlock = useNSTPerBlock(pid)
+
   const { onApprove } = useApprove(lpContract)
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
@@ -78,6 +81,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
             <CardIcon>👨🏻‍🍳</CardIcon>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
+            <Label text={t('nstPerBlock',{nst:nstPerBlock})} />
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (

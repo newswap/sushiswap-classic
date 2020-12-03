@@ -4,6 +4,7 @@ import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'
 import ModalTitle from '../../../components/ModalTitle'
+import Label from '../../../components/Label'
 import TokenInput from '../../../components/TokenInput'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
@@ -65,6 +66,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
           }}
         />
       </ModalActions>
+      <Label text={t('nstMiningFee')} />  
     </Modal>
   )
 }

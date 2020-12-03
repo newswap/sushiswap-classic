@@ -30,7 +30,7 @@
   "Approve": "Approve",
   "Unstake": "Unstake",
   "Withdraw": "Withdraw",
-  "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
+  "depositTokens": "质押 {{lpTokenName}} 的流动性通证挖矿 {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
   "depositTipsNewMine": "⭐️ Every time you stake and unstake LP tokens, the contract will automagically harvest NEW rewards for you!",
   "Info": "Info",
@@ -74,7 +74,9 @@
   "New Farms": "NEW 矿区",
   "newFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
   "Your NEW Balance": "我当前的NEW",
-  "Total NEW Supply": "总挖矿NEW"
+  "Total NEW Supply": "总挖矿NEW",
+  "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
+  "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费"
 }
 
 

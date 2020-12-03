@@ -8,5 +8,7 @@
   "welcomeNSTBar": "Welcome to the NST Bar, stake NST to earn NST.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
 
-  "newFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。"
+  "newFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
+  "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
+  "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费"
 }
