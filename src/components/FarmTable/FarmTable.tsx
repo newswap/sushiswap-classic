@@ -12,6 +12,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
+import useNewFarms from '../../hooks/useNewFarms'
+import { NewFarm } from '../../contexts/NewFarms'
+import { Link } from 'react-router-dom'
+
 
 interface FarmTableProps {
   dataSource: []
@@ -23,22 +27,8 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(id: any, tokenIcon: any, tokenName: any, lpIcon: any, lpName: any) {
-  return { id, tokenIcon, tokenName, lpIcon, lpName };
+interface FarmWithStakedValue extends NewFarm {
 }
-
-const rows = [
-  createData('1', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('2', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('3', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('4', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('5', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('6', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('7', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('8', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('9', '', 'WANQI', '', 'WQ-NEW-LP'),
-  createData('10', '', 'WANQI', '', 'WQ-NEW-LP')
-];
 
 const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
      
@@ -56,7 +46,29 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
     setPage(0);
   };
 
+  const [newFarms] = useNewFarms()
+  console.log('====FarmTable=====')
+  console.log(newFarms)
 
+  const rows = newFarms.reduce<FarmWithStakedValue[][]>(
+    (farmRows, farm, i) => {
+      
+      const farmWithStakedValue = {
+        ...farm,
+        // ...stakedValue[i],
+        // apy: null,
+      }
+      const newFarmRows = [...farmRows]
+      if (newFarmRows[newFarmRows.length - 1].length === 3) {  // TODO 什么逻辑？？？？？？
+        newFarmRows.push([farmWithStakedValue])
+      } else {
+        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
+      }
+      
+      return newFarmRows
+    },
+    [[]],
+  )
     return (
       <StyledTableContainer>
       <Table className={classes.table} aria-label="simple table">
@@ -69,82 +81,52 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         </TableHead>
         <TableBody>
         {
-          rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-            return (
-            <StyledTableRow key={row.id}>
-              <StyledTableCell component="th" scope="row">                
-                <StyledIDLabel>{row.id}</StyledIDLabel>
-                <StyledLogo>
-                    <img src={newIcon}/>
-                </StyledLogo>
-                <StyledTokenLabel>
-                  {row.tokenName}
-                </StyledTokenLabel>
-              </StyledTableCell>
-              <StyledTableCell align="left">
-                <StyledLPLogo>
-                  <img src={newIcon}/>
-                </StyledLPLogo>
-                <StyledLPLabel>{row.lpName}</StyledLPLabel>
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <StyledEnterLabel>进入矿池</StyledEnterLabel>
-              </StyledTableCell>                 
-            </StyledTableRow>
-          )})}
+          // rows.map((farmRow, i) => {
+          //   console.log('====farmRow=====')
+          //   console.log(farmRow)
+            
+            rows[0].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((farm, j) => {
+              console.log('====farm=====')
+              console.log(farm)
+              return (
+                <StyledTableRow key={farm.pid}>
+                  <StyledTableCell component="th" scope="row">                
+                    <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
+                    <StyledLogo>
+                      <img src={newIcon}/>
+                    </StyledLogo>
+                    <StyledTokenLabel>
+                      {farm.name}
+                    </StyledTokenLabel>
+                  </StyledTableCell>
+                  <StyledTableCell align="left">
+                    <StyledLPLogo>
+                      <img src={newIcon}/>
+                    </StyledLPLogo>
+                    <StyledLPLabel>{farm.id}</StyledLPLabel>
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {/* <StyledEnterLabel>进入矿池</StyledEnterLabel> */}
+                    <StyledLink to={`/newFarms/${farm.id}`}>进入矿池</StyledLink>
+                  </StyledTableCell>                 
+                </StyledTableRow>
+              )
+            })
+          // })
+        }
         </TableBody>
       </Table>
       <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={rows.length}
+          count={rows[0].length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </StyledTableContainer>
-    //   <StyledTable>
-    //   <thead>
-    //     <tr>
-    //       <StyledTH>矿池名称</StyledTH>
-    //       <StyledTH>质押通证</StyledTH>
-    //       <StyledTH></StyledTH>
-    //     </tr>
-    //   </thead>
-    //   <tbody>
-    //     <tr>
-    //       <StyledTD>
-    //         <StyledIDLabel>
-    //           1
-    //         </StyledIDLabel>
-
-    //         <StyledLogo>
-    //           <img src={newIcon}/>
-    //         </StyledLogo>
-
-    //         <StyledTokenLabel>
-    //           WANQINEW
-    //         </StyledTokenLabel>
-
-    //       </StyledTD>
-    //       <StyledTD>
-    //         <StyledLPLogo>
-    //           <img src={newIcon}/>
-    //         </StyledLPLogo>
-    //         <StyledLPLabel>
-    //           WQ-NEW-LP
-    //         </StyledLPLabel>
-    //       </StyledTD>
-    //       <StyledTD>
-    //         <StyledTokenLabel>
-    //           进入矿场
-    //         </StyledTokenLabel>
-    //       </StyledTD>
-    //     </tr>
-    //   </tbody>
-    // </StyledTable>
     )
   }
 
@@ -153,25 +135,31 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
       // '&:nth-of-type(odd)': {
       //   backgroundColor: theme.palette.action.hover,
       // },
+      '&:hover': {
+        backgroundColor: theme.palette.action.hover,
+      },
+      // '&:hover': {
+      //   background-color: red,
+      // },
     },
   }))(TableRow);
 
   const StyledTableCell = withStyles((theme) => ({
     head: {
-      borderBottom: "1px solid #F8F8F8"
+      borderBottom: "1px solid #F8F8F8",
     },
     body: {
       borderBottom: "1px solid #F8F8F8"
     },
     root: {
-      paddingLeft: "0px"
+      paddingLeft: "30px"
     }
 
   }))(TableCell);
  
   const StyledTableContainer = withStyles((theme) => ({
     root: {
-      boxShadow: "0 #fff" 
+      boxShadow: "0 #fff"
     }
   }))(TableContainer);
 
@@ -205,14 +193,6 @@ const StyledTokenLabel = styled.div`
     color: #20C5A0;
 `
 
-const StyledEnterLabel = styled.div`
-    height: 30px;
-    padding-top: 8px;
-    margin-left: 10px;
-    font-size: 14px;
-    color: #20C5A0;
-`
-
 const StyledLPLabel = styled.div`
     height: 30px;
     float: left;
@@ -240,6 +220,19 @@ const StyledLogo = styled.div`
     text-decoration: none;
     float: left;
     padding-top: 0px;
+`
+
+const StyledLink = styled(Link)`
+  align-items: center;
+  font-size: 14px;
+  color: #20C5A0;
+  display: flex;
+  flex: 1;
+  height: 56px;
+  justify-content: center;
+  margin: 0 ${props => -props.theme.spacing[4]}px;
+  padding: 0 ${props => props.theme.spacing[4]}px;
+  text-decoration: none;
 `
 
 export default FarmTable

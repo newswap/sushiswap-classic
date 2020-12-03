@@ -4,7 +4,7 @@ import { useWallet } from 'use-wallet'
 import useSushi from '../../hooks/useSushi'
 
 import { bnToDec } from '../../utils'
-import { getFarms } from '../../sushi/utils'
+import { getNSTFarms } from '../../sushi/utils'
 
 import Context from './context'
 import { Farm } from './types'
@@ -15,7 +15,7 @@ const Farms: React.FC = ({ children }) => {
   const sushi = useSushi()
   const { account } = useWallet()
 
-  const farms = getFarms(sushi)
+  const farms = getNSTFarms(sushi)
 
   return (
     <Context.Provider

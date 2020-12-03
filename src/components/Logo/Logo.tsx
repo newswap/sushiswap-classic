@@ -10,7 +10,7 @@ const Logo: React.FC = () => {
 
   return (
     <StyledLogo to="/">
-      <img src={newIcon}/>
+      <StyledNewIcon><img src={newIcon}/></StyledNewIcon>
       <img src={newSwap}/>
     </StyledLogo>
   )
@@ -26,6 +26,10 @@ const StyledLogo = styled(Link)`
   padding: 0;
   text-decoration: none;
 `
+const StyledNewIcon = styled.div`
+
+`
+
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[600]};

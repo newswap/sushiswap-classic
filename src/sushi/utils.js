@@ -50,7 +50,7 @@ export const getNewMineContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMine
 }
 
-export const getFarms = (sushi) => {
+export const getNSTFarms = (sushi) => {
   return sushi
     ? sushi.contracts.pools.map(
         ({
@@ -198,6 +198,10 @@ export const getXSushiSupply = async (sushi) => {
 
 export const getXNSPSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.xNSPStaking.methods.totalSupply().call())
+}
+
+export const getNewSupply = async (sushi) => {
+  return new BigNumber(await sushi.contracts.newMine.methods.newSupply().call())
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {
