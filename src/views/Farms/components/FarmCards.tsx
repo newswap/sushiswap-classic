@@ -15,8 +15,10 @@ import useAllStakedValue, {
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
+import useEarnings from '../../../hooks/useEarnings'
 import { getNSTEarned, getMasterChefContract } from '../../../sushi/utils'
 import { bnToDec } from '../../../utils'
+import { getDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
@@ -128,8 +130,9 @@ interface FarmCardProps {
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, setStartTime] = useState(0)
-  const [harvestable, setHarvestable] = useState(0)
+  // const [harvestable, setHarvestable] = useState(0)
   const { t } = useTranslation()
+  const earnings = useEarnings(farm.pid)
 
   const { account } = useWallet()
   const { lpTokenAddress } = farm
@@ -147,20 +150,20 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
     )
   }
 
-  useEffect(() => {
-    async function fetchEarned() {
-      if (sushi) return
-      const earned = await getNSTEarned(
-        getMasterChefContract(sushi),
-        lpTokenAddress,
-        account,
-      )
-      setHarvestable(bnToDec(earned))
-    }
-    if (sushi && account) {
-      fetchEarned()
-    }
-  }, [sushi, lpTokenAddress, account, setHarvestable])
+  // useEffect(() => {
+  //   async function fetchEarned() {
+  //     if (sushi) return
+  //     const earned = await getNSTEarned(
+  //       getMasterChefContract(sushi),
+  //       lpTokenAddress,
+  //       account,
+  //     )
+  //     setHarvestable(bnToDec(earned))
+  //   }
+  //   if (sushi && account) {
+  //     fetchEarned()
+  //   }
+  // }, [sushi, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
 
@@ -173,6 +176,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <CardIcon>{farm.icon}</CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
+              <StyledDetail> {t('Pending harvest')} {getDisplayBalance(earnings)} NST</StyledDetail>
               <StyledDetail>{t('Deposit')} {farm.lpToken}</StyledDetail>
               <StyledDetail>{t('Earn')} {farm.earnToken.toUpperCase()}</StyledDetail>
             </StyledDetails>
