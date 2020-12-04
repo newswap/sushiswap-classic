@@ -76,7 +76,8 @@
   "Your NEW Balance": "我当前的NEW",
   "Total NEW Supply": "总挖矿NEW",
   "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
-  "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费"
+  "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费",
+  "TOTAL VALUE LOCKED": "当前总质押"
 }
 
 

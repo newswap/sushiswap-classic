@@ -16,7 +16,7 @@ import useAllStakedValue, {
 import useFarms from '../../../hooks/useFarms'
 import useSushi from '../../../hooks/useSushi'
 import useEarnings from '../../../hooks/useEarnings'
-import { getNSTEarned, getMasterChefContract } from '../../../sushi/utils'
+import useNewPrice from '../../../hooks/useNewPrice'
 import { bnToDec } from '../../../utils'
 import { getDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
@@ -24,6 +24,7 @@ import { useTranslation } from 'react-i18next'
 const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
 interface FarmWithStakedValue extends Farm, StakedValue {
+  reserveUSD: BigNumber,
   apy: BigNumber
 }
 
@@ -31,6 +32,8 @@ const FarmCards: React.FC = () => {
   const [farms] = useFarms()
   const { account } = useWallet()
   const stakedValue = useAllStakedValue()
+  const newPrice = useNewPrice()
+  console.log("FarmCards newPrice------->"+newPrice)
   const { t } = useTranslation()
 
   const sushiIndex = farms.findIndex(
@@ -45,44 +48,15 @@ const FarmCards: React.FC = () => {
   const BLOCKS_PER_YEAR = new BigNumber(10512000)
   const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
 
-  console.log('====FarmCards=====')
-  console.log(Number(sushiPrice))
-  console.log(farms)
-  console.log(stakedValue)
-  // console.log('=========')
-  // if(stakedValue[0]){
-  //   console.log(Number(stakedValue[0].poolWeight))
-  //   console.log(Number(stakedValue[0].tokenAmount))
-  //   console.log(Number(stakedValue[0].tokenPriceInWeth))
-  //   console.log(Number(stakedValue[0].totalWethValue))
-  //   console.log(Number(stakedValue[0].wethAmount))
-  //   const a = sushiPrice
-  //     .times(SUSHI_PER_BLOCK)
-  //     .times(BLOCKS_PER_YEAR)
-  //     .times(stakedValue[0].poolWeight)
-  //     .div(stakedValue[0].totalWethValue)
-  //   console.log(Number(a))
-    
-  //   console.log('=========')
-  //   console.log(Number(stakedValue[1].poolWeight))
-  //   console.log(Number(stakedValue[1].tokenAmount))
-  //   console.log(Number(stakedValue[1].tokenPriceInWeth))
-  //   console.log(Number(stakedValue[1].totalWethValue))
-  //   console.log(Number(stakedValue[1].wethAmount))
-
-  //   const b = sushiPrice
-  //   .times(SUSHI_PER_BLOCK)
-  //   .times(BLOCKS_PER_YEAR)
-  //   .times(stakedValue[1].poolWeight)
-  //   .div(stakedValue[1].totalWethValue)
-  //   console.log(Number(b))
-  // }
-
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
       const farmWithStakedValue = {
         ...farm,
         ...stakedValue[i],
+        reserveUSD: stakedValue[i]
+          ? newPrice
+              .times(stakedValue[i].totalWethValue)
+          : null,
         apy: stakedValue[i]
           ? sushiPrice
               .times(SUSHI_PER_BLOCK)
@@ -135,7 +109,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const earnings = useEarnings(farm.pid)
 
   const { account } = useWallet()
-  const { lpTokenAddress } = farm
+  const { wethAmount, totalWethValue, reserveUSD  } = farm
   const sushi = useSushi()
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -193,6 +167,16 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 />
               )}
             </Button>
+            <StyledInsight>
+              <span>{t('TOTAL VALUE LOCKED')}</span>
+              <span>
+                {farm.reserveUSD
+                  ? `$ ${farm.reserveUSD
+                      .toNumber()
+                      .toLocaleString('en-US')}`
+                  : t('Loading ...')}
+              </span>
+            </StyledInsight>
             <StyledInsight>
               <span>{t('APY')}</span>
               <span>

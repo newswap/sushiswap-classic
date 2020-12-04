@@ -72,6 +72,10 @@ export const contractAddresses = {
     1007: '0x72dcd4dba487d8052e0aab77e3af9050d759e0a2',  //小写
     1012: 'TODO'
   },
+  newNUSDTPair: {
+    1007: '0x56aE975581a382193FF36579C81281E179486c43',  //小写
+    1012: 'TODO'  
+  }
 }
 
 /*
