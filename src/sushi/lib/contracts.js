@@ -39,6 +39,8 @@ export class Contracts {
     // new矿区
     this.newMine = new this.web3.eth.Contract(NewMine)
 
+    this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
+
     // NST Pools
     this.pools = supportedPools.map((pool) =>
       Object.assign(pool, {
@@ -75,8 +77,8 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.weth[networkId])
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
-
     setProvider(this.newMine, contractAddresses.newMine[networkId])
+    setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

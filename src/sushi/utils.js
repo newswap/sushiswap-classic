@@ -16,6 +16,9 @@ const GAS_LIMIT = {
 export const getMasterChefAddress = (sushi) => {
   return sushi && sushi.masterChefAddress
 }
+export const getWNewAddress = (sushi) => {
+  return sushi && sushi.wethAddress
+}
 export const getSushiAddress = (sushi) => {
   return sushi && sushi.sushiAddress
 }
@@ -48,6 +51,10 @@ export const getXNSPStakingContract = (sushi) => {
 
 export const getNewMineContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMine
+}
+
+export const getNewNUSDTPairContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.newNUSDTPair
 }
 
 export const getNSTFarms = (sushi) => {
@@ -133,6 +140,18 @@ export const getNSTEarned = async (masterChefContract, pid, account) => {
 
 export const getNewEarned = async (newMineContract, pid, account) => {
   return newMineContract.methods.pendingNew(pid, account).call()
+}
+
+export const getNewPrice = async (newNUSDTPairContract, wnewAddress) => {
+  const reserves = await newNUSDTPairContract.methods.getReserves().call()
+  const token1 = await newNUSDTPairContract.methods.token1().call()
+
+  if(token1.toLowerCase() == wnewAddress)  // token0-usdt,token1-new
+    return  (new BigNumber(reserves._reserve0).div(new BigNumber(10).pow(6)))        
+              .div(new BigNumber(reserves._reserve1).div(new BigNumber(10).pow(18)))
+  else 
+    return  (new BigNumber(reserves._reserve1).div(new BigNumber(10).pow(6)))
+              .div(new BigNumber(reserves._reserve0).div(new BigNumber(10).pow(18)))
 }
 
 export const getTotalLPWethValue = async (
