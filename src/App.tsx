@@ -40,13 +40,13 @@ const App: React.FC = () => {
           <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
           <Switch>
             <Route path="/" exact>
-              <Farms />
-            </Route>
-            <Route path="/nstFarms">
-              <Farms />
+              <Home />
             </Route>
             <Route path="/newFarms">
               <NewFarms />
+            </Route>
+            <Route path="/nstFarms">
+              <Farms />
             </Route>
             <Route path="/nst">
               <NST />

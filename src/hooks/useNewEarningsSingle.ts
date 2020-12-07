@@ -2,23 +2,23 @@ import { useCallback, useEffect, useState } from 'react'
 import { provider } from 'web3-core'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
-import { getNewEarned, getNewMineContract } from '../sushi/utils'
+import { getNewEarnedSingle, getNewMineSingleContract } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
 
-const useNewEarnings = (pid: number) => {
+const useNewEarningsSingle = () => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const {
     account,
     ethereum,
   }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const newMineContract = getNewMineContract(sushi)
+  const newMineContract = getNewMineSingleContract(sushi)
   // 定时刷新
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getNewEarned(newMineContract, pid, account)
+    const balance = await getNewEarnedSingle(newMineContract, account)
     setBalance(new BigNumber(balance))
   }, [account, newMineContract, sushi])
 
@@ -31,4 +31,4 @@ const useNewEarnings = (pid: number) => {
   return balance
 }
 
-export default useNewEarnings
+export default useNewEarningsSingle

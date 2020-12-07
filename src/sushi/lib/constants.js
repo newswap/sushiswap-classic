@@ -72,8 +72,12 @@ export const contractAddresses = {
     1007: '0x72dcd4dba487d8052e0aab77e3af9050d759e0a2',  //小写
     1012: 'TODO'
   },
+  newMineSingle: {
+    1007: '0x6b0070ed4c588f86deb07ca115ebd8af4b30017e',  //小写
+    1012: 'TODO'
+  },
   newNUSDTPair: {
-    1007: '0x56aE975581a382193FF36579C81281E179486c43',  //小写
+    1007: '0x56ae975581a382193ff36579c81281e179486c43',  //小写
     1012: 'TODO'  
   }
 }
@@ -505,19 +509,19 @@ export const supportedPools = [
 
 // newFarms supported Polls
 export const newSupportedPools = [
-  {
-    pid: 0,
-    lpAddresses: {
-      1007: '0x56aE975581a382193FF36579C81281E179486c43',
-    },
-    tokenAddresses: {
-      1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
-    },
-    name: 'NUSDT Party!',
-    symbol: 'NUSDT-NEW LP',
-    tokenSymbol: 'NUSDT',
-    icon: '👨🏻‍🍳',
-  },
+  // { // NUSDT-NEW挖矿单独抽出来，独占一半的new
+  //   pid: 0,
+  //   lpAddresses: {
+  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
+  //   },
+  //   name: 'NUSDT Party!',
+  //   symbol: 'NUSDT-NEW LP',
+  //   tokenSymbol: 'NUSDT',
+  //   icon: '👨🏻‍🍳',
+  // },
   {
     pid: 1,
     lpAddresses: {
