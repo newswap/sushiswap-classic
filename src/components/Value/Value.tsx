@@ -41,7 +41,8 @@ const Value: React.FC<ValueProps> = ({ value, decimals }) => {
 const StyledValue = styled.div`
   font-family: 'Avenir Next Medium', sans-serif;
   // color: ${(props) => props.theme.color.grey[600]};
-  color: #555A6A;
+  color: #20C5A0;
+  // color: #555A6A;
   font-size: 30px;
   font-weight: 700;
 `

@@ -1,4 +1,9 @@
 import BigNumber from 'bignumber.js/bignumber'
+import newcoin from '../../assets/img/new.a6cfc11f.png'
+import btccoin from '../../assets/img/btclogo.png'
+import usdtcoin from '../../assets/img/usdtlogo.png'
+import imxcoin from '../../assets/img/imxlogo.png'
+
 
 export const SUBTRACT_GAS_LIMIT = 100000
 
@@ -93,6 +98,9 @@ SLP Address on mainnet for reference
 */
 
 // nstFarms supported Polls
+
+
+
 export const supportedPools = [
   {
     pid: 1,
@@ -106,6 +114,8 @@ export const supportedPools = [
     symbol: 'NST-NEW LP',
     tokenSymbol: 'NST',
     icon: '👨🏻‍🍳',
+    iconL: '👨🏻‍🍳',
+    iconR: '👨🏻‍🍳'
   },
   {
     pid: 0,
@@ -119,6 +129,8 @@ export const supportedPools = [
     symbol: 'NUSDT-NEW LP',
     tokenSymbol: 'NUSDT',
     icon: '👨🏻‍🍳',
+    iconL: '👨🏻‍🍳',
+    iconR: '👨🏻‍🍳'
   }
 //   {
 //     pid: 12,
@@ -513,6 +525,8 @@ export const newSupportedPools = [
     symbol: 'NUSDT-NEW LP',
     tokenSymbol: 'NUSDT',
     icon: '👨🏻‍🍳',
+    iconL: usdtcoin,
+    iconR: newcoin
   },
   {
     pid: 1,
@@ -526,6 +540,8 @@ export const newSupportedPools = [
     symbol: 'IMX-NEW LP',
     tokenSymbol: 'IMX',
     icon: '👨🏻‍🍳',
+    iconL: imxcoin,
+    iconR: newcoin
   },
   {
     pid: 2,
@@ -539,5 +555,7 @@ export const newSupportedPools = [
     symbol: 'NBTC-NEW LP',
     tokenSymbol: 'NBTC',
     icon: '👨🏻‍🍳',
+    iconL: btccoin,
+    iconR: newcoin
   }
 ]

@@ -8,9 +8,11 @@ export interface NewFarm {
   lpContract: Contract
   tokenAddress: string
   earnToken: string
-  icon: React.ReactNode
+  icon: string//React.ReactNode
   id: string
   tokenSymbol: string
+  iconL: string
+  iconR: string
 }
 
 export interface NewFarmsContext {

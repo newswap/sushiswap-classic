@@ -44,7 +44,9 @@ const NST: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text={`🔓 ` + t('Unlock Wallet')}
+              text={t('Unlock Wallet')}
+              size = 'new'
+              variant = 'green'
             />
           </div>
         )}

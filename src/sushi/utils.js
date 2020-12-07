@@ -63,6 +63,8 @@ export const getNSTFarms = (sushi) => {
           tokenContract,
           lpAddress,
           lpContract,
+          iconL,
+          iconR
         }) => ({
           pid,
           id: symbol,
@@ -76,6 +78,8 @@ export const getNSTFarms = (sushi) => {
           earnToken: 'nst',
           earnTokenAddress: sushi.contracts.sushi.options.address,
           icon,
+          iconL,
+          iconR
         }),
       )
     : []
@@ -94,6 +98,8 @@ export const getNewFarms = (sushi) => {
           tokenContract,
           lpAddress,
           lpContract,
+          iconL,
+          iconR
         }) => ({
           pid,
           id: symbol,
@@ -106,6 +112,8 @@ export const getNewFarms = (sushi) => {
           tokenContract,
           earnToken: 'new',
           icon,
+          iconL,
+          iconR
         }),
       )
     : []

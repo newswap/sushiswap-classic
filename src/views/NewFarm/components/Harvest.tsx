@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
-import CardIcon from '../../../components/CardIcon'
+import NewCardIcon from '../../../components/NewCardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 
@@ -14,9 +14,10 @@ import { useTranslation } from 'react-i18next'
 
 interface HarvestProps {
   pid: number
+  icon?: string
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid }) => {
+const Harvest: React.FC<HarvestProps> = ({ pid, icon }) => {
   const earnings = useNewEarnings(pid)
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useNewReward(pid)
@@ -27,12 +28,15 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>🍣</CardIcon>
+            {/* <CardIcon>🍣</CardIcon> */}
+            <NewCardIcon icon = {icon}></NewCardIcon>
             <Value value={getBalanceNumber(earnings)} />
             <Label text={t('NEW Earned')} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
+              size = 'new'
+              variant = 'green'
               disabled={!earnings.toNumber() || pendingTx}
               text={pendingTx ? t('Collecting NEW') : t('Harvest')}
               onClick={async () => {

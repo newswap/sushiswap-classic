@@ -55,7 +55,7 @@ const StyledInfo = styled.h3`
 const StyledTableDiv = styled.div`
   background: white;
   border-radius: 12px;
-  box-shadow: 3px 3px 3px 3px rgba(7,94,68,0.02);
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
   padding-top: 10px;
   padding-left: 30px;
   padding-right: 30px;

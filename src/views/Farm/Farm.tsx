@@ -68,7 +68,7 @@ const Farm: React.FC = () => {
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <Harvest pid={pid} />
+            <Harvest pid={pid}/>
           </StyledCardWrapper>
           <Spacer />
           <StyledCardWrapper>

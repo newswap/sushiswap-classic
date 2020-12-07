@@ -94,7 +94,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                   <StyledTableCell component="th" scope="row">                
                     <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
                     <StyledLogo>
-                      <img src={newIcon}/>
+                      <StyledImg src={farm.iconL}/>
                     </StyledLogo>
                     <StyledTokenLabel>
                       {farm.name}
@@ -102,7 +102,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                   </StyledTableCell>
                   <StyledTableCell align="left">
                     <StyledLPLogo>
-                      <img src={newIcon}/>
+                      <StyledImg src={farm.iconR}/>
+                      <StyledImgL src={farm.iconL}/>
                     </StyledLPLogo>
                     <StyledLPLabel>{farm.id}</StyledLPLabel>
                   </StyledTableCell>
@@ -175,6 +176,21 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
 //     height: 30px;
 // `
 
+const StyledImg = styled.img `
+    height: 32px;
+    width: 32px;
+    margin: 2px;
+    margin-left: 14px;
+`
+const StyledImgL = styled.img `
+    height: 32px;
+    width: 32px;
+    border-radius: 16px;
+    margin: 2px;
+    margin-left: -47px;
+    margin-right: 20px;
+`
+
 const StyledIDLabel = styled.div`
     width: 30px;
     height: 30px;
@@ -200,6 +216,7 @@ const StyledLPLabel = styled.div`
     padding-top: 8px;
     font-size: 14px;
     color: #647584;
+    margin-left: 10px;
 `
 
 const StyledLPLogo = styled.div`

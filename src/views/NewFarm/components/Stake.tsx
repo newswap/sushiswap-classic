@@ -9,6 +9,7 @@ import CardIcon from '../../../components/CardIcon'
 import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
+import LabelStyled from '../../../components/LabelStyled'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
@@ -28,9 +29,11 @@ interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
+  iconL: string
+  iconR: string
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { t } = useTranslation()
 
@@ -77,9 +80,17 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>👨🏻‍🍳</CardIcon>
+            <StyledDiv>
+              {/* <CardIcon>👨🏻‍🍳</CardIcon>
+              <CardIcon>👨🏻‍🍳</CardIcon> */}
+              <StyledImg src={iconR}></StyledImg>
+              <StyledImgR src={iconL}></StyledImgR>
+            </StyledDiv>
+            <Spacer height={20}></Spacer>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
+            <Spacer height={10}></Spacer>
+            <LabelStyled text={'预计挖矿效率：XXX'} color={'#647684'} fontSize={16}></LabelStyled>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
@@ -87,18 +98,29 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
                 disabled={requestedApproval}
                 onClick={handleApprove}
                 text={t('Approve') + ` ${tokenName}`}
+                size = 'new'
+                variant = 'green'
               />
             ) : (
               <>
                 <Button
                   disabled={stakedBalance.eq(new BigNumber(0))}
-                  text={t('Unstake')}
+                  text={'移除'}
                   onClick={onPresentWithdraw}
+                  size = 'new'
+                  variant = 'grey'
                 />
                 <StyledActionSpacer />
-                <IconButton onClick={onPresentDeposit}>
+                <Button
+                  disabled={stakedBalance.eq(new BigNumber(0))}
+                  text={'添加'}
+                  onClick={onPresentDeposit}
+                  size = 'new'
+                  variant = 'green'
+                />
+                {/* <IconButton onClick={onPresentDeposit}>
                   <AddIcon />
-                </IconButton>
+                </IconButton> */}
               </>
             )}
           </StyledCardActions>
@@ -108,6 +130,18 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
   )
 }
 
+const StyledDiv = styled.div`
+  width: 86px;
+
+`
+interface SpacerProps{
+  height: number
+}
+
+const Spacer = styled.div<SpacerProps>`
+  height: ${props => props.height}px;
+`
+
 const StyledCardHeader = styled.div`
   align-items: center;
   display: flex;
@@ -116,7 +150,7 @@ const StyledCardHeader = styled.div`
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[6]}px;
+  margin-top: ${(props) => props.theme.spacing[4]}px;
   width: 100%;
 `
 
@@ -131,6 +165,23 @@ const StyledCardContentInner = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
+`
+
+const StyledImg = styled.img `
+    float: left;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-left: 26px;
+`
+
+const StyledImgR = styled.img `
+    float: left;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-right: -26px;
+    margin-top: -60px;
 `
 
 export default Stake

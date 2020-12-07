@@ -124,7 +124,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
       <Card>
         <CardContent>
           <StyledContent>
-            {/* <CardIcon>{farm.icon}</CardIcon> */}
+            <CardIcon>{farm.icon}</CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>{t('Deposit')} {farm.lpToken}</StyledDetail>
