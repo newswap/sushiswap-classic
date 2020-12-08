@@ -1,45 +1,42 @@
-import React from 'react'
+import React, { createContext, useCallback, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
+
 const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
 const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
 
+
 const Nav: React.FC = () => {
   const { t } = useTranslation()
+  const [isOpen, setIsOpen] = useState(false)
 
-  return (
-    <StyledNav>
-      {/* <StyledLink exact activeClassName="active" to="/">
-        { t('Home') }
-      </StyledLink> */}
-      <StyledLink exact activeClassName="active" to="/nstFarms">
-        { t('NSTFarms') }
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/newFarms">
-        { t('NewFarms') }
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/nst">
-        { t('NST') }
-      </StyledLink>
-      <StyledLink exact activeClassName="active" to="/nsp">
-        { t('NSP') }
-      </StyledLink>
-      <StyledAbsoluteLink
-        href={ EXCHANGE_URL }
-        target="_blank"
-      >
-        { t('Exchange') }
-      </StyledAbsoluteLink>
-      {/* <StyledAbsoluteLink
-        href={ NEWSWAP_URL }
-        target="_blank"
-      >
-        { t('About') }
-      </StyledAbsoluteLink> */}
-    </StyledNav>
-  )
+    return (
+      <StyledNav>
+        <StyledLink exact activeClassName="active" to="/">
+          { t('Home') }
+        </StyledLink>
+        <StyledLink exact activeClassName="active" to="/nstFarms">
+          { t('NSTFarms') }
+        </StyledLink>
+        <StyledLink exact activeClassName="active" to="/newFarms">
+          { t('NewFarms') }
+        </StyledLink>
+        <StyledLink exact activeClassName="active" to="/nst">
+          { t('NST') }
+        </StyledLink>
+        <StyledLink exact activeClassName="active" to="/nsp">
+          { t('NSP') }
+        </StyledLink>
+        <StyledAbsoluteLink
+          href={ EXCHANGE_URL }
+          target="_blank"
+        >
+          { t('Exchange') }
+        </StyledAbsoluteLink>
+      </StyledNav>
+    )
 }
 
 const StyledNav = styled.nav`

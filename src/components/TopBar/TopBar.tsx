@@ -9,6 +9,7 @@ import Nav from './components/Nav'
 
 import { isMobile } from "react-device-detect"
 import { useWallet } from 'use-wallet'
+import menu from '../../assets/img/menu.svg'
 
 interface TopBarProps {
   onPresentMobileMenu: () => void
@@ -24,21 +25,38 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
     }
   }, [])
 
-  return (
-    <StyledTopBar>
-      <Container size="lg">
-        <StyledTopBarInner>
-          <StyledLogoWrapper>
-            <Logo />
-          </StyledLogoWrapper>
-          <Nav />
-          <StyledAccountButtonWrapper>
-            <AccountButton />
-          </StyledAccountButtonWrapper>
-        </StyledTopBarInner>
-      </Container>
-    </StyledTopBar>
-  )
+  if (!isMobile) {
+    return (
+      <StyledTopBar>
+        <Container size="lg">
+          <StyledTopBarInner>
+            <StyledLogoWrapper>
+              <Logo />
+            </StyledLogoWrapper>
+            <Nav />
+            <StyledAccountButtonWrapper>
+              <AccountButton />
+            </StyledAccountButtonWrapper>
+          </StyledTopBarInner>
+        </Container>
+      </StyledTopBar>
+    )} else {
+      return (
+        <StyledTopBar>
+          <Container size="lg">
+            <StyledTopBarInner>
+              <StyledLogoWrapper>
+                <Logo />
+              </StyledLogoWrapper>          
+              <StyledMenuButton><StyledImg src={menu} onClick={onPresentMobileMenu}/></StyledMenuButton>
+              <StyledAccountButtonWrapper>
+                <AccountButton />
+              </StyledAccountButtonWrapper>
+            </StyledTopBarInner>
+          </Container>
+        </StyledTopBar>
+      )
+    }
 }
 
 const StyledLogoWrapper = styled.div`
@@ -91,6 +109,16 @@ const StyledMenuButton = styled.button`
     height: 44px;
     justify-content: center;
     width: 44px;
+  }
+`
+
+const StyledImg = styled.img`
+  width: 20px;
+  height: 20px;
+  border-radius: 9px;
+  color: red;
+  &:hover {
+    border:0px solid black;
   }
 `
 

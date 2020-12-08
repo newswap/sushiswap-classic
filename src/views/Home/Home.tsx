@@ -27,12 +27,12 @@ const Home: React.FC = () => {
       </Container>
       <Spacer size="lg" />
        
-      <Container size = 'md'>
+      {/* <Container size = 'md'>
         <StyledTableDiv>
           <StyleLabel>矿池列表</StyleLabel>
           <FarmTable dataSource = {[]}></FarmTable>
         </StyledTableDiv>
-      </Container>
+      </Container> */}
       <Spacer size="lg" />
 
     </Page>
@@ -57,8 +57,8 @@ const StyledTableDiv = styled.div`
   border-radius: 12px;
   box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
   padding-top: 10px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
   padding-bottom: 10px
 `
 

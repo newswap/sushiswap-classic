@@ -15,11 +15,11 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
   if (visible) {
     return (
       <StyledMobileMenuWrapper>
-        <StyledBackdrop onClick={onDismiss} />
+        <StyledBackdrop onClick={onDismiss} />  
         <StyledMobileMenu>
-          {/* <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
+          <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
             {t('Home')}
-          </StyledLink> */}
+          </StyledLink>
           <StyledLink
             exact
             activeClassName="active"
@@ -59,14 +59,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
   return null
 }
 
-const StyledBackdrop = styled.div`
-  background-color: ${(props) => props.theme.color.grey[600]}aa;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-`
+
 
 const StyledMobileMenuWrapper = styled.div`
   display: flex;
@@ -88,35 +81,44 @@ const slideIn = keyframes`
   }
 `
 
+const StyledBackdrop = styled.div`
+  background-color: rgba(0,0,0,0.2);
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`
+
 const StyledMobileMenu = styled.div`
   animation: ${slideIn} 0.3s forwards ease-out;
-  background-color: ${(props) => props.theme.color.grey[200]};
+  background-color: white;
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  top: 0;
-  left: 100%;
-  bottom: 0;
-  width: calc(100% - 48px);
+  top: 60px;
+  left: calc(100% - 10px);
+  // bottom: 0;
+  width: 200px;
 `
 
 const StyledLink = styled(NavLink)`
   box-sizing: border-box;
-  color: ${(props) => props.theme.color.grey[400]};
-  font-size: 24px;
-  font-weight: 700;
-  padding: ${(props) => props.theme.spacing[3]}px
-    ${(props) => props.theme.spacing[4]}px;
-  text-align: center;
+  color: #061243;
+  font-size: 16px;
+  font-weight: 500;
+  padding: ${(props) => props.theme.spacing[2]}px
+    ${(props) => props.theme.spacing[2]}px;
+  text-align: left;
   text-decoration: none;
   width: 100%;
   &:hover {
-    color: ${(props) => props.theme.color.grey[500]};
+    color: #00C89D;
   }
   &.active {
-    color: ${(props) => props.theme.color.primary.main};
+    color: #00C89D;
   }
 `
 

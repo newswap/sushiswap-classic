@@ -17,6 +17,7 @@ import Balances from './components/Balances'
 import NewFarmCards from './components/NewFarmCards'
 import { useTranslation } from 'react-i18next'
 import FarmTable from '../../components/FarmTable'
+import {isMobile} from 'react-device-detect'
 
 
 const NewFarms: React.FC = () => {
@@ -46,7 +47,12 @@ const NewFarms: React.FC = () => {
        
               <Container size = 'md'>
                 <StyledTableDiv>
-                  <StyleLabel>矿池列表</StyleLabel>
+                  {isMobile? (
+                    <StyleLabelMob>矿池列表</StyleLabelMob>
+                  ) : (
+                    <StyleLabel>矿池列表</StyleLabel>
+                  )}
+                  
                   <FarmTable dataSource = {[]}></FarmTable>
                 </StyledTableDiv>
               </Container>
@@ -92,6 +98,12 @@ const StyleLabel = styled.div`
   color: #607686;
   font-size: 20px;
   margin-left: 30px;
+`
+
+const StyleLabelMob = styled.div`
+  color: #607686;
+  font-size: 20px;
+  margin-left: 16px;
 `
 
 

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+import {isMobile} from 'react-device-detect'
 
 interface ContainerProps {
   children?: React.ReactNode,

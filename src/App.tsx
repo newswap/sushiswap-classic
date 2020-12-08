@@ -18,10 +18,13 @@ import Home from './views/Home'
 import NST from "./views/NST";
 import NSP from "./views/NSP";
 
+
+
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
 
 const App: React.FC = () => {
+  // const { t } = useTranslation()
   const [mobileMenu, setMobileMenu] = useState(false)
 
   const handleDismissMobileMenu = useCallback(() => {
@@ -29,6 +32,7 @@ const App: React.FC = () => {
   }, [setMobileMenu])
 
   const handlePresentMobileMenu = useCallback(() => {
+    console.log('button clicked')
     setMobileMenu(true)
   }, [setMobileMenu])
 
@@ -38,9 +42,10 @@ const App: React.FC = () => {
         <Router>
           <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
           <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
+          
           <Switch>
             <Route path="/" exact>
-              <Farms />
+              <Home />
             </Route>
             <Route path="/nstFarms">
               <Farms />

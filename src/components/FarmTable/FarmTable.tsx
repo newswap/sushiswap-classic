@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import newIcon from '../../assets/img/logo.d23eaded.svg'
+import arrow from '../../assets/img/ic_arrow_right.svg'
 
 import { makeStyles, withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -15,6 +16,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import useNewFarms from '../../hooks/useNewFarms'
 import { NewFarm } from '../../contexts/NewFarms'
 import { Link } from 'react-router-dom'
+import {isMobile} from 'react-device-detect'
 
 
 interface FarmTableProps {
@@ -23,7 +25,8 @@ interface FarmTableProps {
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    // minWidth: {window.innerWidth - 48},
+    // minWidth: 300
   },
 });
 
@@ -73,48 +76,102 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
       <StyledTableContainer>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <StyledTableCell align="left">矿池名称</StyledTableCell>
-            <StyledTableCell align="left">质押通证</StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
-          </TableRow>
+          {
+            (isMobile) ? (
+              <TableRow>
+                <StyledTableCell align="left" width="48%">
+                
+                  <StyledTHMobile>矿池名称</StyledTHMobile>
+                  
+                </StyledTableCell>
+                <StyledTableCell align="left" width="50%">
+                  
+                  <StyledTHMobile>质押通证</StyledTHMobile>
+                    
+                </StyledTableCell>
+                <StyledTableCell align="left" width="2%"></StyledTableCell>
+              </TableRow>
+            ) : (
+              <TableRow>
+                <StyledTableCell align="left" width="35%">
+                  <StyledTH>矿池名称</StyledTH>
+                </StyledTableCell>
+                <StyledTableCell align="left" width="45%">
+                  <StyledTH>质押通证</StyledTH>
+                </StyledTableCell>
+                <StyledTableCell align="left" width="20%"></StyledTableCell>
+              </TableRow>
+            )
+          }
         </TableHead>
         <TableBody>
         {
-          // rows.map((farmRow, i) => {
-          //   console.log('====farmRow=====')
-          //   console.log(farmRow)
-            
             rows[0].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((farm, j) => {
               console.log('====farm=====')
               console.log(farm)
               return (
                 <StyledTableRow key={farm.pid}>
-                  <StyledTableCell component="th" scope="row">                
-                    <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
-                    <StyledLogo>
-                      <StyledImg src={farm.iconL}/>
-                    </StyledLogo>
-                    <StyledTokenLabel>
-                      {farm.name}
-                    </StyledTokenLabel>
-                  </StyledTableCell>
-                  <StyledTableCell align="left">
-                    <StyledLPLogo>
-                      <StyledImg src={farm.iconR}/>
-                      <StyledImgL src={farm.iconL}/>
-                    </StyledLPLogo>
-                    <StyledLPLabel>{farm.id}</StyledLPLabel>
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {/* <StyledEnterLabel>进入矿池</StyledEnterLabel> */}
-                    <StyledLink to={`/newFarms/${farm.id}`}>进入矿池</StyledLink>
-                  </StyledTableCell>                 
+                  {
+                      (isMobile) ? (
+                        <>
+                        <StyledTableCell component="th" scope="row"> 
+                          <StyledIDLabelMob>{farm.pid + 1}</StyledIDLabelMob>
+                          <StyledLogo>
+                          <StyledImgMob src={farm.iconL}/>
+                          </StyledLogo>
+                          <StyledTokenLabelMob>
+                            {farm.name}
+                          </StyledTokenLabelMob>
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          <StyledPoolLogo>
+                            <StyledPoolImgMob src={farm.iconR}/>
+                            <StyledImgLMob src={farm.iconL}/>
+                          </StyledPoolLogo>
+                          <StyledLPLabelMob>{farm.id}</StyledLPLabelMob>
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          <StyledLink to={`/newFarms/${farm.id}`}>
+                            {(isMobile) ? '' : '进入矿池'}
+                            <StyledArrow src={arrow} />
+                          </StyledLink>
+                        </StyledTableCell>  
+                        </>
+                      ) : (
+                        <>
+                        <StyledTableCell component="th" scope="row"> 
+                        
+                          <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
+                          <StyledLogo>
+                            <StyledImg src={farm.iconL}/>
+                          </StyledLogo>
+                          <StyledTokenLabel>
+                            {farm.name}
+                          </StyledTokenLabel>
+                        
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                          <StyledPoolLogo>
+                            <StyledPoolImg src={farm.iconR}/>
+                            <StyledImgL src={farm.iconL}/>
+                          </StyledPoolLogo>
+                          <StyledLPLabel>{farm.id}</StyledLPLabel>
+                        </StyledTableCell>
+                        <StyledTableCell align="right">
+                          <StyledLink to={`/newFarms/${farm.id}`}>
+                            {(isMobile) ? '' : '进入矿池'}
+                            <StyledArrow src={arrow} />
+                          </StyledLink>
+                        </StyledTableCell>  
+                        </>
+                      )
+                  }
+                  
+                                 
                 </StyledTableRow>
               )
             })
-          // })
         }
         </TableBody>
       </Table>
@@ -153,10 +210,18 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
       borderBottom: "1px solid #F8F8F8"
     },
     root: {
-      paddingLeft: "30px"
+       paddingLeft: "0px",
+       paddingRight: "0px"
     }
 
   }))(TableCell);
+
+  const StyledTH = styled.span`
+    margin-left: 30px;
+  `
+  const StyledTHMobile = styled.span`
+    margin-left: 16px;
+  `
  
   const StyledTableContainer = withStyles((theme) => ({
     root: {
@@ -164,41 +229,84 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
     }
   }))(TableContainer);
 
-// const StyledTH = styled.th`
-//     width: 300px;
-//     text-align: left;
-//     height: 50px;
-//     color: #647584;
-// `
-
-// const StyledTD = styled.td`
-//     text-align: left;
-//     height: 30px;
-// `
-
 const StyledImg = styled.img `
     height: 32px;
     width: 32px;
     margin: 2px;
     margin-left: 14px;
 `
+const StyledImgMob = styled.img `
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    margin-left: 0px;
+    margin-top: 6px;
+`
+
+const StyledPoolImg = styled.img `
+    height: 32px;
+    width: 32px;
+    margin-left: 30px;
+    z-index: 999;
+`
+
+const StyledPoolImgMob = styled.img `
+    height: 20px;
+    width: 20px;
+    margin-left: 12px;
+    z-index: 999;
+    margin-top: 6px;
+`
+
+
+const StyledArrow = styled.img `
+    height: 16px;
+    width: 16px;
+    margin: 0px;
+    justify-content: center;
+    float: left;
+    margin: 20px; 
+    margin-left: 10px;  
+`
+
 const StyledImgL = styled.img `
     height: 32px;
     width: 32px;
     border-radius: 16px;
-    margin: 2px;
-    margin-left: -47px;
+    // margin: 2px;
+    margin-left: -16px;
     margin-right: 20px;
 `
 
+const StyledImgLMob = styled.img `
+    height: 20px;
+    width: 20px;
+    border-radius: 10px;
+    // margin: 2px;
+    margin-left: -10px;
+    margin-top: 6px;
+    // margin-right: 20px;
+`
+
 const StyledIDLabel = styled.div`
-    width: 30px;
     height: 30px;
     float: left;
     text-align: left;
     padding-top: 8px;
     font-size: 16px;
+    margin-left: 30px;
 `
+const StyledIDLabelMob = styled.div`
+    height: 30px;
+    float: left;
+    text-align: left;
+    padding-top: 0px;
+    font-size: 16px;
+    margin-left: 16px;
+    margin-top: 6px;
+`
+
+
 const StyledTokenLabel = styled.div`
     height: 30px;
     float: left;
@@ -209,12 +317,31 @@ const StyledTokenLabel = styled.div`
     color: #20C5A0;
 `
 
+const StyledTokenLabelMob = styled.div`
+    height: 30px;
+    float: left;
+    text-align: left;
+    padding-top: 8px;
+    font-size: 12px;
+    color: #20C5A0;
+`
+
 const StyledLPLabel = styled.div`
     height: 30px;
     float: left;
     text-align: center;
     padding-top: 8px;
     font-size: 14px;
+    color: #647584;
+    margin-left: 10px;
+`
+
+const StyledLPLabelMob = styled.div`
+    height: 30px;
+    float: left;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 12px;
     color: #647584;
     margin-left: 10px;
 `
@@ -239,6 +366,17 @@ const StyledLogo = styled.div`
     padding-top: 0px;
 `
 
+const StyledPoolLogo = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    min-height: 30px;
+    min-width: 30px;
+    text-decoration: none;
+    float: left;
+    padding-top: 0px;
+`
+
 const StyledLink = styled(Link)`
   align-items: center;
   font-size: 14px;
@@ -250,6 +388,7 @@ const StyledLink = styled(Link)`
   margin: 0 ${props => -props.theme.spacing[4]}px;
   padding: 0 ${props => props.theme.spacing[4]}px;
   text-decoration: none;
+  float: left;
 `
 
 export default FarmTable
