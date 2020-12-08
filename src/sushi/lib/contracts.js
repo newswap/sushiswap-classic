@@ -8,6 +8,7 @@ import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
 import NewMine from './abi/newmine.json'
+import NewMineSingle from './abi/newminesingle.json'
 
 import {
   contractAddresses,
@@ -38,6 +39,9 @@ export class Contracts {
 
     // new矿区
     this.newMine = new this.web3.eth.Contract(NewMine)
+
+    // 单独给new-nusdt交易对挖new的矿山
+    this.newMineSingle = new this.web3.eth.Contract(NewMineSingle)
 
     this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
 
@@ -78,6 +82,7 @@ export class Contracts {
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
     setProvider(this.newMine, contractAddresses.newMine[networkId])
+    setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
 
     this.pools.forEach(

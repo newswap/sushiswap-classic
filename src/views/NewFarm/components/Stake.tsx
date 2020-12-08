@@ -81,8 +81,6 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
         <StyledCardContentInner>
           <StyledCardHeader>
             <StyledDiv>
-              {/* <CardIcon>👨🏻‍🍳</CardIcon>
-              <CardIcon>👨🏻‍🍳</CardIcon> */}
               <StyledImg src={iconR}></StyledImg>
               <StyledImgR src={iconL}></StyledImgR>
             </StyledDiv>

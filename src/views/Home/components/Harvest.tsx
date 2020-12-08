@@ -1,28 +1,28 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import NewCardIcon from '../../../components/NewCardIcon'
 import Button from '../../../components/Button'
+import NewCardIcon from '../../../components/NewCardIcon'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useEarnings from '../../../hooks/useEarnings'
-import useReward from '../../../hooks/useReward'
+import useNewEarningsSingle from '../../../hooks/useNewEarningsSingle'
+import useNewRewardSingle from '../../../hooks/useNewRewardSingle'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 interface HarvestProps {
-  pid: number
-  icon?: string
+  icon: string
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid, icon }) => {
-  const earnings = useEarnings(pid)
+const Harvest: React.FC<HarvestProps> = ({icon} ) => {
+  const earnings = useNewEarningsSingle()
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useReward(pid)
+  const { onReward } = useNewRewardSingle()
   const { t } = useTranslation()
-
+  console.log('===icon')
+  console.log(icon)
   return (
     <Card>
       <CardContent>
@@ -31,14 +31,14 @@ const Harvest: React.FC<HarvestProps> = ({ pid, icon }) => {
             {/* <CardIcon>🍣</CardIcon> */}
             <NewCardIcon icon = {icon}></NewCardIcon>
             <Value value={getBalanceNumber(earnings)} />
-            <Label text={t('NST Earned')} />
+            <Label text={t('NEW Earned')} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               size = 'new'
               variant = 'green'
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? t('Collecting NST') : t('Harvest')}
+              text={pendingTx ? t('Collecting NEW') : t('Harvest')}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()

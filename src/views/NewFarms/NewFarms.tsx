@@ -33,7 +33,7 @@ const NewFarms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={coin} height="120" />}
+                icon={<img src={coin} height="95" />}
                 // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
                 title={t('New Farms')}
                 subtitle={t('newFarmsTips')}

@@ -47,11 +47,11 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/nstFarms">
-              <Farms />
-            </Route>
             <Route path="/newFarms">
               <NewFarms />
+            </Route>
+            <Route path="/nstFarms">
+              <Farms />
             </Route>
             <Route path="/nst">
               <NST />

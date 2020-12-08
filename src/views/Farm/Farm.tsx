@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
+import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
 // import useRedeem from '../../hooks/useRedeem'
@@ -26,6 +27,9 @@ const Farm: React.FC = () => {
     earnToken,
     name,
     icon,
+    iconL,
+    iconR,
+    tokenSymbol
   } = useFarm(farmId) || {
     pid: 0,
     lpToken: '',
@@ -34,6 +38,9 @@ const Farm: React.FC = () => {
     earnToken: '',
     name: '',
     icon: '',
+    iconL: '',
+    iconR: '',
+    tokenSymbol: ''
   }
 
   useEffect(() => {
@@ -60,15 +67,23 @@ const Farm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
+      {/* <PageHeader
         icon={icon}
         subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
         title={name}
+      /> */}
+      <NewPageHeader
+        iconL={iconL}
+        iconR={iconR}
+        subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
+        // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
+        title={tokenSymbol + '-NEW 矿池'}
       />
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <Harvest pid={pid}/>
+            {/* <Harvest pid={pid}/> */}
+            <Harvest pid={pid} icon={iconR} />
           </StyledCardWrapper>
           <Spacer />
           <StyledCardWrapper>
@@ -76,6 +91,8 @@ const Farm: React.FC = () => {
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken}
+              iconL={iconL}
+              iconR={iconR}
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>

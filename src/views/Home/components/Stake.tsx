@@ -10,14 +10,13 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useAllowance from '../../../hooks/useAllowance'
-import useApprove from '../../../hooks/useApprove'
 import useModal from '../../../hooks/useModal'
-import useStake from '../../../hooks/useStake'
-import useStakedBalance from '../../../hooks/useStakedBalance'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useUnstake from '../../../hooks/useUnstake'
-import useNSTPerBlock from '../../../hooks/useNSTPerBlock'
+import useAllowanceNewMineSingle from '../../../hooks/useAllowanceNewMineSingle'
+import useApproveNewMineSingle from '../../../hooks/useApproveNewMineSingle'
+import useStakeNewMineSingle from '../../../hooks/useStakeNewMineSingle'
+import useStakedBalanceNewMineSingle from '../../../hooks/useStakedBalanceNewMineSingle'
+import useUnstakeNewMineSingle from '../../../hooks/useUnstakeNewMineSingle'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
@@ -25,26 +24,25 @@ import { useTranslation } from 'react-i18next'
 
 interface StakeProps {
   lpContract: Contract
-  pid: number
   tokenName: string
   iconL: string
   iconR: string
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR }) => {
+const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK ?? '1')
+
+const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { t } = useTranslation()
 
-  const allowance = useAllowance(lpContract)
-  const nstPerBlock = useNSTPerBlock(pid)
-
-  const { onApprove } = useApprove(lpContract)
+  const allowance = useAllowanceNewMineSingle(lpContract)
+  const { onApprove } = useApproveNewMineSingle(lpContract)
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useStakedBalance(pid)
+  const stakedBalance = useStakedBalanceNewMineSingle()
 
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const { onStake } = useStakeNewMineSingle()
+  const { onUnstake } = useUnstakeNewMineSingle()
 
   const [onPresentDeposit] = useModal(
     <DepositModal
@@ -85,10 +83,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
               <StyledImg src={iconR}></StyledImg>
               <StyledImgR src={iconL}></StyledImgR>
             </StyledDiv>
-            <Spacer height={20}></Spacer>
+            <Spacer height={20} />
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
-            <Label text={t('nstPerBlock',{nst:nstPerBlock})} />
+            <Label text={t('newPerBlock',{new:NEW_PER_BLOCK})} />
+
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
@@ -103,7 +102,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
               <>
                 <Button
                   disabled={stakedBalance.eq(new BigNumber(0))}
-                  text={'移除'}
+                  text={t('Unstake')}
                   onClick={onPresentWithdraw}
                   size = 'new'
                   variant = 'grey'
@@ -124,6 +123,14 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
     </Card>
   )
 }
+
+interface SpacerProps{
+  height: number
+}
+
+const Spacer = styled.div<SpacerProps>`
+  height: ${props => props.height}px;
+`
 
 const StyledCardHeader = styled.div`
   align-items: center;
@@ -149,12 +156,6 @@ const StyledCardContentInner = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
-
-const StyledDiv = styled.div`
-  width: 86px;
-
-`
-
 const StyledImg = styled.img `
     float: left;
     width: 60px;
@@ -171,12 +172,9 @@ const StyledImgR = styled.img `
     margin-right: -26px;
     margin-top: -60px;
 `
-interface SpacerProps{
-  height: number
-}
+const StyledDiv = styled.div`
+  width: 86px;
 
-const Spacer = styled.div<SpacerProps>`
-  height: ${props => props.height}px;
 `
 
 export default Stake

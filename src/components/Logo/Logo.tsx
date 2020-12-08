@@ -4,14 +4,27 @@ import styled from 'styled-components'
 import newIcon from '../../assets/img/logo.d23eaded.svg'
 import newSwap from '../../assets/img/wordmark.873dadad.svg'
 import { useTranslation } from 'react-i18next'
+import {isMobile} from 'react-device-detect'
+
 
 const Logo: React.FC = () => {
   const { t } = useTranslation()
 
   return (
     <StyledLogo to="/">
-      <StyledNewIcon><img src={newIcon}/></StyledNewIcon>
-      <img src={newSwap}/>
+      
+      { (isMobile) ? 
+        (
+          <StyledNewIconMob src={newIcon}/>
+        ) : (
+          <>
+          <StyledNewIcon src={newIcon}/>
+          <StyledSwapIcon src={newSwap}/>
+          </>
+        )
+
+      }
+      
     </StyledLogo>
   )
 }
@@ -26,8 +39,20 @@ const StyledLogo = styled(Link)`
   padding: 0;
   text-decoration: none;
 `
-const StyledNewIcon = styled.div`
+const StyledNewIcon = styled.img`
+  height:48px;
+  width: 48px;
+  margin-top: -10px;
+`
+const StyledSwapIcon = styled.img`
+  width: 117px;
+`
 
+
+const StyledNewIconMob = styled.img`
+  height: 60px;
+  width: 60px;
+  margin-top: -10px;
 `
 
 

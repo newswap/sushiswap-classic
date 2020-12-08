@@ -20,6 +20,8 @@ import useNewPrice from '../../../hooks/useNewPrice'
 import { bnToDec } from '../../../utils'
 import { getDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
+import Container from '../../../components/Container'
+
 
 const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
@@ -35,7 +37,7 @@ const FarmCards: React.FC = () => {
   const newPrice = useNewPrice()
   console.log("FarmCards newPrice------->"+newPrice)
   const { t } = useTranslation()
-
+  
   const sushiIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'NST',
   )
@@ -77,6 +79,7 @@ const FarmCards: React.FC = () => {
   )
 
   return (
+    <Container size = 'md'>
     <StyledCards>
       {!!rows[0].length ? (
         rows.map((farmRow, i) => (
@@ -85,6 +88,7 @@ const FarmCards: React.FC = () => {
               <React.Fragment key={j}>
                 <FarmCard farm={farm} />
                 {(j === 0 || j === 1) && <StyledSpacer />}
+                {(j == farmRow.length - 1) && <FarmEmptyCard/>}
               </React.Fragment>
             ))}
           </StyledRow>
@@ -95,6 +99,7 @@ const FarmCards: React.FC = () => {
         </StyledLoadingWrapper>
       )}
     </StyledCards>
+    </Container>
   )
 }
 
@@ -143,19 +148,28 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'NST' && <StyledCardAccent />} 
+      {/* {farm.tokenSymbol === 'NST' && <StyledCardAccent />}  */}
       <Card>
-        <CardContent>
+        <StyledCardContent>
           <StyledContent>
-            <CardIcon>{farm.icon}</CardIcon>
-            <StyledTitle>{farm.name}</StyledTitle>
-            <StyledDetails>
-              <StyledDetail> {t('Pending harvest')} {getDisplayBalance(earnings)} NST</StyledDetail>
-              <StyledDetail>{t('Deposit')} {farm.lpToken}</StyledDetail>
-              <StyledDetail>{t('Earn')} {farm.earnToken.toUpperCase()}</StyledDetail>
-            </StyledDetails>
+            {farm ? (
+              <>
+              <StyledDiv>
+              <StyledImg src={farm.iconL}></StyledImg>
+              <StyledImgR src={farm.iconR}></StyledImgR>
+            </StyledDiv>
+            {/* <CardIcon>{farm.icon}</CardIcon> */}
+            <StyledTitle>{farm.tokenSymbol + '-NEW'}</StyledTitle>
+            {/* <StyledDetails> */}
+              <StyledDetailPending> {t('Pending harvest')} {getDisplayBalance(earnings)} NST</StyledDetailPending>
+              <StyledDetails>
+                <StyledDetail>{t('Deposit')} {farm.lpToken}</StyledDetail>
+                <StyledDetail>{t('Earn')} {farm.earnToken.toUpperCase()}</StyledDetail>
+              </StyledDetails>
             <Spacer />
             <Button
+              size = 'new'
+              variant = 'green'
               disabled={!poolActive}
               text={poolActive ? t('Select') : undefined}
               to={`/nstFarms/${farm.id}`}
@@ -167,28 +181,29 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 />
               )}
             </Button>
-            <StyledInsight>
-              <span>{t('TOTAL VALUE LOCKED')}</span>
-              <span>
-                {farm.reserveUSD
-                  ? `$ ${farm.reserveUSD
-                      .toNumber()
-                      .toLocaleString('en-US')}`
-                  : t('Loading ...')}
-              </span>
-            </StyledInsight>
-            <StyledInsight>
-              <span>{t('APY')}</span>
-              <span>
-                {farm.apy
-                  ? `${farm.apy
-                      .times(new BigNumber(100))
-                      // .times(new BigNumber(3))
-                      .toNumber()
-                      .toLocaleString('en-US')
-                      .slice(0, -1)}%`
-                  : t('Loading ...')}
-              </span>
+            <StyledInsightDiv>
+              <StyledInsight>
+                <span>{t('TOTAL VALUE LOCKED')}</span>
+                <span>
+                  {farm.reserveUSD
+                    ? `$ ${farm.reserveUSD
+                       .toNumber()
+                       .toLocaleString('en-US')}`
+                    : t('Loading ...')}
+                </span>
+              </StyledInsight>
+              <StyledInsight>
+                <span>{t('APY')}</span>
+                <span>
+                  {farm.apy
+                   ? `${farm.apy
+                       .times(new BigNumber(100))
+                       // .times(new BigNumber(3))
+                       .toNumber()
+                       .toLocaleString('en-US')
+                        .slice(0, -1)}%`
+                    : t('Loading ...')}
+                </span>
               {/* <span>
                 {farm.tokenAmount
                   ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
@@ -201,13 +216,60 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   : '-'}{' '}
                 ETH
               </span> */}
-            </StyledInsight>
+              </StyledInsight>
+            </StyledInsightDiv>
+              </>
+
+            ) : (
+              <div></div>
+            )}
+            
           </StyledContent>
-        </CardContent>
+        </StyledCardContent>
       </Card>
     </StyledCardWrapper>
   )
 }
+
+const FarmEmptyCard: React.FC = ({  }) => {
+
+  return (
+    <StyledCardWrapper>
+      {/* {farm.tokenSymbol === 'NST' && <StyledCardAccent />}  */}
+      <Card>
+        <StyledCardContent>
+          <StyledContent>
+            <StyledSpan>
+              更多 NST 矿池敬请期待…
+            </StyledSpan>
+          </StyledContent>
+        </StyledCardContent>
+      </Card>
+    </StyledCardWrapper>
+  )
+}
+
+const StyledSpan = styled.div `
+  display: flex;
+  flex: 1;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(50%);
+`
+
+
+const StyledCardContent = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: ${(props) => props.theme.spacing[3]}px;
+  padding-left: 16px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
+
+`
 
 const RainbowLight = keyframes`
 
@@ -276,13 +338,14 @@ const StyledRow = styled.div`
 
 const StyledCardWrapper = styled.div`
   display: flex;
-  width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
+  width: calc((752px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
 `
 
 const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.color.grey[600]};
-  font-size: 24px;
+  // color: ${(props) => props.theme.color.grey[600]};
+  color: #20C5A0;
+  font-size: 26px;
   font-weight: 700;
   margin: ${(props) => props.theme.spacing[2]}px 0 0;
   padding: 0;
@@ -300,12 +363,28 @@ const StyledSpacer = styled.div`
 `
 
 const StyledDetails = styled.div`
-  margin-top: ${(props) => props.theme.spacing[2]}px;
+  margin-top: 20px;
   text-align: center;
 `
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.color.grey[500]};
+  color: #647684;
+  text-align: center;
+`
+const StyledDetailPending = styled.div`
+  color: #20C5A0;
+  padding: 0px;
+  margin-top: 0px;
+  text-align: center;
+  font-size:16px;
+`
+
+const StyledInsightDiv = styled.div`
+  background: #F2F2F7;
+  width: 100%;
+  border-radius: 8px;
+  padding: 0;
+  margin-top: 10px;
 `
 
 const StyledInsight = styled.div`
@@ -313,15 +392,35 @@ const StyledInsight = styled.div`
   justify-content: space-between;
   box-sizing: border-box;
   border-radius: 8px;
-  background: #fffdfa;
-  color: #aa9584;
+  background: #F2F2F7;
+  color: #647684;
   width: 100%;
-  margin-top: 12px;
+  // margin-top: 12px;
   line-height: 32px;
   font-size: 13px;
-  border: 1px solid #e6dcd5;
+  // border: 1px solid #e6dcd5;
   text-align: center;
   padding: 0 12px;
+  font-size: 13px;
+`
+const StyledDiv = styled.div`
+  width: 101px;
+
+`
+
+
+const StyledImg = styled.img `
+    float: left;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+`
+
+const StyledImgR = styled.img `
+    float: right;
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
 `
 
 export default FarmCards

@@ -17,6 +17,8 @@ const INFO_URL = process.env.REACT_APP_INFO_URL
 
 const NewFarm: React.FC = () => {
   const { farmId } = useParams()
+  console.log("====farmId")
+  console.log(farmId)
   const {
     pid,
     lpToken,

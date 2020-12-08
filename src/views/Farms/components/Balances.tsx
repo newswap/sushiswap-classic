@@ -95,8 +95,8 @@ const Balances: React.FC = () => {
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <SushiIcon />
-              <Spacer />
+              {/* <SushiIcon />
+              <Spacer /> */}
               <div style={{ flex: 1 }}>
                 <Label text={t('Your NST Balance')} />
                 <Value
@@ -132,10 +132,12 @@ const Balances: React.FC = () => {
 }
 
 const Footnote = styled.div`
-  font-size: 14px;
-  padding: 8px 20px;
-  color: ${(props) => props.theme.color.grey[400]};
-  border-top: solid 1px ${(props) => props.theme.color.grey[300]};
+  font-size: 16px;
+  padding: 20px 30px;
+  font-family: 'PingFang SC Medium', sans-serif;
+  // color: ${(props) => props.theme.color.grey[400]};
+  color: #607686;
+  // border-top: solid 1px ${(props) => props.theme.color.grey[300]};
 `
 const FootnoteValue = styled.div`
   font-family: 'Roboto Mono', monospace;
