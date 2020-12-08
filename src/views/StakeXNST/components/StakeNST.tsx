@@ -23,14 +23,14 @@ interface StakeProps {
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
 
-const StakeSushi: React.FC<StakeProps> = ({}) => {
+const StakeNST: React.FC<StakeProps> = ({}) => {
   const tokenName = "NST"
   const [requestedApproval, setRequestedApproval] = useState(false)
   const allowance = useAllowanceStaking()
   const {onApprove} = useApproveStaking()
   const { t } = useTranslation()
 
-  const tokenBalance = useTokenBalance(contractAddresses.sushi[CHAIN_ID])
+  const tokenBalance = useTokenBalance(contractAddresses.nst[CHAIN_ID])
 
   const {onEnter} = useEnter()
   const {onLeave} = useLeave()
@@ -114,4 +114,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default StakeSushi
+export default StakeNST

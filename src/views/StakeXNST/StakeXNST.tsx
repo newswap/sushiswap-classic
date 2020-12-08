@@ -5,22 +5,22 @@ import {provider} from 'web3-core'
 import Spacer from '../../components/Spacer'
 import useSushi from '../../hooks/useSushi'
 import {getContract} from '../../utils/erc20'
-import UnstakeXSushi from './components/UnstakeXSushi'
-import StakeSushi from "./components/StakeSushi";
+import UnstakeXNST from './components/UnstakeXNST'
+import StakeNST from "./components/StakeNST";
 
 import {contractAddresses} from '../../sushi/lib/constants'
-import {getXSushiSupply} from "../../sushi/utils";
+import {getXNSTSupply} from "../../sushi/utils";
 import BigNumber from "bignumber.js";
 import {getBalanceNumber} from "../../utils/formatBalance";
 import { useTranslation } from 'react-i18next'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
 
-const StakeXSushi: React.FC = () => {
+const StakeXNST: React.FC = () => {
   const {
     tokenAddress,
   } = {
-    tokenAddress: contractAddresses.xSushi[CHAIN_ID],
+    tokenAddress: contractAddresses.xNST[CHAIN_ID],
   }
 
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
@@ -35,7 +35,7 @@ const StakeXSushi: React.FC = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getXSushiSupply(sushi)
+      const supply = await getXNSTSupply(sushi)
       setTotalSupply(supply)
     }
     if (sushi) {
@@ -55,13 +55,13 @@ const StakeXSushi: React.FC = () => {
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <UnstakeXSushi
+            <UnstakeXNST
               lpContract={lpContract}
             />
           </StyledCardWrapper>
           <Spacer/>
           <StyledCardWrapper>
-            <StakeSushi
+            <StakeNST
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>
@@ -116,4 +116,4 @@ const StyledInfo = styled.h3`
   text-align: center;
 `
 
-export default StakeXSushi
+export default StakeXNST

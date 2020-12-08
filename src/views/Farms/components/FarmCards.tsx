@@ -36,17 +36,16 @@ const FarmCards: React.FC = () => {
   console.log("FarmCards newPrice------->"+newPrice)
   const { t } = useTranslation()
 
-  const sushiIndex = farms.findIndex(
+  const nstIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'NST',
   )
 
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
+  const nstPrice =
+    nstIndex >= 0 && stakedValue[nstIndex]
+      ? stakedValue[nstIndex].tokenPriceInWeth
       : new BigNumber(0)
 
   const BLOCKS_PER_YEAR = new BigNumber(10512000)
-  const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -58,8 +57,8 @@ const FarmCards: React.FC = () => {
               .times(stakedValue[i].totalWethValue)
           : null,
         apy: stakedValue[i]
-          ? sushiPrice
-              .times(SUSHI_PER_BLOCK)
+          ? nstPrice
+              .times(NST_PER_BLOCK)
               .times(BLOCKS_PER_YEAR)
               .times(stakedValue[i].poolWeight)
               .div(stakedValue[i].totalWethValue)

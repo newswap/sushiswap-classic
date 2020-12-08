@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import MasterChefAbi from './abi/masterchef.json'
-import XSushiAbi from './abi/xsushi.json'
-import SushiAbi from './abi/sushi.json'
+import XNSTAbi from './abi/xnst.json'
+import NSTAbi from './abi/nst.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
@@ -29,9 +29,9 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
     // nst矿区
-    this.sushi = new this.web3.eth.Contract(SushiAbi) // nst
+    this.nst = new this.web3.eth.Contract(NSTAbi)
     this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
-    this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
+    this.xNSTStaking = new this.web3.eth.Contract(XNSTAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
     // nsp理财区
     this.nsp = new this.web3.eth.Contract(NSPAbi)
@@ -75,9 +75,9 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId)
     }
 
-    setProvider(this.sushi, contractAddresses.sushi[networkId])
+    setProvider(this.nst, contractAddresses.nst[networkId])
     setProvider(this.masterChef, contractAddresses.masterChef[networkId])
-    setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
+    setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
@@ -101,7 +101,7 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.sushi.options.from = account
+    this.nst.options.from = account
     this.masterChef.options.from = account
   }
 

@@ -33,7 +33,6 @@ const Farms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={chef} height="120" />}
-                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
                 subtitle={t('Earn NST tokens by staking NewSwap LP Tokens.')}
                 title={t('Select Your Favorite Dishes')}
               />

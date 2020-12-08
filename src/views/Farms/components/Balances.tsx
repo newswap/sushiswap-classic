@@ -14,7 +14,7 @@ import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress, getSushiSupply } from '../../../sushi/utils'
+import { getNSTAddress, getNSTSupply } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
@@ -75,13 +75,13 @@ const PendingRewards: React.FC = () => {
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
   const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const nstBalance = useTokenBalance(getNSTAddress(sushi))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
   const { t } = useTranslation()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getSushiSupply(sushi)
+      const supply = await getNSTSupply(sushi)
       setTotalSupply(supply)
     }
     if (sushi) {
@@ -100,7 +100,7 @@ const Balances: React.FC = () => {
               <div style={{ flex: 1 }}>
                 <Label text={t('Your NST Balance')} />
                 <Value
-                  value={!!account ? getBalanceNumber(sushiBalance) : t('Locked')}
+                  value={!!account ? getBalanceNumber(nstBalance) : t('Locked')}
                 />
               </div>
             </StyledBalance>

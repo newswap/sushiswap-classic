@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useSushi from '../../../hooks/useSushi'
-import { getSushiAddress } from '../../../sushi/utils'
+import { getNSTAddress } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -28,7 +28,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }, [onDismiss, reset])
 
   const sushi = useSushi()
-  const sushiBalance = useTokenBalance(getSushiAddress(sushi))
+  const nstBalance = useTokenBalance(getNSTAddress(sushi))
 
   return (
     <Modal>
@@ -42,7 +42,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
               <span>🍣</span>
             </CardIcon>
             <StyledBalance>
-              <Value value={getBalanceNumber(sushiBalance)} />
+              <Value value={getBalanceNumber(nstBalance)} />
               <Label text={t('NST Balance')} />
             </StyledBalance>
           </StyledBalanceWrapper>

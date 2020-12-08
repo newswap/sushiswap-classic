@@ -10,7 +10,7 @@ import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
-import StakeXSushi from "../StakeXSushi";
+import StakeXNST from "../StakeXNST";
 import { useTranslation } from 'react-i18next'
 
 const NST: React.FC = () => {
@@ -31,7 +31,7 @@ const NST: React.FC = () => {
                 title={t('Irasshaimase!')}
               />
             </Route>
-            <StakeXSushi/>
+            <StakeXNST/>
           </>
         ) : (
           <div

@@ -14,7 +14,7 @@ interface DepositModalProps extends ModalProps {
   tokenName?: string
 }
 
-// TODO 和stakexsushi中的一起抽出来
+// TODO 和stakexnst中的一起抽出来
 const DepositModal: React.FC<DepositModalProps> = ({
   max,
   onConfirm,
