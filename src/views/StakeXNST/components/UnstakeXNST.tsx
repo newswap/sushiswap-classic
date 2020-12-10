@@ -19,10 +19,10 @@ interface HarvestProps {
   lpContract: Contract
 }
 
-const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
+const UnstakeXNST: React.FC<HarvestProps> = ({lpContract}) => {
   const { t } = useTranslation()
 
-  const xSushiBalance = useTokenBalance(lpContract.options.address)
+  const xNSTBalance = useTokenBalance(lpContract.options.address)
   const [pendingTx, setPendingTx] = useState(false)
 
   const {onLeave} = useLeave()
@@ -31,7 +31,7 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
 
   const [onPresentLeave] = useModal(
     <WithdrawModal
-      max={xSushiBalance}
+      max={xNSTBalance}
       onConfirm={onLeave}
       tokenName={tokenName}
     />,
@@ -43,12 +43,12 @@ const UnstakeXSushi: React.FC<HarvestProps> = ({lpContract}) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <CardIcon>🍣</CardIcon>
-            <Value value={getBalanceNumber(xSushiBalance)}/>
+            <Value value={getBalanceNumber(xNSTBalance)}/>
             <Label text={t('xNST (NSTBar) Available')}/>
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              disabled={!xSushiBalance.toNumber() || pendingTx}
+              disabled={!xNSTBalance.toNumber() || pendingTx}
               text={pendingTx ? t('Converting to NST') : t('Convert to NST')}
               onClick={async () => {
                 setPendingTx(true)
@@ -88,4 +88,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default UnstakeXSushi
+export default UnstakeXNST

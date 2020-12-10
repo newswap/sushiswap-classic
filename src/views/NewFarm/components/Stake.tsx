@@ -110,7 +110,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
                 />
                 <StyledActionSpacer />
                 <Button
-                  disabled={stakedBalance.eq(new BigNumber(0))}
+                  disabled={false}
                   text={'添加'}
                   onClick={onPresentDeposit}
                   size = 'new'

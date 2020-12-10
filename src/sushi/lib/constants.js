@@ -45,32 +45,28 @@ export const addressMap = {
 }
 
 export const contractAddresses = {
-  sushi: {  //nst
-    // 1: '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2',
-    1007: '0xb627764e8833ad2b4dc4f53ddbce57611801ae1c',  //小写
-    1012: 'TODO',  
-  },
   masterChef: {
-    // 1: '0xc2edad668740f1aa35e4d8f227fb8e17dca888cd',
-    1007: '0x78260098c307b381fff9ee21ad22425a4f26c832',  //小写
+    1007: '0x99f935050b5851acfb24ce9114c152a369fd89a7',  //小写
     1012: 'TODO'
   },
   weth: { // wnew
-    // 1: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2',
     1007: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf', //小写
     1012: '0xf4905b9bc02ce21c98eac1803693a9357d5253bf'
   },
-  xSushi: { // nstbar
-    // 1: '0x8798249c2e607446efb7ad49ec89dd1865ff4272',   
-    1007: '0x85b7f8c9a4b0b8498a877478b3acd3c2849b0fca',    //小写
+  nst: { 
+    1007: '0x43bb9b430ce64c2ed0c39c59fe48fac239149240',  //小写
+    1012: 'TODO',  
+  },
+  xNST: { // nstbar
+    1007: '0x43e9f5afafd0e897407ee7cf0121d1b2140a8cdc',    //小写
     1012: 'TODO'
   },
   nsp: {
-    1007: '0x5c0334c357b490fb0aad55d00970e172610cf415',    //小写
+    1007: '0x8f3f9902ac83a254711cf87eef32e7aa2e8cd97f',    //小写
     1012: 'TODO'
   },
-  xNSP: {
-    1007: '0x7669cb4b484fd6da7333ad67412000b8cb2e8a12',    //小写
+  xNSP: { //nspbar
+    1007: '0x639a8e293195694fef98cc854cdfa828ea895927',    //小写
     1012: 'TODO'
   },
   newMine: {
@@ -113,10 +109,10 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1007: '0xba8aba8385c6b84a291cfe55e47594c58e53708c',
+      1007: '0x955e90ff4fcd6b79823f6f5185097bdec04cf9c5',
     },
     tokenAddresses: {
-      1007: '0xb627764e8833ad2b4dc4f53ddbce57611801ae1c', //NST
+      1007: '0x43bb9b430ce64c2ed0c39c59fe48fac239149240', //NST
     },
     name: 'NST Party!',
     symbol: 'NST-NEW LP',
@@ -386,19 +382,6 @@ export const supportedPools = [
 //     symbol: 'CRV-ETH SLP',
 //     tokenSymbol: 'CRV',
 //     icon: '🐊',
-//   },
-//   {
-//     pid: 19,
-//     lpAddresses: {
-//       1: '0x36e2FCCCc59e5747Ff63a03ea2e5C0c2C14911e7',
-//     },
-//     tokenAddresses: {
-//       1: '0x8798249c2E607446EfB7Ad49eC89dD1865Ff4272',
-//     },
-//     name: "Chef's Menu",
-//     symbol: 'xSUSHI-ETH SLP',
-//     tokenSymbol: 'xSUSHI',
-//     icon: '👨🏻‍🍳',
 //   },
 //   {
 //    pid: 20,

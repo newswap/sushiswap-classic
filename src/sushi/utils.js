@@ -19,8 +19,8 @@ export const getMasterChefAddress = (sushi) => {
 export const getWNewAddress = (sushi) => {
   return sushi && sushi.wethAddress
 }
-export const getSushiAddress = (sushi) => {
-  return sushi && sushi.sushiAddress
+export const getNSTAddress = (sushi) => {
+  return sushi && sushi.nstAddress
 }
 export const getNSPAddress = (sushi) => {
   return sushi && sushi.nspAddress
@@ -41,11 +41,11 @@ export const getWethContract = (sushi) => {
 export const getMasterChefContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.masterChef
 }
-export const getSushiContract = (sushi) => {
-  return sushi && sushi.contracts && sushi.contracts.sushi
+export const getNSTContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.nst
 }
-export const getXSushiStakingContract = (sushi) => {
-  return sushi && sushi.contracts && sushi.contracts.xSushiStaking
+export const getXNSTStakingContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.xNSTStaking
 }
 
 export const getNSPContract = (sushi) => {
@@ -91,7 +91,7 @@ export const getNSTFarms = (sushi) => {
           tokenSymbol,
           tokenContract,
           earnToken: 'nst',
-          earnTokenAddress: sushi.contracts.sushi.options.address,
+          earnTokenAddress: sushi.contracts.nst.options.address,
           icon,
           iconL,
           iconR
@@ -143,7 +143,7 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 }
 
 export const getNSTEarned = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods.pendingSushi(pid, account).call()
+  return masterChefContract.methods.pendingNST(pid, account).call()
 }
 
 export const getNewEarned = async (newMineContract, pid, account) => {
@@ -158,7 +158,7 @@ export const getNewPrice = async (newNUSDTPairContract, wnewAddress) => {
   const reserves = await newNUSDTPairContract.methods.getReserves().call()
   const token1 = await newNUSDTPairContract.methods.token1().call()
 
-  if(token1.toLowerCase() == wnewAddress)  // token0-usdt,token1-new
+  if(token1.toLowerCase() === wnewAddress)  // token0-usdt,token1-new
     return  (new BigNumber(reserves._reserve0).div(new BigNumber(10).pow(6)))        
               .div(new BigNumber(reserves._reserve1).div(new BigNumber(10).pow(18)))
   else 
@@ -224,15 +224,12 @@ export const approveAddress = async (lpContract, address, account) => {
       .send({ from: account })
 }
 
-export const getSushiSupply = async (sushi) => {
-  console.log('====getSushiSupply========')
-  console.log(sushi?.contracts.sushi)
-
-  return new BigNumber(await sushi.contracts.sushi.methods.totalSupply().call())
+export const getNSTSupply = async (sushi) => {
+  return new BigNumber(await sushi.contracts.nst.methods.totalSupply().call())
 }
 
-export const getXSushiSupply = async (sushi) => {
-  return new BigNumber(await sushi.contracts.xSushiStaking.methods.totalSupply().call())
+export const getXNSTSupply = async (sushi) => {
+  return new BigNumber(await sushi.contracts.xNSTStaking.methods.totalSupply().call())
 }
 
 export const getXNSPSupply = async (sushi) => {

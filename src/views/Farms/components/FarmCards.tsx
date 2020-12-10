@@ -38,17 +38,16 @@ const FarmCards: React.FC = () => {
   console.log("FarmCards newPrice------->"+newPrice)
   const { t } = useTranslation()
   
-  const sushiIndex = farms.findIndex(
+  const nstIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'NST',
   )
 
-  const sushiPrice =
-    sushiIndex >= 0 && stakedValue[sushiIndex]
-      ? stakedValue[sushiIndex].tokenPriceInWeth
+  const nstPrice =
+    nstIndex >= 0 && stakedValue[nstIndex]
+      ? stakedValue[nstIndex].tokenPriceInWeth
       : new BigNumber(0)
 
   const BLOCKS_PER_YEAR = new BigNumber(10512000)
-  const SUSHI_PER_BLOCK = new BigNumber(NST_PER_BLOCK)
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -60,8 +59,8 @@ const FarmCards: React.FC = () => {
               .times(stakedValue[i].totalWethValue)
           : null,
         apy: stakedValue[i]
-          ? sushiPrice
-              .times(SUSHI_PER_BLOCK)
+          ? nstPrice
+              .times(NST_PER_BLOCK)
               .times(BLOCKS_PER_YEAR)
               .times(stakedValue[i].poolWeight)
               .div(stakedValue[i].totalWethValue)
@@ -183,7 +182,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </Button>
             <StyledInsightDiv>
               <StyledInsight>
-                <span>{t('TOTAL VALUE LOCKED')}</span>
+                <span>{t('TOTAL LOCKED')}</span>
                 <span>
                   {farm.reserveUSD
                     ? `$ ${farm.reserveUSD
@@ -395,13 +394,10 @@ const StyledInsight = styled.div`
   background: #F2F2F7;
   color: #647684;
   width: 100%;
-  // margin-top: 12px;
   line-height: 32px;
   font-size: 13px;
-  // border: 1px solid #e6dcd5;
   text-align: center;
   padding: 0 12px;
-  font-size: 13px;
 `
 const StyledDiv = styled.div`
   width: 101px;

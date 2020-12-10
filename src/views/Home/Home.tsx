@@ -81,14 +81,8 @@ const Home: React.FC = () => {
               iconL={iconL}
               iconR={iconR}
               subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
-              // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
               title={tokenSymbol + '-NEW 矿池'}
             />
-            {/* <PageHeader
-              icon={'👨🏻‍🍳'}
-              subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-              title={name}
-            /> */}
             <StyledFarm>
               <StyledCardsWrapper>
                 <StyledCardWrapper>
@@ -105,16 +99,6 @@ const Home: React.FC = () => {
                 </StyledCardWrapper>
               </StyledCardsWrapper>
               <Spacer size="lg" />
-              <StyledInfo>
-                {t('depositTipsNewMine')}
-              </StyledInfo>
-              <Spacer size="md" />
-              <StyledLink
-                target="__blank"
-                href={INFO_URL + `/pair/${lpTokenAddress}`}
-              >
-                {lpTokenName} {t('Info')}
-              </StyledLink>
             </StyledFarm>
           </>
         ) : (

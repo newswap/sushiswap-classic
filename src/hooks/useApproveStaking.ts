@@ -5,15 +5,15 @@ import {useWallet} from 'use-wallet'
 import {provider} from 'web3-core'
 import {
   approve,
-  getSushiContract,
-  getXSushiStakingContract
+  getNSTContract,
+  getXNSTStakingContract
 } from '../sushi/utils'
 
 const useApproveStaking = () => {
   const {account}: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const lpContract = getSushiContract(sushi)
-  const contract = getXSushiStakingContract(sushi)
+  const lpContract = getNSTContract(sushi)
+  const contract = getXNSTStakingContract(sushi)
 
   const handleApprove = useCallback(async () => {
     try {

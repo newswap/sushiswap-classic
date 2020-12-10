@@ -18,10 +18,9 @@ import Home from './views/Home'
 import NST from "./views/NST";
 import NSP from "./views/NSP";
 
-
-
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
+
 
 const App: React.FC = () => {
   // const { t } = useTranslation()

@@ -14,7 +14,7 @@ interface WithdrawModalProps extends ModalProps {
   tokenName?: string
 }
 
-// TODO 和stakexsushi中的一起抽出来
+// TODO 和stakexnst中的一起抽出来
 const WithdrawModal: React.FC<WithdrawModalProps> = ({
   onConfirm,
   onDismiss,
@@ -51,8 +51,10 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         symbol={tokenName}
       />
       <ModalActions>
-        <Button text="Cancel" variant="secondary" onClick={onDismiss} />
+        <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button
+          size="new"
+          variant="green"
           disabled={pendingTx}
           text={pendingTx ? t('Pending Confirmation') : t('Confirm')}
           onClick={async () => {
