@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
+import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import useNewFarm from '../../hooks/useNewFarm'
 import useSushi from '../../hooks/useSushi'
@@ -16,6 +17,8 @@ const INFO_URL = process.env.REACT_APP_INFO_URL
 
 const NewFarm: React.FC = () => {
   const { farmId } = useParams()
+  console.log("====farmId")
+  console.log(farmId)
   const {
     pid,
     lpToken,
@@ -24,6 +27,9 @@ const NewFarm: React.FC = () => {
     earnToken,
     name,
     icon,
+    iconL,
+    iconR,
+    tokenSymbol
   } = useNewFarm(farmId) || {
     pid: 0,
     lpToken: '',
@@ -32,8 +38,12 @@ const NewFarm: React.FC = () => {
     earnToken: '',
     name: '',
     icon: '',
+    iconL: '',
+    iconR: '',
+    tokenSymbol: ''
   }
-
+  console.log("====iconR")
+  console.log(iconR)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -56,36 +66,40 @@ const NewFarm: React.FC = () => {
 
   return (
     <>
-      <PageHeader
-        icon={icon}
-        subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-        title={name}
+      <NewPageHeader
+        iconL={iconL}
+        iconR={iconR}
+        subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
+        // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
+        title={tokenSymbol + '-NEW 矿池'}
       />
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
-            <Harvest pid={pid} />
+            <Harvest pid={pid} icon={iconR} />
           </StyledCardWrapper>
-          <Spacer />
+          <Spacer size='lg'/>
           <StyledCardWrapper>
             <Stake
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken}
+              iconL={iconL}
+              iconR={iconR}
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
-        <StyledInfo>
+        {/* <StyledInfo>
           {t('depositTipsNewMine')}
-        </StyledInfo>
+        </StyledInfo> */}
         <Spacer size="md" />
-        <StyledLink
+        {/* <StyledLink
           target="__blank"
           href={INFO_URL + `/pair/${lpTokenAddress}`}
         >
           {lpTokenName} {t('Info')}
-        </StyledLink>
+        </StyledLink> */}
       </StyledFarm>
     </>
   )
@@ -117,6 +131,7 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
 `
 
 const StyledInfo = styled.h3`

@@ -51,8 +51,10 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         symbol={tokenName}
       />
       <ModalActions>
-        <Button text="Cancel" variant="secondary" onClick={onDismiss} />
+        <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button
+          size="new"
+          variant="green"
           disabled={pendingTx}
           text={pendingTx ? t('Pending Confirmation') : t('Confirm')}
           onClick={async () => {

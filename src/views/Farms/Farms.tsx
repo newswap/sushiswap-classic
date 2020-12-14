@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
+import coin from '../../assets/img/new.a6cfc11f.png'
 import chef from '../../assets/img/chef.png'
 import Container from '../../components/Container'
 
@@ -32,9 +33,10 @@ const Farms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={chef} height="120" />}
-                subtitle={t('Earn NST tokens by staking NewSwap LP Tokens.')}
-                title={t('Select Your Favorite Dishes')}
+                icon={<img src={coin} height="95" />}
+                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
+                title={t('NST Farms')}
+                subtitle={'参与主流矿池的挖矿，将对应的流动性通证质押入矿池，获得 NewSwap 的收益代币 NST 奖励'}
               />
               <Container>
                 <Balances />
@@ -57,7 +59,9 @@ const Farms: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text={`🔓 ` + t('Unlock Wallet')}
+              text={t('Unlock Wallet')}
+              size = 'new'
+              variant = 'green'
             />
           </div>
         )}

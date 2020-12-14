@@ -1,7 +1,8 @@
 import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
-
+import styled from 'styled-components'
+import coin from '../../assets/img/new.a6cfc11f.png'
 import chef from '../../assets/img/chef.png'
 import Container from '../../components/Container'
 import Button from '../../components/Button'
@@ -15,6 +16,9 @@ import NewFarm from '../NewFarm'
 import Balances from './components/Balances'
 import NewFarmCards from './components/NewFarmCards'
 import { useTranslation } from 'react-i18next'
+import FarmTable from '../../components/FarmTable'
+import {isMobile} from 'react-device-detect'
+
 
 const NewFarms: React.FC = () => {
   const { t } = useTranslation()
@@ -29,7 +33,8 @@ const NewFarms: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={chef} height="120" />}
+                icon={<img src={coin} height="95" />}
+                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
                 title={t('New Farms')}
                 subtitle={t('newFarmsTips')}
               />
@@ -37,7 +42,21 @@ const NewFarms: React.FC = () => {
                 <Balances />
               </Container>
               <Spacer size="lg" />
-              <NewFarmCards />
+              {/* <NewFarmCards />
+              <Spacer size="lg" /> */}
+       
+              <Container size = 'md'>
+                <StyledTableDiv>
+                  {isMobile? (
+                    <StyleLabelMob>矿池列表</StyleLabelMob>
+                  ) : (
+                    <StyleLabel>矿池列表</StyleLabel>
+                  )}
+                  
+                  <FarmTable dataSource = {[]}></FarmTable>
+                </StyledTableDiv>
+              </Container>
+              <Spacer size="lg" />
             </Route>
             <Route path={`${path}/:farmId`}>
               <NewFarm />
@@ -54,7 +73,9 @@ const NewFarms: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text={`🔓 ` + t('Unlock Wallet')}
+              text={t('Unlock Wallet')}
+              size = 'new'
+              variant = 'green'
             />
           </div>
         )}
@@ -62,5 +83,28 @@ const NewFarms: React.FC = () => {
     </Switch>
   )
 }
+
+const StyledTableDiv = styled.div`
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 10px
+`
+
+const StyleLabel = styled.div`
+  color: #607686;
+  font-size: 20px;
+  margin-left: 30px;
+`
+
+const StyleLabelMob = styled.div`
+  color: #607686;
+  font-size: 20px;
+  margin-left: 16px;
+`
+
 
 export default NewFarms

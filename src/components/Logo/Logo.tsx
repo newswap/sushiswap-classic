@@ -1,18 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
+import newIcon from '../../assets/img/logo.d23eaded.svg'
+import newSwap from '../../assets/img/wordmark.873dadad.svg'
 import { useTranslation } from 'react-i18next'
+import {isMobile} from 'react-device-detect'
+
 
 const Logo: React.FC = () => {
   const { t } = useTranslation()
 
   return (
     <StyledLogo to="/">
-      <img src={chef} height="32" style={{ marginTop: -4 }} />
-      <StyledText>
-        NewSwap <MasterChefText>{t('Farm')}</MasterChefText>
-      </StyledText>
+      
+      { (isMobile) ? 
+        (
+          <StyledNewIconMob src={newIcon}/>
+        ) : (
+          <>
+          <StyledNewIcon src={newIcon}/>
+          <StyledSwapIcon src={newSwap}/>
+          </>
+        )
+
+      }
+      
     </StyledLogo>
   )
 }
@@ -27,11 +39,27 @@ const StyledLogo = styled(Link)`
   padding: 0;
   text-decoration: none;
 `
+const StyledNewIcon = styled.img`
+  height:48px;
+  width: 48px;
+  margin-top: -10px;
+`
+const StyledSwapIcon = styled.img`
+  width: 117px;
+`
+
+
+const StyledNewIconMob = styled.img`
+  height: 60px;
+  width: 60px;
+  margin-top: -10px;
+`
+
 
 const StyledText = styled.span`
   color: ${(props) => props.theme.color.grey[600]};
-  font-family: 'Reem Kufi', sans-serif;
-  font-size: 20px;
+  font-family: 'Montserrat Regular', regular;
+  font-size: 32.2;
   font-weight: 700;
   letter-spacing: 0.03em;
   margin-left: ${(props) => props.theme.spacing[2]}px;
@@ -40,8 +68,5 @@ const StyledText = styled.span`
   }
 `
 
-const MasterChefText = styled.span`
-  font-family: 'Kaushan Script', sans-serif;
-`
 
 export default Logo

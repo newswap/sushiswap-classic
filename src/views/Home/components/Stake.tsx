@@ -25,11 +25,13 @@ import { useTranslation } from 'react-i18next'
 interface StakeProps {
   lpContract: Contract
   tokenName: string
+  iconL: string
+  iconR: string
 }
 
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK ?? '1')
 
-const Stake: React.FC<StakeProps> = ({ lpContract, tokenName }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { t } = useTranslation()
 
@@ -76,7 +78,12 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>👨🏻‍🍳</CardIcon>
+            {/* <CardIcon>👨🏻‍🍳</CardIcon> */}
+            <StyledDiv>
+              <StyledImg src={iconR}></StyledImg>
+              <StyledImgR src={iconL}></StyledImgR>
+            </StyledDiv>
+            <Spacer height={20} />
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
             <Label text={t('newPerBlock',{new:NEW_PER_BLOCK})} />
@@ -88,6 +95,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName }) => {
                 disabled={requestedApproval}
                 onClick={handleApprove}
                 text={t('Approve') + ` ${tokenName}`}
+                size = 'new'
+                variant = 'green'
               />
             ) : (
               <>
@@ -95,11 +104,17 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName }) => {
                   disabled={stakedBalance.eq(new BigNumber(0))}
                   text={t('Unstake')}
                   onClick={onPresentWithdraw}
+                  size = 'new'
+                  variant = 'grey'
                 />
                 <StyledActionSpacer />
-                <IconButton onClick={onPresentDeposit}>
-                  <AddIcon />
-                </IconButton>
+                <Button
+                  disabled={false}
+                  text={t('Stake')}
+                  onClick={onPresentDeposit}
+                  size = 'new'
+                  variant = 'green'
+                />
               </>
             )}
           </StyledCardActions>
@@ -108,6 +123,14 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName }) => {
     </Card>
   )
 }
+
+interface SpacerProps{
+  height: number
+}
+
+const Spacer = styled.div<SpacerProps>`
+  height: ${props => props.height}px;
+`
 
 const StyledCardHeader = styled.div`
   align-items: center;
@@ -132,6 +155,26 @@ const StyledCardContentInner = styled.div`
   flex: 1;
   flex-direction: column;
   justify-content: space-between;
+`
+const StyledImg = styled.img `
+    float: left;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-left: 26px;
+`
+
+const StyledImgR = styled.img `
+    float: left;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    margin-right: -26px;
+    margin-top: -60px;
+`
+const StyledDiv = styled.div`
+  width: 86px;
+
 `
 
 export default Stake

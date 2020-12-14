@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
+import newLogo from '../../assets/img/metamask.da7f0b29.png'
 import walletConnectLogo from '../../assets/img/wallet-connect.svg'
 
 import Button from '../Button'
@@ -64,13 +65,17 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   return (
     <Modal>
-      <ModalTitle text={ t('Select a wallet provider.') } />
-
+      <div>
+      <ModalTitle text={ t('Select a wallet provider') } />
+      <StyledLabel>
+        <Button text={t('Cancel')} variant="normal" size="normal" onClick={onDismiss} />
+      </StyledLabel>
+      </div>
       <ModalContent>
         <StyledWalletsWrapper>
           <StyledWalletCard>
             <WalletCard
-              icon={<img src={metamaskLogo} style={{ height: 32 }} />}
+              icon={<img src={newLogo} style={{ height: 80 }} />}
               onConnect={() => connect('injected')}
               title="NewMask"
             />
@@ -86,9 +91,9 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </StyledWalletsWrapper>
       </ModalContent>
 
-      <ModalActions>
+      {/* <ModalActions>
         <Button text={t('Cancel')} variant="secondary" onClick={onDismiss} />
-      </ModalActions>
+      </ModalActions> */}
     </Modal>
   )
 }
@@ -106,6 +111,11 @@ const StyledWalletCard = styled.div`
   // flex-basis: calc(50% - ${(props) => props.theme.spacing[2]}px);
   flex-basis: calc(100%);
 
+`
+
+const StyledLabel = styled.div`
+  float: right;
+  margin-top: -44px;
 `
 
 export default WalletProviderModal

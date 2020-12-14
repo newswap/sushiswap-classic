@@ -3,13 +3,21 @@ import styled from 'styled-components'
 
 interface CardIconProps {
   children?: React.ReactNode,
+  icon?: string
 }
 
-const CardIcon: React.FC<CardIconProps> = ({ children }) => (
+const CardIcon: React.FC<CardIconProps> = ({ children, icon }) => (
   <StyledCardIcon>
-    {children}
+    {children}    
   </StyledCardIcon>
 )
+
+const StyledImg = styled.img `
+    margin: 0px;
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+`
 
 const StyledCardIcon = styled.div`
   background-color: ${props => props.theme.color.grey[200]};

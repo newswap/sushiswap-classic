@@ -8,10 +8,10 @@ interface ButtonProps {
   disabled?: boolean,
   href?: string,
   onClick?: () => void,
-  size?: 'sm' | 'md' | 'lg',
+  size?: 'sm' | 'md' | 'lg' | 'new' | 'normal',
   text?: string,
   to?: string,
-  variant?: 'default' | 'secondary' | 'tertiary'
+  variant?: 'default' | 'secondary' | 'tertiary' | 'green' | 'grey' | 'normal'
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -28,12 +28,59 @@ const Button: React.FC<ButtonProps> = ({
 
   let buttonColor: string
   switch (variant) {
+    case 'green':
+      buttonColor = '#ffffff'
+      break
+    case 'grey':
+      buttonColor = '#647684'
+      break
     case 'secondary':
       buttonColor = color.grey[500]
+      break
+    case 'normal':
+      buttonColor = '#647684'
       break
     case 'default':
     default:
       buttonColor = color.primary.main
+  }
+
+  let backgroundColor: string
+  switch (variant) {
+    case 'green':
+      backgroundColor = '#20C5A0'
+      break
+    case 'grey':
+      backgroundColor = '#F2F2F7'
+      break
+    case 'secondary':
+      backgroundColor = color.grey[200]
+      break
+    case 'normal':
+      backgroundColor = '#fff'
+      break
+    case 'default':
+    default:
+      backgroundColor = color.grey[200]
+  }
+
+  let hoverColor: string
+  switch (variant) {
+    case 'green':
+      hoverColor = '#00B38C'
+      break
+    case 'grey':
+      hoverColor = '#D3D9DD'
+      break
+    case 'secondary':
+      hoverColor = color.grey[100]
+      break
+    case 'normal':
+      hoverColor = '#fff'
+      break
+    case 'default':
+    default:
+      hoverColor = color.grey[100]
   }
 
   let boxShadow: string
@@ -41,6 +88,16 @@ const Button: React.FC<ButtonProps> = ({
   let buttonPadding: number
   let fontSize: number
   switch (size) {
+    case 'new':
+      buttonPadding = spacing[4]
+      buttonSize = 50
+      fontSize = 16
+      break
+    case 'normal':
+      buttonPadding = 0
+      buttonSize = 20
+      fontSize = 16
+      break
     case 'sm':
       boxShadow = `4px 4px 8px ${color.grey[300]},
         -8px -8px 16px ${color.grey[100]}FF;`
@@ -83,6 +140,8 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       padding={buttonPadding}
       size={buttonSize}
+      bgColor={backgroundColor}
+      hoverColor={hoverColor}
     >
       {children}
       {ButtonChild}
@@ -96,12 +155,14 @@ interface StyledButtonProps {
   disabled?: boolean,
   fontSize: number,
   padding: number,
-  size: number
+  size: number,
+  bgColor?: string,
+  hoverColor: string
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${props => props.theme.color.grey[200]};
+  background-color: ${props => !props.disabled ? props.bgColor : `${props.bgColor}55`};
   border: 0;
   border-radius: 12px;
   box-shadow: ${props => props.boxShadow};
@@ -118,7 +179,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   pointer-events: ${props => !props.disabled ? undefined : 'none'};
   width: 100%;
   &:hover {
-    background-color: ${props => props.theme.color.grey[100]};
+    background-color: ${props => props.hoverColor};
   }
 `
 

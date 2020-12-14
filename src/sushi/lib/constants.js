@@ -1,4 +1,9 @@
 import BigNumber from 'bignumber.js/bignumber'
+import newcoin from '../../assets/img/new.a6cfc11f.png'
+import btccoin from '../../assets/img/btclogo.png'
+import usdtcoin from '../../assets/img/usdtlogo.png'
+import imxcoin from '../../assets/img/imxlogo.png'
+
 
 export const SUBTRACT_GAS_LIMIT = 100000
 
@@ -97,6 +102,9 @@ SLP Address on mainnet for reference
 */
 
 // nstFarms supported Polls
+
+
+
 export const supportedPools = [
   {
     pid: 1,
@@ -110,6 +118,8 @@ export const supportedPools = [
     symbol: 'NST-NEW LP',
     tokenSymbol: 'NST',
     icon: '👨🏻‍🍳',
+    iconL: newcoin,
+    iconR: newcoin
   },
   {
     pid: 0,
@@ -123,6 +133,8 @@ export const supportedPools = [
     symbol: 'NUSDT-NEW LP',
     tokenSymbol: 'NUSDT',
     icon: '👨🏻‍🍳',
+    iconL: usdtcoin,
+    iconR: newcoin
   }
 //   {
 //     pid: 12,
@@ -492,19 +504,6 @@ export const supportedPools = [
 
 // newFarms supported Polls
 export const newSupportedPools = [
-  // { // NUSDT-NEW挖矿单独抽出来，独占一半的new
-  //   pid: 0,
-  //   lpAddresses: {
-  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
-  //   },
-  //   tokenAddresses: {
-  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
-  //   },
-  //   name: 'NUSDT Party!',
-  //   symbol: 'NUSDT-NEW LP',
-  //   tokenSymbol: 'NUSDT',
-  //   icon: '👨🏻‍🍳',
-  // },
   {
     pid: 1,
     lpAddresses: {
@@ -517,6 +516,8 @@ export const newSupportedPools = [
     symbol: 'IMX-NEW LP',
     tokenSymbol: 'IMX',
     icon: '👨🏻‍🍳',
+    iconL: imxcoin,
+    iconR: newcoin
   },
   {
     pid: 2,
@@ -530,5 +531,7 @@ export const newSupportedPools = [
     symbol: 'NBTC-NEW LP',
     tokenSymbol: 'NBTC',
     icon: '👨🏻‍🍳',
+    iconL: btccoin,
+    iconR: newcoin
   }
 ]

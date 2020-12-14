@@ -1,12 +1,16 @@
 import React, { useEffect, useMemo } from 'react'
 import { useParams, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import chef from '../../assets/img/chef.png'
+import coin from '../../assets/img/new.a6cfc11f.png'
+import Button from '../../components/Button'
+import Container from '../../components/Container'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
+import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
-import Button from '../../components/Button'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import { getNewNUSDTPairAddress } from '../../sushi/utils'
 import useModal from '../../hooks/useModal'
@@ -15,6 +19,10 @@ import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
+import FarmTable from '../../components/FarmTable'
+import useNewFarm from '../../hooks/useNewFarm'
+import newcoin from '../../assets/img/new.a6cfc11f.png'
+import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const INFO_URL = process.env.REACT_APP_INFO_URL
 
@@ -28,6 +36,34 @@ const Home: React.FC = () => {
   const lpTokenName = 'NUSDT-NEW LP'
   const earnTokenName = 'NEW'
   const name = 'NUSDT Party!'
+  const tokenSymbol = 'NUSDT'
+  const iconL = usdtcoin
+  const iconR = newcoin
+  // const {
+  //   pid,
+  //   lpTokenAddress,
+  //   tokenAddress,
+  //   name,
+  //   icon,
+  //   iconL,
+  //   iconR,
+  //   tokenSymbol
+  // } = {
+  //   pid: 0,
+  //   lpTokenAddress: {
+  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
+  //   },
+  //   name: 'NUSDT Party!',
+  //   symbol: 'NUSDT-NEW LP',
+  //   tokenSymbol: 'NUSDT',
+  //   icon: '👨🏻‍🍳',
+  //   iconL: usdtcoin,
+  //   iconR: newcoin
+  // }
+
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -39,39 +75,33 @@ const Home: React.FC = () => {
 
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
   return (
+
     <Switch>
       <Page>
         {!!account ? (
           <>
-            <PageHeader
-              icon={'👨🏻‍🍳'}
-              subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-              title={name}
+            <NewPageHeader
+              iconL={iconL}
+              iconR={iconR}
+              subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
+              title={tokenSymbol + '-NEW 矿池'}
             />
             <StyledFarm>
               <StyledCardsWrapper>
                 <StyledCardWrapper>
-                  <Harvest />
+                  <Harvest icon={iconR}/>
                 </StyledCardWrapper>
                 <Spacer />
                 <StyledCardWrapper>
                   <Stake
                     lpContract={lpContract}
                     tokenName={lpTokenName}
+                    iconL={iconL}
+                    iconR={iconR}
                   />
                 </StyledCardWrapper>
               </StyledCardsWrapper>
               <Spacer size="lg" />
-              <StyledInfo>
-                {t('depositTipsNewMine')}
-              </StyledInfo>
-              <Spacer size="md" />
-              <StyledLink
-                target="__blank"
-                href={INFO_URL + `/pair/${lpTokenAddress}`}
-              >
-                {lpTokenName} {t('Info')}
-              </StyledLink>
             </StyledFarm>
           </>
         ) : (
@@ -85,7 +115,9 @@ const Home: React.FC = () => {
           >
             <Button
               onClick={onPresentWalletProviderModal}
-              text={`🔓 ` + t('Unlock Wallet')}
+              size = 'new'
+              variant = 'green'
+              text={t('Unlock Wallet')}
             />
           </div>
         )}
@@ -120,6 +152,7 @@ const StyledCardWrapper = styled.div`
   @media (max-width: 768px) {
     width: 80%;
   }
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
 `
 
 const StyledInfo = styled.h3`
@@ -139,6 +172,20 @@ const StyledLink = styled.a`
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
+`
+const StyledTableDiv = styled.div`
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
+  padding-top: 10px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-bottom: 10px
+`
+
+const StyleLabel = styled.div`
+  color: #607686;
+  font-size: 20px;
 `
 
 export default Home
