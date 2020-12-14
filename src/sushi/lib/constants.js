@@ -505,34 +505,6 @@ export const supportedPools = [
 // newFarms supported Polls
 export const newSupportedPools = [
   {
-    pid: 0,
-    lpAddresses: {
-      1007: '0x56aE975581a382193FF36579C81281E179486c43',
-    },
-    tokenAddresses: {
-      1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
-    },
-    name: 'NUSDT Party!',
-    symbol: 'NUSDT-NEW LP',
-    tokenSymbol: 'NUSDT',
-    icon: '👨🏻‍🍳',
-    iconL: usdtcoin,
-    iconR: newcoin
-  },
-  // { // NUSDT-NEW挖矿单独抽出来，独占一半的new
-  //   pid: 0,
-  //   lpAddresses: {
-  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
-  //   },
-  //   tokenAddresses: {
-  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
-  //   },
-  //   name: 'NUSDT Party!',
-  //   symbol: 'NUSDT-NEW LP',
-  //   tokenSymbol: 'NUSDT',
-  //   icon: '👨🏻‍🍳',
-  // },
-  {
     pid: 1,
     lpAddresses: {
       1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',

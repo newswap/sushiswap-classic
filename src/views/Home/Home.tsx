@@ -21,7 +21,8 @@ import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
 import FarmTable from '../../components/FarmTable'
 import useNewFarm from '../../hooks/useNewFarm'
-
+import newcoin from '../../assets/img/new.a6cfc11f.png'
+import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const INFO_URL = process.env.REACT_APP_INFO_URL
 
@@ -31,36 +32,38 @@ const Home: React.FC = () => {
   const { t } = useTranslation()
   const { account } = useWallet()
 
-  // const lpTokenAddress = getNewNUSDTPairAddress(sushi)
+  const lpTokenAddress = getNewNUSDTPairAddress(sushi)
   const lpTokenName = 'NUSDT-NEW LP'
   const earnTokenName = 'NEW'
-  // const name = 'NUSDT Party!'
+  const name = 'NUSDT Party!'
+  const tokenSymbol = 'NUSDT'
+  const iconL = usdtcoin
+  const iconR = newcoin
+  // const {
+  //   pid,
+  //   lpTokenAddress,
+  //   tokenAddress,
+  //   name,
+  //   icon,
+  //   iconL,
+  //   iconR,
+  //   tokenSymbol
+  // } = {
+  //   pid: 0,
+  //   lpTokenAddress: {
+  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
+  //   },
+  //   name: 'NUSDT Party!',
+  //   symbol: 'NUSDT-NEW LP',
+  //   tokenSymbol: 'NUSDT',
+  //   icon: '👨🏻‍🍳',
+  //   iconL: usdtcoin,
+  //   iconR: newcoin
+  // }
 
-  const {
-    pid,
-    lpToken,
-    lpTokenAddress,
-    tokenAddress,
-    earnToken,
-    name,
-    icon,
-    iconL,
-    iconR,
-    tokenSymbol
-  } = useNewFarm('NUSDT-NEW LP') || {
-    pid: 0,
-    lpToken: '',
-    lpTokenAddress: '',
-    tokenAddress: '',
-    earnToken: '',
-    name: '',
-    icon: '',
-    iconL: '',
-    iconR: '',
-    tokenSymbol: ''
-  }
-  console.log("====name")
-  console.log(name)
 
   useEffect(() => {
     window.scrollTo(0, 0)

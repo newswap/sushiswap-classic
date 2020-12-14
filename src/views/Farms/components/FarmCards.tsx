@@ -21,7 +21,7 @@ import { bnToDec } from '../../../utils'
 import { getDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 import Container from '../../../components/Container'
-
+import {isMobile} from 'react-device-detect'
 
 const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
@@ -248,15 +248,20 @@ const FarmEmptyCard: React.FC = ({  }) => {
   )
 }
 
-const StyledSpan = styled.div `
-  display: flex;
-  flex: 1;
-  flex-direction: column; 
-  align-items: center;
-  justify-content: center;
-  padding-top: calc(50%);
-`
-
+const StyledSpan = isMobile ? styled.div `
+    display: flex;
+    flex: 1;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+  ` : styled.div `
+    display: flex;
+    flex: 1;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    padding-top: calc(50%);
+  `
 
 const StyledCardContent = styled.div`
   display: flex;
@@ -335,11 +340,16 @@ const StyledRow = styled.div`
   }
 `
 
-const StyledCardWrapper = styled.div`
-  display: flex;
-  width: calc((752px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
-  position: relative;
-`
+const StyledCardWrapper = isMobile ? 
+  styled.div`
+    display: flex;
+    width: 100%;
+    position: relative;
+  ` :  styled.div`
+    display: flex;
+    width: calc((752px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
+    position: relative;
+  `
 
 const StyledTitle = styled.h4`
   // color: ${(props) => props.theme.color.grey[600]};

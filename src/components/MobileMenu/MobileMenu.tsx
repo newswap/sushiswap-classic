@@ -98,10 +98,9 @@ const StyledMobileMenu = styled.div`
   flex-direction: column;
   justify-content: center;
   position: absolute;
-  top: 60px;
+  top: 88px;
   left: calc(100% - 10px);
-  // bottom: 0;
-  width: 200px;
+  width: 160px;
 `
 
 const StyledLink = styled(NavLink)`

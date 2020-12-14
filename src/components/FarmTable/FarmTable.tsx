@@ -116,13 +116,15 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                       (isMobile) ? (
                         <>
                         <StyledTableCell component="th" scope="row"> 
-                          <StyledIDLabelMob>{farm.pid + 1}</StyledIDLabelMob>
+                          <StyledIDLabelMob>{farm.pid}</StyledIDLabelMob>
+                          <div>
                           <StyledLogo>
                           <StyledImgMob src={farm.iconL}/>
                           </StyledLogo>
                           <StyledTokenLabelMob>
                             {farm.name}
                           </StyledTokenLabelMob>
+                          </div>
                         </StyledTableCell>
                         <StyledTableCell align="left">
                           <StyledPoolLogo>

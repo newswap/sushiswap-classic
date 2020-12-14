@@ -21,7 +21,7 @@ const CHAINID_MAIN = '1012'
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   const { account, connect } = useWallet()
-  const env = process.env.REACT_APP_NEWCHAIN_RPC
+  const env = process.env.REACT_APP_CHAIN_ID
   let envTitle: string
   switch (env) {
     case CHAINID_DEV:
@@ -50,12 +50,13 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             <StyledLogoWrapper>
               <Logo />
             </StyledLogoWrapper>
+            <StyledSpacer percent={account ? 20 : 90}></StyledSpacer>
             <Nav />
             <StyleActionDiv>
-              <StyledEnvDiv>{envTitle}</StyledEnvDiv>
               <StyledAccountButtonWrapper>
                 <AccountButton />
               </StyledAccountButtonWrapper>
+              <StyledEnvDiv>{envTitle}</StyledEnvDiv>
             </StyleActionDiv>
             
           </StyledTopBarInner>
@@ -68,7 +69,8 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             <StyledTopBarInner>
               <StyledLogoWrapper>
                 <Logo />
-              </StyledLogoWrapper>          
+              </StyledLogoWrapper> 
+              <StyledSpacer percent={20}></StyledSpacer>         
               <StyledAccountButtonWrapperMob>
                 <AccountButton />
                 <StyledMenuButtonMob><StyledImg src={menu} onClick={onPresentMobileMenu}/></StyledMenuButtonMob>
@@ -80,6 +82,16 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
     }
 }
 
+
+
+interface StyledSpacerProps {
+  percent: number,
+}
+
+const StyledSpacer = styled.div<StyledSpacerProps>`
+  width: ${props => props.percent}%;
+`
+
 const StyledLogoWrapper = styled.div`
   // width: 260px;
   @media (max-width: 400px) {
@@ -87,10 +99,8 @@ const StyledLogoWrapper = styled.div`
   }
 `
 const StyleActionDiv = styled.div `
-  width: 280px;
-
+  width: 100%;
 `
-
 const StyledTopBar = styled.div``
 
 const StyledTopBarMob = styled.div`
@@ -112,7 +122,8 @@ const StyledEnvDiv = styled.div`
   outline: none;
   padding-left: 8px;
   padding-right: 8px;
-  float: left;
+  float: right;
+  margin-right: 10px;
 `
 
 const StyledTopBarInner = styled.div`
@@ -133,10 +144,12 @@ const StyledNavWrapper = styled.div`
 `
 
 const StyledAccountButtonWrapper = styled.div`
+  float: right;
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  // width: 156px;
+  background-color: #D4D9DD;
+  border-radius: 12px;
   @media (max-width: 400px) {
     justify-content: center;
     width: auto;
@@ -147,11 +160,11 @@ const StyledAccountButtonWrapperMob = styled.div`
   align-items: center;
   text-align: right;
   justify-content: flex-end;
-  // width: 156px;
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     justify-content: center;
     width: auto;
   }
+  display: contents;
 `
 
 const StyledMenuButton = styled.button`
@@ -181,8 +194,6 @@ const StyledMenuButtonMob = styled.button`
   background: #D4D9DD;
   border: 0;
   margin: 0;
-  margin-left: 14px;
-  margin-top: 10px;
   outline: 0;
   padding-left: 8px;
   padding-right: 8px; 

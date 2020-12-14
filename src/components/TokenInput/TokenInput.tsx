@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import Button from '../Button'
 import Input, { InputProps } from '../Input'
 import { useTranslation } from 'react-i18next'
+import { isMobile } from "react-device-detect"
 
 interface TokenInputProps extends InputProps {
   max: number | string,
@@ -29,7 +30,13 @@ const TokenInput: React.FC<TokenInputProps> = ({
             <StyledTokenSymbol>{symbol}</StyledTokenSymbol>
             <StyledSpacer />
             <div>
-              <Button size="new" variant="green" text="Max" onClick={onSelectMax} />
+              {isMobile ? (
+                <StyledButtonMob onClick={onSelectMax}>Max</StyledButtonMob>
+              ) : (
+                <Button size="new" variant="green" text="Max" onClick={onSelectMax} />
+              )
+              }
+              
             </div>
           </StyledTokenAdornmentWrapper>
         )}
@@ -53,6 +60,7 @@ const StyledTokenInput = styled.div`
 
 const StyledSpacer = styled.div`
   width: ${props => props.theme.spacing[3]}px;
+  background: red;
 `
 
 const StyledTokenAdornmentWrapper = styled.div`
@@ -73,6 +81,27 @@ const StyledMaxText = styled.div`
 const StyledTokenSymbol = styled.span`
   color: #647684;
   font-weight: 700;
+`
+
+const StyledButtonMob = styled.button`
+align-items: center;
+background-color: #20C5A0;
+border: 0;
+border-radius: 12px;
+color: #ffffff;
+cursor: pointer;
+display: flex;
+font-size: 16px;
+font-weight: 700;
+height: 44px;
+justify-content: center;
+outline: none;
+padding-left: 7px;
+padding-right: 7px;
+width: 100%;
+&:hover {
+}
+
 `
 
 export default TokenInput
