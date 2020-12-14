@@ -3,12 +3,12 @@ import { useCallback } from 'react'
 import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 
-import { unstakeNewMine, getNewMineContract } from '../sushi/utils'
+import { unstakeNewMine, getNewMineForNodeContract } from '../sushi/utils'
 
 const useUnstakeNewMine = (pid: number) => {
   const { account } = useWallet()
   const sushi = useSushi()
-  const newMineContract = getNewMineContract(sushi)
+  const newMineContract = getNewMineForNodeContract(sushi)
 
   const handleUnstake = useCallback(
     async (amount: string) => {

@@ -11,9 +11,9 @@ import Value from '../../../components/Value'
 import SushiIcon from '../../../components/SushiIcon'
 
 import useAllEarningsNew from '../../../hooks/useAllEarningsNew'
-import useNewFarms from '../../../hooks/useNewFarms'
+import useNodeFarms from '../../../hooks/useNodeFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getNewSupply } from '../../../sushi/utils'
+import { getNewSupplyForNode } from '../../../sushi/utils'
 
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
@@ -33,7 +33,7 @@ const PendingRewards: React.FC = () => {
       .toNumber()
   }
 
-  const [farms] = useNewFarms()
+  const [farms] = useNodeFarms()
 
   useEffect(() => {
     setStart(end)
@@ -72,7 +72,7 @@ const Balances: React.FC = () => {
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getNewSupply(sushi)
+      const supply = await getNewSupplyForNode(sushi)
       setTotalSupply(supply)
     }
     if (sushi) {

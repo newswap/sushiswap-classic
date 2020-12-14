@@ -4,7 +4,7 @@ import { provider } from 'web3-core'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getNewEarned, getNewMineContract, getNewFarms } from '../sushi/utils'
+import { getNewEarned, getNewMineForNodeContract, getNodeFarms } from '../sushi/utils'
 import useSushi from './useSushi'
 import useBlock from './useBlock'
 
@@ -12,8 +12,8 @@ const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const farms = getNewFarms(sushi)
-  const newMineContract = getNewMineContract(sushi)
+  const farms = getNodeFarms(sushi)
+  const newMineContract = getNewMineForNodeContract(sushi)
   const block = useBlock()
 
   const fetchAllBalances = useCallback(async () => {

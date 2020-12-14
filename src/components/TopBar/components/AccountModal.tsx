@@ -34,7 +34,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     <Modal>
       <ModalTitle text={t('My Account')} />
       <ModalContent>
-        <Spacer />
+        {/* <Spacer />
 
         <div style={{ display: 'flex' }}>
           <StyledBalanceWrapper>
@@ -48,7 +48,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           </StyledBalanceWrapper>
         </div>
 
-        <Spacer />
+        <Spacer /> */}
         <Button
           href={EXPLORER_URL + `/address/${account}`}
           text={t('View on NewtonExplorer')}

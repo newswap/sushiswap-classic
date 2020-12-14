@@ -45,7 +45,7 @@ export class Sushi {
     this.masterChefAddress = contractAddresses.masterChef[networkId]
     this.wethAddress = contractAddresses.weth[networkId]
 
-    this.newMineAddress = contractAddresses.newMine[networkId]
+    this.newMineForNodeAddress = contractAddresses.newMineForNode[networkId]
     this.newMineSingleAddress = contractAddresses.newMineSingle[networkId]
     this.newNUSDTPairAddress = contractAddresses.newNUSDTPair[networkId]
   }

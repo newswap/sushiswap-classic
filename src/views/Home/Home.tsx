@@ -19,8 +19,6 @@ import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
-import FarmTable from '../../components/FarmTable'
-import useNewFarm from '../../hooks/useNewFarm'
 import newcoin from '../../assets/img/new.a6cfc11f.png'
 import usdtcoin from '../../assets/img/usdtlogo.png'
 
@@ -83,7 +81,7 @@ const Home: React.FC = () => {
             <NewPageHeader
               iconL={iconL}
               iconR={iconR}
-              subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
+              subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得NEW奖励(总量3亿枚，时长一年)'}
               title={tokenSymbol + '-NEW 矿池'}
             />
             <StyledFarm>

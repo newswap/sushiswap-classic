@@ -6,7 +6,7 @@ import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
 import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
-import useNewFarm from '../../hooks/useNewFarm'
+import useNodeFarm from '../../hooks/useNodeFarm'
 import useSushi from '../../hooks/useSushi'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
@@ -15,7 +15,7 @@ import { useTranslation } from 'react-i18next'
 
 const INFO_URL = process.env.REACT_APP_INFO_URL
 
-const NewFarm: React.FC = () => {
+const NodeFarm: React.FC = () => {
   const { farmId } = useParams()
   console.log("====farmId")
   console.log(farmId)
@@ -30,7 +30,7 @@ const NewFarm: React.FC = () => {
     iconL,
     iconR,
     tokenSymbol
-  } = useNewFarm(farmId) || {
+  } = useNodeFarm(farmId) || {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
@@ -153,4 +153,4 @@ const StyledLink = styled.a`
   }
 `
 
-export default NewFarm
+export default NodeFarm

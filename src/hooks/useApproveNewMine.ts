@@ -5,12 +5,12 @@ import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 
-import { approve, getNewMineContract } from '../sushi/utils'
+import { approve, getNewMineForNodeContract } from '../sushi/utils'
 
 const useApproveNewMine = (lpContract: Contract) => {
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
-  const newMineContract = getNewMineContract(sushi)
+  const newMineContract = getNewMineForNodeContract(sushi)
 
   const handleApprove = useCallback(async () => {
     try {

@@ -12,15 +12,15 @@ import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
-import NewFarm from '../NewFarm'
+import NodeFarm from '../NodeFarm'
 import Balances from './components/Balances'
-import NewFarmCards from './components/NewFarmCards'
+import NodeFarmCards from './components/NodeFarmCards'
 import { useTranslation } from 'react-i18next'
 import FarmTable from '../../components/FarmTable'
 import {isMobile} from 'react-device-detect'
 
 
-const NewFarms: React.FC = () => {
+const NodeFarms: React.FC = () => {
   const { t } = useTranslation()
 
   const { path } = useRouteMatch()
@@ -35,14 +35,14 @@ const NewFarms: React.FC = () => {
               <PageHeader
                 icon={<img src={coin} height="95" />}
                 // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
-                title={t('New Farms')}
-                subtitle={t('newFarmsTips')}
+                title={t('Node Farms')}
+                subtitle={t('nodeFarmsTips')}
               />
               <Container>
                 <Balances />
               </Container>
               <Spacer size="lg" />
-              {/* <NewFarmCards />
+              {/* <NodeFarmCards />
               <Spacer size="lg" /> */}
        
               <Container size = 'md'>
@@ -59,7 +59,7 @@ const NewFarms: React.FC = () => {
               <Spacer size="lg" />
             </Route>
             <Route path={`${path}/:farmId`}>
-              <NewFarm />
+              <NodeFarm />
             </Route>
           </>
         ) : (
@@ -107,4 +107,4 @@ const StyleLabelMob = styled.div`
 `
 
 
-export default NewFarms
+export default NodeFarms

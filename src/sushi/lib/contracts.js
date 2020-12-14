@@ -7,14 +7,14 @@ import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
-import NewMine from './abi/newmine.json'
+import NewMineForNode from './abi/newminefornode.json'
 import NewMineSingle from './abi/newminesingle.json'
 
 import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
-  newSupportedPools
+  nodeSupportedPools
 } from './constants.js'
 import * as Types from './types.js'
 
@@ -37,8 +37,8 @@ export class Contracts {
     this.nsp = new this.web3.eth.Contract(NSPAbi)
     this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
-    // new矿区
-    this.newMine = new this.web3.eth.Contract(NewMine)
+    // 节点矿区
+    this.newMineForNode = new this.web3.eth.Contract(NewMineForNode)
 
     // 单独给new-nusdt交易对挖new的矿山
     this.newMineSingle = new this.web3.eth.Contract(NewMineSingle)
@@ -54,8 +54,8 @@ export class Contracts {
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
     )
-    // New Pools
-    this.newPools = newSupportedPools.map((pool) =>
+    // Node Pools
+    this.nodePools = nodeSupportedPools.map((pool) =>
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
@@ -81,7 +81,7 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.weth[networkId])
     setProvider(this.nsp, contractAddresses.nsp[networkId])
     setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
-    setProvider(this.newMine, contractAddresses.newMine[networkId])
+    setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
     setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
 
@@ -92,7 +92,7 @@ export class Contracts {
       },
     )
 
-    this.newPools.forEach(
+    this.nodePools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)

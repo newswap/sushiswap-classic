@@ -3,23 +3,23 @@ import React, { useState } from 'react'
 import { useWallet } from 'use-wallet'
 import useSushi from '../../hooks/useSushi'
 
-import { getNewFarms } from '../../sushi/utils'
+import { getNodeFarms } from '../../sushi/utils'
 
 import Context from './context'
-import { NewFarm } from './types'
+import { NodeFarm } from './types'
 
-const NewFarms: React.FC = ({ children }) => {
+const NodeFarms: React.FC = ({ children }) => {
   const [unharvested, setUnharvested] = useState(0)
 
   const sushi = useSushi()
   const { account } = useWallet()
 
-  const newFarms = getNewFarms(sushi)
+  const nodeFarms = getNodeFarms(sushi)
 
   return (
     <Context.Provider
       value={{
-        newFarms,
+        nodeFarms,
         unharvested,
       }}
     >
@@ -28,4 +28,4 @@ const NewFarms: React.FC = ({ children }) => {
   )
 }
 
-export default NewFarms
+export default NodeFarms
