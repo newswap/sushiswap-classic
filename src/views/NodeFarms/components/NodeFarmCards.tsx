@@ -9,13 +9,13 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
-import { NewFarm } from '../../../contexts/NewFarms'
+import { NodeFarm } from '../../../contexts/NodeFarms'
 // import useAllStakedValue, {
 //   StakedValue,
 // } from '../../../hooks/useAllStakedValue'
-import useNewFarms from '../../../hooks/useNewFarms'
+import useNodeFarms from '../../../hooks/useNodeFarms'
 import useSushi from '../../../hooks/useSushi'
-import { getNewEarned, getNewMineContract } from '../../../sushi/utils'
+import { getNewEarned, getNewMineForNodeContract } from '../../../sushi/utils'
 
 import { bnToDec } from '../../../utils'
 import { useTranslation } from 'react-i18next'
@@ -23,19 +23,19 @@ import { useTranslation } from 'react-i18next'
 // interface FarmWithStakedValue extends Farm, StakedValue {
 //   apy: BigNumber
 // }
-interface FarmWithStakedValue extends NewFarm {
+interface FarmWithStakedValue extends NodeFarm {
 }
 
-const NewFarmCards: React.FC = () => {
-  const [newFarms] = useNewFarms()
+const NodeFarmCards: React.FC = () => {
+  const [nodeFarms] = useNodeFarms()
   const { account } = useWallet()
   // const stakedValue = useAllStakedValue()
   const { t } = useTranslation()
 
-  console.log('====NewFarmCards=====')
-  console.log(newFarms)
+  console.log('====NodeFarmCards=====')
+  console.log(nodeFarms)
 
-  const rows = newFarms.reduce<FarmWithStakedValue[][]>(
+  const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
       const farmWithStakedValue = {
         ...farm,
@@ -105,7 +105,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
     async function fetchEarned() {
       if (sushi) return
       const earned = await getNewEarned(
-        getNewMineContract(sushi),
+        getNewMineForNodeContract(sushi),
         lpTokenAddress,
         account,
       )
@@ -134,7 +134,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <Button
               disabled={!poolActive}
               text={poolActive ? t('Select') : undefined}
-              to={`/newFarms/${farm.id}`}
+              to={`/nodeFarms/${farm.id}`}
             >
               {!poolActive && (
                 <Countdown
@@ -265,4 +265,4 @@ const StyledInsight = styled.div`
   padding: 0 12px;
 `
 
-export default NewFarmCards
+export default NodeFarmCards

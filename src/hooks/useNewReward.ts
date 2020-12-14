@@ -3,12 +3,12 @@ import { useCallback } from 'react'
 import useSushi from './useSushi'
 import { useWallet } from 'use-wallet'
 
-import { harvestNew, getNewMineContract } from '../sushi/utils'
+import { harvestNew, getNewMineForNodeContract } from '../sushi/utils'
 
 const useNewReward = (pid: number) => {
   const { account } = useWallet()
   const sushi = useSushi()
-  const newMineContract = getNewMineContract(sushi)
+  const newMineContract = getNewMineForNodeContract(sushi)
 
   const handleReward = useCallback(async () => {
     try {

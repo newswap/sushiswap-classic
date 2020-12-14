@@ -1,6 +1,6 @@
 import { Contract } from 'web3-eth-contract'
 
-export interface NewFarm {
+export interface NodeFarm {
   pid: number
   name: string
   lpToken: string
@@ -15,7 +15,7 @@ export interface NewFarm {
   iconR: string
 }
 
-export interface NewFarmsContext {
-  newFarms: NewFarm[]
+export interface NodeFarmsContext {
+  nodeFarms: NodeFarm[]
   unharvested: number
 }

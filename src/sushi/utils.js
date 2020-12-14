@@ -28,8 +28,8 @@ export const getNSPAddress = (sushi) => {
 export const getNewNUSDTPairAddress = (sushi) => {
   return sushi && sushi.newNUSDTPairAddress
 }
-export const getNewMineAddress = (sushi) => {
-  return sushi && sushi.newMineAddress
+export const getNewMineForNodeAddress = (sushi) => {
+  return sushi && sushi.newMineForNodeAddress
 }
 export const getNewMineSingleAddress = (sushi) => {
   return sushi && sushi.newMineSingleAddress
@@ -55,8 +55,8 @@ export const getXNSPStakingContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.xNSPStaking
 }
 
-export const getNewMineContract = (sushi) => {
-  return sushi && sushi.contracts && sushi.contracts.newMine
+export const getNewMineForNodeContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.newMineForNode
 }
 export const getNewMineSingleContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMineSingle
@@ -100,9 +100,9 @@ export const getNSTFarms = (sushi) => {
     : []
 }
 
-export const getNewFarms = (sushi) => {
+export const getNodeFarms = (sushi) => {
   return sushi
-    ? sushi.contracts.newPools.map(
+    ? sushi.contracts.nodePools.map(
         ({
           pid,
           name,
@@ -236,8 +236,8 @@ export const getXNSPSupply = async (sushi) => {
   return new BigNumber(await sushi.contracts.xNSPStaking.methods.totalSupply().call())
 }
 
-export const getNewSupply = async (sushi) => {
-  return new BigNumber(await sushi.contracts.newMine.methods.newSupply().call())
+export const getNewSupplyForNode = async (sushi) => {
+  return new BigNumber(await sushi.contracts.newMineForNode.methods.newSupply().call())
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {

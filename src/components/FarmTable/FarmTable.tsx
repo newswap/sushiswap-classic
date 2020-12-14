@@ -13,8 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import useNewFarms from '../../hooks/useNewFarms'
-import { NewFarm } from '../../contexts/NewFarms'
+import useNodeFarms from '../../hooks/useNodeFarms'
+import { NodeFarm } from '../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-interface FarmWithStakedValue extends NewFarm {
+interface FarmWithStakedValue extends NodeFarm {
 }
 
 const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
@@ -49,11 +49,11 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
     setPage(0);
   };
 
-  const [newFarms] = useNewFarms()
+  const [nodeFarms] = useNodeFarms()
   console.log('====FarmTable=====')
-  console.log(newFarms)
+  console.log(nodeFarms)
 
-  const rows = newFarms.reduce<FarmWithStakedValue[][]>(
+  const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
       
       const farmWithStakedValue = {
@@ -134,7 +134,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           <StyledLPLabelMob>{farm.id}</StyledLPLabelMob>
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          <StyledLink to={`/newFarms/${farm.id}`}>
+                          <StyledLink to={`/nodeFarms/${farm.id}`}>
                             {(isMobile) ? '' : '进入矿池'}
                             <StyledArrow src={arrow} />
                           </StyledLink>
@@ -161,7 +161,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           <StyledLPLabel>{farm.id}</StyledLPLabel>
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          <StyledLink to={`/newFarms/${farm.id}`}>
+                          <StyledLink to={`/nodeFarms/${farm.id}`}>
                             {(isMobile) ? '' : '进入矿池'}
                             <StyledArrow src={arrow} />
                           </StyledLink>

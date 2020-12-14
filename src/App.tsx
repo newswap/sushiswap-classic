@@ -6,14 +6,14 @@ import DisclaimerModal from './components/DisclaimerModal'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
 import FarmsProvider from './contexts/Farms'
-import NewFarmsProvider from './contexts/NewFarms'
+import NodeFarmsProvider from './contexts/NodeFarms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import SushiProvider from './contexts/SushiProvider'
 import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
-import NewFarms from './views/NewFarms'
+import NodeFarms from './views/NodeFarms'
 import Home from './views/Home'
 import NST from "./views/NST";
 import NSP from "./views/NSP";
@@ -46,8 +46,8 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/newFarms">
-              <NewFarms />
+            <Route path="/nodeFarms">
+              <NodeFarms />
             </Route>
             <Route path="/nstFarms">
               <Farms />
@@ -78,9 +78,9 @@ const Providers: React.FC = ({ children }) => {
         <SushiProvider>
           <TransactionProvider>
             <FarmsProvider>
-              <NewFarmsProvider>
+              <NodeFarmsProvider>
                 <ModalsProvider>{children}</ModalsProvider>
-              </NewFarmsProvider>
+              </NodeFarmsProvider>
             </FarmsProvider>
           </TransactionProvider>
         </SushiProvider>
