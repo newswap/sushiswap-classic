@@ -69,8 +69,7 @@ const NodeFarm: React.FC = () => {
       <NewPageHeader
         iconL={iconL}
         iconR={iconR}
-        subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
-        // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
+        subtitle= {t('nodeHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW 矿池'}
       />
       <StyledFarm>

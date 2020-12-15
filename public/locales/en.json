@@ -1,4 +1,5 @@
 {
+  "Farm": "Farm",
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
   "depositTipsNewMine": "⭐️ Every time you stake and unstake LP tokens, the contract will automagically harvest NEW rewards for you!",
@@ -11,5 +12,11 @@
   "nodeFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
   "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
   "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费",
-  "newPerBlock": "预计挖矿效率: {{new}}NEW/区块"
+  "newPerBlock": "预计挖矿效率: {{new}}NEW/区块",
+  "farmHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
+  "nstFarmsTips": "参与主流矿池的挖矿，将对应的流动性通证质押入矿池，获得 NewSwap 的收益代币 NST 奖励",
+  "estimateMiningEfficient": "预计挖矿效率",
+  "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
+  "releaseTip": "总量3亿枚，时长一年",
+  "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励"
 }

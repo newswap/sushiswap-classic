@@ -36,7 +36,7 @@ const Farms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
                 title={t('NST Farms')}
-                subtitle={'参与主流矿池的挖矿，将对应的流动性通证质押入矿池，获得 NewSwap 的收益代币 NST 奖励'}
+                subtitle={t('nstFarmsTips')}
               />
               <Container>
                 <Balances />

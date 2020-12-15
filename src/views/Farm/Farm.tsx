@@ -50,6 +50,7 @@ const Farm: React.FC = () => {
   const sushi = useSushi()
   const { ethereum } = useWallet()
   const { t } = useTranslation()
+  const pairToken = 'NEW'
 
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
@@ -70,14 +71,13 @@ const Farm: React.FC = () => {
       {/* <PageHeader
         icon={icon}
         subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-        title={name}
+        title={name}  
       /> */}
       <NewPageHeader
         iconL={iconL}
         iconR={iconR}
-        subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
-        // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-        title={tokenSymbol + '-NEW 矿池'}
+        subtitle= {t('farmHeaderSubtitle', {tokenSymbol: tokenSymbol, earnTokenName: earnTokenName})}
+        title={tokenSymbol + '-NEW ' + t('Farm')}
       />
       <StyledFarm>
         <StyledCardsWrapper>

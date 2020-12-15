@@ -69,6 +69,7 @@ const StyledLink = styled(NavLink)`
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;
   }
+  word-break: keep-all;
 `
 
 const StyledAbsoluteLink = styled.a`

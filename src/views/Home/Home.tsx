@@ -81,8 +81,9 @@ const Home: React.FC = () => {
             <NewPageHeader
               iconL={iconL}
               iconR={iconR}
-              subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得NEW奖励(总量3亿枚，时长一年)'}
-              title={tokenSymbol + '-NEW 矿池'}
+              subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})+ '(' + t('releaseTip') + ')'} 
+              // {'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得NEW奖励(总量3亿枚，时长一年)'}
+              title={tokenSymbol + '- NEW ' + t('Farm')}
             />
             <StyledFarm>
               <StyledCardsWrapper>
