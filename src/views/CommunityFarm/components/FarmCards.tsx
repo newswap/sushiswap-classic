@@ -19,6 +19,9 @@ import { getDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 import Container from '../../../components/Container'
 import {isMobile} from 'react-device-detect'
+import useModal from '../../../hooks/useModal'
+import CommunityProviderModel from '../../../components/CommunityProviderModel'
+
 
 const NST_PER_BLOCK: number = parseInt(process.env.REACT_APP_NST_PER_BLOCK ?? '1')
 
@@ -231,6 +234,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 }
 
 const FarmEmptyCard: React.FC = ({  }) => {
+  const [onPresentWalletProviderModal] = useModal(<CommunityProviderModel />)
 
   return (
     <StyledCardWrapper>
@@ -239,8 +243,18 @@ const FarmEmptyCard: React.FC = ({  }) => {
         <StyledCardContent>
           <StyledContent>
             <StyledSpan>
-              更多 NST 矿池敬请期待…
+              更多社群矿池敬请期待…
             </StyledSpan>
+            <Spacer size="lg" />
+            <Button
+              text="创建我的挖矿"
+              variant="green"
+              onClick={onPresentWalletProviderModal}
+              size="new"
+            />
+            <Spacer size="lg" />
+            <Spacer size="lg" />
+            <Spacer size="lg" />
           </StyledContent>
         </StyledCardContent>
       </Card>

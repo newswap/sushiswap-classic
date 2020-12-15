@@ -92,13 +92,14 @@ const NodeFarm: React.FC = () => {
         {/* <StyledInfo>
           {t('depositTipsNewMine')}
         </StyledInfo> */}
-        <Spacer size="md" />
-        {/* <StyledLink
+        <StyledLink
           target="__blank"
           href={INFO_URL + `/pair/${lpTokenAddress}`}
         >
           {lpTokenName} {t('Info')}
-        </StyledLink> */}
+        </StyledLink>
+        <Spacer size="lg" />
+
       </StyledFarm>
     </>
   )
@@ -143,7 +144,7 @@ const StyledInfo = styled.h3`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #607686;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;

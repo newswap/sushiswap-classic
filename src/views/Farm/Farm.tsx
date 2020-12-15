@@ -97,17 +97,21 @@ const Farm: React.FC = () => {
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
-        <StyledInfo>
+        {/* <StyledInfo>
           {t('depositTips')}
         </StyledInfo>
-        <Spacer size="md" />
+        <Spacer size="md" /> */}
         <StyledLink
           target="__blank"
           href={INFO_URL + `/pair/${lpTokenAddress}`}
         >
           {lpTokenName} {t('Info')}
         </StyledLink>
+        <Spacer size="lg" />
+
       </StyledFarm>
+      
+      <Spacer size="lg" />
     </>
   )
 }

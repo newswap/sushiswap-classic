@@ -82,7 +82,6 @@ const Home: React.FC = () => {
               iconL={iconL}
               iconR={iconR}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})+ '(' + t('releaseTip') + ')'} 
-              // {'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得NEW奖励(总量3亿枚，时长一年)'}
               title={tokenSymbol + '- NEW ' + t('Farm')}
             />
             <StyledFarm>
@@ -101,6 +100,14 @@ const Home: React.FC = () => {
                 </StyledCardWrapper>
               </StyledCardsWrapper>
               <Spacer size="lg" />
+              <StyledLink
+                target="__blank"
+                href={INFO_URL + `/pair/${lpTokenAddress}`}
+              >
+                {lpTokenName} {t('Info')}
+              </StyledLink>
+              <Spacer size="lg" />
+
             </StyledFarm>
           </>
         ) : (
@@ -164,7 +171,7 @@ const StyledInfo = styled.h3`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #607686;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;
