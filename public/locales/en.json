@@ -18,5 +18,6 @@
   "estimateMiningEfficient": "预计挖矿效率",
   "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
   "releaseTip": "总量3亿枚，时长一年",
-  "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励"
+  "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
+  "CommunityFarm": "社群矿区"
 }

@@ -47,11 +47,11 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
       <StyledTopBar>
         <Container size="lg">
           <StyledTopBarInner>
-          <StyledLogoWrapper>
-          {/* <StyledLogoWrapper paddingRight={account ? 0 : 80}> */}
+          {/* <StyledLogoWrapper> */}
+          <StyledLogoWrapper paddingRight={account ? 0 : 80}>
               <Logo />
             </StyledLogoWrapper>
-            <StyledSpacer percent={account ? 0 : 20}></StyledSpacer>
+            {/* <StyledSpacer percent={account ? 0 : 20}></StyledSpacer> */}
             <Nav />
             <StyleActionDiv>
               <StyledAccountButtonWrapper>
