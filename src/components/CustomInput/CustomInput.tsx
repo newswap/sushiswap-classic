@@ -62,8 +62,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     type == 'date' ? 
                     (
                         <>
-                        
-                        <Datetime inputProps={inputProps} closeOnClickOutside={true}>
+                        <Datetime inputProps={inputProps} closeOnClickOutside={true} onChange={onDateSelected}>
                         </Datetime>
                         <StyledCalendarImg src={calendar} />
                         </>
