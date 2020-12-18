@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_xmark</title>
+    <defs>
+        <path d="M63.4070211,63.4070211 C64.4324117,62.3523336 64.4324117,60.5945211 63.4070211,59.5691305 L45.9167867,42.0788961 L63.4070211,24.6179586 C64.4324117,23.5632711 64.4617086,21.8054586 63.4070211,20.780068 C62.3523336,19.7546774 60.623818,19.7546774 59.5691305,20.780068 L42.108193,38.2703024 L24.6179586,20.780068 C23.592568,19.7546774 21.8054586,19.7253805 20.780068,20.780068 C19.7546774,21.8347555 19.7546774,23.592568 20.780068,24.5886617 L38.2703024,42.0788961 L20.780068,59.5691305 C19.7546774,60.5945211 19.7253805,62.3816305 20.780068,63.4070211 C21.8347555,64.4324117 23.592568,64.4324117 24.6179586,63.4070211 L42.108193,45.9167867 L59.5691305,63.4070211 C60.623818,64.4324117 62.3816305,64.4617086 63.4070211,63.4070211 Z" id="path-1"></path>
+    </defs>
+    <g id="Tab" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons---2" transform="translate(-377.000000, -65.000000)">
+            <g id="icon" transform="translate(377.000000, 65.000000)">
+                <g id="icons/ic_xmark">
+                    <rect id="Size" x="0" y="0" width="80" height="80"></rect>
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="icon" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="color/black" mask="url(#mask-2)" fill="#647684" fill-rule="evenodd">
+                        <rect id="Rectangle" x="0" y="0" width="80" height="80"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

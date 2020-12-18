@@ -103,7 +103,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
               <>
                 <Button
                   disabled={stakedBalance.eq(new BigNumber(0))}
-                  text={'移除'}
+                  text={t('Unstake')}
                   onClick={onPresentWithdraw}
                   size = 'new'
                   variant = 'grey'

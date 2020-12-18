@@ -69,8 +69,7 @@ const NodeFarm: React.FC = () => {
       <NewPageHeader
         iconL={iconL}
         iconR={iconR}
-        subtitle={'将' + tokenSymbol + '-NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 ' + earnTokenName + ' 奖励'}
-        // subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
+        subtitle= {t('nodeHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW 矿池'}
       />
       <StyledFarm>
@@ -93,13 +92,14 @@ const NodeFarm: React.FC = () => {
         {/* <StyledInfo>
           {t('depositTipsNewMine')}
         </StyledInfo> */}
-        <Spacer size="md" />
-        {/* <StyledLink
+        <StyledLink
           target="__blank"
           href={INFO_URL + `/pair/${lpTokenAddress}`}
         >
           {lpTokenName} {t('Info')}
-        </StyledLink> */}
+        </StyledLink>
+        <Spacer size="lg" />
+
       </StyledFarm>
     </>
   )
@@ -144,7 +144,7 @@ const StyledInfo = styled.h3`
 `
 
 const StyledLink = styled.a`
-  color: ${(props) => props.theme.color.grey[400]};
+  color: #607686;
   padding-left: ${(props) => props.theme.spacing[3]}px;
   padding-right: ${(props) => props.theme.spacing[3]}px;
   text-decoration: none;

@@ -29,6 +29,9 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/nsp">
         { t('NSP') }
       </StyledLink>
+      {/* <StyledLink exact activeClassName="active" to="/CommunityFarm">
+        { t('CommunityFarm') }
+      </StyledLink> */}
       {/* <StyledAbsoluteLink
         href={ EXCHANGE_URL }
         target="_blank"
@@ -69,6 +72,7 @@ const StyledLink = styled(NavLink)`
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;
   }
+  word-break: keep-all;
 `
 
 const StyledAbsoluteLink = styled.a`

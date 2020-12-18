@@ -88,7 +88,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
             <Spacer height={10}></Spacer>
-            <LabelStyled text={'预计挖矿效率：XXX'} color={'#647684'} fontSize={16}></LabelStyled>
+            <LabelStyled text={t('estimateMiningEfficient') + '：XXX'} color={'#647684'} fontSize={16}></LabelStyled>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
@@ -103,7 +103,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
               <>
                 <Button
                   disabled={stakedBalance.eq(new BigNumber(0))}
-                  text={'移除'}
+                  text={t('Unstake')}
                   onClick={onPresentWithdraw}
                   size = 'new'
                   variant = 'grey'

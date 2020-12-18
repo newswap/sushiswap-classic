@@ -15,11 +15,16 @@ import ModalTitle from '../../ModalTitle'
 import Spacer from '../../Spacer'
 import Value from '../../Value'
 import { useTranslation } from 'react-i18next'
+import {hexAddress2NewAddress} from '../../../utils/addressUtil'
+import copy from '../../../assets/img/copy.png'
+import share from '../../../assets/img/share.png'
+import close from '../../../assets/img/ic_xmark.svg'
+import useClipboard from "react-use-clipboard";
 
 const EXPLORER_URL = process.env.REACT_APP_EXPLORER_URL
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, reset } = useWallet()
+  const { account, balance, reset } = useWallet()
   const { t } = useTranslation()
 
   const handleSignOutClick = useCallback(() => {
@@ -29,11 +34,40 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   const sushi = useSushi()
   const nstBalance = useTokenBalance(getNSTAddress(sushi))
+  const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+  const newAddress = account ? hexAddress2NewAddress(account, CHAIN_ID) : ''
+  const [isCopied, setCopied] = useClipboard(newAddress);
 
   return (
     <Modal>
-      <ModalTitle text={t('My Account')} />
-      <ModalContent>
+      <div>
+        <ModalTitle text={t('My Account')} />
+        <StyledLabel>
+          <Button variant="normal" size="normal" onClick={onDismiss} >
+            <StyledCloseImg src={close}/>
+          </Button>
+        </StyledLabel>
+      </div>
+      {/* <ModalContent> */}
+      <StyledContentDiv>
+        <div>
+          <StyledConnectTip>已经连接到 NewMask</StyledConnectTip>
+          <StyledSignout onClick={handleSignOutClick}>退出</StyledSignout>
+        </div>
+        <StyledSpacer height={10} />
+        <StyledAddress>{newAddress.substring(0,5) + "..." + newAddress.substring(newAddress.length - 4)}</StyledAddress>
+        <StyledOperationDiv>
+          
+          <StyledCopyDiv onClick={setCopied}>
+            <StyledImg src={copy} />
+            复制地址
+          </StyledCopyDiv>
+          <StyledExplorerDiv href={EXPLORER_URL + `/address/${account}`}>
+            <StyledImg src={share} />{t('View on NewtonExplorer')}
+          </StyledExplorerDiv>
+        </StyledOperationDiv>
+      </StyledContentDiv>
+        
         {/* <Spacer />
 
         <div style={{ display: 'flex' }}>
@@ -49,24 +83,30 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         </div>
 
         <Spacer /> */}
-        <Button
+        {/* <Button
           href={EXPLORER_URL + `/address/${account}`}
           text={t('View on NewtonExplorer')}
-          variant="secondary"
+          variant="green"
+          size="new"
         />
         <Spacer />
         <Button
           onClick={handleSignOutClick}
           text={t('Sign out')}
-          variant="secondary"
-        />
-      </ModalContent>
-      <ModalActions>
-        <Button onClick={onDismiss} text={t('Cancel')} />
-      </ModalActions>
+          variant="grey"
+          size="new"
+        /> */}
+      {/* </ModalContent> */}
+      
     </Modal>
   )
 }
+
+const StyledCloseImg = styled.img `
+  height: 24px;
+  width: 24px;
+  margin-top: -10px;
+`
 
 const StyledBalance = styled.div`
   align-items: center;
@@ -80,6 +120,94 @@ const StyledBalanceWrapper = styled.div`
   flex: 1;
   flex-direction: column;
   margin-bottom: ${(props) => props.theme.spacing[4]}px;
+`
+const StyledLabel = styled.div`
+  float: right;
+  margin-top: -44px;
+`
+
+const StyledContentDiv = styled.div`
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #D3D9DD;
+  border-radius: 20px;
+  padding-top: 20px;
+  padding-bottom: 14px;
+  padding-left: 18px;
+  padding-right: 18px;
+`
+const StyledConnectTip = styled.div`
+  font-weight: 500;
+  color: #607686;
+  font-size: 12px;
+`
+const StyledSignout = styled.button`
+  font-weight: 300;
+  color: #607686;
+  font-size: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background: #D3D9DD;
+  border-radius: 8px;
+  height: 28px;
+  float: right;
+  margin-top: -22px;
+  border: 0;
+`
+const StyledAddress = styled.div`
+  color: #607686;
+  font-weight: 500;
+  font-size: 19px;
+`
+const StyledCopyDiv = styled.button`
+  border: 0;
+  background: white;
+  padding: 0px;
+  float: left;
+  padding-right: 12px;
+  color: #607686;
+  font-weight: 500;
+  font-size: 12px;
+  display: flex;
+  &:focus {
+    border: 0;
+  }
+`
+
+const StyledExplorerDiv = styled.a`
+  float: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  color: #607686;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
+const StyledOperationDiv = styled.div`
+  margin-bottom: 0;
+  margin-top: 7px;
+  padding-bottom: 14px;
+`
+
+const StyledImg = styled.img `
+  height: 15px;
+  width: 15px;
+  margin-right: 4px;
+`
+
+
+interface StyledSpacerProps {
+  height: number,
+}
+
+const StyledSpacer = styled.div<StyledSpacerProps>`
+  height: ${props => props.height}px;
 `
 
 export default AccountModal

@@ -17,6 +17,7 @@ import NodeFarms from './views/NodeFarms'
 import Home from './views/Home'
 import NST from "./views/NST";
 import NSP from "./views/NSP";
+import CommunityFarm from "./views/CommunityFarm"
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
@@ -57,6 +58,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="/nsp">
               <NSP />
+            </Route>
+            <Route path="/CommunityFarm">
+              <CommunityFarm />
             </Route>
           </Switch>
         </Router>

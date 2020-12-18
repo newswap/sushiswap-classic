@@ -47,10 +47,11 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
       <StyledTopBar>
         <Container size="lg">
           <StyledTopBarInner>
-            <StyledLogoWrapper>
+          <StyledLogoWrapper>
+          {/* <StyledLogoWrapper paddingRight={account ? 0 : 80}> */}
               <Logo />
             </StyledLogoWrapper>
-            <StyledSpacer percent={account ? 20 : 90}></StyledSpacer>
+            <StyledSpacer percent={account ? 0 : 20}></StyledSpacer>
             <Nav />
             <StyleActionDiv>
               <StyledAccountButtonWrapper>
@@ -67,7 +68,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
         <StyledTopBarMob>
           <Container size="lg">
             <StyledTopBarInner>
-              <StyledLogoWrapper>
+              <StyledLogoWrapper paddingRight={0}>
                 <Logo />
               </StyledLogoWrapper> 
               <StyledSpacer percent={20}></StyledSpacer>         
@@ -82,24 +83,27 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
     }
 }
 
-
-
 interface StyledSpacerProps {
   percent: number,
+}
+
+interface StyledLogoWrapperProps {
+  paddingRight?: number,
 }
 
 const StyledSpacer = styled.div<StyledSpacerProps>`
   width: ${props => props.percent}%;
 `
 
-const StyledLogoWrapper = styled.div`
+const StyledLogoWrapper = styled.div<StyledLogoWrapperProps>`
   // width: 260px;
+  padding-right: ${props => props.paddingRight}px;
   @media (max-width: 400px) {
     width: auto;
   }
 `
 const StyleActionDiv = styled.div `
-  width: 100%;
+  // width: 100%;
 `
 const StyledTopBar = styled.div``
 
