@@ -71,15 +71,15 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <Button text={t('Cancel')} variant="normal" size="normal" onClick={onDismiss} />
       </StyledLabel>
       </div>
-      <ModalContent>
+      {/* <ModalContent> */}
         <StyledWalletsWrapper>
-          <StyledWalletCard>
+          {/* <StyledWalletCard> */}
             <WalletCard
               icon={<img src={newLogo} style={{ height: 80 }} />}
               onConnect={() => connect('injected')}
               title="NewMask"
             />
-          </StyledWalletCard>
+          {/* </StyledWalletCard> */}
           {/* <Spacer size="sm" />
           <StyledWalletCard>
             <WalletCard
@@ -89,7 +89,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
             />
           </StyledWalletCard> */}
         </StyledWalletsWrapper>
-      </ModalContent>
+      {/* </ModalContent> */}
 
       {/* <ModalActions>
         <Button text={t('Cancel')} variant="secondary" onClick={onDismiss} />
@@ -105,6 +105,7 @@ const StyledWalletsWrapper = styled.div`
     flex-direction: column;
     flex-wrap: none;
   }
+  margin-bottom: 14px;
 `
 
 const StyledWalletCard = styled.div`

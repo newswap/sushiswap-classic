@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next'
 import {hexAddress2NewAddress} from '../../../utils/addressUtil'
 import copy from '../../../assets/img/copy.png'
 import share from '../../../assets/img/share.png'
+import close from '../../../assets/img/ic_xmark.svg'
 import useClipboard from "react-use-clipboard";
 
 const EXPLORER_URL = process.env.REACT_APP_EXPLORER_URL
@@ -42,7 +43,9 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
       <div>
         <ModalTitle text={t('My Account')} />
         <StyledLabel>
-          <Button text={t('Cancel')} variant="normal" size="normal" onClick={onDismiss} />
+          <Button variant="normal" size="normal" onClick={onDismiss} >
+            <StyledCloseImg src={close}/>
+          </Button>
         </StyledLabel>
       </div>
       {/* <ModalContent> */}
@@ -99,6 +102,12 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   )
 }
 
+const StyledCloseImg = styled.img `
+  height: 24px;
+  width: 24px;
+  margin-top: -10px;
+`
+
 const StyledBalance = styled.div`
   align-items: center;
   display: flex;
@@ -141,7 +150,6 @@ const StyledSignout = styled.button`
   background: #D3D9DD;
   border-radius: 8px;
   height: 28px;
-  padding-top: 4px;
   float: right;
   margin-top: -22px;
   border: 0;

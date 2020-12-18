@@ -52,6 +52,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           >
             {t('NSP')}    
           </StyledLink>
+
+           <StyledLink 
+            exact 
+            activeClassName="active" 
+            to="/CommunityFarm"
+          >
+            { t('CommunityFarm') }
+          </StyledLink>
         </StyledMobileMenu>
       </StyledMobileMenuWrapper>
     )
