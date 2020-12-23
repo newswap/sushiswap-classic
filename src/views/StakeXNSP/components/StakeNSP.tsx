@@ -9,6 +9,8 @@ import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
+import useTokenBalanceOf from '../../../hooks/useTokenBalanceOf'
+import useTotalSupply from '../../../hooks/useTotalSupply'
 import {getBalanceNumber} from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from "./WithdrawModal"
@@ -40,11 +42,17 @@ const StakeNSP: React.FC<StakeProps> = ({}) => {
   const {onEnter} = useEnterXNSP()
   const {onLeave} = useLeaveXNSP()
 
+  // xnsp(nspbar)持有的nsp数量
+  const totalNSP = useTokenBalanceOf(contractAddresses.nsp[CHAIN_ID], contractAddresses.xNSP[CHAIN_ID])
+  const totalShares = useTotalSupply(contractAddresses.xNSP[CHAIN_ID])
+
   const [onPresentDeposit] = useModal(
     <DepositModal
       max={nspBalance}
       onConfirm={onEnter}
       tokenName={'NSP'}
+      totalNSP={totalNSP}
+      totalShares={totalShares}
     />,
   )
 
@@ -53,6 +61,8 @@ const StakeNSP: React.FC<StakeProps> = ({}) => {
       max={xNSPBalance}
       onConfirm={onLeave}
       tokenName={'xNSP'}
+      totalNSP={totalNSP}
+      totalShares={totalShares}
     />,
   )
 

@@ -28,6 +28,21 @@ export const getAllowance = async (
   }
 }
 
+export const getTotalSupply = async (
+  provider: provider,
+  tokenAddress: string,
+): Promise<string> => {
+  const contract = getContract(provider, tokenAddress)
+  try {
+    const totalSupply: string = await contract.methods
+      .totalSupply()
+      .call()
+    return totalSupply
+  } catch (e) {
+    return '0'
+  }
+}
+
 export const getBalance = async (
   provider: provider,
   tokenAddress: string,

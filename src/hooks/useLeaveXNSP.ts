@@ -11,12 +11,16 @@ const useLeaveXNSP = () => {
 
   const handle = useCallback(
     async (amount: string) => {
-      const txHash = await leave(
-        getXNSPStakingContract(sushi),
-        amount,
-        account,
-      )
-      console.log(txHash)
+      try {
+        const txHash = await leave(
+          getXNSPStakingContract(sushi),
+          amount,
+          account,
+        )
+        return txHash
+      } catch (e) {
+        return false
+      }
     },
     [account, sushi],
   )

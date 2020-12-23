@@ -5,23 +5,29 @@ import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'
 import ModalTitle from '../../../components/ModalTitle'
 import TokenInput from '../../../components/TokenInput'
-import { getFullDisplayBalance } from '../../../utils/formatBalance'
+import Label from '../../../components/Label'
+import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber
   onConfirm: (amount: string) => void
   tokenName?: string
+  totalNSP: BigNumber
+  totalShares: BigNumber
 }
 
-// TODO 和stakexnst中的一起抽出来
 const WithdrawModal: React.FC<WithdrawModalProps> = ({
   onConfirm,
   onDismiss,
   max,
   tokenName = '',
+  totalNSP,
+  totalShares
 }) => {
   const [val, setVal] = useState('')
+  const [harvest, setHarvest] = useState('')
+
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
 
@@ -29,16 +35,32 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     return getFullDisplayBalance(max)
   }, [max])
 
+  const fullHarvest = useMemo(() => {
+    return getFormatDisplayBalance(max.times(totalNSP).div(totalShares), 18, 2)
+    
+  }, [max, totalNSP, totalShares])
+
+
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       setVal(e.currentTarget.value)
+
+      if(!e.currentTarget.value) {
+        setHarvest('')
+      } else {
+        setHarvest(new BigNumber(e.currentTarget.value)
+          .times(totalNSP)
+          .div(totalShares)
+          .toFixed(2))
+      }
     },
     [setVal],
   )
 
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance)
-  }, [fullBalance, setVal])
+    setHarvest(fullHarvest)
+  }, [fullBalance, setVal, fullHarvest, setHarvest])
 
   return (
     <Modal>
@@ -50,6 +72,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         max={fullBalance}
         symbol={tokenName}
       />
+      <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' NSP'} />
       <ModalActions>
         <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button

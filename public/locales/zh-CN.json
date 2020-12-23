@@ -88,6 +88,7 @@
   "CommunityFarm": "社群矿区",
 
   "rate": "权重占比",
+  "estimateHarvest": "预估收到",
   "NSTBar": "NST锁仓理财",
   "nstBarTips": "将NST质押入锁仓理财合约中，获得权重代币xNST，获得NST分红收益",
   "nstBalance": "当前锁仓理财合约奖励池NST",
