@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next'
 interface StakeProps {
 }
 
-const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012');
 
 const StakeNSP: React.FC<StakeProps> = ({}) => {
   const tokenName = "NSP"

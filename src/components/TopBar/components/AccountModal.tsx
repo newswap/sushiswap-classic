@@ -34,7 +34,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   const sushi = useSushi()
   const nstBalance = useTokenBalance(getNSTAddress(sushi))
-  const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+  const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
   const newAddress = account ? hexAddress2NewAddress(account, CHAIN_ID) : ''
   const [isCopied, setCopied] = useClipboard(newAddress);
 

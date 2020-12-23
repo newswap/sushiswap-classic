@@ -14,7 +14,7 @@ import BigNumber from "bignumber.js";
 import {getBalanceNumber} from "../../utils/formatBalance";
 import { useTranslation } from 'react-i18next'
 
-const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1');
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012');
 
 const StakeXNSP: React.FC = () => {
   const {

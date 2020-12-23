@@ -199,8 +199,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                        .times(new BigNumber(100))
                        // .times(new BigNumber(3))
                        .toNumber()
-                       .toLocaleString('en-US')
-                        .slice(0, -1)}%`
+                       .toLocaleString('en-US')}%`
                     : t('Loading ...')}
                 </span>
               {/* <span>

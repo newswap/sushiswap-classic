@@ -29,7 +29,7 @@ interface StakeProps {
   iconR: string
 }
 
-const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK ?? '1')
+const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
 
 const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)

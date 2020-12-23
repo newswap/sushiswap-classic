@@ -6,7 +6,6 @@
   "stakeLP": "Stake NewSwap LP tokens to claim your very own yummy NST!",
   "xNSTTips": "You will earn a portion of the swaps fees based on the amount of xNST held relative the weight of the staking. xNST can be minted by staking NST. To redeem NST staked plus swap fees convert xNST back to NST.",
   "xNSPTips": "You will earn a portion of the swaps fees based on the amount of xNSP held relative the weight of the staking. xNSP can be minted by staking NSP. To redeem NSP staked plus swap fees convert xNSP back to NSP.",
-  "welcomeNSTBar": "Welcome to the NST Bar, stake NST to earn NST.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
 
   "nodeFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
@@ -19,5 +18,13 @@
   "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
   "releaseTip": "总量3亿枚，时长一年",
   "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
-  "CommunityFarm": "社群矿区"
+  "CommunityFarm": "社群矿区",
+
+  "rate": "权重占比",
+  "NSTBar": "NST锁仓理财",
+  "nstBarTips": "将NST质押入锁仓理财合约中，获得权重代币xNST，获得NST分红收益",
+  "nstBalance": "当前锁仓理财合约奖励池NST",
+  "NSPBar": "NSP锁仓理财",
+  "nspBarTips": "将NSP质押入锁仓理财合约中，获得权重代币xNSP，获得NSP分红收益",
+  "nspBalance": "当前锁仓理财合约奖励池NSP"
 }

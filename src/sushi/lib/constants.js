@@ -4,7 +4,7 @@ import btccoin from '../../assets/img/btclogo.png'
 import usdtcoin from '../../assets/img/usdtlogo.png'
 import imxcoin from '../../assets/img/imxlogo.png'
 
-
+export const newCoin = newcoin
 export const SUBTRACT_GAS_LIMIT = 100000
 
 const ONE_MINUTE_IN_SECONDS = new BigNumber(60)

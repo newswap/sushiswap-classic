@@ -18,7 +18,7 @@ import { getNewSupplyForNode } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
-const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK ?? '1')
+const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NODE ?? '1')
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
