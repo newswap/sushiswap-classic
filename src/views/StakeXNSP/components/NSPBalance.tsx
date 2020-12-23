@@ -14,11 +14,11 @@ import { useTranslation } from 'react-i18next'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012');
 
-const NSTBalance: React.FC = () => {
+const NSPBalance: React.FC = () => {
   const { t } = useTranslation()
   
-  // xnst(nstbar)持有的nst数量
-  const nstBalance = useTokenBalanceOf(contractAddresses.nst[CHAIN_ID], contractAddresses.xNST[CHAIN_ID])
+  // xnsp(nspbar)持有的nsp数量
+  const nspBalance = useTokenBalanceOf(contractAddresses.nsp[CHAIN_ID], contractAddresses.xNSP[CHAIN_ID])
 
   return (
     <Card>
@@ -27,8 +27,8 @@ const NSTBalance: React.FC = () => {
           <StyledCardHeader>
             {/* <CardIcon>👨🏻‍🍳</CardIcon> */}
             <NewCardIcon icon = {newCoin}></NewCardIcon>
-            <Value value={nstBalance ? getBalanceNumber(nstBalance) : ''}/>
-            <Label text={t('nstBalance')}/>
+            <Value value={nspBalance ? getBalanceNumber(nspBalance) : ''}/>
+            <Label text={t('nspBalance')}/>
           </StyledCardHeader>
         </StyledCardContentInner>
       </CardContent>
@@ -61,4 +61,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default NSTBalance
+export default NSPBalance

@@ -1,10 +1,7 @@
 import React from 'react'
 import {Route, Switch, useRouteMatch} from 'react-router-dom'
 import {useWallet} from 'use-wallet'
-
-import coin from '../../assets/img/new.a6cfc11f.png'
-import chef from '../../assets/img/chef.png'
-
+import {newCoin} from '../../sushi/lib/constants'
 import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
@@ -27,7 +24,7 @@ const NST: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={coin} height="95" />}
+                icon={<img src={newCoin} height="95" />}
                 title={t('NSTBar')}
                 subtitle={t('nstBarTips')}
               />

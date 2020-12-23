@@ -1,9 +1,7 @@
 import React from 'react'
 import {Route, Switch, useRouteMatch} from 'react-router-dom'
 import {useWallet} from 'use-wallet'
-
-import chef from '../../assets/img/chef.png'
-
+import {newCoin} from '../../sushi/lib/constants'
 import Button from '../../components/Button'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
@@ -26,9 +24,9 @@ const NSP: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={chef} height="120"/>}
-                subtitle={t('welcomeNSPBar')}
-                title={t('Irasshaimase!')}
+                icon={<img src={newCoin} height="95" />}
+                title={t('NSPBar')}
+                subtitle={t('nspBarTips')}
               />
             </Route>
             <StakeXNSP/>

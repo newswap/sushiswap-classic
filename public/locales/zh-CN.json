@@ -58,8 +58,6 @@
   "Approve NSP": "Approve NSP",
   "Convert to xNST": "Convert to xNST",
   "Convert to xNSP": "Convert to xNSP",
-  "xNST (NSTBar) Available": "xNST (NSTBar) Available",
-  "xNSP (NSPBar) Available": "xNSP (NSPBar) Available",
   "Converting to NST": "Converting to NST",
   "Converting to NSP": "Converting to NSP",
   "Convert to NST": "Convert to NST",
@@ -93,9 +91,11 @@
   "NSTBar": "NST锁仓理财",
   "nstBarTips": "将NST质押入锁仓理财合约中，获得权重代币xNST，获得NST分红收益",
   "nstBalance": "当前锁仓理财合约奖励池NST",
+  "xNST Available": "我的 xNST",
   "NSPBar": "NSP锁仓理财",
   "nspBarTips": "将NSP质押入锁仓理财合约中，获得权重代币xNSP，获得NSP分红收益",
-  "nspBalance": "当前锁仓理财合约奖励池NSP"
+  "nspBalance": "当前锁仓理财合约奖励池NSP",
+  "xNSP Available": "我的 xNSP"
 }
 
 

@@ -92,7 +92,7 @@ const StakeNST: React.FC<StakeProps> = ({}) => {
             {/* <CardIcon>🍣</CardIcon> */}
             <NewCardIcon icon = {newCoin}></NewCardIcon>
             <Value value={getBalanceNumber(xNSTBalance)}/>
-            <Label text={t('xNST (NSTBar) Available')}/>
+            <Label text={t('xNST Available')}/>
             <Label text={rate ? t('rate') + `${rate.times(new BigNumber(100)).toNumber().toLocaleString('en-US').slice(0)} ` + `%` : ''} />
           </StyledCardHeader>
           <StyledCardActions>
