@@ -37,7 +37,6 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
 
   const fullHarvest = useMemo(() => {
     return getFormatDisplayBalance(max.times(totalNSP).div(totalShares), 18, 2)
-    
   }, [max, totalNSP, totalShares])
 
 
@@ -54,7 +53,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           .toFixed(2))
       }
     },
-    [setVal],
+    [setVal, setHarvest, totalNSP, totalShares],
   )
 
   const handleSelectMax = useCallback(() => {

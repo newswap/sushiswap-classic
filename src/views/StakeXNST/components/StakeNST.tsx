@@ -9,6 +9,8 @@ import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
+import useTokenBalanceOf from '../../../hooks/useTokenBalanceOf'
+import useTotalSupply from '../../../hooks/useTotalSupply'
 import {getBalanceNumber} from '../../../utils/formatBalance'
 import {getXNSTSupply} from "../../../sushi/utils";
 import WithdrawModal from "./WithdrawModal"
@@ -41,11 +43,17 @@ const StakeNST: React.FC<StakeProps> = ({}) => {
   const {onEnter} = useEnter()
   const {onLeave} = useLeave()
 
+  // xnst(nstbar)持有的nst数量
+  const totalNST = useTokenBalanceOf(contractAddresses.nst[CHAIN_ID], contractAddresses.xNST[CHAIN_ID])
+  const totalShares = useTotalSupply(contractAddresses.xNST[CHAIN_ID])
+  
   const [onPresentDeposit] = useModal(
     <DepositModal
       max={nstBalance}
       onConfirm={onEnter}
       tokenName={"NST"}
+      totalNST={totalNST}
+      totalShares={totalShares}
     />,
   )
 
@@ -54,6 +62,8 @@ const StakeNST: React.FC<StakeProps> = ({}) => {
       max={xNSTBalance}
       onConfirm={onLeave}
       tokenName={"xNST"}
+      totalNST={totalNST}
+      totalShares={totalShares}
     />,
   )
 

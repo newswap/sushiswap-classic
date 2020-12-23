@@ -57,7 +57,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
           .toFixed(2))
       }
     },
-    [setVal],
+    [setVal, setHarvest, totalNSP, totalShares],
   )
 
   const handleSelectMax = useCallback(() => {
