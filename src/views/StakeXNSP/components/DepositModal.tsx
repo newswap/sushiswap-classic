@@ -5,23 +5,29 @@ import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'
 import ModalTitle from '../../../components/ModalTitle'
 import TokenInput from '../../../components/TokenInput'
-import { getFullDisplayBalance } from '../../../utils/formatBalance'
+import Label from '../../../components/Label'
+import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
   onConfirm: (amount: string) => void
   tokenName?: string
+  totalNSP: BigNumber
+  totalShares: BigNumber
 }
 
-// TODO 和stakexnst中的一起抽出来
 const DepositModal: React.FC<DepositModalProps> = ({
   max,
   onConfirm,
   onDismiss,
   tokenName = '',
+  totalNSP,
+  totalShares
 }) => {
   const [val, setVal] = useState('')
+  const [harvest, setHarvest] = useState('')
+
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
 
@@ -29,16 +35,35 @@ const DepositModal: React.FC<DepositModalProps> = ({
     return getFullDisplayBalance(max)
   }, [max])
 
+  const fullHarvest = useMemo(() => {
+    if(totalNSP.toNumber() === 0 || totalShares.toNumber() === 0){
+      return getFormatDisplayBalance(max, 18, 2)
+    } else {
+      return getFormatDisplayBalance(max.times(totalShares).div(totalNSP), 18, 2)
+    }
+  }, [max, totalNSP, totalShares])
+
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
       setVal(e.currentTarget.value)
+      if(!e.currentTarget.value) {
+        setHarvest('')
+      } else if(totalNSP.toNumber() === 0 || totalShares.toNumber() === 0){
+        setHarvest(e.currentTarget.value)
+      } else {
+        setHarvest(new BigNumber(e.currentTarget.value)
+          .times(totalShares)
+          .div(totalNSP)
+          .toFixed(2))
+      }
     },
-    [setVal],
+    [setVal, setHarvest, totalNSP, totalShares],
   )
 
   const handleSelectMax = useCallback(() => {
     setVal(fullBalance)
-  }, [fullBalance, setVal])
+    setHarvest(fullHarvest)
+  }, [fullBalance, setVal, fullHarvest, setHarvest])
 
   return (
     <Modal>
@@ -50,6 +75,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
         max={fullBalance}
         symbol={tokenName}
       />
+      <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' xNSP'} />
       <ModalActions>
         <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button

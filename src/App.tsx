@@ -19,7 +19,7 @@ import NST from "./views/NST";
 import NSP from "./views/NSP";
 import CommunityFarm from "./views/CommunityFarm"
 
-const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1')
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
 
 

@@ -11,12 +11,16 @@ const useEnter = () => {
 
   const handle = useCallback(
     async (amount: string) => {
-      const txHash = await enter(
-        getXNSTStakingContract(sushi),
-        amount,
-        account,
-      )
-      console.log(txHash)
+      try {
+        const txHash = await enter(
+          getXNSTStakingContract(sushi),
+          amount,
+          account,
+        )
+        return txHash
+      } catch (e) {
+        return false
+      }
     },
     [account, sushi],
   )

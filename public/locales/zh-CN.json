@@ -30,6 +30,7 @@
   "Tokens Staked": "Tokens Staked",
   "Approve": "Approve",
   "Unstake": "移除",
+  "Stake": "添加",
   "Withdraw": "Withdraw",
   "depositTokens": "质押 {{lpTokenName}} 的流动性通证挖矿 {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
@@ -57,8 +58,6 @@
   "Approve NSP": "Approve NSP",
   "Convert to xNST": "Convert to xNST",
   "Convert to xNSP": "Convert to xNSP",
-  "xNST (NSTBar) Available": "xNST (NSTBar) Available",
-  "xNSP (NSPBar) Available": "xNSP (NSPBar) Available",
   "Converting to NST": "Converting to NST",
   "Converting to NSP": "Converting to NSP",
   "Convert to NST": "Convert to NST",
@@ -68,7 +67,6 @@
   "There are currently": "There are currently",
   "xNST in the whole pool.": "xNST in the whole pool.",
   "xNSP in the whole pool.": "xNSP in the whole pool.",
-  "welcomeNSTBar": "Welcome to the NST Bar, stake NST to earn NST.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
   "Irasshaimase!": "Irasshaimase!",
 
@@ -87,7 +85,18 @@
   "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
   "releaseTip": "总量3亿枚，时长一年",
   "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
-  "CommunityFarm": "社群矿区"
+  "CommunityFarm": "社群矿区",
+
+  "rate": "权重占比",
+  "estimateHarvest": "预估收到",
+  "NSTBar": "NST锁仓理财",
+  "nstBarTips": "将NST质押入锁仓理财合约中，获得权重代币xNST，获得NST分红收益",
+  "nstBalance": "当前锁仓理财合约奖励池NST",
+  "xNST Available": "我的 xNST",
+  "NSPBar": "NSP锁仓理财",
+  "nspBarTips": "将NSP质押入锁仓理财合约中，获得权重代币xNSP，获得NSP分红收益",
+  "nspBalance": "当前锁仓理财合约奖励池NSP",
+  "xNSP Available": "我的 xNSP"
 }
 
 
