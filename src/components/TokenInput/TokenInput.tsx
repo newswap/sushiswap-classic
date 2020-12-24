@@ -10,6 +10,7 @@ interface TokenInputProps extends InputProps {
   max: number | string,
   symbol: string,
   onSelectMax?: () => void,
+  isCustomized?: boolean
 }
 
 const TokenInput: React.FC<TokenInputProps> = ({
@@ -18,15 +19,33 @@ const TokenInput: React.FC<TokenInputProps> = ({
   onChange,
   onSelectMax,
   value,
+  isCustomized
 }) => {
   const { t } = useTranslation()
 
-  return (
-    <StyledTokenInput>
-      <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
-      <Input
-        endAdornment={(
-          <StyledTokenAdornmentWrapper>
+  if (isCustomized) {
+    return (
+      <StyledTokenInput style={CustomStyledDiv}>
+        <div>
+          <TytleDiv>输入</TytleDiv>
+          <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
+        </div>
+        
+        <StyledInputStyle onChange={onChange} placeholder="0" value={value}/>
+        <StyledMaxDiv>
+          <StyledTokenDiv>{symbol}</StyledTokenDiv>
+          <StyledMaxButton onClick={onSelectMax}>MAX</StyledMaxButton>     
+        </StyledMaxDiv>
+      </StyledTokenInput>
+    )
+  } else {
+
+    return (
+      <StyledTokenInput>
+        <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
+        <Input
+          endAdornment={(
+            <StyledTokenAdornmentWrapper>
             <StyledTokenSymbol>{symbol}</StyledTokenSymbol>
             <StyledSpacer />
             <div>
@@ -39,13 +58,14 @@ const TokenInput: React.FC<TokenInputProps> = ({
               
             </div>
           </StyledTokenAdornmentWrapper>
-        )}
-        onChange={onChange}
-        placeholder="0"
-        value={value}
-      />
-    </StyledTokenInput>
-  )
+          )}
+          onChange={onChange}
+          placeholder="0"
+          value={value}
+        />
+      </StyledTokenInput>
+    )
+    }
 }
 
 /*
@@ -53,6 +73,56 @@ const TokenInput: React.FC<TokenInputProps> = ({
               <Button size="sm" text="Max" />
             </div>
 */
+
+const StyledTokenDiv = styled.div`
+  float: right;
+  padding: 0 10px;
+  border-radius: 12px;
+  background: white;
+  height: 30px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #607686;
+  line-height: 30px;
+`
+
+const StyledMaxButton = styled.button`
+  background: none;
+  color: #20C5A0;
+  font-weight: 500;
+  font-size: 14px;
+  border: 30px;
+  margin-top: 5px;
+  margin-right: 10px;
+`
+
+const StyledMaxDiv = styled.div`
+  float: right;
+`
+const TytleDiv = styled.div `
+  float: left;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #555A6A;
+  font-size: 14px;
+`
+const StyledInputStyle = styled.input `
+  border: 0;
+  font-size: 24px;
+  background: none;
+  width: calc(100% - 120px);
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+`
+const CustomStyledDiv: React.CSSProperties = {
+  width: 'calc(100%-32px)',
+  height: '86px',
+  background: '#F2F2F7',
+  borderRadius: '20px',
+  padding: '0px 16px',
+}
 
 const StyledTokenInput = styled.div`
 
