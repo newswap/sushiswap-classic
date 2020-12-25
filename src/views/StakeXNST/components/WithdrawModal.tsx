@@ -9,6 +9,7 @@ import Label from '../../../components/Label'
 import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
+import help from '../../../assets/img/ic_issue.svg' 
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber
@@ -63,7 +64,10 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
 
   return (
     <Modal>
-      <ModalTitle text={t('Withdraw') + ` ${tokenName}`} />
+      <div>
+        <ModalTitle text={t('Withdraw') + ` ${tokenName}`} style={style}/>
+        <StyledHelpBtn><StyledImg src={help}/></StyledHelpBtn>
+      </div>
       <TokenInput
         isCustomized={true}
         onSelectMax={handleSelectMax}
@@ -72,7 +76,6 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
         max={fullBalance}
         symbol={tokenName}
       />
-      {/* <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' NST'} /> */}
       <StyledLabel>
       <span>{t('estimateHarvest')}</span> 
       {
@@ -120,5 +123,24 @@ const StyledLabel = styled.div`
   font-size: 16px;
   font-weight: 500;
 `
+const StyledImg = styled.img`
+  height: 22px;
+  width: 22px;
+`
+const StyledHelpBtn = styled.button`
+  background: none;
+  border: 0;
+  float: right;
+  height: 36px;
+  margin-top: 18px;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+`
+
+const style: React.CSSProperties = {
+  float: 'left'
+}
 
 export default WithdrawModal
