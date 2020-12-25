@@ -8,6 +8,7 @@ import TokenInput from '../../../components/TokenInput'
 import Label from '../../../components/Label'
 import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber
@@ -65,13 +66,24 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     <Modal>
       <ModalTitle text={t('Withdraw') + ` ${tokenName}`} />
       <TokenInput
+        isCustomized={true}
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         value={val}
         max={fullBalance}
         symbol={tokenName}
       />
-      <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' NSP'} />
+      {/* <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' NSP'} /> */}
+      <StyledLabel>
+      <span>{t('estimateHarvest')}</span> 
+      {
+        harvest ? (
+          <StyledSpanGreen>{' ' + (harvest) + ' NSP'}</StyledSpanGreen>
+        ) : (
+          <StyledSpan>{' --' + ' NSP'}</StyledSpan>
+        )
+      }
+      </StyledLabel>
       <ModalActions>
         <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button
@@ -93,5 +105,21 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     </Modal>
   )
 }
+
+const StyledSpan =  styled.span`
+  color: #647684;
+`
+
+const StyledSpanGreen =  styled.span`
+  color: #00C99E;
+`
+const StyledLabel = styled.div`
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  color: #647684;
+  font-size: 16px;
+  font-weight: 500;
+`
 
 export default WithdrawModal
