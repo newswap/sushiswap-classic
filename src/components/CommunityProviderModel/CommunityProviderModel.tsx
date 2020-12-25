@@ -25,7 +25,6 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     const handleName = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
             setName(e.currentTarget.value)
-            // checkDataFilled()
         },
         [setName],
     )
@@ -35,7 +34,6 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     const handleAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
             setAddress(e.currentTarget.value)
-            // checkDataFilled()
         },
         [setAddress],
     )
@@ -45,16 +43,14 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     const handleFarmAmount = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
             setFarmAmount(e.currentTarget.value)
-            // checkDataFilled()
         },
         [setFarmAmount],
     )
 
     /// Start Date
-    const [selectedDate, setSelectedDate] = React.useState(new Date());
-    const handleDateChange = (date: any) => {
+    const [selectedDate, setSelectedDate] = React.useState((new Date()).toString());
+    const handleDateChange = (date: string) => {
         setSelectedDate(date);
-        // checkDataFilled()
     };
 
     /// Mining Duration
@@ -62,7 +58,6 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     const handleDuration = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
             setDuration(e.currentTarget.value)
-            // checkDataFilled()
         },
         [setDuration],
     )
@@ -72,7 +67,6 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     const handleFee = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
             setFee(e.currentTarget.value)
-            // checkDataFilled()
         },
         [setFee],
     )
@@ -83,19 +77,19 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
         console.log(event.target.value)
         
         setSelectedToken(event.target.value);
-        // checkDataFilled()
     };
 
     const tokenList = [{name: "new"}, {name: "usdt"}]
 
     // const [dataFilled, setDataFilled] = useState(false)
     const checkDataFilled = () => {
-        console.log('==name' + name)
-        console.log('==address' + address)
-        console.log('==farmAmount' + farmAmount)
-        console.log('==duration' + duration)
-        console.log('==fee' + fee)
-        console.log('==selectedToken' + selectedToken)
+        // console.log('==name' + name)
+        // console.log('==address' + address)
+        // console.log('==farmAmount' + farmAmount)
+        // console.log('==duration' + duration)
+        // console.log('==fee' + fee)
+        // console.log('==selectedToken' + selectedToken)
+        console.log('==selected Date' + selectedDate)
         // setDataFilled(name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='')
         if (name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='') {
             /// Submit data
@@ -104,11 +98,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
         }
 
     }
-
     useEffect(() => {
-        // if (account) {
-        //   onDismiss()
-        // }
     }, [account, onDismiss])
 
     return (
@@ -125,7 +115,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
             <CustomInput onChange={handleName} value={name} startAdornment={'矿池名称'} placeholder={''}></CustomInput>
             <CustomInput onChange={handleAddress} value={address} startAdornment={'质押的流动性通证'} placeholder={'输入流通性通证的原始合约地址(0x开头)'}></CustomInput>
             <CustomInput onChange={handleFarmAmount} value={farmAmount} startAdornment={'矿量'} placeholder={'0.0'} type={'select'} onTyleChange={handleSelectedToken} data={tokenList}></CustomInput>
-            <CustomInput onDateSelected={handleDateChange} date={selectedDate} value={selectedDate.toLocaleDateString()} startAdornment={'启动时间'} placeholder={'新加坡时间'} type={'date'}></CustomInput>
+            <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={'启动时间'} placeholder={'新加坡时间'} type={'date'}></CustomInput>
             <CustomInput onChange={handleDuration} value={duration} startAdornment={'挖矿时长'} placeholder={'0'} type={'duration'}></CustomInput>
             <CustomInput onChange={handleFee} value={fee} startAdornment={'挖矿手续费'} placeholder={'0.00'} type={'fee'}></CustomInput>
             

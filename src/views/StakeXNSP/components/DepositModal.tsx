@@ -8,6 +8,7 @@ import TokenInput from '../../../components/TokenInput'
 import Label from '../../../components/Label'
 import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
@@ -69,13 +70,23 @@ const DepositModal: React.FC<DepositModalProps> = ({
     <Modal>
       <ModalTitle text={t('Deposit') + ` ${tokenName} ` + t('Tokens')} />
       <TokenInput
+        isCustomized={true}
         value={val}
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
         symbol={tokenName}
       />
-      <Label text={t('estimateHarvest') + (harvest ? harvest:'--') + ' xNSP'} />
+      <StyledLabel>
+      <span>{t('estimateHarvest')}</span> 
+      {
+        harvest ? (
+          <StyledSpanGreen>{' ' + (harvest) + ' xNSP'}</StyledSpanGreen>
+        ) : (
+          <StyledSpan>{' --' + ' xNSP'}</StyledSpan>
+        )
+      }
+      </StyledLabel>
       <ModalActions>
         <Button size="new" text="Cancel" variant="grey" onClick={onDismiss} />
         <Button
@@ -97,5 +108,21 @@ const DepositModal: React.FC<DepositModalProps> = ({
     </Modal>
   )
 }
+
+const StyledSpan =  styled.span`
+  color: #647684;
+`
+
+const StyledSpanGreen =  styled.span`
+  color: #00C99E;
+`
+const StyledLabel = styled.div`
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  color: #647684;
+  font-size: 16px;
+  font-weight: 500;
+`
 
 export default DepositModal

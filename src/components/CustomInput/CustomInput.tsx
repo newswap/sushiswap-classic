@@ -7,6 +7,7 @@ import calendar from '../../assets/img/ic_calendar.svg'
 import {isMobile} from 'react-device-detect'
 import Datetime from 'react-datetime'
 import "./datePicker.css"
+import { render } from 'react-dom'
 
 
 export interface CustomInputProps {
@@ -21,6 +22,8 @@ export interface CustomInputProps {
     date?: Date,
     data?: Array<Object>
 }
+
+
 
 const CustomInput: React.FC<CustomInputProps> = ({
     onChange,
@@ -38,6 +41,12 @@ const CustomInput: React.FC<CustomInputProps> = ({
     let inputProps = {
         placeholder: '新加坡时间',
     };
+
+    const checkValidDate = (currentDate: any, selectedDate: any) => {
+        console.log('======current date====' + currentDate)
+        return (currentDate/1000/60/60/24) >= (((new Date()).getTime())/1000/60/60/24)
+    }
+
 
     return (
     <StyledInputWrapper>
@@ -62,8 +71,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
                     type == 'date' ? 
                     (
                         <>
-                        
-                        <Datetime inputProps={inputProps} closeOnClickOutside={true}>
+                        <Datetime 
+                            inputProps={inputProps} 
+                            closeOnClickOutside={true} 
+                            onChange={onDateSelected} 
+                            closeOnSelect={true}
+                            isValidDate={checkValidDate}
+                            >
                         </Datetime>
                         <StyledCalendarImg src={calendar} />
                         </>
