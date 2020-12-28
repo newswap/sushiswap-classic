@@ -10,6 +10,7 @@ import { getFullDisplayBalance, getFormatDisplayBalance } from '../../../utils/f
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import help from '../../../assets/img/ic_issue.svg' 
+import ReactTooltip from 'react-tooltip'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
@@ -71,7 +72,10 @@ const DepositModal: React.FC<DepositModalProps> = ({
     <Modal>
       <div>
         <ModalTitle text={t('Deposit') + ` ${tokenName}` + t('Tokens')} style={style}/>
-        <StyledHelpBtn><StyledImg src={help}/></StyledHelpBtn>
+        <StyledHelpBtn data-tip="hello world">
+          <StyledImg src={help}/>
+        </StyledHelpBtn>
+        <ReactTooltip />
       </div>
       <TokenInput
         isCustomized={true}
