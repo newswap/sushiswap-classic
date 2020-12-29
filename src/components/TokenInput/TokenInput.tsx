@@ -94,6 +94,10 @@ const StyledMaxButton = styled.button`
   border: 30px;
   margin-top: 5px;
   margin-right: 10px;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
 `
 
 const StyledMaxDiv = styled.div`
@@ -111,6 +115,8 @@ const StyledInputStyle = styled.input `
   font-size: 24px;
   background: none;
   width: calc(100% - 120px);
+  color: #607686;
+  font-weight: 500;
   &:focus{
     outline: none;
     border: 0;
