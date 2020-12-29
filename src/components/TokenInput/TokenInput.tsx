@@ -114,7 +114,7 @@ const StyledInputStyle = styled.input `
   border: 0;
   font-size: 24px;
   background: none;
-  width: calc(100% - 120px);
+  width: calc(100% - 180px);
   color: #607686;
   font-weight: 500;
   &:focus{
