@@ -7,6 +7,9 @@ import ModalTitle from '../../../components/ModalTitle'
 import TokenInput from '../../../components/TokenInput'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
+import styled from 'styled-components'
+import help from '../../../assets/img/ic_issue.svg' 
+import ReactTooltip from 'react-tooltip'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
@@ -42,9 +45,16 @@ const DepositModal: React.FC<DepositModalProps> = ({
 
   return (
     <Modal>
-      <ModalTitle text={t('Deposit') + ` ${tokenName} ` + t('Tokens')} />
+      <div>
+        <ModalTitle text={t('Deposit') + ` ${tokenName}` + t('Tokens')} style={style}/>
+        <StyledHelpBtn data-tip="hello world">
+          <StyledImg src={help}/>
+        </StyledHelpBtn>
+        <ReactTooltip />
+      </div>
       <TokenInput
         value={val}
+        isCustomized={true}
         onSelectMax={handleSelectMax}
         onChange={handleChange}
         max={fullBalance}
@@ -72,4 +82,37 @@ const DepositModal: React.FC<DepositModalProps> = ({
   )
 }
 
+const StyledSpan =  styled.span`
+  color: #647684;
+`
+
+const StyledSpanGreen =  styled.span`
+  color: #00C99E;
+`
+const StyledLabel = styled.div`
+  width: 100%;
+  text-align: center;
+  padding-top: 20px;
+  color: #647684;
+  font-size: 16px;
+  font-weight: 500;
+`
+const StyledImg = styled.img`
+  height: 22px;
+  width: 22px;
+`
+const StyledHelpBtn = styled.button`
+  background: none;
+  border: 0;
+  float: right;
+  height: 36px;
+  margin-top: 18px;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+`
+const style: React.CSSProperties = {
+  float: 'left'
+}
 export default DepositModal
