@@ -12,8 +12,13 @@ const useUnstakeNewMine = (pid: number) => {
 
   const handleUnstake = useCallback(
     async (amount: string) => {
-      const txHash = await unstakeNewMine(newMineContract, pid, amount, account)
-      console.log(txHash)
+      try {
+        const txHash = await unstakeNewMine(newMineContract, pid, amount, account)
+        console.log(txHash)  
+        return txHash
+      } catch (e) {
+        return false
+      }
     },
     [account, pid, sushi],
   )

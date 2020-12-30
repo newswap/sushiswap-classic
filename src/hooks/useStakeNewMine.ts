@@ -11,13 +11,18 @@ const useStakeNewMine = (pid: number) => {
 
   const handleStake = useCallback(
     async (amount: string) => {
-      const txHash = await stakeNewMine(
-        getNewMineForNodeContract(sushi),
-        pid,
-        amount,
-        account,
-      )
-      console.log(txHash)
+      try {
+        const txHash = await stakeNewMine(
+          getNewMineForNodeContract(sushi),
+          pid,
+          amount,
+          account,
+        )
+        console.log(txHash) 
+        return txHash
+      } catch (e) {
+        return false
+      }
     },
     [account, pid, sushi],
   )
