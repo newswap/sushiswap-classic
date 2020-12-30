@@ -2,11 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface ModalTitleProps {
-  text?: string
+  text?: string,
+  style?: React.CSSProperties
 }
 
-const ModalTitle: React.FC<ModalTitleProps> = ({ text }) => (
-  <StyledModalTitle>
+const ModalTitle: React.FC<ModalTitleProps> = ({ text, style}) => (
+  <StyledModalTitle style={style}>
     {text}
   </StyledModalTitle>
 )
