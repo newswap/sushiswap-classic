@@ -109,6 +109,7 @@ const StyledMobileMenu = styled.div`
   top: 88px;
   left: calc(100% - 10px);
   width: 160px;
+  border-radius: 12px;
 `
 
 const StyledLink = styled(NavLink)`
