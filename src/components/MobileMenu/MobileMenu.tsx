@@ -23,6 +23,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
+            to="/TradeFarm"
+            onClick={onDismiss}
+          >
+            {t('TradeFarm')}           
+          </StyledLink>
+          <StyledLink
+            exact
+            activeClassName="active"
             to="/nodeFarms"
             onClick={onDismiss}
           >

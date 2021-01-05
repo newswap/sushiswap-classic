@@ -43,7 +43,6 @@ const CustomInput: React.FC<CustomInputProps> = ({
     };
 
     const checkValidDate = (currentDate: any, selectedDate: any) => {
-        console.log('======current date====' + currentDate)
         return (currentDate/1000/60/60/24) >= (((new Date()).getTime())/1000/60/60/24)
     }
 

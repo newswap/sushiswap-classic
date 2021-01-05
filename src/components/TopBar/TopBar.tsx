@@ -45,7 +45,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   if (!isMobile) {
     return (
       <StyledTopBar>
-        <Container size="lg">
+        <Container size="llg">
           <StyledTopBarInner>
           {/* <StyledLogoWrapper> */}
           <StyledLogoWrapper paddingRight={account ? 0 : 80}>
@@ -67,7 +67,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
       return (
         <StyledTopBarMob>
           <Container size="lg">
-            <StyledTopBarInner>
+            <StyledTopBarInnerMob>
               <StyledLogoWrapper paddingRight={0}>
                 <Logo />
               </StyledLogoWrapper> 
@@ -76,7 +76,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
                 <AccountButton />
                 <StyledMenuButtonMob><StyledImg src={menu} onClick={onPresentMobileMenu}/></StyledMenuButtonMob>
               </StyledAccountButtonWrapperMob>
-            </StyledTopBarInner>
+            </StyledTopBarInnerMob>
           </Container>
         </StyledTopBarMob>
       )
@@ -135,9 +135,18 @@ const StyledTopBarInner = styled.div`
   display: flex;
   height: ${(props) => props.theme.topBarSize}px;
   justify-content: space-between;
+  max-width: 2000px;
+  width: 100%;
+`
+const StyledTopBarInnerMob = styled.div`
+  align-items: center;
+  display: flex;
+  height: ${(props) => props.theme.topBarSize}px;
+  justify-content: space-between;
   max-width: ${(props) => props.theme.siteWidth}px;
   width: 100%;
 `
+
 const StyledNavWrapper = styled.div`
   display: flex;
   flex: 1;
