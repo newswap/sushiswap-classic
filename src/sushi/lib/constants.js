@@ -70,7 +70,7 @@ export const contractAddresses = {
     1012: 'TODO'
   },
   newMineForNode: {
-    1007: '0x72dcd4dba487d8052e0aab77e3af9050d759e0a2',  //小写
+    1007: '0x50ea3d34b684edf578c377f68d25d3379d3c734a',  //小写
     1012: 'TODO'
   },
   newMineSingle: {
@@ -505,7 +505,7 @@ export const supportedPools = [
 // nodeFarms supported Polls
 export const nodeSupportedPools = [
   {
-    pid: 1,
+    pid: 0,
     lpAddresses: {
       1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',
     },
@@ -520,7 +520,7 @@ export const nodeSupportedPools = [
     iconR: newcoin
   },
   {
-    pid: 2,
+    pid: 1,
     lpAddresses: {
       1007: '0xdda2c1d6237dab9351af93e1f3f81047f897e45b',
     },
