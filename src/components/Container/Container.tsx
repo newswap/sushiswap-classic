@@ -4,7 +4,7 @@ import {isMobile} from 'react-device-detect'
 
 interface ContainerProps {
   children?: React.ReactNode,
-  size?: 'sm' | 'md' | 'lg' | 'kg'
+  size?: 'sm' | 'md' | 'lg' | 'kg' | 'llg'
 }
 
 const Container: React.FC<ContainerProps> = ({ children, size = 'md' }) => {
@@ -18,6 +18,11 @@ const Container: React.FC<ContainerProps> = ({ children, size = 'md' }) => {
       width = siteWidth * 2 / 3
       break
     case 'lg':
+      width = siteWidth
+      break
+    case 'llg':
+      width = 2000
+      break
     default:
       width = siteWidth
   }

@@ -18,6 +18,7 @@ import Home from './views/Home'
 import NST from "./views/NST";
 import NSP from "./views/NSP";
 import CommunityFarm from "./views/CommunityFarm"
+import TradeFarm from "./views/TradeFarm"
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
@@ -32,7 +33,6 @@ const App: React.FC = () => {
   }, [setMobileMenu])
 
   const handlePresentMobileMenu = useCallback(() => {
-    console.log('button clicked')
     setMobileMenu(true)
   }, [setMobileMenu])
 
@@ -46,6 +46,9 @@ const App: React.FC = () => {
           <Switch>
             <Route path="/" exact>
               <Home />
+            </Route>
+            <Route path="/TradeFarm">
+              <TradeFarm />
             </Route>
             <Route path="/nodeFarms">
               <NodeFarms />

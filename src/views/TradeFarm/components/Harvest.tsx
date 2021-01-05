@@ -26,11 +26,15 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            {/* <CardIcon>🍣</CardIcon> */}
             <NewCardIcon icon = {icon}></NewCardIcon>
-            <Value value={getBalanceNumber(earnings)} />
-            <Label text={t('NEW Earned')} />
+            {/* <Value value={getBalanceNumber(earnings)} /> */}
+            <Value value={'##.##'} />
+            <Label text={t('tradeFarmPendingTip')} />
           </StyledCardHeader>
+          <StyledGrandTotal>
+            <StyledGrandTotalTitle>{t('grandTotalTitle')}</StyledGrandTotalTitle>
+            <StyledGrandTotalAmount>{'####,##'} NEW</StyledGrandTotalAmount>
+          </StyledGrandTotal>
           <StyledCardActions>
             <Button
               size = 'new'
@@ -44,11 +48,41 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
               }}
             />
           </StyledCardActions>
+          <StyledUpdate>{t('tradeFarmUpdateTip')}</StyledUpdate>
         </StyledCardContentInner>
       </CardContent>
     </Card>
   )
 }
+
+const StyledUpdate = styled.div`
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #647684;
+`
+
+const StyledGrandTotal = styled.div`
+    width: 100%;
+    background: #F2F2F7;
+    border-radius: 12px;
+    padding: 5px 10px;
+    margin-top: 40px;
+`
+
+const StyledGrandTotalTitle = styled.div`
+    font-size: 13px;
+    color: #647684;
+    float: left;
+`
+
+const StyledGrandTotalAmount = styled.div`
+    font-size: 13px;
+    color: #647684;
+    font-weight: 500;
+    float: right;
+`
 
 const StyledCardHeader = styled.div`
   align-items: center;
@@ -58,7 +92,7 @@ const StyledCardHeader = styled.div`
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[6]}px;
+  margin-top: 10px;
   width: 100%;
 `
 

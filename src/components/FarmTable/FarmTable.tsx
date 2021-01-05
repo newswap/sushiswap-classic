@@ -50,8 +50,6 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
   };
 
   const [nodeFarms] = useNodeFarms()
-  console.log('====FarmTable=====')
-  console.log(nodeFarms)
 
   const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -108,8 +106,6 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         {
             rows[0].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((farm, j) => {
-              console.log('====farm=====')
-              console.log(farm)
               return (
                 <StyledTableRow key={farm.pid}>
                   {

@@ -23,6 +23,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
+            to="/TradeFarm"
+            onClick={onDismiss}
+          >
+            {t('TradeFarm')}           
+          </StyledLink>
+          <StyledLink
+            exact
+            activeClassName="active"
             to="/nodeFarms"
             onClick={onDismiss}
           >
@@ -109,6 +117,7 @@ const StyledMobileMenu = styled.div`
   top: 88px;
   left: calc(100% - 10px);
   width: 160px;
+  border-radius: 12px;
 `
 
 const StyledLink = styled(NavLink)`

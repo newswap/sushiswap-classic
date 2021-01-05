@@ -11,7 +11,7 @@ interface PageHeaderProps {
 
 const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
   return (
-    <Container size="sm">
+    <Container size="lg">
       <StyledPageHeader>
         <StyledIcon>{icon}</StyledIcon>
         <StyledTitle>{title}</StyledTitle>
