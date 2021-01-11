@@ -7,8 +7,9 @@ import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
-import NewMineForNode from './abi/newminefornode.json'
-import NewMineSingle from './abi/newminesingle.json'
+import NewMineForNodeAbi from './abi/newminefornode.json'
+import NewMineSingleAbi from './abi/newminesingle.json'
+import MerkleDistributorAbi from './abi/merkleDistributor.json'
 
 import {
   contractAddresses,
@@ -38,12 +39,14 @@ export class Contracts {
     this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
     // 节点矿区
-    this.newMineForNode = new this.web3.eth.Contract(NewMineForNode)
+    this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
 
     // 单独给new-nusdt交易对挖new的矿山
-    this.newMineSingle = new this.web3.eth.Contract(NewMineSingle)
-
+    this.newMineSingle = new this.web3.eth.Contract(NewMineSingleAbi)
     this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
+
+    // 交易挖矿
+    this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
 
     // NST Pools
     this.pools = supportedPools.map((pool) =>
@@ -84,6 +87,7 @@ export class Contracts {
     setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
     setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
+    setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

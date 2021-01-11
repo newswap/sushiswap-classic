@@ -6,22 +6,17 @@ import coin from '../../assets/img/new.a6cfc11f.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import { useWallet } from 'use-wallet'
-import { provider } from 'web3-core'
 import Page from '../../components/Page'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
-import { getNewNUSDTPairAddress } from '../../sushi/utils'
 import useModal from '../../hooks/useModal'
-import useSushi from '../../hooks/useSushi'
-import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import { useTranslation } from 'react-i18next'
 import newcoin from '../../assets/img/new.a6cfc11f.png'
 import swapIcon from '../../assets/img/ic_swap_green.svg'
 
 const TradeFarm: React.FC = () => {
-
     const { account } = useWallet()
     const { t } = useTranslation()
     const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)

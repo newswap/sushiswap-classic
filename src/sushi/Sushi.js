@@ -48,6 +48,7 @@ export class Sushi {
     this.newMineForNodeAddress = contractAddresses.newMineForNode[networkId]
     this.newMineSingleAddress = contractAddresses.newMineSingle[networkId]
     this.newNUSDTPairAddress = contractAddresses.newNUSDTPair[networkId]
+    this.merkleDistributorAddress = contractAddresses.merkleDistributor[networkId]
   }
 
   async resetEVM() {

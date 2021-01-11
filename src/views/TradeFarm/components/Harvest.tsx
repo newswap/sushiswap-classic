@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import Button from '../../../components/Button'
 import NewCardIcon from '../../../components/NewCardIcon'
@@ -7,43 +8,50 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useNewEarningsSingle from '../../../hooks/useNewEarningsSingle'
-import useNewRewardSingle from '../../../hooks/useNewRewardSingle'
-import { getBalanceNumber } from '../../../utils/formatBalance'
+import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
+import useSwapMerkleNode from '../../../hooks/useSwapMerkleNode'
+import useSwapClaimedAmount from '../../../hooks/useSwapClaimedAmount'
+import useSwapClaim from '../../../hooks/useSwapClaim'
 import { useTranslation } from 'react-i18next'
-
 interface HarvestProps {
   icon: string
 }
 
 const Harvest: React.FC<HarvestProps> = ({icon} ) => {
-  const earnings = useNewEarningsSingle()
+  const merkleNode = useSwapMerkleNode()
+  const claimedAmount = useSwapClaimedAmount()
+  // console.log("tradeFarm harvest merkleNode:")
+  // console.log(merkleNode)
+  // console.log(new BigNumber(merkleNode.amount).toString())
+  // console.log(claimedAmount.toNumber())
+
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useNewRewardSingle()
+  const { onClaim } = useSwapClaim()
   const { t } = useTranslation()
+
   return (
     <Card>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
             <NewCardIcon icon = {icon}></NewCardIcon>
-            {/* <Value value={getBalanceNumber(earnings)} /> */}
-            <Value value={'##.##'} />
+            <Value value={getDisplayBalance(new BigNumber(merkleNode.amount).minus(claimedAmount))} />
             <Label text={t('tradeFarmPendingTip')} />
           </StyledCardHeader>
+
           <StyledGrandTotal>
             <StyledGrandTotalTitle>{t('grandTotalTitle')}</StyledGrandTotalTitle>
-            <StyledGrandTotalAmount>{'####,##'} NEW</StyledGrandTotalAmount>
+            <StyledGrandTotalAmount>{getDisplayBalance(new BigNumber(merkleNode.amount))} NEW</StyledGrandTotalAmount>
           </StyledGrandTotal>
           <StyledCardActions>
             <Button
               size = 'new'
               variant = 'green'
-              disabled={!earnings.toNumber() || pendingTx}
+              disabled={(new BigNumber(merkleNode.amount).minus(claimedAmount)).toNumber() <= 0 || pendingTx}
               text={pendingTx ? t('Collecting NEW') : t('Harvest')}
               onClick={async () => {
                 setPendingTx(true)
-                await onReward()
+                await onClaim(merkleNode.index, merkleNode.account, merkleNode.amount, merkleNode.proof)
                 setPendingTx(false)
               }}
             />

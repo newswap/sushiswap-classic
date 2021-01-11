@@ -34,6 +34,9 @@ export const getNewMineForNodeAddress = (sushi) => {
 export const getNewMineSingleAddress = (sushi) => {
   return sushi && sushi.newMineSingleAddress
 }
+export const getMerkleDistributorAddress = (sushi) => {
+  return sushi && sushi.merkleDistributorAddress
+}
 
 export const getWethContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.weth
@@ -63,6 +66,10 @@ export const getNewMineSingleContract = (sushi) => {
 }
 export const getNewNUSDTPairContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newNUSDTPair
+}
+
+export const getMerkleDistributorContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.merkleDistributor
 }
 
 export const getNSTFarms = (sushi) => {
@@ -164,6 +171,21 @@ export const getNewPrice = async (newNUSDTPairContract, wnewAddress) => {
   else 
     return  (new BigNumber(reserves._reserve1).div(new BigNumber(10).pow(6)))
               .div(new BigNumber(reserves._reserve0).div(new BigNumber(10).pow(18)))
+}
+
+export const getClaimedAmount = async (merkleDistributorContract, account) => {
+  return merkleDistributorContract.methods.claimedAmount(account).call()
+}
+
+// MerkleDistributor claim 
+export const claim = async (merkleDistributorContract, index, account, amount, proof) => {  
+  return merkleDistributorContract.methods
+    .claim(index, account, new BigNumber(amount).toString(),proof)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
 }
 
 export const getTotalLPWethValue = async (
