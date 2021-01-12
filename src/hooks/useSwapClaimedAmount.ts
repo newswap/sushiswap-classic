@@ -6,6 +6,7 @@ import { useWallet } from 'use-wallet'
 
 import { getClaimedAmount, getMerkleDistributorContract } from '../sushi/utils'
 import useSushi from './useSushi'
+import useBlock from './useBlock'
 
 const useSwapClaimedAmount = () => {
   const [amount, setAmount] = useState(new BigNumber(0))
@@ -15,6 +16,7 @@ const useSwapClaimedAmount = () => {
   }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
   const merkleDistributorContract = getMerkleDistributorContract(sushi)
+  const block = useBlock()
 
   const fetchAmount = useCallback(async () => {
     const amount = await getClaimedAmount(merkleDistributorContract, account)
@@ -26,7 +28,7 @@ const useSwapClaimedAmount = () => {
     if (account && merkleDistributorContract && sushi) {
       fetchAmount()
     }
-  }, [account, merkleDistributorContract, setAmount, sushi])
+  }, [account, merkleDistributorContract, setAmount, block, sushi])
 
   return amount
 }
