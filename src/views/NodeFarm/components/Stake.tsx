@@ -87,8 +87,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
             <Spacer height={20}></Spacer>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
-            <Spacer height={10}></Spacer>
-            <LabelStyled text={t('estimateMiningEfficient') + '：XXX'} color={'#647684'} fontSize={16}></LabelStyled>
+            {/* <Spacer height={10}></Spacer>
+            <LabelStyled text={t('estimateMiningEfficient') + '：XXX'} color={'#647684'} fontSize={16}></LabelStyled> */}
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (

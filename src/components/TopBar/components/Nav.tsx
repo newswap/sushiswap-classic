@@ -32,9 +32,9 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/nsp">
         { t('NSP') }
       </StyledLink>
-      <StyledLink exact activeClassName="active" to="/CommunityFarm">
+      {/* <StyledLink exact activeClassName="active" to="/CommunityFarm">
         { t('CommunityFarm') }
-      </StyledLink>
+      </StyledLink> */}
       {/* <StyledAbsoluteLink
         href={ EXCHANGE_URL }
         target="_blank"

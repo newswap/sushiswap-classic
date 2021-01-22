@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
+import AccountButton from '../components/TopBar/components/AccountButton'
 
 const MERKLE_URL = process.env.REACT_APP_MERKLE_URL
 
@@ -24,6 +25,7 @@ const useSwapMerkleNode = () => {
 
     if (response && response.ok) {
       const json = await response.json()
+      // console.log(account)
       // console.log("merkle.json:")
       // console.log(json)
 
@@ -31,13 +33,15 @@ const useSwapMerkleNode = () => {
       const claim = claims[account]
       // console.log("claim:")
       // console.log(claim)
-      if(claim){
+      if(claim) {
         setNode({
           index: claim.index, 
           amount: claim.amount,
           account: account,
           proof: claim.proof
         })
+      } else {
+        setNode({index: 0, amount: "0", account: account, proof: []})        
       }
     }
   }, [account, ethereum])

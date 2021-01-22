@@ -35,7 +35,7 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
         <StyledCardContentInner>
           <StyledCardHeader>
             <NewCardIcon icon = {icon}></NewCardIcon>
-            <Value value={getDisplayBalance(new BigNumber(merkleNode.amount).minus(claimedAmount))} />
+            <Value value={(new BigNumber(merkleNode.amount).minus(claimedAmount)).toNumber() <= 0 ? 0 : getDisplayBalance(new BigNumber(merkleNode.amount).minus(claimedAmount))} />
             <Label text={t('tradeFarmPendingTip')} />
           </StyledCardHeader>
 
