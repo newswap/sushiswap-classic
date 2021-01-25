@@ -68,10 +68,10 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     <Modal>
       <div>
         <ModalTitle text={t('Withdraw') + ` ${tokenName}`} style={style}/>
-        <StyledHelpBtn data-tip="hello world">
+        {/* <StyledHelpBtn data-tip="hello world">
           <StyledImg src={help}/>
         </StyledHelpBtn>
-        <ReactTooltip />
+        <ReactTooltip /> */}
       </div>
       
       <TokenInput

@@ -30,12 +30,13 @@ const TokenInput: React.FC<TokenInputProps> = ({
           <TytleDiv>输入</TytleDiv>
           <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
         </div>
-        
-        <StyledInputStyle onChange={onChange} placeholder="0" value={value}/>
-        <StyledMaxDiv>
-          <StyledTokenDiv>{symbol}</StyledTokenDiv>
-          <StyledMaxButton onClick={onSelectMax}>MAX</StyledMaxButton>     
-        </StyledMaxDiv>
+        <StyledInputDiv>
+          <StyledInputStyle onChange={onChange} placeholder="0" value={value}/>
+          <StyledMaxDiv>
+            <StyledMaxButton onClick={onSelectMax}>MAX</StyledMaxButton> 
+            <StyledTokenDiv>{symbol}</StyledTokenDiv>  
+          </StyledMaxDiv>
+        </StyledInputDiv>
       </StyledTokenInput>
     )
   } else {
@@ -74,8 +75,12 @@ const TokenInput: React.FC<TokenInputProps> = ({
             </div>
 */
 
+const StyledInputDiv = styled.div`
+  display: inline-flex; 
+  width: 100%;
+`
+
 const StyledTokenDiv = styled.div`
-  float: right;
   padding: 0 10px;
   border-radius: 12px;
   background: white;
@@ -84,6 +89,7 @@ const StyledTokenDiv = styled.div`
   font-size: 14px;
   color: #607686;
   line-height: 30px;
+  width: max-content;
 `
 
 const StyledMaxButton = styled.button`
@@ -91,9 +97,9 @@ const StyledMaxButton = styled.button`
   color: #20C5A0;
   font-weight: 500;
   font-size: 14px;
-  border: 30px;
-  margin-top: 5px;
-  margin-right: 10px;
+  height: 30px;
+  outline: none;
+  border: 0;
   &:focus{
     outline: none;
     border: 0;
@@ -101,7 +107,7 @@ const StyledMaxButton = styled.button`
 `
 
 const StyledMaxDiv = styled.div`
-  float: right;
+  display: flex;
 `
 const TytleDiv = styled.div `
   float: left;
@@ -114,7 +120,7 @@ const StyledInputStyle = styled.input `
   border: 0;
   font-size: 24px;
   background: none;
-  width: calc(100% - 180px);
+  width: 100%;
   color: #607686;
   font-weight: 500;
   &:focus{
@@ -160,22 +166,22 @@ const StyledTokenSymbol = styled.span`
 `
 
 const StyledButtonMob = styled.button`
-align-items: center;
-background-color: #20C5A0;
-border: 0;
-border-radius: 12px;
-color: #ffffff;
-cursor: pointer;
-display: flex;
-font-size: 16px;
-font-weight: 700;
-height: 44px;
-justify-content: center;
-outline: none;
-padding-left: 7px;
-padding-right: 7px;
-width: 100%;
-&:hover {
+  align-items: center;
+  background-color: #20C5A0;
+  border: 0;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: 700;
+  height: 44px;
+  justify-content: center;
+  outline: none;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 100%;
+  &:hover {
 }
 
 `
