@@ -18,9 +18,9 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
         <StyledBackdrop onClick={onDismiss} />  
         <StyledMobileMenu>
           <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
-            {t('Home')}
+            {t('Liquidity Mining')}
           </StyledLink>
-          <StyledLink
+          {/* <StyledLink
             exact
             activeClassName="active"
             to="/TradeFarm"
@@ -67,7 +67,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             to="/CommunityFarm"
           >
             { t('CommunityFarm') }
-          </StyledLink>
+          </StyledLink> */}
         </StyledMobileMenu>
       </StyledMobileMenuWrapper>
     )

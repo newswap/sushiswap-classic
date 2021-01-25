@@ -47,7 +47,7 @@ const App: React.FC = () => {
             <Route path="/" exact>
               <Home />
             </Route>
-            <Route path="/TradeFarm">
+            {/* <Route path="/TradeFarm">
               <TradeFarm />
             </Route>
             <Route path="/nodeFarms">
@@ -64,7 +64,7 @@ const App: React.FC = () => {
             </Route>
             <Route path="/CommunityFarm">
               <CommunityFarm />
-            </Route>
+            </Route> */}
           </Switch>
         </Router>
         {/* <Disclaimer /> */}

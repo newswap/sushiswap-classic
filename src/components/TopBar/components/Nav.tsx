@@ -15,9 +15,9 @@ const Nav: React.FC = () => {
   return (
     <StyledNav>
       <StyledLink exact activeClassName="active" to="/">
-        { t('Home') }
+        { t('Liquidity Mining') }
       </StyledLink>
-      <StyledLink exact activeClassName="active" to="/TradeFarm">
+      {/* <StyledLink exact activeClassName="active" to="/TradeFarm">
         { t('TradeFarm') }
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/nodeFarms">
@@ -31,7 +31,8 @@ const Nav: React.FC = () => {
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/nsp">
         { t('NSP') }
-      </StyledLink>
+      </StyledLink> */}
+
       {/* <StyledLink exact activeClassName="active" to="/CommunityFarm">
         { t('CommunityFarm') }
       </StyledLink> */}

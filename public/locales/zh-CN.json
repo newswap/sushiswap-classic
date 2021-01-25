@@ -1,5 +1,6 @@
 {  
   "Farm": "矿池",
+  "Liquidity Mining": "流动性挖矿",
   "Home": "主页",
   "Menu": "菜单",
   "Farms": "矿区",
@@ -83,7 +84,7 @@
   "nstFarmsTips": "参与主流矿池的挖矿，将对应的流动性通证质押入矿池，获得 NewSwap 的收益代币 NST 奖励",
   "estimateMiningEfficient": "预计挖矿效率",
   "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
-  "releaseTip": "总量3亿枚，时长一年",
+  "releaseTip": "总量1亿枚，时长一年",
   "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
   "CommunityFarm": "社群矿区",
 
