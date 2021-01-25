@@ -9,10 +9,12 @@ import { isMobile } from "react-device-detect"
 import {hexAddress2NewAddress} from '../../../utils/addressUtil'
 import { getFormatDisplayBalance } from '../../../utils/formatBalance'
 import BigNumber from 'bignumber.js'
+import { useTranslation } from 'react-i18next'
 
 interface AccountButtonProps {}
 
 const AccountButton: React.FC<AccountButtonProps> = (props) => {
+  const { t } = useTranslation()
   const [onPresentAccountModal] = useModal(<AccountModal />)
   const [onPresentWalletProviderModal] = useModal(
     <WalletProviderModal />,
@@ -30,7 +32,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
   return (
     <StyledAccountButton>
       {!account ? (
-        < StyledButton onClick={handleUnlockClick}>Unlock Wallet </StyledButton>
+        < StyledButton onClick={handleUnlockClick}>{t('Unlock Wallet')} </StyledButton>
       ) : (
         isMobile ? (
           <StyledButtonMob>{newAddress.substring(0,5) + "..." + newAddress.substring(newAddress.length - 4)}</StyledButtonMob>
