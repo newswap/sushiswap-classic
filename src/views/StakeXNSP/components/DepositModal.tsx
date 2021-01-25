@@ -72,10 +72,10 @@ const DepositModal: React.FC<DepositModalProps> = ({
     <Modal>
       <div>
         <ModalTitle text={t('Deposit') + ` ${tokenName}` + t('Tokens')} style={style}/>
-        <StyledHelpBtn data-tip="hello world">
+        {/* <StyledHelpBtn data-tip="hello world">
           <StyledImg src={help}/>
         </StyledHelpBtn>
-        <ReactTooltip />
+        <ReactTooltip /> */}
       </div>
       <TokenInput
         isCustomized={true}
