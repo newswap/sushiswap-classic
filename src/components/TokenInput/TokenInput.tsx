@@ -77,7 +77,7 @@ const TokenInput: React.FC<TokenInputProps> = ({
 
 const StyledInputDiv = styled.div`
   display: inline-flex; 
-
+  width: 100%;
 `
 
 const StyledTokenDiv = styled.div`
