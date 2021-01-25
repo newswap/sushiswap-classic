@@ -10,15 +10,16 @@ interface WalletCardProps {
   icon: React.ReactNode
   onConnect: () => void
   title: string
+  connectTitle: string
 }
 
-const WalletCard: React.FC<WalletCardProps> = ({ icon, onConnect, title }) => (
+const WalletCard: React.FC<WalletCardProps> = ({ icon, onConnect, title, connectTitle }) => (
   <Card>
     <CardContent>
       <CardIcon>{icon}</CardIcon>
       <CardTitle text={title} />
       <Spacer />
-      <Button onClick={onConnect} text="Connect" size="new" variant="green" />
+      <Button onClick={onConnect} text={connectTitle} size="new" variant="green" />
     </CardContent>
   </Card>
 )

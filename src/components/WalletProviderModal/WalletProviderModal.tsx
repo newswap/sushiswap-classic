@@ -78,6 +78,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
               icon={<img src={newLogo} style={{ height: 80 }} />}
               onConnect={() => connect('injected')}
               title="NewMask"
+              connectTitle= {t('Connect')}
             />
           {/* </StyledWalletCard> */}
           {/* <Spacer size="sm" />
