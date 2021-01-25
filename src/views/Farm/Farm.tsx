@@ -77,7 +77,7 @@ const Farm: React.FC = () => {
         iconL={iconL}
         iconR={iconR}
         subtitle= {t('farmHeaderSubtitle', {tokenSymbol: tokenSymbol, earnTokenName: earnTokenName})}
-        title={tokenSymbol + '-NEW ' + t('Farm')}
+        title={tokenSymbol + '-NEW ' + t('MINING')}
       />
       <StyledFarm>
         <StyledCardsWrapper>

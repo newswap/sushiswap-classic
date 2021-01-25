@@ -4,6 +4,10 @@ import styled, { keyframes } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
+const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
+const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
+const INFO_URL = process.env.REACT_APP_INFO_URL
+
 interface MobileMenuProps {
   onDismiss: () => void
   visible?: boolean
@@ -20,6 +24,20 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
             {t('Liquidity Mining')}
           </StyledLink>
+          <StyledAbsoluteLink
+            href={ EXCHANGE_URL }
+            target="_blank"
+            onClick={onDismiss}
+          >
+            { t('Exchange') }
+          </StyledAbsoluteLink>
+          <StyledAbsoluteLink
+            href={ INFO_URL }
+            target="_blank"
+            onClick={onDismiss}
+          >
+            { t('Info') }
+          </StyledAbsoluteLink>
           {/* <StyledLink
             exact
             activeClassName="active"
@@ -135,6 +153,27 @@ const StyledLink = styled(NavLink)`
   }
   &.active {
     color: #00C89D;
+  }
+`
+
+const StyledAbsoluteLink = styled.a`
+  // color: ${(props) => props.theme.color.grey[400]};
+  color: #061243;
+  font-weight: 500;
+  padding: ${(props) => props.theme.spacing[2]}px
+    ${(props) => props.theme.spacing[2]}px;
+  text-decoration: none;
+  &:hover {
+    // color: ${(props) => props.theme.color.grey[500]};
+    color: #00C89D;
+  }
+  &.active {
+    // color: ${(props) => props.theme.color.primary.main};
+    color: #00C89D;
+  }
+  @media (max-width: 400px) {
+    padding-left: ${(props) => props.theme.spacing[2]}px;
+    padding-right: ${(props) => props.theme.spacing[2]}px;
   }
 `
 
