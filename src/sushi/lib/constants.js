@@ -74,7 +74,7 @@ export const contractAddresses = {
     1012: 'TODO'
   },
   newMineSingle: {
-    1007: '0x6b0070ed4c588f86deb07ca115ebd8af4b30017e',  //小写
+    1007: '0x8b028f0f001417e3b9c086c5740722839dab12b0',  //小写
     1012: 'TODO'
   },
   newNUSDTPair: {

@@ -84,7 +84,7 @@ const Home: React.FC = () => {
               iconR={iconR}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
               subsubtitle={'(' + t('releaseTip') + ')'}
-              title={tokenSymbol + '- NEW ' + t('Farm')}
+              title={tokenSymbol + '- NEW ' + t('MINING')}
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>

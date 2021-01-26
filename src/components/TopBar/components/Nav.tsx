@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 
 const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
 const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
-
+const INFO_URL = process.env.REACT_APP_INFO_URL
 
 const Nav: React.FC = () => {
   const { t } = useTranslation()
@@ -36,12 +36,18 @@ const Nav: React.FC = () => {
       {/* <StyledLink exact activeClassName="active" to="/CommunityFarm">
         { t('CommunityFarm') }
       </StyledLink> */}
-      {/* <StyledAbsoluteLink
+      <StyledAbsoluteLink
         href={ EXCHANGE_URL }
         target="_blank"
       >
         { t('Exchange') }
-      </StyledAbsoluteLink> */}
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink
+        href={ INFO_URL }
+        target="_blank"
+      >
+        { t('Info') }
+      </StyledAbsoluteLink>
       {/* <StyledAbsoluteLink
         href={ NEWSWAP_URL }
         target="_blank"
