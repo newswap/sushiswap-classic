@@ -13,15 +13,19 @@ import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import { getNewNUSDTPairAddress } from '../../sushi/utils'
+import { getFormatDisplayBalance } from '../../utils/formatBalance'
 import useModal from '../../hooks/useModal'
+import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
 import useSushi from '../../hooks/useSushi'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
+import {contractAddresses} from '../../sushi/lib/constants'
 import newcoin from '../../assets/img/new.a6cfc11f.png'
 import usdtcoin from '../../assets/img/usdtlogo.png'
 
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const INFO_URL = process.env.REACT_APP_INFO_URL
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
 
@@ -38,6 +42,10 @@ const Home: React.FC = () => {
   const tokenSymbol = 'NUSDT'
   const iconL = usdtcoin
   const iconR = newcoin
+
+  // 锁仓合约持有的lp数量
+  const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
+
   // const {
   //   pid,
   //   lpTokenAddress,
@@ -88,7 +96,7 @@ const Home: React.FC = () => {
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                {t('totalStake')}: 400000000000
+                {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)}
               </StyledTotalDiv>
               <StyledSpeedDiv>
                 {t('newPerBlock',{new:NEW_PER_BLOCK})}
