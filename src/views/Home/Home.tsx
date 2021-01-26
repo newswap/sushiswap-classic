@@ -23,6 +23,7 @@ import newcoin from '../../assets/img/new.a6cfc11f.png'
 import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const INFO_URL = process.env.REACT_APP_INFO_URL
+const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
 
 const Home: React.FC = () => {
   const sushi = useSushi()
@@ -81,9 +82,19 @@ const Home: React.FC = () => {
             <NewPageHeader
               iconL={iconL}
               iconR={iconR}
-              subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})+ '(' + t('releaseTip') + ')'} 
-              title={tokenSymbol + ' - NEW ' + t('MINING')}
+              subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
+              subsubtitle={'(' + t('releaseTip') + ')'}
+              title={tokenSymbol + '- NEW ' + t('MINING')}
             />
+            <StyledTotalBaseDiv>
+              <StyledTotalDiv>
+                {t('totalStake')}: 400000000000
+              </StyledTotalDiv>
+              <StyledSpeedDiv>
+                {t('newPerBlock',{new:NEW_PER_BLOCK})}
+              </StyledSpeedDiv>
+            </StyledTotalBaseDiv>
+            <Spacer />
             <StyledFarm>
               <StyledCardsWrapper>
                 <StyledCardWrapper>
@@ -131,6 +142,50 @@ const Home: React.FC = () => {
     </Switch>
   )
 }
+
+const StyledTotalBaseDiv = styled.div`
+  
+  background: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    width: 80%;
+  }
+  padding-top: 16px;
+  padding-bottom: 16px;
+  box-shadow: 0px 5px 12px 0px rgba(7,94,68,0.11);
+  border-radius: 12px;
+`
+const StyledTotalDiv = styled.div`
+  
+  width: 600px;
+  background: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    width: 100%;
+    font-size: 24px;
+  }
+  color: #20C5A0;
+  font-size: 30px;
+  font-weight: 700;
+
+`
+
+const StyledSpeedDiv = styled.div`
+  
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+  font-weight: 400;
+  color: #607686;
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+`
 
 const StyledFarm = styled.div`
   align-items: center;
