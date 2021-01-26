@@ -86,7 +86,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) =>
             <Spacer height={20} />
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
-            <Label text={t('newPerBlock',{new:NEW_PER_BLOCK})} />
+            {/* <Label text={t('newPerBlock',{new:NEW_PER_BLOCK})} /> */}
 
           </StyledCardHeader>
           <StyledCardActions>
