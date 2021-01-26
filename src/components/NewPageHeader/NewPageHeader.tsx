@@ -7,10 +7,11 @@ interface NewPageHeaderProps {
   iconL: string//React.ReactNode
   iconR: string //React.ReactNode
   subtitle?: string
+  subsubtitle?: string
   title?: string
 }
 
-const NewPageHeader: React.FC<NewPageHeaderProps> = ({ iconL, iconR, subtitle, title }) => {
+const NewPageHeader: React.FC<NewPageHeaderProps> = ({ iconL, iconR, subtitle, subsubtitle, title }) => {
   return (
     <Container size="sm">
       <StyledPageHeader>
@@ -20,6 +21,7 @@ const NewPageHeader: React.FC<NewPageHeaderProps> = ({ iconL, iconR, subtitle, t
         </div>
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
+        <StyledSubtitle>{subsubtitle}</StyledSubtitle>
       </StyledPageHeader>
     </Container>
   )

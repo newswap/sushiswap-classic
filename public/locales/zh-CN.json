@@ -1,7 +1,7 @@
 { 
   "Liquidity Mining": "流动性挖矿",
   "estimateMiningEfficient": "全局挖矿效率",
-  "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励",
+  "homeHeaderSubtitle": "将 {{tokenSymbol}} - {{new}} 流动性通证质押入矿池，获得 {{token}} 奖励。",
   "releaseTip": "总量1亿枚，时长一年",
   "Farm": "矿池",
   "Unlock Wallet": "连接钱包",
