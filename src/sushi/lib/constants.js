@@ -73,7 +73,7 @@ export const contractAddresses = {
     1007: '0x50ea3d34b684edf578c377f68d25d3379d3c734a',  //小写
     1012: 'TODO'
   },
-  newMineSingle: {
+  newMineSingle: { //改成nuMineSingle
     1007: '0x8b028f0f001417e3b9c086c5740722839dab12b0',  //小写
     1012: 'TODO'
   },

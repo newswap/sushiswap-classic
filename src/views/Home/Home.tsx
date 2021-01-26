@@ -82,7 +82,7 @@ const Home: React.FC = () => {
               iconL={iconL}
               iconR={iconR}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})+ '(' + t('releaseTip') + ')'} 
-              title={tokenSymbol + ' - NEW ' + t('MINING')}
+              title={tokenSymbol + '-NEW ' + t('MINING')}
             />
             <StyledFarm>
               <StyledCardsWrapper>

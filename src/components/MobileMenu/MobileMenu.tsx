@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
 const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
 const INFO_URL = process.env.REACT_APP_INFO_URL
-
+const FAQ_URL = process.env.REACT_APP_FAQ_URL
 interface MobileMenuProps {
   onDismiss: () => void
   visible?: boolean
@@ -21,22 +21,38 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
       <StyledMobileMenuWrapper>
         <StyledBackdrop onClick={onDismiss} />  
         <StyledMobileMenu>
-          <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
-            {t('Liquidity Mining')}
-          </StyledLink>
+          <StyledAbsoluteLink
+            href={ NEWSWAP_URL }
+            target="_blank"
+            onClick={onDismiss}
+          >
+            { t('Home') }
+          </StyledAbsoluteLink>
           <StyledAbsoluteLink
             href={ EXCHANGE_URL }
             target="_blank"
             onClick={onDismiss}
           >
             { t('Exchange') }
-          </StyledAbsoluteLink>
+          </StyledAbsoluteLink>   
+            
+          <StyledLink exact activeClassName="active" to="/" onClick={onDismiss}>
+            {t('Liquidity Mining')}
+          </StyledLink>
+
           <StyledAbsoluteLink
             href={ INFO_URL }
             target="_blank"
             onClick={onDismiss}
           >
-            { t('Info') }
+            { t('Analytics') }
+          </StyledAbsoluteLink>
+          <StyledAbsoluteLink
+            href={ FAQ_URL }
+            target="_blank"
+            onClick={onDismiss}
+          >
+            { t('FAQ') }
           </StyledAbsoluteLink>
           {/* <StyledLink
             exact
