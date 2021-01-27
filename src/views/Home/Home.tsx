@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js'
 import React, { useEffect, useMemo } from 'react'
 import { useParams, Switch } from 'react-router-dom'
 import styled from 'styled-components'
@@ -16,6 +17,8 @@ import { getNewNUSDTPairAddress } from '../../sushi/utils'
 import { getFormatDisplayBalance } from '../../utils/formatBalance'
 import useModal from '../../hooks/useModal'
 import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
+import useTotalSupply from '../../hooks/useTotalSupply'
+import useNewPrice from '../../hooks/useNewPrice'
 import useSushi from '../../hooks/useSushi'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
@@ -28,6 +31,7 @@ import usdtcoin from '../../assets/img/usdtlogo.png'
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const INFO_URL = process.env.REACT_APP_INFO_URL
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
+const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 const Home: React.FC = () => {
   const sushi = useSushi()
@@ -43,8 +47,21 @@ const Home: React.FC = () => {
   const iconL = usdtcoin
   const iconR = newcoin
 
-  // 锁仓合约持有的lp数量
+  // 锁仓合约质押的lp数量
   const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
+  // console.log("lpBalance:"+lpBalance.toNumber())
+  // lp总量
+  const totalSupply = useTotalSupply(lpTokenAddress)
+  // console.log("totalSupply:"+totalSupply.toNumber())
+  // lp合约持有的new数量
+  const newBalance = useTokenBalanceOf(contractAddresses.weth[CHAIN_ID], lpTokenAddress)
+  // console.log("newBalance:"+newBalance.toNumber())
+  const newPrice = useNewPrice()
+  // console.log("newPrice:"+newPrice.toNumber())
+  // 锁仓合约质押LP对应价值NEW数量
+  const newAmount = lpBalance.div(new BigNumber(10).pow(18)).times(newBalance).times(2).div(totalSupply)
+  // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
+  // console.log("newValue:"+newAmount.toNumber())
 
   // const {
   //   pid,
@@ -96,8 +113,23 @@ const Home: React.FC = () => {
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)}
+                {t('Total Stake Value')}: {newAmount
+                    ? `$ ${newAmount.times(newPrice)
+                       .toNumber()
+                       .toLocaleString('en-US')}`
+                    : '$ 0.00'}
               </StyledTotalDiv>
+              <StyledSpeedDiv>
+                {t('APY（Estimated）')}: {newAmount
+                   ? `${BLOCKS_PER_YEAR.times(NEW_PER_BLOCK).div(newAmount)
+                       .times(new BigNumber(100))
+                       .toNumber()
+                       .toLocaleString('en-US')}%`
+                    : t('——')}
+              </StyledSpeedDiv>
+              {/* <StyledSpeedDiv>
+                {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)} LP
+              </StyledSpeedDiv> */}
               <StyledSpeedDiv>
                 {t('newPerBlock',{new:NEW_PER_BLOCK})}
               </StyledSpeedDiv>
