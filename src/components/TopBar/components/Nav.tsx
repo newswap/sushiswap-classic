@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 const EXCHANGE_URL = process.env.REACT_APP_EXCHANGE_URL
 const NEWSWAP_URL = process.env.REACT_APP_NEWSWAP_URL
 const INFO_URL = process.env.REACT_APP_INFO_URL
+const FAQ_URL = process.env.REACT_APP_FAQ_URL
 
 const Nav: React.FC = () => {
   const { t } = useTranslation()
@@ -14,6 +15,18 @@ const Nav: React.FC = () => {
 
   return (
     <StyledNav>
+      <StyledAbsoluteLink
+        href={ NEWSWAP_URL }
+        target="_blank"
+      >
+        { t('Home') }
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink
+        href={ EXCHANGE_URL }
+        target="_blank"
+      >
+        { t('Exchange') }
+      </StyledAbsoluteLink>
       <StyledLink exact activeClassName="active" to="/">
         { t('Liquidity Mining') }
       </StyledLink>
@@ -37,16 +50,16 @@ const Nav: React.FC = () => {
         { t('CommunityFarm') }
       </StyledLink> */}
       <StyledAbsoluteLink
-        href={ EXCHANGE_URL }
-        target="_blank"
-      >
-        { t('Exchange') }
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink
         href={ INFO_URL }
         target="_blank"
       >
-        { t('Info') }
+        { t('Analytics') }
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink
+        href={ FAQ_URL }
+        target="_blank"
+      >
+        { t('FAQ') }
       </StyledAbsoluteLink>
       {/* <StyledAbsoluteLink
         href={ NEWSWAP_URL }

@@ -17,7 +17,7 @@ import useApproveNewMineSingle from '../../../hooks/useApproveNewMineSingle'
 import useStakeNewMineSingle from '../../../hooks/useStakeNewMineSingle'
 import useStakedBalanceNewMineSingle from '../../../hooks/useStakedBalanceNewMineSingle'
 import useUnstakeNewMineSingle from '../../../hooks/useUnstakeNewMineSingle'
-import { getBalanceNumber } from '../../../utils/formatBalance'
+import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import { useTranslation } from 'react-i18next'
@@ -28,8 +28,6 @@ interface StakeProps {
   iconL: string
   iconR: string
 }
-
-const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
 
 const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
@@ -84,10 +82,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) =>
               <StyledImgR src={iconL}></StyledImgR>
             </StyledDiv>
             <Spacer height={20} />
-            <Value value={getBalanceNumber(stakedBalance)} />
+            <Value value={getDisplayBalance(stakedBalance)} />
             <Label text={`${tokenName} ` + t('Tokens Staked')} />
-            {/* <Label text={t('newPerBlock',{new:NEW_PER_BLOCK})} /> */}
-
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
