@@ -34,5 +34,6 @@
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
-  "totalStake": "总锁仓量"
+  "totalStake": "总锁仓量",
+  "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time."
 }

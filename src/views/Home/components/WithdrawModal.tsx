@@ -78,6 +78,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
           }}
         />
       </ModalActions>
+      <StyledTip><span>{t('addRemoveLPTips')}</span></StyledTip>
     </Modal>
   )
 }
@@ -89,6 +90,17 @@ const StyledSpan =  styled.span`
 const StyledSpanGreen =  styled.span`
   color: #00C99E;
 `
+const StyledTip = styled.div`
+  padding-top: 0px;
+  padding-bottom: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #647684;
+  font-size: 12px;
+  flex-direction: column;
+`
+
 const StyledLabel = styled.div`
   width: 100%;
   text-align: center;
