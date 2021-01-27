@@ -113,19 +113,19 @@ const Home: React.FC = () => {
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                {t('Total Stake Value')}: {newAmount
+                {t('Total Stake Value')}: {newAmount.toNumber() > 0
                     ? `$ ${newAmount.times(newPrice)
                        .toNumber()
                        .toLocaleString('en-US')}`
                     : '$ 0.00'}
               </StyledTotalDiv>
               <StyledSpeedDiv>
-                {t('APY（Estimated）')}: {newAmount
+                {t('APY（Estimated）')}: {newAmount.toNumber() > 0
                    ? `${BLOCKS_PER_YEAR.times(NEW_PER_BLOCK).div(newAmount)
                        .times(new BigNumber(100))
                        .toNumber()
                        .toLocaleString('en-US')}%`
-                    : t('——')}
+                    : t('—')}
               </StyledSpeedDiv>
               {/* <StyledSpeedDiv>
                 {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)} LP
