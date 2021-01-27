@@ -11,6 +11,7 @@ import { isMobile } from "react-device-detect"
 import { useWallet } from 'use-wallet'
 import menu from '../../assets/img/menu.svg'
 
+
 interface TopBarProps {
   onPresentMobileMenu: () => void
 }
