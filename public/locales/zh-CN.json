@@ -17,7 +17,7 @@
   "Withdraw": "解锁",
   "Cancel": "取消",
   "Info": "统计信息",
-  "newPerBlock": "全局挖矿效率: {{new}} NEW/区块",
+  "newPerBlock": "全局挖矿效率: {{new}}NEW/区块",
   "Unstake": "移除",
   "Stake": "添加",
   "My Account": "我的地址",

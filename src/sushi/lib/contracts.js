@@ -29,24 +29,26 @@ export class Contracts {
       options.confirmationType || Types.ConfirmationType.Confirmed
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
-    // nst矿区
-    this.nst = new this.web3.eth.Contract(NSTAbi)
-    this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
-    this.xNSTStaking = new this.web3.eth.Contract(XNSTAbi)
-    this.weth = new this.web3.eth.Contract(WETHAbi)
-    // nsp理财区
-    this.nsp = new this.web3.eth.Contract(NSPAbi)
-    this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
-    // 节点矿区
-    this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
+    this.weth = new this.web3.eth.Contract(WETHAbi)
+    this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
 
     // 单独给new-nusdt交易对挖new的矿山
     this.newMineSingle = new this.web3.eth.Contract(NewMineSingleAbi)
-    this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
+
+    // nst矿区
+    // this.nst = new this.web3.eth.Contract(NSTAbi)
+    // this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
+    // this.xNSTStaking = new this.web3.eth.Contract(XNSTAbi)
+    // nsp理财区
+    // this.nsp = new this.web3.eth.Contract(NSPAbi)
+    // this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
+
+    // 节点矿区
+    // this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
 
     // 交易挖矿
-    this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
+    // this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
 
     // NST Pools
     this.pools = supportedPools.map((pool) =>
@@ -78,16 +80,17 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId)
     }
 
-    setProvider(this.nst, contractAddresses.nst[networkId])
-    setProvider(this.masterChef, contractAddresses.masterChef[networkId])
-    setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
-    setProvider(this.nsp, contractAddresses.nsp[networkId])
-    setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
-    setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
-    setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
-    setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
+    setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
+
+    // setProvider(this.nst, contractAddresses.nst[networkId])
+    // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
+    // setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
+    // setProvider(this.nsp, contractAddresses.nsp[networkId])
+    // setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
+    // setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
+    // setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
@@ -105,8 +108,8 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.nst.options.from = account
-    this.masterChef.options.from = account
+    // this.nst.options.from = account
+    // this.masterChef.options.from = account
   }
 
   async callContractFunction(method, options) {

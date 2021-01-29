@@ -114,10 +114,8 @@ const Home: React.FC = () => {
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
                 {t('Total Stake Value')}: {newAmount.toNumber() > 0
-                    ? `$ ${newAmount.times(newPrice)
-                       .toNumber()
-                       .toLocaleString('en-US')}`
-                    : '$ 0.00'}
+                    ? `$${newAmount.times(newPrice).toFixed(2)}`
+                    : '$0.00'}
               </StyledTotalDiv>
               <StyledSpeedDiv>
                 {t('APY（Estimated）')}: {newAmount.toNumber() > 0
