@@ -2,7 +2,7 @@
   "estimateMiningEfficient": "Overall Farm Rate",
   "homeHeaderSubtitle": "Stake {{tokenSymbol}}-{{new}} liquidity token and get {{token}} reward.",
   "releaseTip": "30M in total for 3 months",
-  "newPerBlock": "Overall Farm Rate: {{new}}NEW/block",
+  "newPerBlock": "Overall Farm Rate: {{new}} NEW/block",
 
 
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",

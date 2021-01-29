@@ -30,7 +30,7 @@ import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const INFO_URL = process.env.REACT_APP_INFO_URL
-const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NU ?? '1')
+const NEW_PER_BLOCK = process.env.REACT_APP_NEW_PER_BLOCK_NU
 const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 const Home: React.FC = () => {
@@ -121,7 +121,7 @@ const Home: React.FC = () => {
               </StyledTotalDiv>
               <StyledSpeedDiv>
                 {t('APY（Estimated）')}: {newAmount.toNumber() > 0
-                   ? `${BLOCKS_PER_YEAR.times(NEW_PER_BLOCK).div(newAmount)
+                   ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount)
                        .times(new BigNumber(100))
                        .toNumber()
                        .toLocaleString('en-US')}%`
@@ -130,9 +130,9 @@ const Home: React.FC = () => {
               {/* <StyledSpeedDiv>
                 {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)} LP
               </StyledSpeedDiv> */}
-              <StyledSpeedDiv>
+              {/* <StyledSpeedDiv>
                 {t('newPerBlock',{new:NEW_PER_BLOCK})}
-              </StyledSpeedDiv>
+              </StyledSpeedDiv> */}
             </StyledTotalBaseDiv>
             <Spacer />
             <StyledFarm>
