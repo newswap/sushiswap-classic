@@ -17,8 +17,7 @@ const useNewPrice = () => {
   const sushi = useSushi()
   const newNUSDTPairContract = getNewNUSDTPairContract(sushi)
   const wnewAddress = getWNewAddress(sushi)
-  // 如果需要实时更新new价格，将block放入useEffect
-  // const block = useBlock()
+  const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
     const price = await getNewPrice(newNUSDTPairContract, wnewAddress)
@@ -29,7 +28,7 @@ const useNewPrice = () => {
     if (account && newNUSDTPairContract && sushi) {
       fetchBalance()
     }
-  }, [account, newNUSDTPairContract, setNewPrice, sushi])
+  }, [account, newNUSDTPairContract, setNewPrice, block, sushi])
 
   return newPrice
 }
