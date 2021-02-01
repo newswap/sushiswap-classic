@@ -1,7 +1,7 @@
 {
   "estimateMiningEfficient": "Overall Farm Rate",
   "homeHeaderSubtitle": "Stake {{tokenSymbol}}-{{new}} liquidity token and get {{token}} reward.",
-  "releaseTip": "30M in total for 3 months",
+  "releaseTip": "30M in total for 30 days",
   "newPerBlock": "Overall Farm Rate: {{new}}NEW/block",
   "miningStart": "(Mining starts at 2021.2.3 8:00 (UTC+8))",
 

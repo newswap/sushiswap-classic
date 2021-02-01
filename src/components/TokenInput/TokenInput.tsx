@@ -27,7 +27,7 @@ const TokenInput: React.FC<TokenInputProps> = ({
     return (
       <StyledTokenInput style={CustomStyledDiv}>
         <div>
-          <TytleDiv>输入</TytleDiv>
+          <TytleDiv>{t('Input')}</TytleDiv>
           <StyledMaxText>{max.toLocaleString()} {symbol} {t('Available')}</StyledMaxText>
         </div>
         <StyledInputDiv>

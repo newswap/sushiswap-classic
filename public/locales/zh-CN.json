@@ -2,7 +2,7 @@
   "Liquidity Mining": "流动性挖矿",
   "estimateMiningEfficient": "全局挖矿效率",
   "homeHeaderSubtitle": "将 {{tokenSymbol}}-{{new}} 流动性通证质押入矿池，获得 {{token}} 奖励。",
-  "releaseTip": "总量3000万枚，时长3个月",
+  "releaseTip": "总量3000万枚，时长30天",
   "MINING": "矿池",
   "Unlock Wallet": "连接钱包",
   "Deposit": "质押",
@@ -33,6 +33,7 @@
   "APY（Estimated）": "预估年化收益率",
   "Approving...": "授权中...",
   "miningStart": "(2021年2月3日8时(UTC+8) 开启挖矿)",
+  "Input": "输入",
 
   "Menu": "菜单",
   "Farm": "矿池",
