@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import chef from '../../assets/img/chef.png'
 import coin from '../../assets/img/new.a6cfc11f.png'
 import Button from '../../components/Button'
+import Label from '../../components/Label'
 import Container from '../../components/Container'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
@@ -111,6 +112,9 @@ const Home: React.FC = () => {
               subsubtitle={'(' + t('releaseTip') + ')'}
               title={tokenSymbol + '-NEW ' + t('MINING')}
             />
+            { new Date().getTime() < new Date("2021-02-03 08:00:00").getTime() && (
+              <Label text={t('miningStart')} />
+            )}
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
                 {t('Total Stake Value')}: {newAmount.toNumber() > 0

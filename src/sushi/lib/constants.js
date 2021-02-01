@@ -38,7 +38,7 @@ export const contractAddresses = {
   },
   newMineSingle: { //改成nuMineSingle
     1007: '0x8b028f0f001417e3b9c086c5740722839dab12b0',  //小写
-    1012: 'TODO'
+    1012: '0x8b028f0f001417e3b9c086c5740722839dab12b0'
   },
 
   masterChef: {
