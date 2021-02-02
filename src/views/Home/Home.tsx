@@ -203,13 +203,14 @@ const StyledTotalBaseDiv = styled.div`
 `
 const StyledTotalDiv = styled.div`
   
+  text-align: center;
   width: 600px;
   background: white;
   align-items: center;
   display: flex;
   flex-direction: column;
   @media (max-width: 768px) {
-    width: 100%;
+    width: 99%;
     font-size: 24px;
   }
   color: #20C5A0;
