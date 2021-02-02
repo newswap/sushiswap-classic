@@ -112,7 +112,7 @@ const Home: React.FC = () => {
               subsubtitle={'(' + t('releaseTip') + ')'}
               title={tokenSymbol + '-NEW ' + t('MINING')}
             />
-            { new Date().getTime() < new Date("2021-02-03 08:00:00").getTime() && (
+            { new Date().getTime() < 1612310400000 && (
               <Label text={t('miningStart')} />
             )}
             <StyledTotalBaseDiv>
