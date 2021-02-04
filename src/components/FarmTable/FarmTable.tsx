@@ -130,7 +130,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           <StyledLPLabelMob>{farm.id}</StyledLPLabelMob>
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          <StyledLink to={`/nodeFarms/${farm.id}`}>
+                          <StyledLink to={`/communityMining/${farm.id}`}>
                             {(isMobile) ? '' : '进入矿池'}
                             <StyledArrow src={arrow} />
                           </StyledLink>
@@ -157,7 +157,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           <StyledLPLabel>{farm.id}</StyledLPLabel>
                         </StyledTableCell>
                         <StyledTableCell align="right">
-                          <StyledLink to={`/nodeFarms/${farm.id}`}>
+                          <StyledLink to={`/communityMining/${farm.id}`}>
                             {(isMobile) ? '' : '进入矿池'}
                             <StyledArrow src={arrow} />
                           </StyledLink>

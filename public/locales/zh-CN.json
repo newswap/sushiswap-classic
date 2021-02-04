@@ -35,12 +35,16 @@
   "miningStart": "(2021年2月3日8时(UTC+8) 开启挖矿)",
   "Input": "输入",
 
+  "Community Mining": "Community Mining",
+
+
+
+  
   "Menu": "菜单",
   "Farm": "矿池",
   "Farms": "矿区",
   "NSTFarms": "NST矿区",
   "NEWFarms": "NEW矿区",
-  "NodeFarms": "节点矿区",
   "TokenFarms": "社群矿区",
   "Staking": "Staking",
   "NST": "NST",

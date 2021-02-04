@@ -36,6 +36,19 @@ export class Contracts {
     // 单独给new-nusdt交易对挖new的矿山
     this.newMineSingle = new this.web3.eth.Contract(NewMineSingleAbi)
 
+    // 社群矿区
+    this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
+
+    // Community Pools
+    this.nodePools = nodeSupportedPools.map((pool) =>
+      Object.assign(pool, {
+        lpAddress: pool.lpAddresses[networkId],
+        tokenAddress: pool.tokenAddresses[networkId],
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+        tokenContract: new this.web3.eth.Contract(ERC20Abi),
+      }),
+    )
+
     // nst矿区
     // this.nst = new this.web3.eth.Contract(NSTAbi)
     // this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
@@ -44,23 +57,11 @@ export class Contracts {
     // this.nsp = new this.web3.eth.Contract(NSPAbi)
     // this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
-    // 节点矿区
-    // this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
-
     // 交易挖矿
     // this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
 
     // NST Pools
     this.pools = supportedPools.map((pool) =>
-      Object.assign(pool, {
-        lpAddress: pool.lpAddresses[networkId],
-        tokenAddress: pool.tokenAddresses[networkId],
-        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
-        tokenContract: new this.web3.eth.Contract(ERC20Abi),
-      }),
-    )
-    // Node Pools
-    this.nodePools = nodeSupportedPools.map((pool) =>
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
@@ -83,23 +84,23 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.weth[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
     setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
+    setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
 
-    // setProvider(this.nst, contractAddresses.nst[networkId])
-    // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
-    // setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
-    // setProvider(this.nsp, contractAddresses.nsp[networkId])
-    // setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
-    // setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
-    // setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
-
-    this.pools.forEach(
+    this.nodePools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)
       },
     )
 
-    this.nodePools.forEach(
+    // setProvider(this.nst, contractAddresses.nst[networkId])
+    // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
+    // setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
+    // setProvider(this.nsp, contractAddresses.nsp[networkId])
+    // setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
+    // setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
+
+    this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)
