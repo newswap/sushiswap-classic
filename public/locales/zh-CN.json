@@ -35,6 +35,16 @@
   "miningStart": "(2021年2月3日8时(UTC+8) 开启挖矿)",
   "Input": "输入",
   "Community Mining": "社群挖矿",
+  "Trade Mining": "交易挖矿",
+  "tradeMiningTips": "在NewSway中进行交易，瓜分牛年新春NEW奖励。",
+  "tradeMiningTime": "(总量1000万枚 / 活动时间：2020.2.11 08:00 - 2020.2.18 08:00)",
+  "Total Number of Trade": "今日总交易数",
+  "My Number of Trade": "今日我的交易数",
+  "go to Exchange": "去交易",
+  "tradeDataTime": "*交易数据每日08:00(UTC+8)清零",
+  "tradeEarnedTime": "*收益数据每日08:00(UTC+8)更新",
+  "Total Rewards on Trading": "累计交易挖矿收益",
+
   "Menu": "菜单",
   "Farm": "矿池",
   "Farms": "矿区",
@@ -122,8 +132,9 @@
   "farmStakeToken": "质押通证",
   "farmList": "矿池列表",
 
-  "enterPool": "进入矿池"
+  "enterPool": "进入矿池",
 
+  "addRemoveLPTips": "*添加/移除流动性通证将会自动为您领取当前奖励。"
 }
 
 

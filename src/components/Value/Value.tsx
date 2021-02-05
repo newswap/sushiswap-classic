@@ -45,6 +45,7 @@ const StyledValue = styled.div`
   // color: #555A6A;
   font-size: 30px;
   font-weight: 700;
+  text-align: center;
 `
 
 export default Value
