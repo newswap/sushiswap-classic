@@ -37,7 +37,7 @@ export class Contracts {
     this.newMineSingle = new this.web3.eth.Contract(NewMineSingleAbi)
 
     // 社群矿区
-    this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
+    // this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
 
     // Community Pools
     this.nodePools = nodeSupportedPools.map((pool) =>
@@ -85,7 +85,7 @@ export class Contracts {
     setProvider(this.weth, contractAddresses.weth[networkId])
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
     setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
-    setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
+    // setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
 
     this.nodePools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
