@@ -12,28 +12,38 @@ import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import useModal from '../../hooks/useModal'
 import Harvest from './components/Harvest'
+import Statistics from './components/Statistics'
 import { useTranslation } from 'react-i18next'
-import newcoin from '../../assets/img/new.a6cfc11f.png'
 import swapIcon from '../../assets/img/ic_swap_green.svg'
+import newcoin from '../../assets/img/new.a6cfc11f.png'
+import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const TradeFarm: React.FC = () => {
     const { account } = useWallet()
     const { t } = useTranslation()
     const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
-
+    const iconL = usdtcoin
+    const iconR = newcoin
+  
     return (
         <Switch>
           <Page>
             {!!account ? (
               <>
                 <PageHeader
-                    icon={<img src={swapIcon} height="95" />}
-                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
+                    icon={<img src={newcoin} height="95" />}
+                    // iconL={iconL}
+                    // iconR={newcoin}
                     title={t('Trade Mining')}
-                    subtitle={t('tradeFarmsTips')}
+                    subtitle={t('tradeMiningTips')}
+                    subsubtitle={t('tradeMiningTime')}
                 />
                 <StyledFarm>
                   <StyledCardsWrapper>
+                    <StyledCardWrapper>
+                      <Statistics icon={iconR}/>
+                    </StyledCardWrapper>
+                    <Spacer />
                     <StyledCardWrapper>
                       <Harvest icon={newcoin}/>
                     </StyledCardWrapper>
@@ -92,7 +102,7 @@ const StyledFarm = styled.div`
 
 const StyledCardsWrapper = styled.div`
   display: flex;
-  width: 310px;
+  width: 600px;
   @media (max-width: 768px) {
     width: 100%;
     flex-flow: column nowrap;

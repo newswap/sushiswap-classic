@@ -6,16 +6,18 @@ import Container from '../Container'
 interface PageHeaderProps {
   icon: React.ReactNode
   subtitle?: string
+  subsubtitle?: string
   title?: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, subsubtitle, title }) => {
   return (
     <Container size="lg">
       <StyledPageHeader>
         <StyledIcon>{icon}</StyledIcon>
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
+        <StyledSubtitle>{subsubtitle}</StyledSubtitle>
       </StyledPageHeader>
     </Container>
   )

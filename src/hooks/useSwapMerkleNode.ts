@@ -2,12 +2,13 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
-import AccountButton from '../components/TopBar/components/AccountButton'
+import useBlock from './useBlock'
 
 const MERKLE_URL = process.env.REACT_APP_MERKLE_URL
 
 const useSwapMerkleNode = () => {
   const [node, setNode] = useState({index: 0, amount: "0", account: "", proof: []})
+  const block = useBlock()
 
   const {
     account,
@@ -50,7 +51,7 @@ const useSwapMerkleNode = () => {
     if (account && ethereum) {
       fetchNode()
     }
-  }, [account, ethereum, setNode])
+  }, [account, ethereum, block, setNode])
 
   return node
 }

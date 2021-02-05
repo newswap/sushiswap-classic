@@ -34,13 +34,13 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <NewCardIcon icon = {icon}></NewCardIcon>
+            {/* <NewCardIcon icon = {icon}></NewCardIcon> */}
             <Value value={(new BigNumber(merkleNode.amount).minus(claimedAmount)).toNumber() <= 0 ? 0 : getDisplayBalance(new BigNumber(merkleNode.amount).minus(claimedAmount))} />
-            <Label text={t('tradeFarmPendingTip')} />
+            <Label text={t('NEW Earned')} />
           </StyledCardHeader>
 
           <StyledGrandTotal>
-            <StyledGrandTotalTitle>{t('grandTotalTitle')}</StyledGrandTotalTitle>
+            <StyledGrandTotalTitle>{t('Total Rewards on Trading')}</StyledGrandTotalTitle>
             <StyledGrandTotalAmount>{getDisplayBalance(new BigNumber(merkleNode.amount))} NEW</StyledGrandTotalAmount>
           </StyledGrandTotal>
           <StyledCardActions>
@@ -56,7 +56,7 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
               }}
             />
           </StyledCardActions>
-          <StyledUpdate>{t('tradeFarmUpdateTip')}</StyledUpdate>
+          <StyledUpdate>{t('tradeEarnedTime')}</StyledUpdate>
         </StyledCardContentInner>
       </CardContent>
     </Card>
