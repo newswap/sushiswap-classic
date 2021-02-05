@@ -35,5 +35,11 @@
   "grandTotalTitle": "累计交易挖矿收益",
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
   "totalStake": "总锁仓量",
-  "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time."
+  "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time.",
+
+  "farmName":  "矿池名称",
+  "farmStakeToken": "质押通证",
+  "farmList": "矿池列表",
+
+  "enterPool": "进入矿池"
 }

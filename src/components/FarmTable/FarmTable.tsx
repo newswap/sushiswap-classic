@@ -17,6 +17,7 @@ import useNodeFarms from '../../hooks/useNodeFarms'
 import { NodeFarm } from '../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
+import { useTranslation } from 'react-i18next'
 
 
 interface FarmTableProps {
@@ -34,7 +35,7 @@ interface FarmWithStakedValue extends NodeFarm {
 }
 
 const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
-     
+  const { t } = useTranslation()
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -79,12 +80,12 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
               <TableRow>
                 <StyledTableCell align="left" width="48%">
                 
-                  <StyledTHMobile>矿池名称</StyledTHMobile>
+                  <StyledTHMobile>{t('farmName')}</StyledTHMobile>
                   
                 </StyledTableCell>
                 <StyledTableCell align="left" width="50%">
                   
-                  <StyledTHMobile>质押通证</StyledTHMobile>
+                  <StyledTHMobile>{t('farmStakeToken')}</StyledTHMobile>
                     
                 </StyledTableCell>
                 <StyledTableCell align="left" width="2%"></StyledTableCell>
@@ -92,10 +93,10 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
             ) : (
               <TableRow>
                 <StyledTableCell align="left" width="35%">
-                  <StyledTH>矿池名称</StyledTH>
+                  <StyledTH>{t('farmName')}</StyledTH>
                 </StyledTableCell>
                 <StyledTableCell align="left" width="45%">
-                  <StyledTH>质押通证</StyledTH>
+                  <StyledTH>{t('farmStakeToken')}</StyledTH>
                 </StyledTableCell>
                 <StyledTableCell align="left" width="20%"></StyledTableCell>
               </TableRow>
@@ -131,7 +132,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         </StyledTableCell>
                         <StyledTableCell align="right">
                           <StyledLink to={`/communityMining/${farm.id}`}>
-                            {(isMobile) ? '' : '进入矿池'}
+                            {(isMobile) ? '' : t('enterPool')}
                             <StyledArrow src={arrow} />
                           </StyledLink>
                         </StyledTableCell>  
@@ -158,7 +159,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         </StyledTableCell>
                         <StyledTableCell align="right">
                           <StyledLink to={`/communityMining/${farm.id}`}>
-                            {(isMobile) ? '' : '进入矿池'}
+                            {(isMobile) ? '' : t("enterPool")}
                             <StyledArrow src={arrow} />
                           </StyledLink>
                         </StyledTableCell>  

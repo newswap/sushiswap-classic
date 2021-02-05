@@ -35,9 +35,7 @@
   "miningStart": "(2021年2月3日8时(UTC+8) 开启挖矿)",
   "Input": "输入",
 
-  "Community Mining": "Community Mining",
-
-
+  "Community Mining": "社群挖矿",
 
   
   "Menu": "菜单",
@@ -121,7 +119,14 @@
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
-  "addRemoveLPTips": "*添加/移除流动性通证将会自动为您领取当前奖励。"
+  "addRemoveLPTips": "*添加/移除流动性通证将会自动为您领取当前奖励。",
+
+  "farmName":  "矿池名称",
+  "farmStakeToken": "质押通证",
+  "farmList": "矿池列表",
+
+  "enterPool": "进入矿池"
+
 }
 
 
