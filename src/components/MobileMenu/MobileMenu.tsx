@@ -42,6 +42,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
+            to="/tradeMining"
+            onClick={onDismiss}
+          >
+            {t('Trade Mining')}           
+          </StyledLink>
+          <StyledLink
+            exact
+            activeClassName="active"
             to="/communityMining"
             onClick={onDismiss}
           >
@@ -62,14 +70,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           >
             { t('FAQ') }
           </StyledAbsoluteLink>
-          {/* <StyledLink
-            exact
-            activeClassName="active"
-            to="/TradeFarm"
-            onClick={onDismiss}
-          >
-            {t('TradeFarm')}           
-          </StyledLink>
+          {/* 
           <StyledLink
             exact
             activeClassName="active"
