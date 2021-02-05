@@ -29,7 +29,6 @@
   "NSPBar": "NSP锁仓理财",
   "nspBarTips": "将NSP质押入锁仓理财合约中，获得权重代币xNSP，获得NSP分红收益",
   "nspBalance": "当前锁仓理财合约奖励池NSP",
-  "TradeFarm": "Trade Farm",
   "tradeFarmsTips": "所有在 NewSwap 中的交易都将按照交易笔数获得 NEW 的挖矿收益。",
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",

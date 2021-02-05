@@ -29,7 +29,7 @@ const TradeFarm: React.FC = () => {
                 <PageHeader
                     icon={<img src={swapIcon} height="95" />}
                 // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
-                    title={t('TradeFarm')}
+                    title={t('Trade Mining')}
                     subtitle={t('tradeFarmsTips')}
                 />
                 <StyledFarm>

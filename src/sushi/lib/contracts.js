@@ -49,6 +49,9 @@ export class Contracts {
       }),
     )
 
+    // 交易挖矿
+    this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
+
     // nst矿区
     // this.nst = new this.web3.eth.Contract(NSTAbi)
     // this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
@@ -57,8 +60,6 @@ export class Contracts {
     // this.nsp = new this.web3.eth.Contract(NSPAbi)
     // this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
 
-    // 交易挖矿
-    // this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
 
     // NST Pools
     this.pools = supportedPools.map((pool) =>
@@ -93,12 +94,13 @@ export class Contracts {
       },
     )
 
+    setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
+    
     // setProvider(this.nst, contractAddresses.nst[networkId])
     // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     // setProvider(this.xNSTStaking, contractAddresses.xNST[networkId])
     // setProvider(this.nsp, contractAddresses.nsp[networkId])
     // setProvider(this.xNSPStaking, contractAddresses.xNSP[networkId])
-    // setProvider(this.merkleDistributor, contractAddresses.merkleDistributor[networkId])
 
     this.pools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

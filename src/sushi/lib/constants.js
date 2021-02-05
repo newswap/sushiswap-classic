@@ -44,6 +44,10 @@ export const contractAddresses = {
     1007: '0x50ea3d34b684edf578c377f68d25d3379d3c734a',  //小写 
     1012: 'TODO'
   },
+  merkleDistributor: {
+    1007: '0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5',  //小写 
+    1012: 'TODO'  
+  }, 
 
   masterChef: {
     1007: 'TODO',  //小写 0x99f935050b5851acfb24ce9114c152a369fd89a7
@@ -65,10 +69,6 @@ export const contractAddresses = {
     1007: 'TODO',    //小写 0x639a8e293195694fef98cc854cdfa828ea895927
     1012: 'TODO'
   },
-  merkleDistributor: {
-    1007: 'TODO',  //小写 0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5
-    1012: 'TODO'  
-  }, 
 }
 
 // nstFarms supported Pools
