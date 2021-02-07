@@ -23,7 +23,7 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
   // console.log("tradeFarm harvest merkleNode:")
   // console.log(merkleNode)
   // console.log(new BigNumber(merkleNode.amount).toString())
-  // console.log(claimedAmount.toNumber())
+  // console.log("claimedAmount:"+claimedAmount.toNumber())
 
   const [pendingTx, setPendingTx] = useState(false)
   const { onClaim } = useSwapClaim()

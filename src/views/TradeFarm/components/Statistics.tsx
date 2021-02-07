@@ -20,10 +20,8 @@ const Statistics: React.FC<StatisticsProps> = ({icon} ) => {
   const swapStatistics = useSwapStatistics()
   const { t } = useTranslation()
 
-  console.log("swapStatistics:")
-  console.log(swapStatistics)
-  console.log(swapStatistics.total)
-  console.log(swapStatistics.number)
+  // console.log("swapStatistics:")
+  // console.log(swapStatistics)
 
   return (
     <Card>

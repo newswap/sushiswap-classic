@@ -15,47 +15,40 @@ const useSwapStatistics = () => {
     ethereum,
   }: { account: string; ethereum: provider } = useWallet()
 
-  const fetchNode = useCallback(async () => {
+  const fetchStatistics = useCallback(async () => {
     let response
     try {
-      console.log("TRADE_INFO_URL:"+ TRADE_INFO_URL + "/" + account)
-      response = await fetch(TRADE_INFO_URL + "/" + account)
+      console.log("TRADE_INFO_URL:"+ TRADE_INFO_URL + "/?address=" + account)
+      response = await fetch(TRADE_INFO_URL + "/?address=" + account, { headers: {'Content-Type': 'application/json'} })  
     } catch (error) {
-      console.debug('Failed to fetch TRADE_INFO', TRADE_INFO_URL+ "/" + account, error)
+      console.debug('Failed to fetch TRADE_INFO', TRADE_INFO_URL+ "/?address=" + account, error)
     }
 
     if (response && response.ok) {
       const json = await response.json()
-      // console.log(account)
-      // console.log("merkle.json:")
-      console.log(json)
+      // console.log("------------------>")
+      // console.log(json)
 
-      // "error_code": 1
-      // "result": {
-      //     "today_total_transactions_number": 100, // 今天总交易笔数
-      //     "transaction_number": 10,  // 用户今天交易笔数
-      // }
-  
-      const claims = json['claims']
-      const claim = claims[account]
-      // // console.log("claim:")
+      const error_code = json['error_code']
+      // console.log("error_code:"+error_code)
+      const result = json['result']
+      // console.log("result"+result)
+
       // // console.log(claim)
-      // if(claim) {
-      //   setStatistics({
-      //     index: claim.index, 
-      //     amount: claim.amount,
-      //     account: account,
-      //     proof: claim.proof
-      //   })
-      // } else {
-      //   setStatistics({index: 0, amount: "0", account: account, proof: []})        
-      // }
+      if(error_code == 1) {
+        setStatistics({
+          total: result.today_total_transactions_number, 
+          number: result.transaction_number
+        })
+      } else {
+        setStatistics({total: 0, number: 0})        
+      }
     }
   }, [account, ethereum])
 
   useEffect(() => {
     if (account && ethereum) {
-      fetchNode()
+      fetchStatistics()
     }
   }, [account, ethereum, block, setStatistics])
 
