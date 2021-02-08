@@ -18,7 +18,7 @@ const useSwapStatistics = () => {
   const fetchStatistics = useCallback(async () => {
     let response
     try {
-      console.log("TRADE_INFO_URL:"+ TRADE_INFO_URL + "/?address=" + account)
+      // console.log("TRADE_INFO_URL:"+ TRADE_INFO_URL + "/?address=" + account)
       response = await fetch(TRADE_INFO_URL + "/?address=" + account, { headers: {'Content-Type': 'application/json'} })  
     } catch (error) {
       console.debug('Failed to fetch TRADE_INFO', TRADE_INFO_URL+ "/?address=" + account, error)

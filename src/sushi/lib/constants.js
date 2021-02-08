@@ -41,7 +41,7 @@ export const contractAddresses = {
     1012: '0x8b028f0f001417e3b9c086c5740722839dab12b0'
   },
   merkleDistributor: {
-    1007: '0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5',  //小写 
+    1007: '0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5',  //小写  test-0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5        dev-0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5  
     1012: 'TODO'  
   }, 
 

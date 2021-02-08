@@ -16,16 +16,16 @@ const useSwapMerkleNode = () => {
   }: { account: string; ethereum: provider } = useWallet()
 
   const fetchNode = useCallback(async () => {
-    let response
+    let response, json
     try {
       // console.log("MERKLE_URL:"+MERKLE_URL)
       response = await fetch(MERKLE_URL)
+      json = await response.json()
     } catch (error) {
-      console.debug('Failed to fetch MERKLE', MERKLE_URL, error)
+      console.log('Failed to fetch MERKLE', MERKLE_URL, error)
     }
 
-    if (response && response.ok) {
-      const json = await response.json()
+    if (response.ok && json) {
       // console.log(account)
       // console.log("merkle.json:")
       // console.log(json)
