@@ -42,7 +42,7 @@ export const contractAddresses = {
   },
   merkleDistributor: {
     1007: '0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5',  //小写  test-0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5        dev-0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5  
-    1012: 'TODO'  
+    1012: '0x8a19104382fcf2858067a4621555ec9f652579be'  
   }, 
 
   newMineForNode: { // 社群矿区

@@ -25,7 +25,7 @@ const useSwapMerkleNode = () => {
       console.log('Failed to fetch MERKLE', MERKLE_URL, error)
     }
 
-    if (response.ok && json) {
+    if (response && response.ok && json) {
       // console.log(account)
       // console.log("merkle.json:")
       // console.log(json)
