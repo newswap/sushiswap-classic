@@ -48,9 +48,9 @@ const NodeFarms: React.FC = () => {
               <Container size = 'md'>
                 <StyledTableDiv>
                   {isMobile? (
-                    <StyleLabelMob>矿池列表</StyleLabelMob>
+                    <StyleLabelMob>{t('farmList')}</StyleLabelMob>
                   ) : (
-                    <StyleLabel>矿池列表</StyleLabel>
+                    <StyleLabel>{t('farmList')}</StyleLabel>
                   )}
                   
                   <FarmTable dataSource = {[]}></FarmTable>
