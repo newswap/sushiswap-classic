@@ -8,17 +8,16 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import SushiIcon from '../../../components/SushiIcon'
 
+import useAllStakedValueForCommunity from '../../../hooks/useAllStakedValueForCommunity'
 import useAllEarningsNew from '../../../hooks/useAllEarningsNew'
-import useNodeFarms from '../../../hooks/useNodeFarms'
-import useSushi from '../../../hooks/useSushi'
-import { getNewSupplyForNode } from '../../../sushi/utils'
+import useNewPrice from '../../../hooks/useNewPrice'
 
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NODE ?? '1')
+const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
@@ -32,8 +31,6 @@ const PendingRewards: React.FC = () => {
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }
-
-  const [farms] = useNodeFarms()
 
   useEffect(() => {
     setStart(end)
@@ -65,20 +62,23 @@ const PendingRewards: React.FC = () => {
 }
 
 const Balances: React.FC = () => {
-  const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const sushi = useSushi()
   const { account, balance }: { account: any; balance: any;} = useWallet()
   const { t } = useTranslation()
 
-  useEffect(() => {
-    async function fetchTotalSupply() {
-      const supply = await getNewSupplyForNode(sushi)
-      setTotalSupply(supply)
-    }
-    if (sushi) {
-      fetchTotalSupply()
-    }
-  }, [sushi, setTotalSupply])
+  const stakedValue = useAllStakedValueForCommunity()
+  const newPrice = useNewPrice()
+  // console.log("newPrice------->"+newPrice)
+
+  let totalNew = 0
+  for (let staked of stakedValue) {
+    totalNew += staked.totalWethValue ? staked.totalWethValue.toNumber() : 0
+
+    // console.log('========================')
+    // console.log(staked.tokenAmount.toNumber())
+    // console.log(staked.wethAmount.toNumber())
+    // console.log(staked.totalWethValue.toNumber())
+    // console.log(staked.tokenPriceInWeth.toNumber())
+  }
 
   return (
     <StyledWrapper>
@@ -91,14 +91,14 @@ const Balances: React.FC = () => {
               <div style={{ flex: 1 }}>
                 <Label text={t('Your NEW Balance')} />
                 <Value
-                  value={!!account ? getBalanceNumber(new BigNumber(balance)) : t('Locked')}
+                  value={!!account ? getBalanceNumber(new BigNumber(balance)) : '—'}
                 />
               </div>
             </StyledBalance>
           </StyledBalances>
         </CardContent>
         <Footnote>
-          {t('Pending harvest')}
+          {t('NEW Earned')}
           <FootnoteValue>
             <PendingRewards /> NEW
           </FootnoteValue>
@@ -108,14 +108,25 @@ const Balances: React.FC = () => {
 
       <Card>
         <CardContent>
-          <Label text={t('Total NEW Supply')} />
+          <Label text={t('Total Stake Value')} />
           <Value
-            value={totalSupply ? getBalanceNumber(totalSupply) : t('Locked')}
+            value={totalNew > 0 
+              ? `$${newPrice.times(totalNew)
+              .toNumber()
+              .toLocaleString('en-US')}` 
+              : '—'}
           />
         </CardContent>
         <Footnote>
-          {t('New rewards per block')}
-          <FootnoteValue>{NEW_PER_BLOCK} NEW</FootnoteValue>
+          {t('APY（Estimated）')}
+          <FootnoteValue>{
+            totalNew > 0
+                   ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
+                       .times(new BigNumber(100))
+                       .toNumber()
+                       .toLocaleString('en-US')}%`
+                    : '—'}
+            </FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

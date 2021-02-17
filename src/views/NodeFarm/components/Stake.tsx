@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
+import { useWallet } from 'use-wallet'
 import styled from 'styled-components'
 import { Contract } from 'web3-eth-contract'
 import Button from '../../../components/Button'
@@ -35,6 +36,8 @@ interface StakeProps {
 
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
+  const { account } = useWallet()
+
   const { t } = useTranslation()
 
   const allowance = useAllowanceNewMine(lpContract)
@@ -61,6 +64,10 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
       tokenName={tokenName}
     />,
   )
+
+  useEffect(() => {
+    setRequestedApproval(false)
+  }, [account, setRequestedApproval])
 
   const handleApprove = useCallback(async () => {
     try {
@@ -95,7 +102,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={t('Approve') + ` ${tokenName}`}
+                text={requestedApproval ? t('Approving...') : t('Approve') + ` ${tokenName}`}
                 size = 'new'
                 variant = 'green'
               />

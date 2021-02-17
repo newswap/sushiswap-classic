@@ -44,8 +44,7 @@ export class Sushi {
     this.newNUSDTPairAddress = contractAddresses.newNUSDTPair[networkId]
     this.newMineSingleAddress = contractAddresses.newMineSingle[networkId]
     this.merkleDistributorAddress = contractAddresses.merkleDistributor[networkId]
-
-    // this.newMineForNodeAddress = contractAddresses.newMineForNode[networkId]
+    this.newMineForNodeAddress = contractAddresses.newMineForNode[networkId]
 
     // this.nstAddress = contractAddresses.nst[networkId]
     // this.nspAddress = contractAddresses.nsp[networkId]

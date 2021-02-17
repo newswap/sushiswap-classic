@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import styled from 'styled-components'
 import newIcon from '../../assets/img/logo.d23eaded.svg'
-import arrow from '../../assets/img/ic_arrow_right.svg'
+import arrow from '../../../assets/img/ic_arrow_right.svg'
 
 import { makeStyles, withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,8 +13,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import useNodeFarms from '../../hooks/useNodeFarms'
-import { NodeFarm } from '../../contexts/NodeFarms'
+import useNodeFarms from '../../../hooks/useNodeFarms'
+import { NodeFarm } from '../../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
@@ -174,7 +174,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         }
         </TableBody>
       </Table>
-      <TablePagination
+      {/* <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows[0].length}
@@ -182,7 +182,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        /> */}
       </StyledTableContainer>
     )
   }

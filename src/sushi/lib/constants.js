@@ -44,11 +44,12 @@ export const contractAddresses = {
     1007: '0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5',  //小写  test-0xf8d9dc9bcd3e6bcbfdbd0f1132043bd0ee730ae5        dev-0x8f5f9f59c39f9cb8d353cb25b8a0bd58e710caa5  
     1012: '0x8a19104382fcf2858067a4621555ec9f652579be'  
   }, 
-
   newMineForNode: { // 社群矿区
-    1007: 'TODO',  //小写 0x50ea3d34b684edf578c377f68d25d3379d3c734a
+    1007: '0x50ea3d34b684edf578c377f68d25d3379d3c734a',  //小写  TODO 修改一个新的
     1012: 'TODO'
   },
+
+
   masterChef: {
     1007: 'TODO',  //小写 0x99f935050b5851acfb24ce9114c152a369fd89a7
     1012: 'TODO'
@@ -107,34 +108,38 @@ export const supportedPools = [
 
 // community mining supported Polls
 export const nodeSupportedPools = [
-  // {
-  //   pid: 0,
-  //   lpAddresses: {
-  //     1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',
-  //   },
-  //   tokenAddresses: {
-  //     1007: '0xed4e695e436a4fce38bba9fb66d980afd66b0e3e', //IMX
-  //   },
-  //   name: 'IMX Party!',
-  //   symbol: 'IMX-NEW LP',
-  //   tokenSymbol: 'IMX',
-  //   icon: '👨🏻‍🍳',
-  //   iconL: imxcoin,
-  //   iconR: newcoin
-  // },
-  // {
-  //   pid: 1,
-  //   lpAddresses: {
-  //     1007: '0xdda2c1d6237dab9351af93e1f3f81047f897e45b',
-  //   },
-  //   tokenAddresses: {
-  //     1007: '0xd1eb8bfd4e6af831fa3c7e726e21e9b56a032727', //NBTC
-  //   },
-  //   name: 'NBTC Party!',
-  //   symbol: 'NBTC-NEW LP',
-  //   tokenSymbol: 'NBTC',
-  //   icon: '👨🏻‍🍳',
-  //   iconL: btccoin,
-  //   iconR: newcoin
-  // }
+  {
+    pid: 0,
+    lpAddresses: {
+      1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',
+      1012: 'TODO',
+    },
+    tokenAddresses: {
+      1007: '0xed4e695e436a4fce38bba9fb66d980afd66b0e3e', //IMX
+      1012: 'TODO',
+    },
+    name: 'IMX Party!',
+    symbol: 'IMX-NEW LP',
+    tokenSymbol: 'IMX',
+    icon: '👨🏻‍🍳',
+    iconL: imxcoin,
+    iconR: newcoin
+  },
+  { //TODO 修改为MCT
+    pid: 1,
+    lpAddresses: {
+      1007: '0xdda2c1d6237dab9351af93e1f3f81047f897e45b',
+      1012: 'TODO',
+    },
+    tokenAddresses: {
+      1007: '0xd1eb8bfd4e6af831fa3c7e726e21e9b56a032727', //NBTC
+      1012: 'TODO',
+    },
+    name: 'NBTC Party!',
+    symbol: 'NBTC-NEW LP',
+    tokenSymbol: 'NBTC',
+    icon: '👨🏻‍🍳',
+    iconL: btccoin,
+    iconR: newcoin
+  }
 ]

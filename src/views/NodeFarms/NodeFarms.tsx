@@ -14,9 +14,8 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 import useModal from '../../hooks/useModal'
 import NodeFarm from '../NodeFarm'
 import Balances from './components/Balances'
-import NodeFarmCards from './components/NodeFarmCards'
 import { useTranslation } from 'react-i18next'
-import FarmTable from '../../components/FarmTable'
+import FarmTable from './components/FarmTable'
 import {isMobile} from 'react-device-detect'
 
 
@@ -34,17 +33,15 @@ const NodeFarms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={coin} height="95" />}
-                // subtitle="Earn SUSHI tokens by staking SushiSwap V2 SLP Tokens. Note: Current APY does not include 2/3rd SUSHI emission that is locked and will be retroactively disbursed at a later date."
                 title={t('Community Mining')}
-                subtitle={t('nodeFarmsTips')}
+                subtitle={t('communityMiningTips')}
+                subsubtitle={t('tradeMiningTime')}
               />
               <Container>
                 <Balances />
               </Container>
               <Spacer size="lg" />
-              {/* <NodeFarmCards />
-              <Spacer size="lg" /> */}
-       
+
               <Container size = 'md'>
                 <StyledTableDiv>
                   {isMobile? (

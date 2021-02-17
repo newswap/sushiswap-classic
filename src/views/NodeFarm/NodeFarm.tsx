@@ -69,8 +69,9 @@ const NodeFarm: React.FC = () => {
       <NewPageHeader
         iconL={iconL}
         iconR={iconR}
-        subtitle= {t('nodeHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
-        title={tokenSymbol + '-NEW 矿池'}
+        subtitle= {t('communityHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
+        title={tokenSymbol + '-NEW ' + t('MINING')}
+
       />
       <StyledFarm>
         <StyledCardsWrapper>

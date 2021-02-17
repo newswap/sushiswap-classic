@@ -194,6 +194,7 @@ export const getTotalLPWethValue = async (
   lpContract,
   tokenContract,
   pid,
+  isGetPoolWeight
 ) => {
   console.log('getTotalLPWethValue========')
   console.log(lpContract.options.address)
@@ -230,7 +231,7 @@ export const getTotalLPWethValue = async (
     wethAmount,
     totalWethValue: totalLpWethValue.div(new BigNumber(10).pow(18)),
     tokenPriceInWeth: wethAmount.div(tokenAmount),
-    poolWeight: await getPoolWeight(masterChefContract, pid),
+    poolWeight: isGetPoolWeight ? await getPoolWeight(masterChefContract, pid) : new BigNumber(0),
   }
 }
 

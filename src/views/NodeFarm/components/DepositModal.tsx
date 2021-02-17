@@ -78,9 +78,21 @@ const DepositModal: React.FC<DepositModalProps> = ({
           }}
         />
       </ModalActions>
+      <StyledTip><span>{t('addRemoveLPTips')}</span></StyledTip>
     </Modal>
   )
 }
+
+const StyledTip = styled.div`
+  padding-top: 0px;
+  padding-bottom: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: #647684;
+  font-size: 12px;
+  flex-direction: column;
+`
 
 const StyledSpan =  styled.span`
   color: #647684;

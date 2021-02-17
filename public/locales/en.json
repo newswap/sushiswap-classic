@@ -12,6 +12,15 @@
   "tradeEarnedTime": "*Rewarding data resets at 08:00(UTC+8)",
 
 
+  "communityMiningTips": "质押由优质牛顿社群运营的社群矿池对应的流动性通证，获得 NEW 奖励。",
+  "communityMiningTime": "(10M NEW in total from 2021.2.25 08:00 to 2021.3.18 08:00)",
+  "farmName":  "矿池名称",
+  "farmStakeToken": "质押通证",
+  "farmList": "矿池列表",
+  "enterPool": "进入矿池",
+  "communityHeaderSubtitle": "将 {{tokenSymbol}}-NEW 流动性通证质押入矿池，获得 {{earnTokenName}} 奖励",
+
+
   
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
   "depositTips": "⭐️ Every time you stake(0.1% fee) and unstake LP tokens, the contract will automagically harvest NST rewards for you!",
@@ -21,12 +30,10 @@
   "xNSPTips": "You will earn a portion of the swaps fees based on the amount of xNSP held relative the weight of the staking. xNSP can be minted by staking NSP. To redeem NSP staked plus swap fees convert xNSP back to NSP.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
 
-  "nodeFarmsTips": "由 NewPay 社群节点挖矿迁移而来的 NEW 矿区，将 社群节点通证-NEW 的流动性通证质押入矿池，获得 NEW 奖励。",
   "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
   "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费",
   "farmHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
   "nstFarmsTips": "参与主流矿池的挖矿，将对应的流动性通证质押入矿池，获得 NewSwap 的收益代币 NST 奖励",
-  "nodeHeaderSubtitle": "将 {{tokenSymbol}} - NEW 流动性通证质押入矿池，获得 NewSwap 的收益代币 {{earnTokenName}} 奖励",
   "CommunityFarm": "社群矿区",
 
   "rate": "权重占比",
@@ -41,13 +48,7 @@
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
-  "totalStake": "总锁仓量",
-  "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time.",
 
-  "farmName":  "矿池名称",
-  "farmStakeToken": "质押通证",
-  "farmList": "矿池列表",
 
-  "enterPool": "进入矿池",
   "totalStake": "总锁仓量"
 }
