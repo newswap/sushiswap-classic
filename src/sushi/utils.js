@@ -371,6 +371,17 @@ export const harvestNewSingle = async (newMineSingleContract, account) => {
     })
 }
 
+// update lp price for community mining
+export const updateNewPerLPAll = async (newMineContract, account) => {
+  return newMineContract.methods
+    .updateNewPerLPAll()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
     const { amount } = await masterChefContract.methods
