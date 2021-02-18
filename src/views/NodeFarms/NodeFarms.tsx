@@ -25,6 +25,7 @@ const NodeFarms: React.FC = () => {
   const { path } = useRouteMatch()
   const { account } = useWallet()
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
+  const updatePrice = () => {}
   return (
     <Switch>
       <Page>
@@ -45,9 +46,22 @@ const NodeFarms: React.FC = () => {
               <Container size = 'md'>
                 <StyledTableDiv>
                   {isMobile? (
-                    <StyleLabelMob>{t('farmList')}</StyleLabelMob>
+                    <>
+                    <StyleLabelMob>
+                      <div>{t('farmList')}</div>
+                      <StyledUpdateMobButton onClick={updatePrice}>{t('updatePriceButton')}
+                      </StyledUpdateMobButton>
+                    </StyleLabelMob>
+                    
+                    </>
                   ) : (
-                    <StyleLabel>{t('farmList')}</StyleLabel>
+                    <>
+                    <StyleLabel>
+                      <div>{t('farmList')}</div>
+                      <StyledUpdateButton onClick={updatePrice}>{t('updatePriceButton')}</StyledUpdateButton>
+                    </StyleLabel>
+                    
+                    </>
                   )}
                   
                   <FarmTable dataSource = {[]}></FarmTable>
@@ -80,6 +94,36 @@ const NodeFarms: React.FC = () => {
     </Switch>
   )
 }
+
+const StyledUpdateMobButton = styled.button`
+  float: right;
+  margin-top: -26px;
+  margin-right: 10px;
+  font-size: 16px;
+  border-width: 0;
+  background: white;
+  color: #20C5A0;
+  cursor: pointer;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+`
+
+const StyledUpdateButton = styled.button`
+  float: right;
+  margin-top: -26px;
+  margin-right: 30px;
+  font-size: 16px;
+  border-width: 0;
+  background: white;
+  color: #20C5A0;
+  cursor: pointer;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+`
 
 const StyledTableDiv = styled.div`
   background: white;
