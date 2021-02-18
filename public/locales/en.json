@@ -50,5 +50,6 @@
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
 
 
-  "totalStake": "总锁仓量"
+  "totalStake": "总锁仓量",
+  "updatePriceButton": "更新矿池价格"
 }
