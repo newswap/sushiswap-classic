@@ -42,6 +42,14 @@ const NodeFarms: React.FC = () => {
                 <Balances />
               </Container>
               <Spacer size="lg" />
+              
+              <StyledLink
+                target="__blank"
+                href="https://wj.qq.com/s2/8013861/aaa9"
+              >
+                 {t('Apply Creating Community Pool')}
+              </StyledLink>
+              <Spacer size="sm" />
 
               <Container size = 'md'>
                 <StyledTableDiv>
@@ -147,5 +155,13 @@ const StyleLabelMob = styled.div`
   margin-left: 16px;
 `
 
+const StyledLink = styled.a`
+  color: #607686;
+  float:left;
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.color.grey[500]};
+  }
+`
 
 export default NodeFarms
