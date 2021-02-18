@@ -46,6 +46,7 @@
   "tradeDataTime": "*交易数据每日08:00(UTC+8)清零",
   "tradeEarnedTime": "*收益数据每日08:00(UTC+8)更新",
   "Total Rewards on Trading": "累计交易挖矿收益",
+  "Transaction Mining has ended": "交易挖矿活动已结束",
 
   "Menu": "菜单",
   "Farm": "矿池",

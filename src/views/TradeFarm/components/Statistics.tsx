@@ -30,19 +30,21 @@ const Statistics: React.FC<StatisticsProps> = ({icon} ) => {
           <StyledCardHeader>
             {/* <NewCardIcon icon = {icon}></NewCardIcon> */}
             {/* `/pair/${NEWSWAP_URL}` */}
-            <Value value= {t('Total Number of Trade')} />
+            <Value value= {t('Transaction Mining has ended')} />
+
+            {/* <Value value= {t('Total Number of Trade')} />
             <Value value= {swapStatistics.total} decimals= {0} />
-            <Label text={t('My Number of Trade') + ": " + swapStatistics.number} />
+            <Label text={t('My Number of Trade') + ": " + swapStatistics.number} /> */}
           </StyledCardHeader>
-          <StyledCardActions>
+          {/* <StyledCardActions>
             <Button
               size = 'new'
               variant = 'green'
               text={ t('go to Exchange') }
               href={ EXCHANGE_URL }
             />
-          </StyledCardActions>
-          <StyledUpdate>{t('tradeDataTime')}</StyledUpdate>
+          </StyledCardActions> */}
+          {/* <StyledUpdate>{t('tradeDataTime')}</StyledUpdate> */}
         </StyledCardContentInner>
       </CardContent>
     </Card>
