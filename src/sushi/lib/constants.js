@@ -3,6 +3,7 @@ import newcoin from '../../assets/img/new.a6cfc11f.png'
 import btccoin from '../../assets/img/btclogo.png'
 import usdtcoin from '../../assets/img/usdtlogo.png'
 import imxcoin from '../../assets/img/imxlogo.png'
+import mctcoin from '../../assets/img/mctlogo.png'
 
 export const newCoin = newcoin
 export const SUBTRACT_GAS_LIMIT = 100000
@@ -45,7 +46,7 @@ export const contractAddresses = {
     1012: '0x8a19104382fcf2858067a4621555ec9f652579be'  
   }, 
   newMineForNode: { // 社群矿区
-    1007: '0x50ea3d34b684edf578c377f68d25d3379d3c734a',  //小写  TODO 修改一个新的
+    1007: '0xf313c8852762ae2e856d849e4130ff50f45fe683',  //小写
     1012: 'TODO'
   },
 
@@ -125,21 +126,21 @@ export const nodeSupportedPools = [
     iconL: imxcoin,
     iconR: newcoin
   },
-  { //TODO 修改为MCT
+  {
     pid: 1,
     lpAddresses: {
-      1007: '0xdda2c1d6237dab9351af93e1f3f81047f897e45b',
+      1007: '0xe3715753795fb99c68857a6b7f5c3e6ccae4ec78',
       1012: 'TODO',
     },
     tokenAddresses: {
-      1007: '0xd1eb8bfd4e6af831fa3c7e726e21e9b56a032727', //NBTC
+      1007: '0x483246b0ae0b14db4c4597c7cc4af2e2ea440a55', //MCT
       1012: 'TODO',
     },
-    name: 'NBTC Party!',
-    symbol: 'NBTC-NEW LP',
-    tokenSymbol: 'NBTC',
+    name: 'MCT Party!',
+    symbol: 'MCT-NEW LP',
+    tokenSymbol: 'MCT',
     icon: '👨🏻‍🍳',
-    iconL: btccoin,
+    iconL: mctcoin,
     iconR: newcoin
   }
 ]

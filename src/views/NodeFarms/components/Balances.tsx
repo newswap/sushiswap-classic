@@ -114,7 +114,7 @@ const Balances: React.FC = () => {
               ? `$${newPrice.times(totalNew)
               .toNumber()
               .toLocaleString('en-US')}` 
-              : '—'}
+              : '$0.00'}
           />
         </CardContent>
         <Footnote>

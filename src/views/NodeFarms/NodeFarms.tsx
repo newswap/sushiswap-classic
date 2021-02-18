@@ -48,8 +48,8 @@ const NodeFarms: React.FC = () => {
                   {isMobile? (
                     <>
                     <StyleLabelMob>
-                      <div>{t('farmList')}</div>
-                      <StyledUpdateMobButton onClick={updatePrice}>{t('updatePriceButton')}
+                      <div>{t('Pool List')}</div>
+                      <StyledUpdateMobButton onClick={updatePrice}>{t('Update Price')}
                       </StyledUpdateMobButton>
                     </StyleLabelMob>
                     
@@ -57,8 +57,8 @@ const NodeFarms: React.FC = () => {
                   ) : (
                     <>
                     <StyleLabel>
-                      <div>{t('farmList')}</div>
-                      <StyledUpdateButton onClick={updatePrice}>{t('updatePriceButton')}</StyledUpdateButton>
+                      <div>{t('Pool List')}</div>
+                      <StyledUpdateButton onClick={updatePrice}>{t('Update Price')}</StyledUpdateButton>
                     </StyleLabel>
                     
                     </>

@@ -145,6 +145,19 @@
   },
   {
     "inputs": [],
+    "name": "accNewPerShare",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "endBlock",
     "outputs": [
       {
@@ -154,8 +167,20 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastRewardBlock",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -168,8 +193,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -182,8 +206,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -196,8 +219,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -210,8 +232,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -229,18 +250,13 @@
         "type": "address"
       },
       {
-        "internalType": "uint256",
-        "name": "allocPoint",
-        "type": "uint256"
+        "internalType": "bool",
+        "name": "state",
+        "type": "bool"
       },
       {
         "internalType": "uint256",
-        "name": "lastRewardBlock",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "accNewPerShare",
+        "name": "lpAmount",
         "type": "uint256"
       },
       {
@@ -249,14 +265,18 @@
         "type": "uint256"
       },
       {
-        "internalType": "bool",
-        "name": "state",
-        "type": "bool"
+        "internalType": "uint256",
+        "name": "rewardDebt",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "accNewPerShare",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -267,7 +287,7 @@
   },
   {
     "inputs": [],
-    "name": "startBlock",
+    "name": "stakingNewSupply",
     "outputs": [
       {
         "internalType": "uint256",
@@ -276,22 +296,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "totalAllocPoint",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -333,8 +338,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -347,13 +351,11 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "stateMutability": "payable",
-    "type": "receive",
-    "payable": true
+    "type": "receive"
   },
   {
     "inputs": [
@@ -428,11 +430,6 @@
         "internalType": "bool",
         "name": "_state",
         "type": "bool"
-      },
-      {
-        "internalType": "bool",
-        "name": "_withUpdate",
-        "type": "bool"
       }
     ],
     "name": "setPoolState",
@@ -461,20 +458,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "poolLength",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
     "inputs": [
       {
         "internalType": "uint256",
@@ -487,7 +470,7 @@
         "type": "uint256"
       }
     ],
-    "name": "getMultiplier",
+    "name": "getReward",
     "outputs": [
       {
         "internalType": "uint256",
@@ -496,8 +479,40 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "poolLength",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "updateNewPerLPAll",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "_pids",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "updateNewPerLPMultiple",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
   },
   {
     "inputs": [
@@ -529,8 +544,7 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [
@@ -546,29 +560,6 @@
       }
     ],
     "name": "deposit",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_beneficiary",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_pid",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "depositFor",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -626,7 +617,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   }
 ]

@@ -1,5 +1,6 @@
 { 
   "Liquidity Mining": "流动性挖矿",
+  "NUSDT Mining": "NUSDT挖矿",
   "estimateMiningEfficient": "全局挖矿效率",
   "homeHeaderSubtitle": "将 {{tokenSymbol}}-{{new}} 流动性通证质押入矿池，获得 {{token}} 奖励。",
   "releaseTip": "总量3000万枚，时长30天",
@@ -48,13 +49,14 @@
 
   "Community Mining": "社群挖矿",
   "communityMiningTips": "质押由优质牛顿社群运营的社群矿池对应的流动性通证，获得 NEW 奖励。",
-  "communityMiningTime": "(总量3000万枚 / 活动时间：2021.2.25 08:00 - 2021.3.18 08:00)",
-  "Your NEW Balance": "我当前的NEW",
-  "farmName":  "矿池名称",
-  "farmStakeToken": "质押通证",
-  "farmList": "矿池列表",
-  "enterPool": "进入矿池",
+  "communityMiningTime": "(总量3000万枚 / 活动时间：2021.2.19 08:00 - 2021.3.18 08:00)",
   "communityHeaderSubtitle": "将 {{tokenSymbol}}-NEW 流动性通证质押入矿池，获得 {{earnTokenName}} 奖励",
+  "Your NEW Balance": "我当前的NEW",
+  "Pool Name":  "矿池名称",
+  "Liquidity Token": "质押通证",
+  "Pool List": "矿池列表",
+  "Enter Pool": "进入矿池",
+  "Update Price": "更新矿池价格",
 
   "Menu": "菜单",
   "Farm": "矿池",
@@ -131,8 +133,7 @@
   "tradeFarmsTips": "所有在 NewSwap 中的交易都将按照交易笔数获得 NEW 的挖矿收益。",
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",
-  "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
-  "updatePriceButton": "更新矿池价格"
+  "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)"
 }
 
 

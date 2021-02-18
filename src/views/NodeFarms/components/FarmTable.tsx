@@ -80,12 +80,12 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
               <TableRow>
                 <StyledTableCell align="left" width="48%">
                 
-                  <StyledTHMobile>{t('farmName')}</StyledTHMobile>
+                  <StyledTHMobile>{t('Pool Name')}</StyledTHMobile>
                   
                 </StyledTableCell>
                 <StyledTableCell align="left" width="50%">
                   
-                  <StyledTHMobile>{t('farmStakeToken')}</StyledTHMobile>
+                  <StyledTHMobile>{t('Liquidity Token')}</StyledTHMobile>
                     
                 </StyledTableCell>
                 <StyledTableCell align="left" width="2%"></StyledTableCell>
@@ -93,10 +93,10 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
             ) : (
               <TableRow>
                 <StyledTableCell align="left" width="35%">
-                  <StyledTH>{t('farmName')}</StyledTH>
+                  <StyledTH>{t('Pool Name')}</StyledTH>
                 </StyledTableCell>
                 <StyledTableCell align="left" width="45%">
-                  <StyledTH>{t('farmStakeToken')}</StyledTH>
+                  <StyledTH>{t('Liquidity Token')}</StyledTH>
                 </StyledTableCell>
                 <StyledTableCell align="left" width="20%"></StyledTableCell>
               </TableRow>
@@ -132,7 +132,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         </StyledTableCell>
                         <StyledTableCell align="right">
                           <StyledLink to={`/communityMining/${farm.id}`}>
-                            {(isMobile) ? '' : t('enterPool')}
+                            {(isMobile) ? '' : t('Enter Pool')}
                             <StyledArrow src={arrow} />
                           </StyledLink>
                         </StyledTableCell>  
@@ -159,7 +159,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         </StyledTableCell>
                         <StyledTableCell align="right">
                           <StyledLink to={`/communityMining/${farm.id}`}>
-                            {(isMobile) ? '' : t("enterPool")}
+                            {(isMobile) ? '' : t("Enter Pool")}
                             <StyledArrow src={arrow} />
                           </StyledLink>
                         </StyledTableCell>  

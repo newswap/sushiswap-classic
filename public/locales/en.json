@@ -11,14 +11,9 @@
   "tradeDataTime": "*Trading data resets at 08:00(UTC+8)",
   "tradeEarnedTime": "*Rewarding data resets at 08:00(UTC+8)",
 
-
-  "communityMiningTips": "质押由优质牛顿社群运营的社群矿池对应的流动性通证，获得 NEW 奖励。",
-  "communityMiningTime": "(30M NEW in total from 2021.2.25 08:00 to 2021.3.18 08:00)",
-  "farmName":  "矿池名称",
-  "farmStakeToken": "质押通证",
-  "farmList": "矿池列表",
-  "enterPool": "进入矿池",
-  "communityHeaderSubtitle": "将 {{tokenSymbol}}-NEW 流动性通证质押入矿池，获得 {{earnTokenName}} 奖励",
+  "communityMiningTips": "Stake liquidity tokens of community pools and earn NEW rewards.",
+  "communityMiningTime": "(30M NEW in total from 2021.2.19 08:00 to 2021.3.18 08:00)",
+  "communityHeaderSubtitle": "Stake {{tokenSymbol}}-NEW LP tokens to the Pool and earn {{earnTokenName}} rewards",
 
 
   
@@ -50,6 +45,5 @@
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
 
 
-  "totalStake": "总锁仓量",
-  "updatePriceButton": "更新矿池价格"
+  "totalStake": "总锁仓量"
 }
