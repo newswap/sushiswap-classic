@@ -10,7 +10,7 @@ import Page from '../../components/Page'
 import Spacer from '../../components/Spacer'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
-
+import useUpdateNewPerLPAll from '../../hooks/useUpdateNewPerLPAll'
 import useModal from '../../hooks/useModal'
 import NodeFarm from '../NodeFarm'
 import Balances from './components/Balances'
@@ -24,8 +24,13 @@ const NodeFarms: React.FC = () => {
 
   const { path } = useRouteMatch()
   const { account } = useWallet()
+  const { onUpdatePrice } = useUpdateNewPerLPAll()
+
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
-  const updatePrice = () => {}
+  const updatePrice = async () => {
+    await onUpdatePrice()
+  }
+
   return (
     <Switch>
       <Page>
@@ -43,12 +48,14 @@ const NodeFarms: React.FC = () => {
               </Container>
               <Spacer size="lg" />
               
-              <StyledLink
-                target="__blank"
-                href="https://wj.qq.com/s2/8013861/aaa9"
-              >
-                 {t('Apply Creating Community Pool')}
-              </StyledLink>
+              <Container>
+                <StyledLink
+                  target="__blank"
+                  href="https://wj.qq.com/s2/8013861/aaa9"
+                >
+                  {t('Apply Creating Community Pool')}
+                </StyledLink>
+              </Container>
               <Spacer size="sm" />
 
               <Container size = 'md'>
@@ -157,7 +164,7 @@ const StyleLabelMob = styled.div`
 
 const StyledLink = styled.a`
   color: #607686;
-  float:left;
+  padding-left: 10px;
   text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
