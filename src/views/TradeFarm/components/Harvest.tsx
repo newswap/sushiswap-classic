@@ -56,7 +56,7 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
               }}
             />
           </StyledCardActions>
-          <StyledUpdate>{t('tradeEarnedTime')}</StyledUpdate>
+          {/* <StyledUpdate>{t('tradeEarnedTime')}</StyledUpdate> */}
         </StyledCardContentInner>
       </CardContent>
     </Card>
