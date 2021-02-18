@@ -35,7 +35,7 @@ const NodeFarms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Community Mining')}
                 subtitle={t('communityMiningTips')}
-                subsubtitle={t('tradeMiningTime')}
+                subsubtitle={t('communityMiningTime')}
               />
               <Container>
                 <Balances />
