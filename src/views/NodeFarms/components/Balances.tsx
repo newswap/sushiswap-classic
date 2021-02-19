@@ -62,7 +62,7 @@ const PendingRewards: React.FC = () => {
 }
 
 const Balances: React.FC = () => {
-  const { account, balance }: { account: any; balance: any;} = useWallet()
+  const { account, balance } = useWallet()
   const { t } = useTranslation()
 
   const stakedValue = useAllStakedValueForCommunity()
