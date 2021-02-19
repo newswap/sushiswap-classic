@@ -25,16 +25,19 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import { useTranslation } from 'react-i18next'
+import LazyIcon from '../../../components/LazyIcon'
+
 
 interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
-  iconL: string
+  // iconL: string
   iconR: string
+  tokenAddress: string
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconR, tokenAddress }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWallet()
 
@@ -89,7 +92,8 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconL, iconR 
           <StyledCardHeader>
             <StyledDiv>
               <StyledImg src={iconR}></StyledImg>
-              <StyledImgR src={iconL}></StyledImgR>
+              {/* <StyledImgR src={iconL}></StyledImgR> */}
+              <LazyIcon address={tokenAddress} customStyle={iconStyle}/>
             </StyledDiv>
             <Spacer height={20}></Spacer>
             <Value value={getBalanceNumber(stakedBalance)} />
@@ -188,5 +192,14 @@ const StyledImgR = styled.img `
     margin-right: -26px;
     margin-top: -60px;
 `
+
+const iconStyle: React.CSSProperties = {
+  float: 'left',
+  width: '60px',
+  height: '60px',
+  borderRadius: '30px',
+  marginRight: '-26px',
+  marginTop: '-60px',
+}
 
 export default Stake
