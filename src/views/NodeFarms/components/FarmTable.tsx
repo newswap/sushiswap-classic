@@ -18,7 +18,7 @@ import { NodeFarm } from '../../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
 import { useTranslation } from 'react-i18next'
-
+import LazyIcon from '../../../components/LazyIcon'
 
 interface FarmTableProps {
   dataSource: []
@@ -107,6 +107,9 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         {
             rows[0].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((farm, j) => {
+
+              let address = farm.tokenAddress
+              console.log("======address" + address)
               return (
                 <StyledTableRow key={farm.pid}>
                   {
@@ -116,7 +119,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           <StyledIDLabelMob>{farm.pid}</StyledIDLabelMob>
                           <div>
                           <StyledLogo>
-                          <StyledImgMob src={farm.iconL}/>
+                          <LazyIcon address={address} customStyle={iconStyleMob}/>
+                          {/* <StyledImgMob src={farm.iconL}/> */}
                           </StyledLogo>
                           <StyledTokenLabelMob>
                             {farm.name}
@@ -126,7 +130,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         <StyledTableCell align="left">
                           <StyledPoolLogo>
                             <StyledPoolImgMob src={farm.iconR}/>
-                            <StyledImgLMob src={farm.iconL}/>
+                            {/* <StyledImgLMob src={farm.iconL}/> */}
+                            <LazyIcon address={address} customStyle={iconLStyleMob}/>
                           </StyledPoolLogo>
                           <StyledLPLabelMob>{farm.id}</StyledLPLabelMob>
                         </StyledTableCell>
@@ -143,7 +148,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         
                           <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
                           <StyledLogo>
-                            <StyledImg src={farm.iconL}/>
+                            {/* <StyledImg src={farm.iconL}/> */}
+                            <LazyIcon address={address} customStyle={iconStyle}/>
                           </StyledLogo>
                           <StyledTokenLabel>
                             {farm.name}
@@ -153,7 +159,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         <StyledTableCell align="left">
                           <StyledPoolLogo>
                             <StyledPoolImg src={farm.iconR}/>
-                            <StyledImgL src={farm.iconL}/>
+                            {/* <StyledImgL src={farm.iconL}/> */}
+                            <LazyIcon address={address} customStyle={iconStyleL}/>
                           </StyledPoolLogo>
                           <StyledLPLabel>{farm.id}</StyledLPLabel>
                         </StyledTableCell>
@@ -281,10 +288,8 @@ const StyledImgLMob = styled.img `
     height: 20px;
     width: 20px;
     border-radius: 10px;
-    // margin: 2px;
     margin-left: -10px;
     margin-top: 6px;
-    // margin-right: 20px;
 `
 
 const StyledIDLabel = styled.div`
@@ -389,5 +394,38 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   float: left;
 `
+const iconStyle: React.CSSProperties = {
+
+  width: '32px',
+  height: '32px',
+  margin: '2px',
+  marginLeft: '14px',
+  borderRadius: '16px',
+}
+
+const iconStyleL: React.CSSProperties = {
+    height: '32px',
+    width: '32px',
+    borderRadius: '16px',
+    marginLeft: '-16px',
+    marginRight: '20px',
+}
+
+const iconStyleMob: React.CSSProperties = {
+  width: '20px',
+  height: '20px',
+  margin: '2px',
+  marginLeft: '0px',
+  marginTop: '6px',
+  borderRadius: '10px',
+}
+
+const iconLStyleMob: React.CSSProperties = {
+  width: '20px',
+  height: '20px',
+  borderRadius: '10px',
+  marginLeft: '-10px',
+  marginTop: '6px',
+}
 
 export default FarmTable
