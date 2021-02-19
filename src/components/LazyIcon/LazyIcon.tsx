@@ -10,6 +10,7 @@ import styled from 'styled-components'
 import { render } from 'react-dom'
 import { LazyImage } from "react-lazy-images";
 import { LazyImageFull, ImageState } from "react-lazy-images";
+import placeholderIcon from '../../assets/img/placeholder_token.png'
 
 
 export interface LazyIconProps {
@@ -48,7 +49,7 @@ const LazyIcon: React.FC<LazyIconProps> = ({
                     src={
                         imageState === ImageState.LoadSuccess
                             ? imageProps.src
-                            : "/img/porto_buildings_lowres.jpg"
+                            : placeholderIcon
                     }
                     style={customStyle}
                 />

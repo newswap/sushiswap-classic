@@ -200,6 +200,7 @@ const iconStyle: React.CSSProperties = {
   borderRadius: '30px',
   marginRight: '-26px',
   marginTop: '-60px',
+  background: 'white',
 }
 
 export default Stake
