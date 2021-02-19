@@ -82,7 +82,6 @@ const Providers: React.FC = ({ children }) => {
         connectors={{
           walletconnect: { rpcUrl: NEWCHAIN_RPC },
         }}
-        pollBalanceInterval={2000}
       >
         <SushiProvider>
           <TransactionProvider>

@@ -12,7 +12,7 @@ import Value from '../../../components/Value'
 import useAllStakedValueForCommunity from '../../../hooks/useAllStakedValueForCommunity'
 import useAllEarningsNew from '../../../hooks/useAllEarningsNew'
 import useNewPrice from '../../../hooks/useNewPrice'
-
+import useNewBalance from '../../../hooks/useNewBalance'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
@@ -69,6 +69,10 @@ const Balances: React.FC = () => {
   const newPrice = useNewPrice()
   // console.log("newPrice------->"+newPrice)
 
+  // balance在手机上无效
+  const newBalance = useNewBalance()
+  // console.log("===================>"+newBalance)
+
   let totalNew = 0
   for (let staked of stakedValue) {
     totalNew += staked.totalWethValue ? staked.totalWethValue.toNumber() : 0
@@ -91,7 +95,7 @@ const Balances: React.FC = () => {
               <div style={{ flex: 1 }}>
                 <Label text={t('Your NEW Balance')} />
                 <Value
-                  value={!!account ? getBalanceNumber(new BigNumber(balance)) : '—'}
+                  value={!!account ? getBalanceNumber(newBalance) : '—'}
                 />
               </div>
             </StyledBalance>
