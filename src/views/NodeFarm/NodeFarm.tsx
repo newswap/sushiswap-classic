@@ -67,11 +67,11 @@ const NodeFarm: React.FC = () => {
   return (
     <>
       <NewPageHeader
-        iconL={iconL}
         iconR={iconR}
+        // iconR={iconR}
         subtitle= {t('communityHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW ' + t('MINING')}
-
+        tokenAddress={tokenAddress}
       />
       <StyledFarm>
         <StyledCardsWrapper>
@@ -84,7 +84,7 @@ const NodeFarm: React.FC = () => {
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken}
-              iconL={iconL}
+              tokenAddress = {tokenAddress}
               iconR={iconR}
             />
           </StyledCardWrapper>

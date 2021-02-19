@@ -47,6 +47,7 @@ const Home: React.FC = () => {
   const tokenSymbol = 'NUSDT'
   const iconL = usdtcoin
   const iconR = newcoin
+  const tokenAddress = '0x20F12218281F9CA566B5c41F17c6c19050125cD3'
 
   // 锁仓合约质押的lp数量
   const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
@@ -106,8 +107,9 @@ const Home: React.FC = () => {
         {!!account ? (
           <>
             <NewPageHeader
-              iconL={iconL}
               iconR={iconR}
+              // iconR={iconR}
+              tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
               subsubtitle={'(' + t('releaseTip') + ')'}
               title={tokenSymbol + '-NEW ' + t('MINING')}

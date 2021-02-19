@@ -74,10 +74,11 @@ const Farm: React.FC = () => {
         title={name}  
       /> */}
       <NewPageHeader
-        iconL={iconL}
         iconR={iconR}
+        // iconR={iconR}
         subtitle= {t('farmHeaderSubtitle', {tokenSymbol: tokenSymbol, earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW ' + t('MINING')}
+        tokenAddress={tokenAddress}
       />
       <StyledFarm>
         <StyledCardsWrapper>
@@ -91,7 +92,7 @@ const Farm: React.FC = () => {
               lpContract={lpContract}
               pid={pid}
               tokenName={lpToken}
-              iconL={iconL}
+              tokenAddress={tokenAddress}
               iconR={iconR}
             />
           </StyledCardWrapper>

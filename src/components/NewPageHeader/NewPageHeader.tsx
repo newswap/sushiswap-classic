@@ -2,22 +2,31 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Container from '../Container'
+import LazyIcon from '../LazyIcon'
+
 
 interface NewPageHeaderProps {
-  iconL: string//React.ReactNode
-  iconR: string //React.ReactNode
+  iconR: string//React.ReactNode
+  // iconR: string //React.ReactNode
   subtitle?: string
   subsubtitle?: string
   title?: string
+  tokenAddress: string
 }
 
-const NewPageHeader: React.FC<NewPageHeaderProps> = ({ iconL, iconR, subtitle, subsubtitle, title }) => {
+const NewPageHeader: React.FC<NewPageHeaderProps> = ({ iconR, subtitle, subsubtitle, title, tokenAddress }) => {
   return (
     <Container size="sm">
       <StyledPageHeader>
         <div>
-            <StyledIcon><StyledImg src={iconL}/></StyledIcon>
-            <StyledIcon><StyledImg src={iconR}/></StyledIcon>
+            <StyledIcon>
+              {/* <StyledImg src={iconL}/> */}
+              <LazyIcon address={tokenAddress} customStyle={iconStyle}/>
+              </StyledIcon>
+            <StyledIcon>
+              <StyledImg src={iconR}/>
+              
+            </StyledIcon>
         </div>
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
@@ -70,5 +79,13 @@ const StyledSubtitle = styled.h3`
   padding: 0;
   text-align: center;
 `
+const iconStyle: React.CSSProperties = {
+
+  width: '85px',
+  height: '85px',
+  margin: '2px',
+  borderRadius: '42.5px',
+}
+
 
 export default NewPageHeader
