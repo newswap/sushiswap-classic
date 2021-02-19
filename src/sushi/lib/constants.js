@@ -116,7 +116,7 @@ export const nodeSupportedPools = [
       1012: 'TODO',
     },
     tokenAddresses: {
-      1007: '0xed4e695e436a4fce38bba9fb66d980afd66b0e3e', //IMX
+      1007: '0xEd4e695e436a4fCE38BBA9FB66D980aFD66b0e3e', //IMX
       1012: 'TODO',
     },
     name: 'IMX Party!',
@@ -133,7 +133,7 @@ export const nodeSupportedPools = [
       1012: 'TODO',
     },
     tokenAddresses: {
-      1007: '0x483246b0ae0b14db4c4597c7cc4af2e2ea440a55', //MCT
+      1007: '0x483246B0Ae0B14DB4C4597C7CC4af2e2ea440a55', //MCT
       1012: 'TODO',
     },
     name: 'MCT Party!',
