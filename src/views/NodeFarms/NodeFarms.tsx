@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next'
 import FarmTable from './components/FarmTable'
 import {isMobile} from 'react-device-detect'
 
+const APPLY_FOR_COMMUNITY = process.env.REACT_APP_APPLY_FOR_COMMUNITY
 
 const NodeFarms: React.FC = () => {
   const { t } = useTranslation()
@@ -51,7 +52,7 @@ const NodeFarms: React.FC = () => {
               <Container>
                 <StyledLink
                   target="__blank"
-                  href="https://wj.qq.com/s2/8013861/aaa9"
+                  href= {APPLY_FOR_COMMUNITY}
                 >
                   {t('Apply Creating Community Pool')}
                 </StyledLink>
