@@ -65,8 +65,8 @@ const NodeFarms: React.FC = () => {
                     <>
                     <StyleLabelMob>
                       <div>{t('Pool List')}</div>
-                      <StyledUpdateMobButton onClick={updatePrice}>{t('Update Price')}
-                      </StyledUpdateMobButton>
+                      {/* <StyledUpdateMobButton onClick={updatePrice}>{t('Update Price')}
+                      </StyledUpdateMobButton> */}
                     </StyleLabelMob>
                     
                     </>
@@ -74,7 +74,7 @@ const NodeFarms: React.FC = () => {
                     <>
                     <StyleLabel>
                       <div>{t('Pool List')}</div>
-                      <StyledUpdateButton onClick={updatePrice}>{t('Update Price')}</StyledUpdateButton>
+                      {/* <StyledUpdateButton onClick={updatePrice}>{t('Update Price')}</StyledUpdateButton> */}
                     </StyleLabel>
                     
                     </>
