@@ -46,6 +46,8 @@
   "Total Rewards on Trading": "累计交易挖矿收益",
   "addRemoveLPTips": "*添加/移除流动性通证将会自动为您领取当前奖励。",
   "Transaction Mining has ended": "交易挖矿活动已结束",
+  "pageClose":"本页面即将下线",
+  "pageCloseTips": "请于 2月22日12:00(UTC+8) 前领取奖励",
 
   "Community Mining": "社群挖矿",
   "communityMiningTips": "质押由优质牛顿社群运营的社群矿池对应的流动性通证，获得 NEW 奖励。",

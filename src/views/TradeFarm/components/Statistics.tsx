@@ -30,7 +30,9 @@ const Statistics: React.FC<StatisticsProps> = ({icon} ) => {
           <StyledCardHeader>
             {/* <NewCardIcon icon = {icon}></NewCardIcon> */}
             {/* `/pair/${NEWSWAP_URL}` */}
-            <Value value= {t('Transaction Mining has ended')} />
+            {/* <Value value= {t('Transaction Mining has ended')} /> */}
+            <Value value= {t('pageClose')} />
+            <Label text={t('pageCloseTips')} />
 
             {/* <Value value= {t('Total Number of Trade')} />
             <Value value= {swapStatistics.total} decimals= {0} />
