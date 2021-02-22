@@ -32,7 +32,6 @@ interface StakeProps {
   lpContract: Contract
   pid: number
   tokenName: string
-  // iconL: string
   iconR: string
   tokenAddress: string
 }

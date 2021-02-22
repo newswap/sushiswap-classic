@@ -6,8 +6,7 @@ import LazyIcon from '../LazyIcon'
 
 
 interface NewPageHeaderProps {
-  iconR: string//React.ReactNode
-  // iconR: string //React.ReactNode
+  iconR: string
   subtitle?: string
   subsubtitle?: string
   title?: string

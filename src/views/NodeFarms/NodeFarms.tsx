@@ -47,6 +47,9 @@ const NodeFarms: React.FC = () => {
               <Container>
                 <Balances />
               </Container>
+              <Container>
+              <StyledRedeemDiv>{t('redeemTip')}</StyledRedeemDiv>
+              </Container>
               <Spacer size="lg" />
               
               <Container>
@@ -170,6 +173,13 @@ const StyledLink = styled.a`
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};
   }
+`
+
+const StyledRedeemDiv = styled.div`
+  color: red;
+  font-size: 16px;
+  margin-top: 4px;
+  margin-left: 12px;
 `
 
 export default NodeFarms

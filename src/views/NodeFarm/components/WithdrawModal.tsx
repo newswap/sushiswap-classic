@@ -10,7 +10,8 @@ import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import help from '../../../assets/img/ic_issue.svg' 
 import ReactTooltip from 'react-tooltip'
-
+import ResultModal from '../../../components/ResultModal/ResultModal'
+import useModal from '../../../hooks/useModal'
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber
@@ -28,6 +29,12 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
+
+  const [onPresentResult] = useModal(
+    <ResultModal 
+      type={'unstake'}
+    />
+  )
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(max)
@@ -76,6 +83,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
             await onConfirm(val)
             setPendingTx(false)
             onDismiss()
+            onPresentResult()
           }}
         />
       </ModalActions>
