@@ -176,7 +176,7 @@ const StyledLink = styled.a`
 `
 
 const StyledRedeemDiv = styled.div`
-  color: red;
+  color: #607686;
   font-size: 16px;
   margin-top: 4px;
   margin-left: 12px;

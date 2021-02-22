@@ -15,7 +15,7 @@ import useModal from '../../../hooks/useModal'
 
 interface WithdrawModalProps extends ModalProps {
   max: BigNumber
-  onConfirm: (amount: string) => void
+  onConfirm: (amount: string) => any
   tokenName?: string
 }
 
@@ -80,10 +80,12 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
               return
             
             setPendingTx(true)
-            await onConfirm(val)
+            const txHash = await onConfirm(val)
             setPendingTx(false)
             onDismiss()
-            onPresentResult()
+
+            if(txHash)
+              onPresentResult()
           }}
         />
       </ModalActions>

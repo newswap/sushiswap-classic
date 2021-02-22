@@ -15,7 +15,7 @@ import ResultModal from '../../../components/ResultModal/ResultModal'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
-  onConfirm: (amount: string) => void
+  onConfirm: (amount: string) => any
   tokenName?: string
 }
 
@@ -80,10 +80,12 @@ const DepositModal: React.FC<DepositModalProps> = ({
               return
             
             setPendingTx(true)
-            await onConfirm(val)
+            const txHash = await onConfirm(val)
             setPendingTx(false)
             onDismiss()
-            onPresentResult()
+
+            if(txHash)
+              onPresentResult()
           }}
         />
       </ModalActions>
