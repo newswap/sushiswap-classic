@@ -19,6 +19,7 @@ import FarmTable from './components/FarmTable'
 import {isMobile} from 'react-device-detect'
 
 const APPLY_FOR_COMMUNITY = process.env.REACT_APP_APPLY_FOR_COMMUNITY
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 
 const NodeFarms: React.FC = () => {
   const { t } = useTranslation()
@@ -42,7 +43,7 @@ const NodeFarms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Community Mining')}
                 subtitle={t('communityMiningTips')}
-                subsubtitle={t('communityMiningTime')}
+                subsubtitle={CHAIN_ID == 1012 ? t('communityMiningTime') : t('communityMiningTimeTest')}
               />
               <Container>
                 <Balances />

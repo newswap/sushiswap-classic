@@ -15,6 +15,7 @@ import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
 
 const INFO_URL = process.env.REACT_APP_INFO_URL
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 
 const NodeFarm: React.FC = () => {
   const { farmId } = useParams()
@@ -73,7 +74,7 @@ const NodeFarm: React.FC = () => {
         title={tokenSymbol + '-NEW ' + t('MINING')}
         tokenAddress={tokenAddress}
       />
-      { new Date().getTime() < 1614211200000 && (
+      { CHAIN_ID == 1012 && new Date().getTime() < 1614211200000 && (
         <Label text={t('communityMiningStart')} />
       )}
       <StyledFarm>

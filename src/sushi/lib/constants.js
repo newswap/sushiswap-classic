@@ -145,21 +145,21 @@ export const nodeSupportedPools = [
   },
 
   // 以下测试网没有，部署测试网需要注释！！！
-  { // MZD-NEW
-    pid: 2,
-    lpAddresses: {
-      1007: '',
-      1012: '0x31b62fae9cfc27b0db3bfe07be458f74ea3538ec',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x40D690551F5F21EccB8cEdc09e86C2dd2E40Dd52',   //MZD
-    },
-    name: 'MZD Party!',
-    symbol: 'MZD-NEW LP',
-    tokenSymbol: 'MZD',
-    icon: '👨🏻‍🍳',
-    iconL: '',
-    iconR: newcoin
-  }
+  // { // MZD-NEW
+  //   pid: 2,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x31b62fae9cfc27b0db3bfe07be458f74ea3538ec',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x40D690551F5F21EccB8cEdc09e86C2dd2E40Dd52',   //MZD
+  //   },
+  //   name: 'MZD Party!',
+  //   symbol: 'MZD-NEW LP',
+  //   tokenSymbol: 'MZD',
+  //   icon: '👨🏻‍🍳',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
 ]
