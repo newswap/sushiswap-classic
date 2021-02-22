@@ -51,7 +51,7 @@
 
   "Community Mining": "社群挖矿",
   "communityMiningTips": "质押社群矿池对应的流动性通证，获得 NEW 奖励。",
-  "communityMiningTime": "(总量3000万枚 / 活动时间：2021.2.19 08:00 - 2021.3.18 08:00)",
+  "communityMiningTime": "(总量2000万枚 / 活动时间：2021.2.25 08:00 - 2021.3.11 08:00)",
   "communityHeaderSubtitle": "将 {{tokenSymbol}}-NEW 流动性通证质押入矿池，获得 {{earnTokenName}} 奖励",
   "Your NEW Balance": "钱包NEW余额",
   "Pool Name":  "矿池名称",
@@ -60,6 +60,7 @@
   "Enter Pool": "进入矿池",
   "Update Price": "更新矿池价格",
   "Apply Creating Community Pool": "点击无门槛申请创建社群矿池",
+  "communityMiningStart": "(2021年2月25日8时(UTC+8) 开启挖矿)",
 
   "Menu": "菜单",
   "Farm": "矿池",

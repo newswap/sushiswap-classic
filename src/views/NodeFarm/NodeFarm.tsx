@@ -5,6 +5,7 @@ import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
 import NewPageHeader from '../../components/NewPageHeader'
+import Label from '../../components/Label'
 import Spacer from '../../components/Spacer'
 import useNodeFarm from '../../hooks/useNodeFarm'
 import useSushi from '../../hooks/useSushi'
@@ -73,6 +74,9 @@ const NodeFarm: React.FC = () => {
         title={tokenSymbol + '-NEW ' + t('MINING')}
         tokenAddress={tokenAddress}
       />
+      { new Date().getTime() < 1614211200000 && (
+        <Label text={t('communityMiningStart')} />
+      )}
       <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>

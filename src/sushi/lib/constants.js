@@ -47,7 +47,7 @@ export const contractAddresses = {
   }, 
   newMineForNode: { // 社群矿区
     1007: '0xf313c8852762ae2e856d849e4130ff50f45fe683',  //小写
-    1012: 'TODO'
+    1012: '0xd1d4105c4dfa8f76b10fd99645f9cad73afc548b'
   },
 
 
@@ -109,15 +109,15 @@ export const supportedPools = [
 
 // community mining supported Polls
 export const nodeSupportedPools = [
-  {
+  { // IMX-NEW
     pid: 0,
     lpAddresses: {
       1007: '0xbba2d33e853737f5cbe3f8834d31bb406d0d5798',
-      1012: 'TODO',
+      1012: '0x82742505f549c2bcb3d14490c576c9e2c27ee7b7',
     },
     tokenAddresses: {
-      1007: '0xEd4e695e436a4fCE38BBA9FB66D980aFD66b0e3e', //IMX
-      1012: 'TODO',
+      1007: '0xEd4e695e436a4fCE38BBA9FB66D980aFD66b0e3e', //IMX 区分大小写，否则无法获得图片
+      1012: '0x223E2E48f2f09c314f4caD3101f63213cB775A93',
     },
     name: 'IMX Party!',
     symbol: 'IMX-NEW LP',
@@ -126,21 +126,40 @@ export const nodeSupportedPools = [
     iconL: imxcoin,
     iconR: newcoin
   },
-  {
+  { // MCT-NEW
     pid: 1,
     lpAddresses: {
       1007: '0xe3715753795fb99c68857a6b7f5c3e6ccae4ec78',
-      1012: 'TODO',
+      1012: '0xe3715753795fb99c68857a6b7f5c3e6ccae4ec78',
     },
     tokenAddresses: {
       1007: '0x483246B0Ae0B14DB4C4597C7CC4af2e2ea440a55', //MCT
-      1012: 'TODO',
+      1012: '0x483246B0Ae0B14DB4C4597C7CC4af2e2ea440a55',
     },
     name: 'MCT Party!',
     symbol: 'MCT-NEW LP',
     tokenSymbol: 'MCT',
     icon: '👨🏻‍🍳',
     iconL: mctcoin,
+    iconR: newcoin
+  },
+
+  // 以下测试网没有，部署测试网需要注释！！！
+  { // MZD-NEW
+    pid: 2,
+    lpAddresses: {
+      1007: '',
+      1012: '0x31b62fae9cfc27b0db3bfe07be458f74ea3538ec',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x40D690551F5F21EccB8cEdc09e86C2dd2E40Dd52',   //MZD
+    },
+    name: 'MZD Party!',
+    symbol: 'MZD-NEW LP',
+    tokenSymbol: 'MZD',
+    icon: '👨🏻‍🍳',
+    iconL: '',
     iconR: newcoin
   }
 ]
