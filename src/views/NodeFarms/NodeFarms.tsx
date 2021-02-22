@@ -168,8 +168,9 @@ const StyleLabelMob = styled.div`
 `
 
 const StyledLink = styled.a`
+  float: right;
   color: #607686;
-  padding-left: 10px;
+  padding-right: 10px;
   text-decoration: none;
   &:hover {
     color: ${(props) => props.theme.color.grey[500]};

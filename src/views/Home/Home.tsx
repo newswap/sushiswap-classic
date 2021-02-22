@@ -47,8 +47,8 @@ const Home: React.FC = () => {
   const tokenSymbol = 'NUSDT'
   const iconL = usdtcoin
   const iconR = newcoin
-  const tokenAddress = '0x20F12218281F9CA566B5c41F17c6c19050125cD3'
-
+  const tokenAddress = CHAIN_ID==1012 ? '0x4BFB4297f9C28a373aE6ae58a8f8EfeFF334cae8' : '0x20F12218281F9CA566B5c41F17c6c19050125cD3'
+  
   // 锁仓合约质押的lp数量
   const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
   // console.log("lpBalance:"+lpBalance.toNumber())
