@@ -10,7 +10,7 @@
   "Tokens": "通证",
   "Pending Confirmation": "确认中",
   "Confirm": "确认",
-  "NEW Earned": "可领取的NEW",
+  "NEW Earned": "待领取的NEW",
   "Collecting NEW": "正在领取奖励",
   "Harvest": "领取奖励",
   "Tokens Staked": "已质押通证",
@@ -137,7 +137,13 @@
   "tradeFarmsTips": "所有在 NewSwap 中的交易都将按照交易笔数获得 NEW 的挖矿收益。",
   "tradeFarmPendingTip": "待领取的 NEW",
   "grandTotalTitle": "累计交易挖矿收益",
-  "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)"
+  "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
+  "redeemTip": "*进入矿池领取NEW奖励",
+  "OK": "确定",
+  "stakeCompleteTitle": "质押已完成",
+  "unstakeCompleteTitle": "解锁已完成",
+  "harvestedTip": "已自动领取当前奖励"
+
 }
 
 

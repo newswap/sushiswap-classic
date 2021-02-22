@@ -4,12 +4,14 @@ import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'
 import ModalTitle from '../../../components/ModalTitle'
+import useModal from '../../../hooks/useModal'
 import TokenInput from '../../../components/TokenInput'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import help from '../../../assets/img/ic_issue.svg' 
 import ReactTooltip from 'react-tooltip'
+import ResultModal from '../../../components/ResultModal/ResultModal'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
@@ -27,6 +29,12 @@ const DepositModal: React.FC<DepositModalProps> = ({
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const { t } = useTranslation()
+
+  const [onPresentResult] = useModal(
+    <ResultModal 
+      type={'stake'}
+    />
+  )
 
   const fullBalance = useMemo(() => {
     return getFullDisplayBalance(max)
@@ -75,6 +83,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
             await onConfirm(val)
             setPendingTx(false)
             onDismiss()
+            onPresentResult()
           }}
         />
       </ModalActions>

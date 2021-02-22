@@ -69,7 +69,6 @@ const NodeFarm: React.FC = () => {
     <>
       <NewPageHeader
         iconR={iconR}
-        // iconR={iconR}
         subtitle= {t('communityHeaderSubtitle', {tokenSymbol: tokenSymbol,  earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW ' + t('MINING')}
         tokenAddress={tokenAddress}

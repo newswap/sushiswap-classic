@@ -68,14 +68,9 @@ const Farm: React.FC = () => {
 
   return (
     <>
-      {/* <PageHeader
-        icon={icon}
-        subtitle={t('depositTokens',{lpTokenName:lpTokenName, earnTokenName:earnTokenName})}
-        title={name}  
-      /> */}
+  
       <NewPageHeader
         iconR={iconR}
-        // iconR={iconR}
         subtitle= {t('farmHeaderSubtitle', {tokenSymbol: tokenSymbol, earnTokenName: earnTokenName})}
         title={tokenSymbol + '-NEW ' + t('MINING')}
         tokenAddress={tokenAddress}

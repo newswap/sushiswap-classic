@@ -46,5 +46,10 @@
   "tradeFarmUpdateTip": "*每日 00:00 更新 (UTC时间)",
 
 
-  "totalStake": "总锁仓量"
+  "totalStake": "总锁仓量",
+  "redeemTip": "*Please enter the community pool to receive NEW rewards",
+  "OK": "OK",
+  "stakeCompleteTitle": "Staking is completed",
+  "unstakeCompleteTitle": "Unstaking is completed",
+  "harvestedTip": "Your current reward has been automatically harvested."
 }

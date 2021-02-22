@@ -108,7 +108,6 @@ const Home: React.FC = () => {
           <>
             <NewPageHeader
               iconR={iconR}
-              // iconR={iconR}
               tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
               subsubtitle={'(' + t('releaseTip') + ')'}
