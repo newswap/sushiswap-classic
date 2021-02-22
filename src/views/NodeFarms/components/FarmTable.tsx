@@ -111,8 +111,9 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
               let address = farm.tokenAddress
               console.log("======address" + address)
               return (
-                <StyledTableRow key={farm.pid}>
-                  {
+                <StyledNavLink to={`/communityMining/${farm.id}`}>
+                  <StyledTableRow key={farm.pid}>
+                    {
                       (isMobile) ? (
                         <>
                         <StyledTableCell component="th" scope="row"> 
@@ -172,10 +173,9 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         </StyledTableCell>  
                         </>
                       )
-                  }
-                  
-                                 
-                </StyledTableRow>
+                    }             
+                  </StyledTableRow>
+                </StyledNavLink>
               )
             })
         }
@@ -427,5 +427,9 @@ const iconLStyleMob: React.CSSProperties = {
   marginLeft: '-10px',
   marginTop: '6px',
 }
+
+const StyledNavLink = styled(Link)`
+  display: contents
+`
 
 export default FarmTable
