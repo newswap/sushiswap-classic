@@ -39,7 +39,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(20);
 
   const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
