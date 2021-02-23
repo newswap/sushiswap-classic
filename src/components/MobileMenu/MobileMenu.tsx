@@ -130,6 +130,8 @@ const StyledLangButton = styled.button`
     border: 0;
   }
   text-align: left;
+  padding: ${(props) => props.theme.spacing[2]}px
+    ${(props) => props.theme.spacing[2]}px;
 `
 
 const StyledMobileMenuWrapper = styled.div`
