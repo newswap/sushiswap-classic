@@ -14,8 +14,14 @@ interface MobileMenuProps {
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
-  const { t } = useTranslation()
-
+  const { t, i18n} = useTranslation()
+  const changeLanguage = () => {
+    if (i18n.language == "en") {
+      i18n.changeLanguage("zh-CN")
+    } else {
+      i18n.changeLanguage("en")
+    }
+  }
   if (visible) {
     return (
       <StyledMobileMenuWrapper>
@@ -103,6 +109,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           >
             { t('CommunityFarm') }
           </StyledLink> */}
+          <StyledLangButton onClick={changeLanguage}>
+            {i18n.language!="en" ? "EN": "中文"}
+          </StyledLangButton>
+
         </StyledMobileMenu>
       </StyledMobileMenuWrapper>
     )
@@ -110,7 +120,17 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
   return null
 }
 
-
+const StyledLangButton = styled.button`
+  font-size: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  &:focus{
+    outline: none;
+    border: 0;
+  }
+  text-align: left;
+`
 
 const StyledMobileMenuWrapper = styled.div`
   display: flex;
@@ -153,6 +173,7 @@ const StyledMobileMenu = styled.div`
   left: calc(100% - 10px);
   width: 160px;
   border-radius: 12px;
+  padding: 4px;
 `
 
 const StyledLink = styled(NavLink)`

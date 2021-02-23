@@ -10,7 +10,8 @@ import Nav from './components/Nav'
 import { isMobile } from "react-device-detect"
 import { useWallet } from 'use-wallet'
 import menu from '../../assets/img/menu.svg'
-
+import language from '../../assets/img/ic_language.svg'
+import { useTranslation } from 'react-i18next'
 
 interface TopBarProps {
   onPresentMobileMenu: () => void
@@ -19,6 +20,7 @@ interface TopBarProps {
 const CHAINID_DEV = '1002'
 const CHAINID_TEST = '1007'
 const CHAINID_MAIN = '1012'
+
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   const { account, connect } = useWallet()
@@ -34,6 +36,14 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
     case CHAINID_MAIN:
     default:
       envTitle = 'NewChainMainNet'
+  }
+  const { t, i18n} = useTranslation()
+  const changeLanguage = () => {
+    if (i18n.language == "en") {
+      i18n.changeLanguage("zh-CN")
+    } else {
+      i18n.changeLanguage("en")
+    }
   }
 
   useEffect(() => {
@@ -56,9 +66,14 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             {/* <Nav /> */}
             <StyleActionDiv>
               <Nav />
+              
+              
               <StyledAccountButtonWrapper>
                 <AccountButton />
               </StyledAccountButtonWrapper>
+              <StyledLangButton onClick={changeLanguage}>
+                {i18n.language!="en" ? "EN": "中文"}
+              </StyledLangButton>
               <StyledEnvDiv>{envTitle}</StyledEnvDiv>
             </StyleActionDiv>
             
@@ -233,6 +248,21 @@ const StyledImg = styled.img`
   &:hover {
     border:0px solid black;
   }
+`
+
+const StyledLangButton = styled.button`
+  font-size: 16px;
+  height: 28px;
+  padding: 0;
+  padding-top: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding-right: 4px;
+  &:focus{
+    outline: none;
+    border: 0;
+}
 `
 
 export default TopBar
