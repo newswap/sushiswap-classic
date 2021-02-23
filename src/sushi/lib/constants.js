@@ -145,92 +145,92 @@ export const nodeSupportedPools = [
   },
 
   // 以下测试网没有，部署测试网需要注释！！！
-  { // MZD-NEW
-    pid: 2,
-    lpAddresses: {
-      1007: '',
-      1012: '0x31b62fae9cfc27b0db3bfe07be458f74ea3538ec',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x40D690551F5F21EccB8cEdc09e86C2dd2E40Dd52',   //MZD
-    },
-    name: 'MZD Party!',
-    symbol: 'MZD-NEW LP',
-    tokenSymbol: 'MZD',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
+  // { // MZD-NEW
+  //   pid: 2,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x31b62fae9cfc27b0db3bfe07be458f74ea3538ec',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x40D690551F5F21EccB8cEdc09e86C2dd2E40Dd52',   //MZD
+  //   },
+  //   name: 'MZD Party!',
+  //   symbol: 'MZD-NEW LP',
+  //   tokenSymbol: 'MZD',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
 
-  { // DOL-NEW
-    pid: 3,
-    lpAddresses: {
-      1007: '',
-      1012: '0xe4faf4ff4af25cc79ab4bb5a359bb9e06528bb7d',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x76791bFA7098f8aac59CE9612Ce083584Fd332aF',   //DOL
-    },
-    name: 'DOL Party!',
-    symbol: 'DOL-NEW LP',
-    tokenSymbol: 'DOL',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
-  { // LOL-NEW
-    pid: 4,
-    lpAddresses: {
-      1007: '',
-      1012: '0x30524592b18c4791cdcbab3e7c3030c5aa2d1aab',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0xE67EE3A0581f9FdfE33E51FEC34593630502EE58',   //LOL
-    },
-    name: 'LOL Party!',
-    symbol: 'LOL-NEW LP',
-    tokenSymbol: 'LOL',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
-  { // JL-NEW
-    pid: 5,
-    lpAddresses: {
-      1007: '',
-      1012: '0xde166c2e659e3f5f2c82ac5c6877e5f1134af81b',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x9cc2AFD608eC856C524320BC37d79C53181cdbb7',   //JL
-    },
-    name: 'JL Party!',
-    symbol: 'JL-NEW LP',
-    tokenSymbol: 'JL',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
-  { // XIN-NEW
-    pid: 6,
-    lpAddresses: {
-      1007: '',
-      1012: '0xade2f4077989219015b493db2dcde25d37217df0',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x399100123B2A4c1cF7c22C6C3E12798c168A9860',   
-    },
-    name: 'XIN Party!',
-    symbol: 'XIN-NEW LP',
-    tokenSymbol: 'XIN',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  }
+  // { // DOL-NEW
+  //   pid: 3,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xe4faf4ff4af25cc79ab4bb5a359bb9e06528bb7d',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x76791bFA7098f8aac59CE9612Ce083584Fd332aF',   //DOL
+  //   },
+  //   name: 'DOL Party!',
+  //   symbol: 'DOL-NEW LP',
+  //   tokenSymbol: 'DOL',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // LOL-NEW
+  //   pid: 4,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x30524592b18c4791cdcbab3e7c3030c5aa2d1aab',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0xE67EE3A0581f9FdfE33E51FEC34593630502EE58',   //LOL
+  //   },
+  //   name: 'LOL Party!',
+  //   symbol: 'LOL-NEW LP',
+  //   tokenSymbol: 'LOL',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // JL-NEW
+  //   pid: 5,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xde166c2e659e3f5f2c82ac5c6877e5f1134af81b',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x9cc2AFD608eC856C524320BC37d79C53181cdbb7',   //JL
+  //   },
+  //   name: 'JL Party!',
+  //   symbol: 'JL-NEW LP',
+  //   tokenSymbol: 'JL',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // XIN-NEW
+  //   pid: 6,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xade2f4077989219015b493db2dcde25d37217df0',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x399100123B2A4c1cF7c22C6C3E12798c168A9860',   
+  //   },
+  //   name: 'XIN Party!',
+  //   symbol: 'XIN-NEW LP',
+  //   tokenSymbol: 'XIN',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
 
 
 ]
