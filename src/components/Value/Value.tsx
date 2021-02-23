@@ -4,7 +4,7 @@ import CountUp from 'react-countup'
 import styled from 'styled-components'
 
 interface ValueProps {
-  value: string | number
+  value: string | number | object
   decimals?: number
 }
 
