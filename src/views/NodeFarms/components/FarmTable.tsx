@@ -54,18 +54,18 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
 
   const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
-      
+
       const farmWithStakedValue = {
         ...farm,
         // ...stakedValue[i],
         // apy: null,
       }
       const newFarmRows = [...farmRows]
-      if (newFarmRows[newFarmRows.length - 1].length === 3) {  // TODO 什么逻辑？？？？？？
-        newFarmRows.push([farmWithStakedValue])
-      } else {
-        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
-      }
+      // if (newFarmRows[newFarmRows.length - 1].length === 3) {  
+      //   newFarmRows.push([farmWithStakedValue])
+      // } else {
+      newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
+      // }
       
       return newFarmRows
     },
