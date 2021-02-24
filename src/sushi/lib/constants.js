@@ -230,7 +230,91 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+
+  { // NAC-NEW
+    pid: 7,
+    lpAddresses: {
+      1007: '',
+      1012: '0x505f7d4c6e030d257a89302409cc49ccc607ba12',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x2558c362799314b050e915548b530976B7a8fc14',   
+    },
+    name: 'NAC Party!',
+    symbol: 'NAC-NEW LP',
+    tokenSymbol: 'NAC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // AD-NEW
+    pid: 8,
+    lpAddresses: {
+      1007: '',
+      1012: '0x3e5946af5e5a65640be8d4b0bfee39e7ea61d5c1',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xDD03BF2170d1fcb934453F4e1a206AF225fefD54',   
+    },
+    name: 'AD Party!',
+    symbol: 'AD-NEW LP',
+    tokenSymbol: 'AD',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // DVC-NEW
+    pid: 9,
+    lpAddresses: {
+      1007: '',
+      1012: '0x66b42aa2a26e16dea352aeee4d47c8c251a8354e',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x8E1fCE3e20FBa415bE61cE95610521bC7a4df121',   
+    },
+    name: 'DVC Party!',
+    symbol: 'DVC-NEW LP',
+    tokenSymbol: 'DVC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // DOGE-NEW
+    pid: 10,
+    lpAddresses: {
+      1007: '',
+      1012: '0x71bf2cb40412dfd511adf9a5f24b7fb97a076288',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x115d702Fc5a31b9DC74F1468Df0D3c65bBFECe77',   
+    },
+    name: 'DOGE Party!',
+    symbol: 'DOGE-NEW LP',
+    tokenSymbol: 'DOGE',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // ECARE-NEW
+    pid: 11,
+    lpAddresses: {
+      1007: '',
+      1012: '0x7a4aa1c009db9d93118ed273f294a0019a2b66de',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x9fb33bf209E16138C87548ABaeB78C8eb8d038aC',   
+    },
+    name: 'ECARE Party!',
+    symbol: 'ECARE-NEW LP',
+    tokenSymbol: 'ECARE',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
-
-
 ]
