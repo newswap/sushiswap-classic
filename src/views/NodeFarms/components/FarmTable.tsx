@@ -124,7 +124,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                           {/* <StyledImgMob src={farm.iconL}/> */}
                           </StyledLogo>
                           <StyledTokenLabelMob>
-                            {farm.name}
+                            {farm.name.slice(0, 10)}
                           </StyledTokenLabelMob>
                           </div>
                         </StyledTableCell>
@@ -134,7 +134,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                             {/* <StyledImgLMob src={farm.iconL}/> */}
                             <LazyIcon address={address} customStyle={iconLStyleMob}/>
                           </StyledPoolLogo>
-                          <StyledLPLabelMob>{farm.id}</StyledLPLabelMob>
+                          <StyledLPLabelMob>{farm.id.slice(0, 10)}</StyledLPLabelMob>
                         </StyledTableCell>
                         <StyledTableCell align="right">
                           <StyledLink to={`/communityMining/${farm.id}`}>

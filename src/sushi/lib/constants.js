@@ -316,5 +316,42 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+
+  { // GYSQ-NEW
+    pid: 12,
+    lpAddresses: {
+      1007: '',
+      1012: '0x390523ee97294fdcdce3cfa0aed1d5a4828d7891',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x8B6231d9EcB6Ec6f6AA3a5F889cF14346857e141',   
+    },
+    name: 'GYSQ Party!',
+    symbol: 'GYSQ-NEW LP',
+    tokenSymbol: 'GYSQ',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
+
+  // { // ?-NEW
+  //   pid: ?,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '?',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '?',   
+  //   },
+  //   name: '? Party!',
+  //   symbol: '?-NEW LP',
+  //   tokenSymbol: '?',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
+
 ]
