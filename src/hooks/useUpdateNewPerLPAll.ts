@@ -13,7 +13,7 @@ const useUpdateNewPerLPAll = () => {
   const handleUpdateNewPerLPAll = useCallback(async () => {
     try {
       const txHash = await updateNewPerLPAll(newMineContract, account)
-      console.log("-----------useUpdateNewPerLPAll:"+txHash)
+      // console.log("-----------useUpdateNewPerLPAll:"+txHash)
       return txHash
     } catch (e) {
       return false

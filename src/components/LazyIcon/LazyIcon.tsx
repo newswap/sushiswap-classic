@@ -24,7 +24,7 @@ const LazyIcon: React.FC<LazyIconProps> = ({
     customStyle
 }) => {
     const iconSrc =  "https://misc.newswap.org/tokenlist/assets/" + env + "/" + address + "/logo.png"
-    console.log("Address is: " + iconSrc)
+    // console.log("Address is: " + iconSrc)
     return (
         // <LazyImage 
         //     src={iconSrc}

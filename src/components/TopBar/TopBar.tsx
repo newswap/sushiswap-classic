@@ -48,7 +48,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
 
   useEffect(() => {
     if (!account) {
-      console.log("=========TopBar:auto connect=============")
+      // console.log("=========TopBar:auto connect=============")
       connect('injected')
     }
   }, [])

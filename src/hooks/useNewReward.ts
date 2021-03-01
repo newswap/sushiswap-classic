@@ -13,7 +13,7 @@ const useNewReward = (pid: number) => {
   const handleReward = useCallback(async () => {
     try {
       const txHash = await harvestNew(newMineContract, pid, account)
-      console.log("-----------useNewReward:"+txHash)
+      // console.log("-----------useNewReward:"+txHash)
       return txHash
     } catch (e) {
       return false

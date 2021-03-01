@@ -109,7 +109,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
             .map((farm, j) => {
 
               let address = farm.tokenAddress
-              console.log("======address" + address)
+              // console.log("======address" + address)
               return (
                 <StyledNavLink to={`/communityMining/${farm.id}`}>
                   <StyledTableRow key={farm.pid}>

@@ -183,7 +183,7 @@ export const claim = async (merkleDistributorContract, index, account, amount, p
     .claim(index, account, new BigNumber(amount).toString(),proof)
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -196,8 +196,8 @@ export const getTotalLPWethValue = async (
   pid,
   isGetPoolWeight
 ) => {
-  console.log('getTotalLPWethValue========')
-  console.log(lpContract.options.address)
+  // console.log('getTotalLPWethValue========')
+  // console.log(lpContract.options.address)
 
   // Get balance of the token address
   const tokenAmountWholeLP = await tokenContract.methods
@@ -271,7 +271,7 @@ export const stake = async (masterChefContract, pid, amount, account) => {
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -284,7 +284,7 @@ export const stakeNewMine = async (newMineContract, pid, amount, account) => {
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -296,7 +296,7 @@ export const stakeNewMineSingle = async (newMineSingleContract, amount, account)
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -309,7 +309,7 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -322,7 +322,7 @@ export const unstakeNewMine = async (newMineContract, pid, amount, account) => {
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -334,7 +334,7 @@ export const unstakeNewMineSingle = async (newMineSingleContract, amount, accoun
     )
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -345,7 +345,7 @@ export const harvest = async (masterChefContract, pid, account) => {
     .deposit(pid, '0')
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -355,7 +355,7 @@ export const harvestNew = async (newMineContract, pid, account) => {
     .deposit(pid, '0')
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -366,7 +366,7 @@ export const harvestNewSingle = async (newMineSingleContract, account) => {
     .deposit('0')
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -377,7 +377,7 @@ export const updateNewPerLPAll = async (newMineContract, account) => {
     .updateNewPerLPAll()
     .send({ from: account })
     .on('transactionHash', (tx) => {
-      console.log(tx)
+      // console.log(tx)
       return tx.transactionHash
     })
 }
@@ -422,7 +422,7 @@ export const redeem = async (masterChefContract, account) => {
       .exit()
       .send({ from: account })
       .on('transactionHash', (tx) => {
-        console.log(tx)
+        // console.log(tx)
         return tx.transactionHash
       })
   } else {
@@ -438,7 +438,7 @@ export const enter = async (contract, amount, account) => {
       )
       .send({ from: account })
       .on('transactionHash', (tx) => {
-        console.log(tx)
+        // console.log(tx)
         return tx.transactionHash
       })
 }
@@ -450,7 +450,7 @@ export const leave = async (contract, amount, account) => {
       )
       .send({ from: account })
       .on('transactionHash', (tx) => {
-        console.log(tx)
+        // console.log(tx)
         return tx.transactionHash
       })
 }

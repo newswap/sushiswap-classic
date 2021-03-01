@@ -22,7 +22,7 @@ const useSwapMerkleNode = () => {
       response = await fetch(MERKLE_URL)
       json = await response.json()
     } catch (error) {
-      console.log('Failed to fetch MERKLE', MERKLE_URL, error)
+      // console.log('Failed to fetch MERKLE', MERKLE_URL, error)
     }
 
     if (response && response.ok && json) {

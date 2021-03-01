@@ -19,8 +19,8 @@ const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 
 const NodeFarm: React.FC = () => {
   const { farmId } = useParams()
-  console.log("====farmId")
-  console.log(farmId)
+  // console.log("====farmId")
+  // console.log(farmId)
   const {
     pid,
     lpToken,
@@ -44,8 +44,8 @@ const NodeFarm: React.FC = () => {
     iconR: '',
     tokenSymbol: ''
   }
-  console.log("====iconR")
-  console.log(iconR)
+  // console.log("====iconR")
+  // console.log(iconR)
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])

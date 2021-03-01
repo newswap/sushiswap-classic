@@ -41,8 +41,8 @@ const SushiProvider: React.FC = ({ children }) => {
         ethereumNodeTimeout: 10000,
       })
 
-      console.log("=======SushiProvider=========")
-      console.log(sushiLib)
+      // console.log("=======SushiProvider=========")
+      // console.log(sushiLib)
 
       setSushi(sushiLib)
       window.sushisauce = sushiLib

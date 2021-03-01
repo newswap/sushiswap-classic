@@ -317,7 +317,6 @@ export const nodeSupportedPools = [
     iconL: '',
     iconR: newcoin
   },
-
   { // GYSQ-NEW
     pid: 12,
     lpAddresses: {
@@ -331,6 +330,40 @@ export const nodeSupportedPools = [
     name: 'GYSQ Party!',
     symbol: 'GYSQ-NEW LP',
     tokenSymbol: 'GYSQ',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // MCC-NEW
+    pid: 13,
+    lpAddresses: {
+      1007: '',
+      1012: '0x6fe0ea67d9d536df7c045da4f4f8d954385aaee0',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x888C5723822dae91c00b80e2812B5d59a2601B01',   
+    },
+    name: 'MCC Party!',
+    symbol: 'MCC-NEW LP',
+    tokenSymbol: 'MCC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // STC-NEW
+    pid: 14,
+    lpAddresses: {
+      1007: '',
+      1012: '0x834d7f93ce46e495f7f5d50021b503f9c3cb1e5b',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x463A9e854D5A08ccbF227D3cefD4fBd09FEE6B1E',   
+    },
+    name: 'STC Party!',
+    symbol: 'STC-NEW LP',
+    tokenSymbol: 'STC',
     icon: '',
     iconL: '',
     iconR: newcoin

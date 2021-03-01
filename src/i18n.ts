@@ -20,7 +20,7 @@ i18next
     interpolation: { escapeValue: false }
   },
   (error) => {
-    console.log(error, "i18n error loading");
+    // console.log(error, "i18n error loading");
   })
 
 export default i18next

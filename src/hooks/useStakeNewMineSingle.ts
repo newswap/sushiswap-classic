@@ -17,7 +17,7 @@ const useStakeNewMineSingle = () => {
           amount,
           account,
         )
-        console.log(txHash)
+        // console.log(txHash)
         return txHash
       } catch (e) {
         return false

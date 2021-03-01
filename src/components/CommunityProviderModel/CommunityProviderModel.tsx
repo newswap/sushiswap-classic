@@ -74,7 +74,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
     // Token Type
     const [selectedToken, setSelectedToken] = React.useState('');
     const handleSelectedToken = (event: any) => {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         
         setSelectedToken(event.target.value);
     };
@@ -89,7 +89,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
         // console.log('==duration' + duration)
         // console.log('==fee' + fee)
         // console.log('==selectedToken' + selectedToken)
-        console.log('==selected Date' + selectedDate)
+        // console.log('==selected Date' + selectedDate)
         // setDataFilled(name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='')
         if (name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='') {
             /// Submit data

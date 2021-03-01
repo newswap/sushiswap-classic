@@ -14,7 +14,7 @@ const useSwapClaim = () => {
     async (index, account, amount, proof) => {
       try {
         const txHash = await claim(merkleDistributorContract, index, account, amount, proof)
-        console.log(txHash)
+        // console.log(txHash)
         return txHash
       } catch (e) {
         return false

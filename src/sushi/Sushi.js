@@ -11,7 +11,7 @@ export class Sushi {
     var realProvider
 
     if (typeof provider === 'string') {
-      console.log("====new Sushi 1=====provider:" + provider)
+      // console.log("====new Sushi 1=====provider:" + provider)
       if (provider.includes('wss')) {
         realProvider = new Web3.providers.WebsocketProvider(
           provider,
@@ -24,8 +24,8 @@ export class Sushi {
         )
       }
     } else {
-      console.log("====new Sushi 2=====provider:")
-      console.log(provider)
+      // console.log("====new Sushi 2=====provider:")
+      // console.log(provider)
       realProvider = provider
     }
 

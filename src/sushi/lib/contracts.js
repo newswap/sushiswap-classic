@@ -21,7 +21,7 @@ import * as Types from './types.js'
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
-    console.log("=====new Contracts======")
+    // console.log("=====new Contracts======")
     this.web3 = web3
     this.defaultConfirmations = options.defaultConfirmations
     this.autoGasMultiplier = options.autoGasMultiplier || 1.5
@@ -140,7 +140,7 @@ export class Contracts {
         txOptions.gas = this.defaultGas
       } else {
         try {
-          console.log('estimating gas')
+          // console.log('estimating gas')
           gasEstimate = await method.estimateGas(txOptions)
         } catch (error) {
           const data = method.encodeABI()

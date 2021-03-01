@@ -35,7 +35,7 @@ const FarmCards: React.FC = () => {
   const { account } = useWallet()
   const stakedValue = useAllStakedValue()
   const newPrice = useNewPrice()
-  console.log("FarmCards newPrice------->"+newPrice)
+  // console.log("FarmCards newPrice------->"+newPrice)
   const { t } = useTranslation()
   
   const nstIndex = farms.findIndex(

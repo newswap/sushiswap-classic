@@ -14,7 +14,7 @@ const useUnstakeNewMine = (pid: number) => {
     async (amount: string) => {
       try {
         const txHash = await unstakeNewMine(newMineContract, pid, amount, account)
-        console.log(txHash)  
+        // console.log(txHash)  
         return txHash
       } catch (e) {
         return false

@@ -13,7 +13,7 @@ const useReward = (pid: number) => {
   const handleReward = useCallback(async () => {
     try {
       const txHash = await harvest(masterChefContract, pid, account)
-      console.log(txHash)
+      // console.log(txHash)
       return txHash
     } catch (e) {
       return false

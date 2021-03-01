@@ -14,7 +14,7 @@ const useUnstakeNewMineSingle = () => {
     async (amount: string) => {
       try {
         const txHash = await unstakeNewMineSingle(newMineContract, amount, account)
-        console.log(txHash)
+        // console.log(txHash)
         return txHash
       } catch (e) {
         return false
