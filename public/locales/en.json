@@ -1,10 +1,12 @@
 {
   "estimateMiningEfficient": "Overall Farm Rate",
   "homeHeaderSubtitle": "Stake {{tokenSymbol}}-{{new}} liquidity token and get {{token}} reward.",
-  "releaseTip": "30M in total for 30 days",
+  "releaseTip": "30M NEW in total from 2021.2.3 08:00 to 2021.3.5 08:00",
   "newPerBlock": "Overall Farm Rate: {{new}}NEW/block",
   "miningStart": "(Mining starts at 2021.2.3 8:00 (UTC+8))",
   "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time.",
+  "unMingClose": "Stay tuned on the upcoming Phase 2",
+  "unMingCloseTips": "Phase 1 has ended, please harvest your reward.",
 
   "tradeMiningTips": "Trade digital assets in NewSwap and win your Chinese New Year rewards.",
   "tradeMiningTime": "(10M NEW in total from 2021.2.11 08:00 to 2021.2.18 08:00)",

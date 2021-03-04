@@ -65,6 +65,8 @@ const Home: React.FC = () => {
   // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
   // console.log("newValue:"+newAmount.toNumber())
 
+  // 挖矿结束时间 
+  const endTime = 1614902400000
   // const {
   //   pid,
   //   lpTokenAddress,
@@ -110,27 +112,27 @@ const Home: React.FC = () => {
               iconR={iconR}
               tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
-              subsubtitle={'(' + t('releaseTip') + ')'}
-              title={tokenSymbol + '-NEW ' + t('MINING')}
+              subsubtitle={new Date().getTime() < endTime ? '(' + t('releaseTip') + ')' : ''}
+              title={ tokenSymbol + '-NEW ' + t('MINING')}
             />
             { new Date().getTime() < 1612310400000 && (
               <Label text={t('miningStart')} />
             )}
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                {t('Total Stake Value')}: {newAmount.toNumber() > 0
-                    ? `$${newAmount.times(newPrice)
-                        .toNumber()
-                        .toLocaleString('en-US')}`
-                    : '$0.00'}
+                { new Date().getTime() < endTime ? 
+                     `${t('Total Stake Value')}: 
+                        ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
+                      : t('unMingClose')
+                }
               </StyledTotalDiv>
               <StyledSpeedDiv>
-                {t('APY（Estimated）')}: {newAmount.toNumber() > 0
-                   ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount)
-                       .times(new BigNumber(100))
-                       .toNumber()
-                       .toLocaleString('en-US')}%`
-                    : t('—')}
+                { new Date().getTime() < endTime ? 
+                      `${t('APY（Estimated）')}:
+                          ${newAmount.toNumber() > 0 ? 
+                              BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
+                      : t('unMingCloseTips')
+                }
               </StyledSpeedDiv>
               {/* <StyledSpeedDiv>
                 {t('Total Stake')}: {getFormatDisplayBalance(lpBalance, 18, 6)} LP
