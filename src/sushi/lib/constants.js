@@ -283,23 +283,23 @@ export const nodeSupportedPools = [
     iconL: '',
     iconR: newcoin
   },
-  { // DOGE-NEW
-    pid: 10,
-    lpAddresses: {
-      1007: '',
-      1012: '0x71bf2cb40412dfd511adf9a5f24b7fb97a076288',
-    },
-    tokenAddresses: {
-      1007: '', 
-      1012: '0x115d702Fc5a31b9DC74F1468Df0D3c65bBFECe77',   
-    },
-    name: 'DOGE Party!',
-    symbol: 'DOGE-NEW LP',
-    tokenSymbol: 'DOGE',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
+  // { // DOGE-NEW
+  //   pid: 10,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x71bf2cb40412dfd511adf9a5f24b7fb97a076288',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x115d702Fc5a31b9DC74F1468Df0D3c65bBFECe77',   
+  //   },
+  //   name: 'DOGE Party!',
+  //   symbol: 'DOGE-NEW LP',
+  //   tokenSymbol: 'DOGE',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
   { // ECARE-NEW
     pid: 11,
     lpAddresses: {
