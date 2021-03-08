@@ -117,7 +117,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                       (isMobile) ? (
                         <>
                         <StyledTableCell component="th" scope="row"> 
-                          <StyledIDLabelMob>{farm.pid + 1}</StyledIDLabelMob>
+                          <StyledIDLabelMob>{j + 1}</StyledIDLabelMob>
                           <div>
                           <StyledLogo>
                           <LazyIcon address={address} customStyle={iconStyleMob}/>
@@ -147,7 +147,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         <>
                         <StyledTableCell component="th" scope="row"> 
                         
-                          <StyledIDLabel>{farm.pid + 1}</StyledIDLabel>
+                          <StyledIDLabel>{j + 1}</StyledIDLabel>
                           <StyledLogo>
                             {/* <StyledImg src={farm.iconL}/> */}
                             <LazyIcon address={address} customStyle={iconStyle}/>

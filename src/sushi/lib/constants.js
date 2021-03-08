@@ -367,6 +367,40 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // XC-NEW
+    pid: 15,
+    lpAddresses: {
+      1007: '',
+      1012: '0x02159fbcb57b0b5357e95eb68bf314b00f242905',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xCad38A1E4E3918f03b12A451Ce5835C8a274586C',   
+    },
+    name: 'XC Party!',
+    symbol: 'XC-NEW LP',
+    tokenSymbol: 'XC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // LBP-NEW
+    pid: 16,
+    lpAddresses: {
+      1007: '',
+      1012: '0x946571a62f53318e7f6ba67873369c997b3b118a',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x4DcbC88C1d2C9E36a5DB99B7f9523a5F0C19D507',   
+    },
+    name: 'LBP Party!',
+    symbol: 'LBP-NEW LP',
+    tokenSymbol: 'LBP',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
