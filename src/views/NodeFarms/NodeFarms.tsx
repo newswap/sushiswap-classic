@@ -33,6 +33,9 @@ const NodeFarms: React.FC = () => {
     await onUpdatePrice()
   }
 
+  // 挖矿结束时间3.11 8:00 = 1615420800000  
+  const endTime = 1615420800000
+
   return (
     <Switch>
       <Page>
@@ -43,7 +46,7 @@ const NodeFarms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Community Mining')}
                 subtitle={t('communityMiningTips')}
-                subsubtitle={CHAIN_ID == 1012 ? t('communityMiningTime') : t('communityMiningTimeTest')}
+                subsubtitle={new Date().getTime() < endTime ? t('communityMiningTime') : ''}         
               />
               <Container>
                 <Balances />
@@ -179,6 +182,7 @@ const StyledLink = styled.a`
 
 const StyledRedeemDiv = styled.div`
   color: #607686;
+  float: right;
   font-size: 16px;
   margin-top: 4px;
   margin-left: 12px;

@@ -84,8 +84,49 @@ const Balances: React.FC = () => {
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
+  // 挖矿结束时间3.11 8:00 = 1615420800000  
+  const endTime = 1615420800000
+
   return (
     <StyledWrapper>
+      { new Date().getTime() < endTime ? (
+          <Card>
+            <CardContent>
+              <Label text={t('Total Stake Value')} />
+              <Value
+                value={totalNew > 0 
+                  ? `$${newPrice.times(totalNew)
+                  .toNumber()
+                  .toLocaleString('en-US')}` 
+                  : '$0.00'}
+              />
+            </CardContent>
+            <Footnote>
+              {t('APY（Estimated）')}
+              <FootnoteValue>{
+                totalNew > 0
+                      ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
+                          .times(new BigNumber(100))
+                          .toNumber()
+                          .toLocaleString('en-US')}%`
+                        : '—'}
+                </FootnoteValue>
+            </Footnote>
+          </Card>
+        ) : (
+          <Card>
+            <CardContent>
+              <StyledCloseDiv>
+                {t('unMingClose')}
+              </StyledCloseDiv>
+            </CardContent>
+            <Footnote>
+              {t('unMingCloseTips')}
+            </Footnote>
+          </Card>
+        )
+      }
+      <Spacer />
       <Card>
         <CardContent>
           <StyledBalances>
@@ -108,34 +149,25 @@ const Balances: React.FC = () => {
           </FootnoteValue>
         </Footnote>
       </Card>
-      <Spacer />
-
-      <Card>
-        <CardContent>
-          <Label text={t('Total Stake Value')} />
-          <Value
-            value={totalNew > 0 
-              ? `$${newPrice.times(totalNew)
-              .toNumber()
-              .toLocaleString('en-US')}` 
-              : '$0.00'}
-          />
-        </CardContent>
-        <Footnote>
-          {t('APY（Estimated）')}
-          <FootnoteValue>{
-            totalNew > 0
-                   ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
-                       .times(new BigNumber(100))
-                       .toNumber()
-                       .toLocaleString('en-US')}%`
-                    : '—'}
-            </FootnoteValue>
-        </Footnote>
-      </Card>
     </StyledWrapper>
   )
 }
+
+const StyledCloseDiv = styled.div`
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  @media (max-width: 768px) {
+    width: 99%;
+    font-size: 24px;
+  }
+  color: #20C5A0;
+  font-size: 29px;
+  font-weight: 700;
+`
 
 const Footnote = styled.div`
   font-size: 16px;

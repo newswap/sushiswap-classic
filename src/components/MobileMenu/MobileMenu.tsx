@@ -16,6 +16,7 @@ interface MobileMenuProps {
 const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
   const { t, i18n} = useTranslation()
   const changeLanguage = () => {
+    onDismiss()
     if (i18n.language == "en") {
       i18n.changeLanguage("zh-CN")
     } else {
