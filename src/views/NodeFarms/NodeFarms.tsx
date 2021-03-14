@@ -33,9 +33,9 @@ const NodeFarms: React.FC = () => {
     await onUpdatePrice()
   }
 
-  // 挖矿结束时间3.11 8:00 = 1615420800000  
-  const endTime = 1615420800000
-
+  // 挖矿开始时间 1615780800000
+  const startTime = 1615780800000
+  
   return (
     <Switch>
       <Page>
@@ -46,7 +46,7 @@ const NodeFarms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Community Mining')}
                 subtitle={t('communityMiningTips')}
-                subsubtitle={new Date().getTime() < endTime ? t('communityMiningTime') : ''}         
+                subsubtitle={new Date().getTime() > startTime ? t('communityMiningTime') : ''}         
               />
               <Container>
                 <Balances />

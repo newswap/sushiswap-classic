@@ -3,7 +3,7 @@
   "NUSDT Mining": "NUSDT挖矿",
   "estimateMiningEfficient": "全局挖矿效率",
   "homeHeaderSubtitle": "将 {{tokenSymbol}}-{{new}} 流动性通证质押入矿池，获得 {{token}} 奖励。",
-  "releaseTip": "总量3000万枚 / 活动时间：2021.2.3 08:00 - 2021.3.5 08:00",
+  "releaseTip": "总量1000万枚 / 活动时间：2021.3.15 12:00 - 2021.3.22 12:00",
   "MINING": "矿池",
   "Unlock Wallet": "连接钱包",
   "Deposit": "质押",
@@ -53,7 +53,7 @@
   
   "Community Mining": "社群挖矿",
   "communityMiningTips": "质押社群矿池对应的流动性通证，获得 NEW 奖励。",
-  "communityMiningTime": "(总量2000万枚 / 活动时间：2021.2.25 08:00 - 2021.3.11 08:00)",
+  "communityMiningTime": "(总量1000万枚 / 活动时间：2021.3.15 12:00 - 2021.4.12 12:00)",
   "communityMiningTimeTest": "(总量3000万枚 / 活动时间：2021.2.19 08:00 - 2021.3.18 08:00)",
   "communityHeaderSubtitle": "将 {{tokenSymbol}}-NEW 流动性通证质押入矿池，获得 {{earnTokenName}} 奖励",
   "Your NEW Balance": "钱包NEW余额",

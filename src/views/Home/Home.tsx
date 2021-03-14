@@ -65,8 +65,8 @@ const Home: React.FC = () => {
   // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
   // console.log("newValue:"+newAmount.toNumber())
 
-  // 挖矿结束时间 
-  const endTime = 1614902400000
+  // 挖矿开始时间 1615780800000
+  const startTime = 1615780800000
   // const {
   //   pid,
   //   lpTokenAddress,
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
               iconR={iconR}
               tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
-              subsubtitle={new Date().getTime() < endTime ? '(' + t('releaseTip') + ')' : ''}
+              subsubtitle={new Date().getTime() > startTime ? '(' + t('releaseTip') + ')' : ''}
               title={ tokenSymbol + '-NEW ' + t('MINING')}
             />
             { new Date().getTime() < 1612310400000 && (
@@ -120,14 +120,14 @@ const Home: React.FC = () => {
             )}
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                { new Date().getTime() < endTime ? 
+                { new Date().getTime() > startTime ? 
                      `${t('Total Stake Value')}: 
                         ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
                       : t('unMingClose')
                 }
               </StyledTotalDiv>
               <StyledSpeedDiv>
-                { new Date().getTime() < endTime ? 
+                { new Date().getTime() > startTime ? 
                       `${t('APY（Estimated）')}:
                           ${newAmount.toNumber() > 0 ? 
                               BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
