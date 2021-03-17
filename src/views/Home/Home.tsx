@@ -112,7 +112,7 @@ const Home: React.FC = () => {
               iconR={iconR}
               tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
-              subsubtitle={CHAIN_ID==1007 ? t('releaseTipTest') : (new Date().getTime() > startTime ? t('releaseTip') : '')}
+              subsubtitle={CHAIN_ID===1007 ? t('releaseTipTest') : (new Date().getTime() > startTime ? t('releaseTip') : '')}
               title={ tokenSymbol + '-NEW ' + t('MINING')}
             />
             { new Date().getTime() < 1612310400000 && (

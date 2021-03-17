@@ -46,7 +46,7 @@ const NodeFarms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Community Mining')}
                 subtitle={t('communityMiningTips')}
-                subsubtitle={new Date().getTime() > startTime ? t('communityMiningTime') : ''}         
+                subsubtitle={CHAIN_ID===1007 ? t('communityMiningTimeTest') : (new Date().getTime() > startTime ? t('communityMiningTime') : '')}         
               />
               <Container>
                 <Balances />
