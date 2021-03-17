@@ -401,6 +401,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // DLD-NEW
+    pid: 17,
+    lpAddresses: {
+      1007: '',
+      1012: '0x30a5b4ac0df2f6223b45aef82039f1731d291930',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xE15B9d4979CAcAD3e01f86909005ecc3ACcEA498',   
+    },
+    name: 'DLD Party!',
+    symbol: 'DLD-NEW LP',
+    tokenSymbol: 'DLD',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
