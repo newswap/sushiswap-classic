@@ -47,7 +47,7 @@ const Home: React.FC = () => {
   const tokenSymbol = 'NUSDT'
   const iconL = usdtcoin
   const iconR = newcoin
-  const tokenAddress = CHAIN_ID==1012 ? '0x4BFB4297f9C28a373aE6ae58a8f8EfeFF334cae8' : '0x20F12218281F9CA566B5c41F17c6c19050125cD3'
+  const tokenAddress = CHAIN_ID==1012 ? '0x4BFB4297f9C28a373aE6ae58a8f8EfeFF334cae8' : '0xC01A73fBF1c1953D18b48518259b36D70b07F277'
   
   // 锁仓合约质押的lp数量
   const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
@@ -79,10 +79,10 @@ const Home: React.FC = () => {
   // } = {
   //   pid: 0,
   //   lpTokenAddress: {
-  //     1007: '0x56aE975581a382193FF36579C81281E179486c43',
+  //     1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
   //   },
   //   tokenAddresses: {
-  //     1007: '0x20F12218281F9CA566B5c41F17c6c19050125cD3', //NUSDT
+  //     1007: '0xc01a73fbf1c1953d18b48518259b36d70b07f277', //NUSDT
   //   },
   //   name: 'NUSDT Party!',
   //   symbol: 'NUSDT-NEW LP',
@@ -112,7 +112,7 @@ const Home: React.FC = () => {
               iconR={iconR}
               tokenAddress={tokenAddress}
               subtitle= {t('homeHeaderSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
-              subsubtitle={new Date().getTime() > startTime ? '(' + t('releaseTip') + ')' : ''}
+              subsubtitle={CHAIN_ID==1007 ? t('releaseTipTest') : (new Date().getTime() > startTime ? t('releaseTip') : '')}
               title={ tokenSymbol + '-NEW ' + t('MINING')}
             />
             { new Date().getTime() < 1612310400000 && (
