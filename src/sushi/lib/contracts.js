@@ -15,6 +15,7 @@ import {
   contractAddresses,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
+  mainstreamSupportedPools,
   nodeSupportedPools
 } from './constants.js'
 import * as Types from './types.js'
@@ -33,7 +34,7 @@ export class Contracts {
     this.weth = new this.web3.eth.Contract(WETHAbi)
     this.newNUSDTPair = new this.web3.eth.Contract(UNIV2PairAbi)
 
-    // 单独给new-nusdt交易对挖new的矿山
+    // 单独给new-nusdt交易对挖new的矿山  TODO 删除，放到mainstreamPools
     this.newMineSingle = new this.web3.eth.Contract(NewMineSingleAbi)
 
     // 社群矿区
@@ -48,6 +49,19 @@ export class Contracts {
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
       }),
     )
+   
+    // 主流币矿区
+    this.mainstreamPools = mainstreamSupportedPools.map((pool) =>
+      Object.assign(pool, {
+        miningAddress: pool.miningAddresses[networkId],
+        lpAddress: pool.lpAddresses[networkId],
+        tokenAddress: pool.tokenAddresses[networkId],
+        miningContract: new this.web3.eth.Contract(NewMineSingleAbi),
+        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+        tokenContract: new this.web3.eth.Contract(ERC20Abi),
+        newPerBlock: pool.newPerBlocks[networkId],
+      }),
+    )
 
     // 交易挖矿
     this.merkleDistributor = new this.web3.eth.Contract(MerkleDistributorAbi)
@@ -59,7 +73,6 @@ export class Contracts {
     // nsp理财区
     // this.nsp = new this.web3.eth.Contract(NSPAbi)
     // this.xNSPStaking = new this.web3.eth.Contract(XNSPAbi)
-
 
     // NST Pools
     this.pools = supportedPools.map((pool) =>
@@ -89,6 +102,14 @@ export class Contracts {
 
     this.nodePools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {
+        setProvider(lpContract, lpAddress)
+        setProvider(tokenContract, tokenAddress)
+      },
+    )
+
+    this.mainstreamPools.forEach(
+      ({ miningContract, miningAddress, lpContract, lpAddress, tokenContract, tokenAddress }) => {
+        setProvider(miningContract, miningAddress)
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)
       },

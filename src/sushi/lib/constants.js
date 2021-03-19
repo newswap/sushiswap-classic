@@ -52,7 +52,7 @@ export const contractAddresses = {
 
 
   masterChef: {
-    1007: 'TODO',  //小写 0x99f935050b5851acfb24ce9114c152a369fd89a7
+    1007: 'TODO',  //小写
     1012: 'TODO'
   },
   nst: { 
@@ -75,36 +75,63 @@ export const contractAddresses = {
 
 // nstFarms supported Pools
 export const supportedPools = [
-//   // {
-//   //   pid: 1,
-//   //   lpAddresses: {
-//   //     1007: '0x955e90ff4fcd6b79823f6f5185097bdec04cf9c5',
-//   //   },
-//   //   tokenAddresses: {
-//   //     1007: '0x43bb9b430ce64c2ed0c39c59fe48fac239149240', //NST
-//   //   },
-//   //   name: 'NST Party!',
-//   //   symbol: 'NST-NEW LP',
-//   //   tokenSymbol: 'NST',
-//   //   icon: '👨🏻‍🍳',
-//   //   iconL: newcoin,
-//   //   iconR: newcoin
-//   // },
-//   // {
-//   //   pid: 0,
-//   //   lpAddresses: {
-//   //     1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
-//   //   },
-//   //   tokenAddresses: {
-//   //     1007: '0xc01a73fbf1c1953d18b48518259b36d70b07f277', //NUSDT
-//   //   },
-//   //   name: 'NUSDT Party!',
-//   //   symbol: 'NUSDT-NEW LP',
-//   //   tokenSymbol: 'NUSDT',
-//   //   icon: '👨🏻‍🍳',
-//   //   iconL: usdtcoin,
-//   //   iconR: newcoin
-//   // }
+  // {
+  //   pid: 1,
+  //   lpAddresses: {
+  //     1007: '0x955e90ff4fcd6b79823f6f5185097bdec04cf9c5',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0x43bb9b430ce64c2ed0c39c59fe48fac239149240', //NST
+  //   },
+  //   name: 'NST Party!',
+  //   symbol: 'NST-NEW LP',
+  //   tokenSymbol: 'NST',
+  //   icon: '👨🏻‍🍳',
+  //   iconL: newcoin,
+  //   iconR: newcoin
+  // },
+  // {
+  //   pid: 0,
+  //   lpAddresses: {
+  //     1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0xC01A73fBF1c1953D18b48518259b36D70b07F277', //NUSDT
+  //   },
+  //   name: 'NUSDT Party!',
+  //   symbol: 'NUSDT-NEW LP',
+  //   tokenSymbol: 'NUSDT',
+  //   icon: '👨🏻‍🍳',
+  //   iconL: usdtcoin,
+  //   iconR: newcoin
+  // }
+]
+
+export const mainstreamSupportedPools = [
+  { // NUSDT-NEW
+    miningAddresses: {
+      1007: '0xa6f3fb1557a5053af53d4b7febddafc8f03e6cbb',  //小写
+      1012: '0x8b028f0f001417e3b9c086c5740722839dab12b0'
+    },
+    lpAddresses: {
+      1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
+      1012: '',
+    },
+    tokenAddresses: {
+      1007: '0xC01A73fBF1c1953D18b48518259b36D70b07F277', // 区分大小写，否则无法获得图片
+      1012: '', 
+    },
+    newPerBlocks: {
+      1007: '1', 
+      1012: '49.603174', 
+    },
+    name: 'NUSDT Party!',
+    symbol: 'NUSDT-NEW LP',
+    tokenSymbol: 'NUSDT',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
 ]
 
 // // community mining supported Polls

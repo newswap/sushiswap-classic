@@ -9,22 +9,19 @@ import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
 
-import useAllStakedValueForCommunity from '../../../hooks/useAllStakedValueForCommunity'
-import useAllEarningsNew from '../../../hooks/useAllEarningsNew'
+import useAllStakedValueForMainstream from '../../../hooks/useAllStakedValueForMainstream'
+import useAllEarningsNewMainstream from '../../../hooks/useAllEarningsNewMainstream'
 import useNewPrice from '../../../hooks/useNewPrice'
 import useNewBalance from '../../../hooks/useNewBalance'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
-
-const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NODE ?? '1')
-const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
 
-  const allEarnings = useAllEarningsNew()
+  const allEarnings = useAllEarningsNewMainstream()
   let sumEarning = 0
   for (let earning of allEarnings) {
     sumEarning += new BigNumber(earning)
@@ -65,14 +62,14 @@ const Balances: React.FC = () => {
   const { account, balance } = useWallet()
   const { t } = useTranslation()
 
-  const stakedValue = useAllStakedValueForCommunity()
+  const stakedValue = useAllStakedValueForMainstream()
   const newPrice = useNewPrice()
   // console.log("newPrice------->"+newPrice)
 
   // useWallet()中的balance在手机上无效，获取NEW用下面的方法
   const newBalance = useNewBalance()
   // console.log("===================>"+newBalance)
-
+  
   let totalNew = 0
   for (let staked of stakedValue) {
     totalNew += staked.totalWethValue ? staked.totalWethValue.toNumber() : 0
@@ -84,7 +81,7 @@ const Balances: React.FC = () => {
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
-  // 挖矿开始时间 1615780800000
+  // 挖矿开始时间
   const startTime = 1615780800000
   
   return (
@@ -103,13 +100,16 @@ const Balances: React.FC = () => {
             </CardContent>
             <Footnote>
               {t('APY（Estimated）')}
-              <FootnoteValue>{
-                totalNew > 0
-                      ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
-                          .times(new BigNumber(100))
-                          .toNumber()
-                          .toLocaleString('en-US')}%`
-                        : '—'}
+              <FootnoteValue>
+                {
+                 '？？？？？？？'
+                // totalNew > 0
+                //       ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
+                //           .times(new BigNumber(100))
+                //           .toNumber()
+                //           .toLocaleString('en-US')}%`
+                //         : '—'
+                }
                 </FootnoteValue>
             </Footnote>
           </Card>

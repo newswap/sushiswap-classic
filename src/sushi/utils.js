@@ -61,6 +61,8 @@ export const getXNSPStakingContract = (sushi) => {
 export const getNewMineForNodeContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMineForNode
 }
+
+// TODO DEL
 export const getNewMineSingleContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMineSingle
 }
@@ -132,6 +134,44 @@ export const getNodeFarms = (sushi) => {
           tokenAddress,
           tokenSymbol,
           tokenContract,
+          earnToken: 'new',
+          icon,
+          iconL,
+          iconR
+        }),
+      )
+    : []
+}
+
+export const getMainstreamFarms = (sushi) => {
+  return sushi
+    ? sushi.contracts.mainstreamPools.map(
+        ({
+          name,
+          symbol,
+          icon,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          lpAddress,
+          lpContract,
+          miningAddress,
+          miningContract,
+          newPerBlock,
+          iconL,
+          iconR
+        }) => ({
+          id: symbol,
+          name,
+          lpToken: symbol,
+          lpTokenAddress: lpAddress,
+          lpContract,
+          tokenAddress,
+          tokenSymbol,
+          tokenContract,
+          miningAddress,
+          miningContract,
+          newPerBlock,
           earnToken: 'new',
           icon,
           iconL,

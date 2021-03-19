@@ -19,7 +19,7 @@
   "communityMiningTips": "Stake liquidity tokens of community pools and earn NEW rewards.",
   "communityMiningTime": "(10M NEW in total from 2021.3.15 12:00 to 2021.4.12 12:00)",
   "communityMiningTimeTest": "(10M NEW in total from 2021.3.17 12:00 to 2022.3.16 12:00)",
-  "communityHeaderSubtitle": "Stake {{tokenSymbol}}-NEW LP tokens to the Pool and earn {{earnTokenName}} rewards",
+  "communityHeaderSubtitle": "Stake {{tokenSymbol}}-NEW LP tokens to the Pool and earn {{earnTokenName}} rewards.",
   "communityMiningStart": "(Mining starts at 2021.2.25 8:00 (UTC+8))",
 
   "depositTokens": "Deposit {{lpTokenName}} Tokens and earn {{earnTokenName}}",
@@ -51,7 +51,7 @@
 
 
   "totalStake": "总锁仓量",
-  "redeemTip": "*Please enter the community pool to receive NEW rewards",
+  "redeemTip": "*Please enter the pool to receive NEW rewards",
   "OK": "OK",
   "stakeCompleteTitle": "Staking is completed",
   "unstakeCompleteTitle": "Unstaking is completed",

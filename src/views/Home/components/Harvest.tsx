@@ -7,6 +7,8 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
+import { getNewMineSingleContract } from '../../../sushi/utils'
+import useSushi from '../../../hooks/useSushi'
 import useNewEarningsSingle from '../../../hooks/useNewEarningsSingle'
 import useNewRewardSingle from '../../../hooks/useNewRewardSingle'
 import { getBalanceNumber } from '../../../utils/formatBalance'
@@ -17,7 +19,9 @@ interface HarvestProps {
 }
 
 const Harvest: React.FC<HarvestProps> = ({icon} ) => {
-  const earnings = useNewEarningsSingle()
+  const sushi = useSushi()
+  const newMineContract = getNewMineSingleContract(sushi)
+  const earnings = useNewEarningsSingle(newMineContract)
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useNewRewardSingle()
   const { t } = useTranslation()
