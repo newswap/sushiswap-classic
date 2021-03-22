@@ -1,14 +1,11 @@
 import { useCallback } from 'react'
-
-import useSushi from './useSushi'
+import { Contract } from 'web3-eth-contract'
 import { useWallet } from 'use-wallet'
 
-import { unstakeNewMineSingle, getNewMineSingleContract } from '../sushi/utils'
+import { unstakeNewMineSingle } from '../sushi/utils'
 
-const useUnstakeNewMineSingle = () => {
+const useUnstakeNewMineSingle = (newMineContract: Contract) => {
   const { account } = useWallet()
-  const sushi = useSushi()
-  const newMineContract = getNewMineSingleContract(sushi)
 
   const handleUnstake = useCallback(
     async (amount: string) => {
@@ -20,7 +17,7 @@ const useUnstakeNewMineSingle = () => {
         return false
       }
     },
-    [account, sushi],
+    [account, newMineContract],
   )
 
   return { onUnstake: handleUnstake }

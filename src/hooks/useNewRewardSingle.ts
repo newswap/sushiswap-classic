@@ -1,14 +1,10 @@
 import { useCallback } from 'react'
-
-import useSushi from './useSushi'
+import { Contract } from 'web3-eth-contract'
 import { useWallet } from 'use-wallet'
+import { harvestNewSingle } from '../sushi/utils'
 
-import { harvestNewSingle, getNewMineSingleContract } from '../sushi/utils'
-
-const useNewRewardSingle = () => {
+const useNewRewardSingle = (newMineContract: Contract) => {
   const { account } = useWallet()
-  const sushi = useSushi()
-  const newMineContract = getNewMineSingleContract(sushi)
 
   const handleReward = useCallback(async () => {
     try {
@@ -17,7 +13,7 @@ const useNewRewardSingle = () => {
     } catch (e) {
       return false
     }
-  }, [account, sushi])
+  }, [account, newMineContract])
 
   return { onReward: handleReward }
 }

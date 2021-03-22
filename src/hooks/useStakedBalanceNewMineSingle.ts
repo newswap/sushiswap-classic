@@ -1,29 +1,25 @@
 import { useCallback, useEffect, useState } from 'react'
-
+import { Contract } from 'web3-eth-contract'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
-
-import { getStakedNewMineSingle, getNewMineSingleContract } from '../sushi/utils'
-import useSushi from './useSushi'
+import { getStakedNewMineSingle } from '../sushi/utils'
 import useBlock from './useBlock'
 
-const useStakedBalanceNewMineSingle = () => {
+const useStakedBalanceNewMineSingle = (newMineContract: Contract) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { account }: { account: string } = useWallet()
-  const sushi = useSushi()
-  const newMineContract = getNewMineSingleContract(sushi)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
     const balance = await getStakedNewMineSingle(newMineContract, account)
     setBalance(new BigNumber(balance))
-  }, [account, sushi])
+  }, [account, newMineContract])
 
   useEffect(() => {
-    if (account && sushi) {
+    if (account && newMineContract) {
       fetchBalance()
     }
-  }, [account, setBalance, block, sushi])
+  }, [account, setBalance, block, newMineContract])
 
   return balance
 }

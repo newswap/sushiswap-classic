@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useState, useEffect } from 'react'
 import { useWallet } from 'use-wallet'
-import useSushi from '../../../hooks/useSushi'
 import styled from 'styled-components'
 import { Contract } from 'web3-eth-contract'
 import Button from '../../../components/Button'
@@ -13,7 +12,6 @@ import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
-import { getNewMineSingleContract } from '../../../sushi/utils'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import useAllowanceNewMineSingle from '../../../hooks/useAllowanceNewMineSingle'
 import useApproveNewMineSingle from '../../../hooks/useApproveNewMineSingle'
@@ -24,30 +22,30 @@ import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalanc
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import { useTranslation } from 'react-i18next'
+import LazyIcon from '../../../components/LazyIcon'
 
 interface StakeProps {
   lpContract: Contract
+  miningContract: Contract
   tokenName: string
-  iconL: string
   iconR: string
+  tokenAddress: string
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) => {
+const Stake: React.FC<StakeProps> = ({ lpContract, miningContract, tokenName, iconR, tokenAddress }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWallet()
+
   const { t } = useTranslation()
 
-  const sushi = useSushi()
-  const newMineContract = getNewMineSingleContract(sushi)
-
-  const allowance = useAllowanceNewMineSingle(lpContract, newMineContract)
-  const { onApprove } = useApproveNewMineSingle(lpContract, newMineContract)
+  const allowance = useAllowanceNewMineSingle(lpContract, miningContract)
+  const { onApprove } = useApproveNewMineSingle(lpContract, miningContract)
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useStakedBalanceNewMineSingle(newMineContract)
+  const stakedBalance = useStakedBalanceNewMineSingle(miningContract)
 
-  const { onStake } = useStakeNewMineSingle(newMineContract)
-  const { onUnstake } = useUnstakeNewMineSingle(newMineContract)
+  const { onStake } = useStakeNewMineSingle(miningContract)
+  const { onUnstake } = useUnstakeNewMineSingle(miningContract)
 
   const [onPresentDeposit] = useModal(
     <DepositModal
@@ -90,7 +88,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) =>
             {/* <CardIcon>👨🏻‍🍳</CardIcon> */}
             <StyledDiv>
               <StyledImg src={iconR}></StyledImg>
-              <StyledImgR src={iconL}></StyledImgR>
+              <LazyIcon address={tokenAddress} customStyle={iconStyle}/>
             </StyledDiv>
             <Spacer height={20} />
             <Value value={getDisplayBalance(stakedBalance)} />
@@ -183,5 +181,15 @@ const StyledDiv = styled.div`
   width: 86px;
 
 `
+
+const iconStyle: React.CSSProperties = {
+  float: 'left',
+  width: '60px',
+  height: '60px',
+  borderRadius: '30px',
+  marginRight: '-26px',
+  marginTop: '-60px',
+  background: 'white',
+}
 
 export default Stake

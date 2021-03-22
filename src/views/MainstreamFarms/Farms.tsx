@@ -11,7 +11,7 @@ import Spacer from '../../components/Spacer'
 import PageHeader from '../../components/PageHeader'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import useModal from '../../hooks/useModal'
-import Farm from '../Farm'
+import MainstreamFarm from '../MainstreamFarm'
 import Balances from './components/Balances'
 import FarmCards from './components/FarmCards'
 import { useTranslation } from 'react-i18next'
@@ -49,7 +49,7 @@ const Farms: React.FC = () => {
               <FarmCards />
             </Route>
             <Route path={`${path}/:farmId`}>
-              <Farm />
+              <MainstreamFarm />
             </Route>
           </>
         ) : (

@@ -4,26 +4,23 @@ import Button from '../../../components/Button'
 import NewCardIcon from '../../../components/NewCardIcon'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
-import CardIcon from '../../../components/CardIcon'
+import { Contract } from 'web3-eth-contract'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import { getNewMineSingleContract } from '../../../sushi/utils'
-import useSushi from '../../../hooks/useSushi'
 import useNewEarningsSingle from '../../../hooks/useNewEarningsSingle'
 import useNewRewardSingle from '../../../hooks/useNewRewardSingle'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
 interface HarvestProps {
+  miningContract: Contract
   icon: string
 }
 
-const Harvest: React.FC<HarvestProps> = ({icon} ) => {
-  const sushi = useSushi()
-  const newMineContract = getNewMineSingleContract(sushi)
-  const earnings = useNewEarningsSingle(newMineContract)
+const Harvest: React.FC<HarvestProps> = ({miningContract, icon} ) => {
+  const earnings = useNewEarningsSingle(miningContract)
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useNewRewardSingle(newMineContract)
+  const { onReward } = useNewRewardSingle(miningContract)
   const { t } = useTranslation()
   return (
     <Card>

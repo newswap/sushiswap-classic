@@ -47,6 +47,9 @@ const App: React.FC = () => {
           
           <Switch>
             <Route path="/" exact>
+              <MainstreamFarms />
+            </Route>
+            <Route path="/home">
               <Home />
             </Route>
             <Route path="/communityMining">

@@ -2,55 +2,55 @@ import BigNumber from 'bignumber.js'
 import React, { useEffect, useMemo } from 'react'
 import { useParams, Switch } from 'react-router-dom'
 import styled from 'styled-components'
-import chef from '../../assets/img/chef.png'
-import coin from '../../assets/img/new.a6cfc11f.png'
+import {newCoin} from '../../sushi/lib/constants'
 import Button from '../../components/Button'
-import Label from '../../components/Label'
-import Container from '../../components/Container'
 import { useWallet } from 'use-wallet'
-import { provider } from 'web3-core'
 import Page from '../../components/Page'
-import PageHeader from '../../components/PageHeader'
 import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
-import { getNewNUSDTPairAddress } from '../../sushi/utils'
-import { getFormatDisplayBalance } from '../../utils/formatBalance'
+import useMainstreamFarm from '../../hooks/useMainstreamFarm'
 import useModal from '../../hooks/useModal'
 import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
 import useTotalSupply from '../../hooks/useTotalSupply'
 import useNewPrice from '../../hooks/useNewPrice'
-import useSushi from '../../hooks/useSushi'
-import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
 import {contractAddresses} from '../../sushi/lib/constants'
-import newcoin from '../../assets/img/new.a6cfc11f.png'
-import usdtcoin from '../../assets/img/usdtlogo.png'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const INFO_URL = process.env.REACT_APP_INFO_URL
-const NEW_PER_BLOCK = process.env.REACT_APP_NEW_PER_BLOCK_NU
 const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
-const Home: React.FC = () => {
-  const sushi = useSushi()
-  const { ethereum } = useWallet()
+const Farm: React.FC = () => {
+  const { ethereum, account } = useWallet()
   const { t } = useTranslation()
-  const { account } = useWallet()
 
-  const lpTokenAddress = getNewNUSDTPairAddress(sushi)
-  const lpTokenName = 'NUSDT-NEW LP'
-  const earnTokenName = 'NEW'
-  const name = 'NUSDT Party!'
-  const tokenSymbol = 'NUSDT'
-  const iconL = usdtcoin
-  const iconR = newcoin
-  const tokenAddress = CHAIN_ID==1012 ? '0x4BFB4297f9C28a373aE6ae58a8f8EfeFF334cae8' : '0xC01A73fBF1c1953D18b48518259b36D70b07F277'
-  
+  const { farmId } = useParams()
+  // console.log("farmId:"+farmId)
+  const {
+    lpToken,
+    lpTokenAddress,
+    lpContract,
+    tokenAddress,
+    tokenSymbol,
+    miningAddress,
+    miningContract,
+    newPerBlock
+  } = useMainstreamFarm(farmId) || {
+    lpToken: '',
+    lpTokenAddress: '',
+    lpContract: null,
+    tokenAddress: '',
+    tokenSymbol: '',
+    miningAddress: '',
+    miningContract: null,
+    newPerBlock:0
+  }
+
   // 锁仓合约质押的lp数量
-  const lpBalance = useTokenBalanceOf(lpTokenAddress, contractAddresses.newMineSingle[CHAIN_ID])
+  const lpBalance = useTokenBalanceOf(lpTokenAddress, miningAddress)
   // console.log("lpBalance:"+lpBalance.toNumber())
   // lp总量
   const totalSupply = useTotalSupply(lpTokenAddress)
@@ -67,39 +67,10 @@ const Home: React.FC = () => {
 
   // 挖矿开始时间 1615780800000
   const startTime = 1615780800000
-  // const {
-  //   pid,
-  //   lpTokenAddress,
-  //   tokenAddress,
-  //   name,
-  //   icon,
-  //   iconL,
-  //   iconR,
-  //   tokenSymbol
-  // } = {
-  //   pid: 0,
-  //   lpTokenAddress: {
-  //     1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
-  //   },
-  //   tokenAddresses: {
-  //     1007: '0xc01a73fbf1c1953d18b48518259b36d70b07f277', //NUSDT
-  //   },
-  //   name: 'NUSDT Party!',
-  //   symbol: 'NUSDT-NEW LP',
-  //   tokenSymbol: 'NUSDT',
-  //   icon: '👨🏻‍🍳',
-  //   iconL: usdtcoin,
-  //   iconR: newcoin
-  // }
-
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
-
-  const lpContract = useMemo(() => {
-    return getContract(ethereum as provider, lpTokenAddress)
-  }, [ethereum, lpTokenAddress])
 
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
   return (
@@ -109,7 +80,7 @@ const Home: React.FC = () => {
         {!!account ? (
           <>
             <NewPageHeader
-              iconR={iconR}
+              iconR={newCoin}
               tokenAddress={tokenAddress}
               subtitle= {t('stakeSubtitle', {tokenSymbol: tokenSymbol, new: 'NEW', token: 'NEW'})} 
               subsubtitle={CHAIN_ID===1007 ? t('mainstreamMiningTimeTest') : (new Date().getTime() > startTime ? t('mainstreamMiningTime') : '')}
@@ -127,7 +98,7 @@ const Home: React.FC = () => {
                 { new Date().getTime() > startTime ? 
                       `${t('APY（Estimated）')}:
                           ${newAmount.toNumber() > 0 ? 
-                              BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
+                              BLOCKS_PER_YEAR.times(new BigNumber(newPerBlock)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
                       : t('unMingCloseTips')
                 }
               </StyledSpeedDiv>
@@ -142,15 +113,19 @@ const Home: React.FC = () => {
             <StyledFarm>
               <StyledCardsWrapper>
                 <StyledCardWrapper>
-                  <Harvest icon={iconR}/>
+                  <Harvest 
+                    miningContract={miningContract}
+                    icon={newCoin}
+                  />
                 </StyledCardWrapper>
                 <Spacer />
                 <StyledCardWrapper>
                   <Stake
                     lpContract={lpContract}
-                    tokenName={lpTokenName}
-                    iconL={iconL}
-                    iconR={iconR}
+                    miningContract={miningContract}
+                    tokenName={lpToken}
+                    tokenAddress = {tokenAddress}
+                    iconR={newCoin}
                   />
                 </StyledCardWrapper>
               </StyledCardsWrapper>
@@ -159,7 +134,7 @@ const Home: React.FC = () => {
                 target="__blank"
                 href={INFO_URL + `/pair/${lpTokenAddress}`}
               >
-                {lpTokenName} {t('Info')}
+                {lpToken} {t('Info')}
               </StyledLink>
               <Spacer size="lg" />
 
@@ -294,4 +269,4 @@ const StyleLabel = styled.div`
   font-size: 20px;
 `
 
-export default Home
+export default Farm
