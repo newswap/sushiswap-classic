@@ -122,8 +122,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             {farm ? (
               <>
               <StyledDiv>
-              <StyledImg src={newCoin}></StyledImg>
               <LazyIcon address={farm.tokenAddress} customStyle={iconStyle}/>
+              <StyledImg src={newCoin}></StyledImg>
             </StyledDiv>
             <StyledTitle>{farm.tokenSymbol + '-NEW'}</StyledTitle>
               {/* <StyledDetailPending> {t('Pending harvest')} {getDisplayBalance(earnings)} NEW</StyledDetailPending> */}
@@ -373,32 +373,27 @@ const StyledInsight = styled.div`
   padding: 0 12px;
 `
 const StyledDiv = styled.div`
-  width: 101px;
-
+  display: flex;
 `
 
 
 const StyledImg = styled.img `
-    float: left;
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
     border-radius: 24px;
+    margin-left: 4px;
 `
 
 const StyledImgR = styled.img `
-    float: right;
-    width: 48px;
-    height: 48px;
-    border-radius: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
 `
 
 const iconStyle: React.CSSProperties = {
-  float: 'left',
   width: '60px',
   height: '60px',
   borderRadius: '30px',
-  marginRight: '-26px',
-  marginTop: '-60px',
   background: 'white',
 }
 
