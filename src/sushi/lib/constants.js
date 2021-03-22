@@ -132,6 +132,30 @@ export const mainstreamSupportedPools = [
     iconL: '',
     iconR: newcoin
   },
+  { // NETH-NEW
+    miningAddresses: {
+      1007: '0x58718951f6804ce11e7a249d7ebec27125ca90b7',  //小写
+      1012: ''
+    },
+    lpAddresses: {
+      1007: '0x087b650f59a003b55fa36941365bd31c9a195c66',
+      1012: '',
+    },
+    tokenAddresses: {
+      1007: '0x56963f254186464b0be5003486d5501FC13e07D4', // 区分大小写，否则无法获得图片
+      1012: '', 
+    },
+    newPerBlocks: {
+      1007: '2', 
+      1012: '', 
+    },
+    name: 'NETH Party!',
+    symbol: 'NETH-NEW LP',
+    tokenSymbol: 'NETH',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
 ]
 
 // // community mining supported Polls

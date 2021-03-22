@@ -99,7 +99,7 @@ const Balances: React.FC = () => {
               />
             </CardContent>
             <Footnote>
-              {t('APY（Estimated）')}
+              {t('Your Total Stake Value')}
               <FootnoteValue>
                 {
                  '？？？？？？？'
