@@ -71,13 +71,16 @@ const Balances: React.FC = () => {
   // console.log("===================>"+newBalance)
   
   let totalNew = 0
+  let myTotalNew = 0
   for (let staked of stakedValue) {
     totalNew += staked.totalWethValue ? staked.totalWethValue.toNumber() : 0
+    myTotalNew += staked.myTotalWethValue ? staked.myTotalWethValue.toNumber() : 0
 
     // console.log('========================')
+    // console.log(staked.totalWethValue.toNumber())
+    // console.log(staked.myTotalWethValue.toNumber())
     // console.log(staked.tokenAmount.toNumber())
     // console.log(staked.wethAmount.toNumber())
-    // console.log(staked.totalWethValue.toNumber())
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
@@ -101,14 +104,11 @@ const Balances: React.FC = () => {
             <Footnote>
               {t('Your Total Stake Value')}
               <FootnoteValue>
-                {
-                 '？？？？？？？'
-                // totalNew > 0
-                //       ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
-                //           .times(new BigNumber(100))
-                //           .toNumber()
-                //           .toLocaleString('en-US')}%`
-                //         : '—'
+                {myTotalNew > 0 
+                  ? `$${newPrice.times(myTotalNew)
+                  .toNumber()
+                  .toLocaleString('en-US')}` 
+                  : '$0.00'               
                 }
                 </FootnoteValue>
             </Footnote>

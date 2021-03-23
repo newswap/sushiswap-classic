@@ -17,6 +17,7 @@ export interface StakedValue {
   wethAmount: BigNumber
   totalWethValue: BigNumber
   tokenPriceInWeth: BigNumber
+  myTotalWethValue: BigNumber
 }
 
 const useAllStakedValueForMainstream = () => {
@@ -44,8 +45,9 @@ const useAllStakedValueForMainstream = () => {
             wethContact,
             lpContract,
             tokenContract,
-            0,
+            -1,
             false,
+            account
           ),
       ),
     )

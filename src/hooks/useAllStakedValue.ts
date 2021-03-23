@@ -50,6 +50,7 @@ const useAllStakedValue = () => {
             tokenContract,
             pid,
             true,
+            null
           ),
       ),
     )

@@ -234,7 +234,8 @@ export const getTotalLPWethValue = async (
   lpContract,
   tokenContract,
   pid,
-  isGetPoolWeight
+  isGetPoolWeight,
+  account
 ) => {
   // console.log('getTotalLPWethValue========')
   // console.log(lpContract.options.address)
@@ -257,7 +258,7 @@ export const getTotalLPWethValue = async (
   // Return p1 * w1 * 2
   const portionLp = new BigNumber(balance).div(new BigNumber(totalSupply))
   const lpWethWorth = new BigNumber(lpContractWeth)
-  const totalLpWethValue = portionLp.times(lpWethWorth).times(new BigNumber(2))
+  const totalLpWethValue = portionLp.times(lpWethWorth).times(new BigNumber(2)).div(new BigNumber(10).pow(18))
   // Calculate
   const tokenAmount = new BigNumber(tokenAmountWholeLP)
     .times(portionLp)
@@ -266,10 +267,15 @@ export const getTotalLPWethValue = async (
   const wethAmount = new BigNumber(lpContractWeth)
     .times(portionLp)
     .div(new BigNumber(10).pow(18))
+
+  const { amount } = !account ? {amount:0} :
+                        (pid > -1 ? await masterChefContract.methods.userInfo(pid, account).call() : await masterChefContract.methods.userInfo(account).call())
+                                                
   return {
     tokenAmount,
     wethAmount,
-    totalWethValue: totalLpWethValue.div(new BigNumber(10).pow(18)),
+    totalWethValue: totalLpWethValue,
+    myTotalWethValue: balance > 0 ? new BigNumber(amount).div(new BigNumber(balance)).times(totalLpWethValue) : new BigNumber(0),
     tokenPriceInWeth: wethAmount.div(tokenAmount),
     poolWeight: isGetPoolWeight ? await getPoolWeight(masterChefContract, pid) : new BigNumber(0),
   }

@@ -49,6 +49,7 @@ const useAllStakedValueForCommunity = () => {
             tokenContract,
             pid,
             false,
+            null
           ),
       ),
     )
