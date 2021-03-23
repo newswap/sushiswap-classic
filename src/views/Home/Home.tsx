@@ -125,7 +125,7 @@ const Home: React.FC = () => {
               </StyledTotalDiv>
               <StyledSpeedDiv>
                 { new Date().getTime() > startTime ? 
-                      `${t('APY（Estimated）')}:
+                      `${t('APY(Estimated)')}:
                           ${newAmount.toNumber() > 0 ? 
                               BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
                       : t('unMingCloseTips')

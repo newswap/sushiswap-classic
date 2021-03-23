@@ -102,7 +102,7 @@ const Balances: React.FC = () => {
               />
             </CardContent>
             <Footnote>
-              {t('Your Total Stake Value')}
+              {t('Your Stake Value')}
               <FootnoteValue>
                 {myTotalNew > 0 
                   ? `$${newPrice.times(myTotalNew)

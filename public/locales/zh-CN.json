@@ -31,7 +31,8 @@
   "FAQ": "常见问题",
   "Total Stake": "总锁仓量",
   "Total Stake Value": "总锁仓价值",
-  "APY（Estimated）": "预估年化收益率",
+  "Stake Value": "锁仓价值",
+  "APY(Estimated)": "预估年化收益率",
   "Approving...": "授权中...",
   "Input": "输入",
   "Trade Mining": "交易挖矿",
@@ -66,15 +67,11 @@
   "Apply Creating Community Pool": "点击无门槛申请创建社群矿池",
   "communityMiningStart": "(2021年2月25日8时(UTC+8) 开启挖矿)",
 
-
-
+  "Mining": "主矿区",
+  "Your Stake Value": "我的锁仓价值",
   "mainstreamMiningTime": "(总量1000万枚 / 活动时间：2021.3.15 12:00 - 2021.3.22 12:00)",
   "mainstreamMiningTimeTest": "(总量1000万枚 / 活动时间：2021.3.17 12:00 - 2022.3.16 12:00)",
-  "Mainstream Mining": "主矿区",
-  "mainstreamMiningTips": "质押主流币矿池对应的流动性通证，获得 NEW 奖励。",
-  "Your Total Stake Value": "我的总锁仓价值",
-
-
+  "mainstreamMiningTips": "质押主矿区矿池对应的流动性通证，获得 NEW 奖励。",
 
   "Cooking the rice ...": "Cooking the rice ...",
   "Menu": "菜单",

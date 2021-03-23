@@ -41,7 +41,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, miningContract, tokenName, ic
   const allowance = useAllowanceNewMineSingle(lpContract, miningContract)
   const { onApprove } = useApproveNewMineSingle(lpContract, miningContract)
 
-  const tokenBalance = useTokenBalance(lpContract.options.address)
+  const tokenBalance = useTokenBalance(lpContract?.options.address)
   const stakedBalance = useStakedBalanceNewMineSingle(miningContract)
 
   const { onStake } = useStakeNewMineSingle(miningContract)

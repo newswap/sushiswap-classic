@@ -148,7 +148,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             </Button>
             <StyledInsightDiv>
               <StyledInsight>
-                <span>{t('Total Stake Value')}</span>
+                <span>{t('Stake Value')}</span>
                 <span>
                   {farm.reserveUSD
                     ? `$${farm.reserveUSD
@@ -158,7 +158,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 </span>
               </StyledInsight>
               <StyledInsight>
-                <span>{t('APY（Estimated）')}</span>
+                <span>{t('APY(Estimated)')}</span>
                 <span>
                   {farm.apy
                    ? `${farm.apy

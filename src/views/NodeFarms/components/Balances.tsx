@@ -102,7 +102,7 @@ const Balances: React.FC = () => {
               />
             </CardContent>
             <Footnote>
-              {t('APY（Estimated）')}
+              {t('APY(Estimated)')}
               <FootnoteValue>{
                 totalNew > 0
                       ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)

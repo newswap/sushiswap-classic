@@ -96,7 +96,7 @@ const Farm: React.FC = () => {
               </StyledTotalDiv>
               <StyledSpeedDiv>
                 { new Date().getTime() > startTime ? 
-                      `${t('APY（Estimated）')}:
+                      `${t('APY(Estimated)')}:
                           ${newAmount.toNumber() > 0 ? 
                               BLOCKS_PER_YEAR.times(new BigNumber(newPerBlock)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
                       : t('unMingCloseTips')

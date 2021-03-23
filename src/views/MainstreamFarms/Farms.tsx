@@ -35,7 +35,7 @@ const Farms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={coin} height="95" />}
-                title={t('Mainstream Mining')}
+                title={t('Mining')}
                 subtitle={t('mainstreamMiningTips')}
                 subsubtitle={CHAIN_ID===1007 ? t('mainstreamMiningTimeTest') : (new Date().getTime() > startTime ? t('mainstreamMiningTime') : '')}         
               />

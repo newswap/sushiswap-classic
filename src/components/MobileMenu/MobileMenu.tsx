@@ -44,7 +44,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           </StyledAbsoluteLink>   
             
           <StyledLink exact activeClassName="active" to="/mainstreamMining" onClick={onDismiss}>
-            {t('Mainstream Mining')}
+            {t('Mining')}
           </StyledLink>
           {/* <StyledLink
             exact
