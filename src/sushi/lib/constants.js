@@ -467,6 +467,23 @@ export const nodeSupportedPools = [
   //   icon: '',
   //   iconL: '',
   //   iconR: newcoin
+  // },
+  // { // JIN-NEW
+  //   pid: 18,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x741b2e6ba99e431355a6dad0eb4d93514924b072',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x5C22B2BcE6EB7f525a7b2931F301B4F48edc5Ad6',   
+  //   },
+  //   name: 'JIN Party!',
+  //   symbol: 'JIN-NEW LP',
+  //   tokenSymbol: 'JIN',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
   // }
   // // { // ?-NEW
   // //   pid: ?,

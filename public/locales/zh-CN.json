@@ -48,8 +48,9 @@
   "Transaction Mining has ended": "交易挖矿活动已结束",
   "pageClose":"本页面即将下线",
   "pageCloseTips": "请于 2月22日12:00(UTC+8) 前领取奖励",
-  "unMingClose": "第二期即将开启  敬请期待",
-  "unMingCloseTips": "第一期已结束，请随时领取奖励。",
+
+  "unMingClose": "第三期即将开启  敬请期待",
+  "unMingCloseTips": "第二期已结束，请随时领取奖励。",
   "Select": "质押",
   "Loading ...": "加载中 ...",
 

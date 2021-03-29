@@ -16,10 +16,51 @@ import useNewBalance from '../../../hooks/useNewBalance'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
 
-const PendingRewards: React.FC = () => {
-  const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(0)
-  const [scale, setScale] = useState(1)
+// const PendingRewards: React.FC = () => {
+//   const [start, setStart] = useState(0)
+//   const [end, setEnd] = useState(0)
+//   const [scale, setScale] = useState(1)
+
+//   const allEarnings = useAllEarningsNewMainstream()
+//   let sumEarning = 0
+//   for (let earning of allEarnings) {
+//     sumEarning += new BigNumber(earning)
+//       .div(new BigNumber(10).pow(18))
+//       .toNumber()
+//   }
+
+//   useEffect(() => {
+//     setStart(end)
+//     setEnd(sumEarning)
+//   }, [sumEarning])
+
+//   return (
+//     <span
+//       style={{
+//         transform: `scale(${scale})`,
+//         transformOrigin: 'right bottom',
+//         transition: 'transform 0.5s',
+//         display: 'inline-block',
+//       }}
+//     >
+//       <CountUp
+//         start={start}
+//         end={end}
+//         decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
+//         duration={1}
+//         onStart={() => {
+//           setScale(1.25)
+//           setTimeout(() => setScale(1), 600)
+//         }}
+//         separator=","
+//       />
+//     </span>
+//   )
+// }
+
+const Balances: React.FC = () => {
+  const { account, balance } = useWallet()
+  const { t } = useTranslation()
 
   const allEarnings = useAllEarningsNewMainstream()
   let sumEarning = 0
@@ -28,40 +69,7 @@ const PendingRewards: React.FC = () => {
       .div(new BigNumber(10).pow(18))
       .toNumber()
   }
-
-  useEffect(() => {
-    setStart(end)
-    setEnd(sumEarning)
-  }, [sumEarning])
-
-  return (
-    <span
-      style={{
-        transform: `scale(${scale})`,
-        transformOrigin: 'right bottom',
-        transition: 'transform 0.5s',
-        display: 'inline-block',
-      }}
-    >
-      <CountUp
-        start={start}
-        end={end}
-        decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
-        duration={1}
-        onStart={() => {
-          setScale(1.25)
-          setTimeout(() => setScale(1), 600)
-        }}
-        separator=","
-      />
-    </span>
-  )
-}
-
-const Balances: React.FC = () => {
-  const { account, balance } = useWallet()
-  const { t } = useTranslation()
-
+  
   const stakedValue = useAllStakedValueForMainstream()
   const newPrice = useNewPrice()
   // console.log("newPrice------->"+newPrice)
@@ -92,23 +100,23 @@ const Balances: React.FC = () => {
       { new Date().getTime() > startTime ? (
           <Card>
             <CardContent>
-              <Label text={t('Total Stake Value')} />
+              <Label text={t('Your Stake Value')} />
               <Value
-                value={totalNew > 0 
-                  ? `$${newPrice.times(totalNew)
+                value={myTotalNew > 0 
+                  ? `$${newPrice.times(myTotalNew)
                   .toNumber()
                   .toLocaleString('en-US')}` 
                   : '$0.00'}
               />
             </CardContent>
             <Footnote>
-              {t('Your Stake Value')}
+              {t('Total Stake Value')}
               <FootnoteValue>
-                {myTotalNew > 0 
-                  ? `$${newPrice.times(myTotalNew)
+                {totalNew > 0 
+                  ? `$${newPrice.times(totalNew)
                   .toNumber()
                   .toLocaleString('en-US')}` 
-                  : '$0.00'               
+                  : '$0.00'
                 }
                 </FootnoteValue>
             </Footnote>
@@ -134,18 +142,19 @@ const Balances: React.FC = () => {
               {/* <SushiIcon /> */}
               {/* <Spacer /> */}
               <div style={{ flex: 1 }}>
-                <Label text={t('Your NEW Balance')} />
+                <Label text={t('NEW Earned')} />
                 <Value
-                  value={!!account ? getBalanceNumber(newBalance) : '—'}
+                  value={!!account ? sumEarning : '—'}
                 />
               </div>
             </StyledBalance>
           </StyledBalances>
         </CardContent>
         <Footnote>
-          {t('NEW Earned')}
+          {t('Your NEW Balance')}
           <FootnoteValue>
-            <PendingRewards /> NEW
+            {!!account ? getBalanceNumber(newBalance).toFixed(3) : '—'}            
+            {/* <PendingRewards /> NEW */}
           </FootnoteValue>
         </Footnote>
       </Card>

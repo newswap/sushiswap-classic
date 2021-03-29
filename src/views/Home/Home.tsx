@@ -65,8 +65,9 @@ const Home: React.FC = () => {
   // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
   // console.log("newValue:"+newAmount.toNumber())
 
-  // 挖矿开始时间 1615780800000
+  // 挖矿开始时间 
   const startTime = 1615780800000
+  const endTime = 1616385600000
   // const {
   //   pid,
   //   lpTokenAddress,
@@ -117,7 +118,7 @@ const Home: React.FC = () => {
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                { new Date().getTime() > startTime ? 
+                { new Date().getTime() < endTime ? 
                      `${t('Total Stake Value')}: 
                         ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
                       : t('unMingClose')
