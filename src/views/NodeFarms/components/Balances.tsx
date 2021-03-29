@@ -19,51 +19,58 @@ import { useTranslation } from 'react-i18next'
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NODE ?? '1')
 const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
-const PendingRewards: React.FC = () => {
-  const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(0)
-  const [scale, setScale] = useState(1)
+// const PendingRewards: React.FC = () => {
+//   const [start, setStart] = useState(0)
+//   const [end, setEnd] = useState(0)
+//   const [scale, setScale] = useState(1)
+
+//   const allEarnings = useAllEarningsNew()
+//   let sumEarning = 0
+//   for (let earning of allEarnings) {
+//     sumEarning += new BigNumber(earning)
+//       .div(new BigNumber(10).pow(18))
+//       .toNumber()
+//   }
+
+//   useEffect(() => {
+//     setStart(end)
+//     setEnd(sumEarning)
+//   }, [sumEarning])
+
+//   return (
+//     <span
+//       style={{
+//         transform: `scale(${scale})`,
+//         transformOrigin: 'right bottom',
+//         transition: 'transform 0.5s',
+//         display: 'inline-block',
+//       }}
+//     >
+//       <CountUp
+//         start={start}
+//         end={end}
+//         decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
+//         duration={1}
+//         onStart={() => {
+//           setScale(1.25)
+//           setTimeout(() => setScale(1), 600)
+//         }}
+//         separator=","
+//       />
+//     </span>
+//   )
+// }
+
+const Balances: React.FC = () => {
+  const { account, balance } = useWallet()
+  const { t } = useTranslation()
 
   const allEarnings = useAllEarningsNew()
   let sumEarning = 0
   for (let earning of allEarnings) {
     sumEarning += new BigNumber(earning)
-      .div(new BigNumber(10).pow(18))
       .toNumber()
   }
-
-  useEffect(() => {
-    setStart(end)
-    setEnd(sumEarning)
-  }, [sumEarning])
-
-  return (
-    <span
-      style={{
-        transform: `scale(${scale})`,
-        transformOrigin: 'right bottom',
-        transition: 'transform 0.5s',
-        display: 'inline-block',
-      }}
-    >
-      <CountUp
-        start={start}
-        end={end}
-        decimals={end < 0 ? 4 : end > 1e5 ? 0 : 3}
-        duration={1}
-        onStart={() => {
-          setScale(1.25)
-          setTimeout(() => setScale(1), 600)
-        }}
-        separator=","
-      />
-    </span>
-  )
-}
-
-const Balances: React.FC = () => {
-  const { account, balance } = useWallet()
-  const { t } = useTranslation()
 
   const stakedValue = useAllStakedValueForCommunity()
   const newPrice = useNewPrice()
@@ -92,25 +99,27 @@ const Balances: React.FC = () => {
       { new Date().getTime() > startTime ? (
           <Card>
             <CardContent>
-              <Label text={t('Total Stake Value')} />
+              <Label text={t('APY（Estimated）')} />
               <Value
-                value={totalNew > 0 
-                  ? `$${newPrice.times(totalNew)
-                  .toNumber()
-                  .toLocaleString('en-US')}` 
-                  : '$0.00'}
-              />
-            </CardContent>
-            <Footnote>
-              {t('APY（Estimated）')}
-              <FootnoteValue>{
-                totalNew > 0
+                value={totalNew > 0
                       ? `${BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(totalNew)
                           .times(new BigNumber(100))
                           .toNumber()
                           .toLocaleString('en-US')}%`
                         : '—'}
-                </FootnoteValue>
+              />
+            </CardContent>
+            <Footnote>
+              {t('Total Stake Value')}
+              <FootnoteValue>
+                {
+                  totalNew > 0 
+                    ? `$${newPrice.times(totalNew)
+                    .toNumber()
+                    .toLocaleString('en-US')}` 
+                    : '$0.00'
+                }
+              </FootnoteValue>
             </Footnote>
           </Card>
         ) : (
@@ -134,18 +143,19 @@ const Balances: React.FC = () => {
               {/* <SushiIcon /> */}
               {/* <Spacer /> */}
               <div style={{ flex: 1 }}>
-                <Label text={t('Your NEW Balance')} />
+                <Label text={t('NEW Earned')} />
                 <Value
-                  value={!!account ? getBalanceNumber(newBalance) : '—'}
+                  value={!!account ? getBalanceNumber(new BigNumber(sumEarning)) : '—'}
                 />
               </div>
             </StyledBalance>
           </StyledBalances>
         </CardContent>
         <Footnote>
-          {t('NEW Earned')}
+          {t('Your NEW Balance')}
           <FootnoteValue>
-            <PendingRewards /> NEW
+            {!!account ? getBalanceNumber(newBalance).toFixed(3) : '—'}            
+            {/* <PendingRewards /> NEW */}
           </FootnoteValue>
         </Footnote>
       </Card>
