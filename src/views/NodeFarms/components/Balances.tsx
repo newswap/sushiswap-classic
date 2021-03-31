@@ -69,6 +69,7 @@ const Balances: React.FC = () => {
   let sumEarning = 0
   for (let earning of allEarnings) {
     sumEarning += new BigNumber(earning)
+      .div(new BigNumber(10).pow(18))
       .toNumber()
   }
 
@@ -145,7 +146,7 @@ const Balances: React.FC = () => {
               <div style={{ flex: 1 }}>
                 <Label text={t('NEW Earned')} />
                 <Value
-                  value={!!account ? getBalanceNumber(new BigNumber(sumEarning)) : '—'}
+                  value={!!account ? sumEarning : '—'}
                 />
               </div>
             </StyledBalance>
