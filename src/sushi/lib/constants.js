@@ -435,6 +435,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // TICT-NEW
+    pid: 19,
+    lpAddresses: {
+      1007: '',
+      1012: '0x50f11868ea46044018cba3dfbd015517af623cc7',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xF201F4FE14FD8a363BC3782E42d808316C0d1762',   
+    },
+    name: 'TICT Party!',
+    symbol: 'TICT-NEW LP',
+    tokenSymbol: 'TICT',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
