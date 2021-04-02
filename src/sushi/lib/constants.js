@@ -452,6 +452,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // BER-NEW
+    pid: 20,
+    lpAddresses: {
+      1007: '',
+      1012: '0x7526b68ec2da585673bef04f58b4d1773bcf6fa5',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x76aBb404247b10f80f77d426f70eD23c7aD21D18',   
+    },
+    name: 'BER Party!',
+    symbol: 'BER-NEW LP',
+    tokenSymbol: 'BER',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
