@@ -469,6 +469,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // CICI-NEW
+    pid: 21,
+    lpAddresses: {
+      1007: '',
+      1012: '0x40dac2f1993eed252f7e0e3d421ec1700f01a045',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x4ddeAA082891b95029eEAf5463a2017E5cbcB9dF',   
+    },
+    name: 'CICI Party!',
+    symbol: 'CICI-NEW LP',
+    tokenSymbol: 'CICI',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
