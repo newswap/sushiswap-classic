@@ -486,6 +486,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // DKY-NEW
+    pid: 22,
+    lpAddresses: {
+      1007: '',
+      1012: '0x36335e3e01fa6cb5bd1767fba44dd666117219ae',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xc7Fe3d6A7DBada78ba235ed49Cc48F2b7aA07E98',   
+    },
+    name: 'DKY Party!',
+    symbol: 'DKY-NEW LP',
+    tokenSymbol: 'DKY',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
