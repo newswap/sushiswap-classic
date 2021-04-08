@@ -25,8 +25,9 @@ const Farms: React.FC = () => {
   const { account } = useWallet()
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
 
-  const startTime = 1615780800000
-  
+  // 第三期结束时间 4月16 12:00(utc+8)
+  const endTime = 1618545600000
+
   return (
     <Switch>
       <Page>
@@ -37,7 +38,7 @@ const Farms: React.FC = () => {
                 icon={<img src={coin} height="95" />}
                 title={t('Mining')}
                 subtitle={t('mainstreamMiningTips')}
-                subsubtitle={CHAIN_ID===1007 ? t('mainstreamMiningTimeTest') : (new Date().getTime() > startTime ? t('mainstreamMiningTime') : '')}         
+                subsubtitle={CHAIN_ID===1007 ? t('mainstreamMiningTimeTest') : (new Date().getTime() < endTime ? t('mainstreamMiningTime') : '')}         
               />
               <Container>
                 <Balances />

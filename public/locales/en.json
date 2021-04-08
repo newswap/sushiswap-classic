@@ -3,10 +3,10 @@
   "stakeSubtitle": "Stake {{tokenSymbol}}-{{new}} liquidity token and get {{token}} reward.",
   "newPerBlock": "Overall Farm Rate: {{new}}NEW/block",
   "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time.",
-  "unMingClose": "Stay tuned on the upcoming Phase 3",
-  "unMingCloseTips": "Phase 2 has ended, please harvest your reward.",
+  "unMingClose": "Stay tuned on the upcoming Phase {{Number}}",
+  "unMingCloseTips": "Phase {{Number}} has ended, please harvest your reward.",
 
-  "mainstreamMiningTime": "(10M NEW in total from 2021.3.15 12:00 to 2021.3.22 12:00)",
+  "mainstreamMiningTime": "(15M NEW in total from 2021.4.2 12:00 to 2021.4.16 12:00)",
   "mainstreamMiningTimeTest": "(10M NEW in total from 2021.3.17 12:00 to 2022.3.16 12:00)",
   "mainstreamMiningTips": "Stake liquidity tokens of pools and earn NEW rewards.",
   
@@ -56,5 +56,5 @@
   "OK": "OK",
   "stakeCompleteTitle": "Staking is completed",
   "unstakeCompleteTitle": "Unstaking is completed",
-  "harvestedTip": "Your current reward has been automatically harvested."
+  "harvestedTip": "Your current reward has been harvested."
 }

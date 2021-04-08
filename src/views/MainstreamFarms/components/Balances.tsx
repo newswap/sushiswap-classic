@@ -92,12 +92,12 @@ const Balances: React.FC = () => {
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
-  // 挖矿开始时间
-  const startTime = 1615780800000
-  
+  // 第三期结束时间 4月16 12:00(utc+8)
+  const endTime = 1618545600000
+
   return (
     <StyledWrapper>
-      { new Date().getTime() > startTime ? (
+      { new Date().getTime() < endTime ? (
           <Card>
             <CardContent>
               <Label text={t('Your Stake Value')} />

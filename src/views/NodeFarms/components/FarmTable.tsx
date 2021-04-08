@@ -39,14 +39,14 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
 
   const handleChangePage = (event: any, newPage: any) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event: any) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 25));
     setPage(0);
   };
 
@@ -117,7 +117,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                       (isMobile) ? (
                         <>
                         <StyledTableCell component="th" scope="row"> 
-                          <StyledIDLabelMob>{j + 1}</StyledIDLabelMob>
+                          <StyledIDLabelMob>{(page * rowsPerPage) + j + 1}</StyledIDLabelMob>
                           <div>
                           <StyledLogo>
                           <LazyIcon address={address} customStyle={iconStyleMob}/>
@@ -147,7 +147,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                         <>
                         <StyledTableCell component="th" scope="row"> 
                         
-                          <StyledIDLabel>{j + 1}</StyledIDLabel>
+                          <StyledIDLabel>{(page * rowsPerPage) + j + 1}</StyledIDLabel>
                           <StyledLogo>
                             {/* <StyledImg src={farm.iconL}/> */}
                             <LazyIcon address={address} customStyle={iconStyle}/>
@@ -181,15 +181,16 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         }
         </TableBody>
       </Table>
-      {/* <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+      <TablePagination
+          // rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[25]}
           component="div"
           count={rows[0].length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
           onChangeRowsPerPage={handleChangeRowsPerPage}
-        /> */}
+        />
       </StyledTableContainer>
     )
   }

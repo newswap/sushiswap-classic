@@ -212,7 +212,6 @@ export const nodeSupportedPools = [
   //   iconL: '',
   //   iconR: newcoin
   // },
-
   // { // DOL-NEW
   //   pid: 3,
   //   lpAddresses: {
@@ -485,25 +484,94 @@ export const nodeSupportedPools = [
   //   iconL: '',
   //   iconR: newcoin
   // }
-  // // { // ?-NEW
-  // //   pid: ?,
-  // //   lpAddresses: {
-  // //     1007: '',
-  // //     1012: '?',
-  // //   },
-  // //   tokenAddresses: {
-  // //     1007: '', 
-  // //     1012: '?',   
-  // //   },
-  // //   name: '? Party!',
-  // //   symbol: '?-NEW LP',
-  // //   tokenSymbol: '?',
-  // //   icon: '',
-  // //   iconL: '',
-  // //   iconR: newcoin
-  // // }
+  // { // TICT-NEW
+  //   pid: 19,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x50f11868ea46044018cba3dfbd015517af623cc7',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0xF201F4FE14FD8a363BC3782E42d808316C0d1762',   
+  //   },
+  //   name: 'TICT Party!',
+  //   symbol: 'TICT-NEW LP',
+  //   tokenSymbol: 'TICT',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // BER-NEW
+  //   pid: 20,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x7526b68ec2da585673bef04f58b4d1773bcf6fa5',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x76aBb404247b10f80f77d426f70eD23c7aD21D18',   
+  //   },
+  //   name: 'BER Party!',
+  //   symbol: 'BER-NEW LP',
+  //   tokenSymbol: 'BER',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // CICI-NEW
+  //   pid: 21,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x40dac2f1993eed252f7e0e3d421ec1700f01a045',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x4ddeAA082891b95029eEAf5463a2017E5cbcB9dF',   
+  //   },
+  //   name: 'CICI Party!',
+  //   symbol: 'CICI-NEW LP',
+  //   tokenSymbol: 'CICI',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // DKY-NEW
+  //   pid: 22,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x36335e3e01fa6cb5bd1767fba44dd666117219ae',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0xc7Fe3d6A7DBada78ba235ed49Cc48F2b7aA07E98',   
+  //   },
+  //   name: 'DKY Party!',
+  //   symbol: 'DKY-NEW LP',
+  //   tokenSymbol: 'DKY',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
 
-  // 测试网
+  // { // ?-NEW
+  //   pid: ?,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '?',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '?',   
+  //   },
+  //   name: '? Party!',
+  //   symbol: '?-NEW LP',
+  //   tokenSymbol: '?',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
+
+  // ==================测试网
   { // DLD-NEW
     pid: 0,
     lpAddresses: {
