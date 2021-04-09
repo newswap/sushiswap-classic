@@ -503,6 +503,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // MTC-NEW
+    pid: 23,
+    lpAddresses: {
+      1007: '',
+      1012: '0xcca573275eab37e320c1fcab79e85c829c29ebba',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xC68Cd1e7ac55De78859d0d25DC0E9344b0682e71',   
+    },
+    name: 'MTC Party!',
+    symbol: 'MTC-NEW LP',
+    tokenSymbol: 'MTC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
