@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_arrow.left</title>
+    <defs>
+        <path d="M40.0301659,70 C42.1455505,70 43.7217195,68.4636678 43.7217195,66.3460208 C43.7217195,65.3079585 43.3484163,64.3529412 42.6847662,63.6885813 L33.8914027,54.7197232 L21.2405732,43.2179931 L30.6561086,43.799308 L66.2254902,43.799308 C68.4653092,43.799308 70,42.2214533 70,40.0207612 C70,37.7785467 68.4653092,36.200692 66.2254902,36.200692 L30.6561086,36.200692 L21.2820513,36.7820069 L33.8914027,25.2802768 L42.6847662,16.3114187 C43.3484163,15.6470588 43.7217195,14.6920415 43.7217195,13.6539792 C43.7217195,11.5363322 42.1455505,10 40.0301659,10 C39.0346908,10 38.1221719,10.3737024 37.2096531,11.2456747 L11.285822,37.1557093 C10.4562594,37.9446367 10,38.9411765 10,40.0207612 C10,41.0588235 10.4562594,42.0553633 11.285822,42.8442907 L37.2926094,68.8373702 C38.1221719,69.6262976 39.0346908,70 40.0301659,70 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icons" transform="translate(-380.000000, -70.000000)">
+            <g id="ic_arrow.left" transform="translate(380.000000, 70.000000)">
+                <g id="icons/ic_arrow.left" transform="translate(40.000000, 40.000000) rotate(-180.000000) translate(-40.000000, -40.000000) ">
+                    <rect id="Size" x="0" y="0" width="80" height="80"></rect>
+                    <mask id="mask-2" fill="black">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="icon" fill="#647684" fill-rule="nonzero" transform="translate(40.000000, 40.000000) rotate(-180.000000) translate(-40.000000, -40.000000) " xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)" fill="white">
+                        <g id="color">
+                            <rect id="Rectangle" x="0" y="0" width="80" height="80"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -14,7 +14,9 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 import Container from '../../components/Container'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
-
+import arrowLeft from '../../assets/img/ic_arrow_left.svg'
+import issue from '../../assets/img/ic_issue.svg'
+import { Link } from 'react-router-dom'
 
 const CustomCreateSingleFarm: React.FC = () => {
     const { t } = useTranslation()
@@ -119,8 +121,17 @@ const CustomCreateSingleFarm: React.FC = () => {
             <Spacer size = 'lg'/>
             <StyledWalletsWrapper>
                 <StyledWalletCard>
-                    <StyledLabel>创建自定义矿池-单通证挖矿</StyledLabel>
-
+                    <StyleHeader>
+                        <StyledNomalLink to={'/customSingleFarms'}>
+                            <StyledIcon src = {arrowLeft} />
+                        </StyledNomalLink>
+                        
+                        <StyledLabel>创建自定义矿池-单通证挖矿</StyledLabel>
+                        <StyledNomalLink to={'/customSingleFarms'}>
+                            <StyledIcon src = {issue} />
+                        </StyledNomalLink>
+                        
+                    </StyleHeader>
                     <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={'请输入矿池名称'}></CustomInput>
                     {/* <CustomInput onChange={handleToken} value={token} startAdornment={'质押的流动性通证'} placeholder={'NUSDT-NEW'} type={'select'} onTypeChange={handleToken} data={tokenList}></CustomInput> */}
                     <CustomInput onChange={handleStakeAddress} value={stakeAddress} startAdornment={'质押通证的地址'} placeholder={'请输入质押通证地址'}></CustomInput>
@@ -182,6 +193,20 @@ const StyledTip = styled.div`
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+`
+
+const StyledIcon = styled.img`
+  height: 20px;
+  width: 20px;
+`
+
+const StyleHeader = styled.div`
+  display: flex;
+  line-height: 20px;
+`
+
+const StyledNomalLink = styled(Link)`
+    
 `
 
 export default CustomCreateSingleFarm

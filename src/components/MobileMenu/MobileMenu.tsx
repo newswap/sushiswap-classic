@@ -63,6 +63,24 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             {t('Community Mining')}           
           </StyledLink>
 
+          <StyledLink
+            exact
+            activeClassName="active"
+            to="/customLPFarms"
+            onClick={onDismiss}
+          >
+            流通性挖矿      
+          </StyledLink>
+
+          <StyledLink
+            exact
+            activeClassName="active"
+            to="/customSingleFarms"
+            onClick={onDismiss}
+          >
+            单通证挖矿         
+          </StyledLink>
+
           <StyledAbsoluteLink
             href={ INFO_URL }
             target="_blank"

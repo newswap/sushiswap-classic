@@ -14,7 +14,9 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 import Container from '../../components/Container'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
-
+import arrowLeft from '../../assets/img/ic_arrow_left.svg'
+import issue from '../../assets/img/ic_issue.svg'
+import { Link } from 'react-router-dom'
 
 const CustomCreateLPFarm: React.FC = () => {
     const { t } = useTranslation()
@@ -119,8 +121,15 @@ const CustomCreateLPFarm: React.FC = () => {
             <Spacer size = 'lg'/>
             <StyledWalletsWrapper>
                 <StyledWalletCard>
-                    <StyledLabel>创建自定义矿池-流通性挖矿</StyledLabel>
-
+                    <StyleHeader>
+                        <StyledNomalLink to={'/customLPFarms'}>
+                            <StyledIcon src = {arrowLeft} />
+                        </StyledNomalLink>
+                        <StyledLabel>创建自定义矿池-流通性挖矿</StyledLabel>
+                        <StyledNomalLink to={'/customLPFarms'}>
+                            <StyledIcon src = {issue} />
+                        </StyledNomalLink>
+                    </StyleHeader>
                     <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={'请输入矿池名称'}></CustomInput>
                     <CustomInput onChange={handleToken} value={token} startAdornment={'质押的流动性通证'} placeholder={'NUSDT-NEW'} type={'select'} onTypeChange={handleToken} data={tokenList}></CustomInput>
 
@@ -181,6 +190,23 @@ const StyledTip = styled.div`
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
+`
+
+const StyledIcon = styled.img`
+  height: 20px;
+  width: 20px;
+`
+
+const StyleHeader = styled.div`
+  display: flex;
+  line-height: 20px;
+`
+
+const StyledNomalLink = styled(Link)`
+    align-items: center;
+    font-size: 14px;    
+    text-decoration: none;
+    color: #20C5A0;
 `
 
 export default CustomCreateLPFarm
