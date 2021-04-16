@@ -1,16 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import {isMobile} from 'react-device-detect'
 import Container from '../Container'
+import { Link } from 'react-router-dom'
 
 interface PageHeaderProps {
   icon: React.ReactNode
   subtitle?: string
   subsubtitle?: string
   title?: string
+  to?: string
+  toTitle?: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, subsubtitle, title }) => {
+const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, subsubtitle, title, to, toTitle }) => {
   return (
     <Container size="lg">
       <StyledPageHeader>
@@ -18,12 +21,29 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, subsubtitle, ti
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
         <StyledSubtitle>{subsubtitle}</StyledSubtitle>
+        {
+          isMobile && to ? (
+            <StyledNomalLink  to={to} >
+              {toTitle + " >"} 
+            </StyledNomalLink>
+          ) : (
+            <></>
+          )
+        }
       </StyledPageHeader>
     </Container>
   )
 }
 
-const StyledPageHeader = styled.div`
+const StyledPageHeader = isMobile ? styled.div`
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: ${(props) => props.theme.spacing[2]}px;
+  padding-top: ${(props) => props.theme.spacing[2]}px;
+  margin: 0 auto;
+` : styled.div`
   align-items: center;
   box-sizing: border-box;
   display: flex;
@@ -31,7 +51,7 @@ const StyledPageHeader = styled.div`
   padding-bottom: ${(props) => props.theme.spacing[6]}px;
   padding-top: ${(props) => props.theme.spacing[6]}px;
   margin: 0 auto;
-`
+` 
 
 const StyledIcon = styled.div`
   font-size: 120px;
@@ -61,6 +81,16 @@ const StyledSubtitle = styled.h3`
   margin: 0;
   padding: 0;
   text-align: center;
+`
+
+const StyledNomalLink = styled(Link)`
+    align-items: center;
+    font-size: 14px;    
+    text-decoration: none;
+    color: #20C5A0;
+    font-weight: 700;
+    height: 20px;
+    padding-top: 15px;
 `
 
 export default PageHeader

@@ -183,42 +183,19 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                     <Tab className = {classes.root} label="即将开始" />
                     <Tab className = {classes.root} label="已完成" />
                 </AntTabs>
-                <CreateFarmDiv>
-                    <StyledNomalLink  to={'/customCreateLPFarms'} >
-                        {'创建自定义矿池 >'}
-                    </StyledNomalLink>
-                </CreateFarmDiv>
+                {
+                    isMobile ? (
+                        <></>
+                    ) : (
+                        <CreateFarmDiv>
+                            <StyledNomalLink  to={'/customCreateLPFarms'} >
+                                {'创建自定义矿池 >'}
+                            </StyledNomalLink>
+                        </CreateFarmDiv>
+                    )
+                }
             </HeadDiv>
             <Table className={classes.table} aria-label="simple table">
-        {/* <TableHead>
-          {
-            (isMobile) ? (
-              <TableRow>
-                <StyledTableCell align="left" width="48%">
-                
-                  <StyledTHMobile>{t('Pool Name')}</StyledTHMobile>
-                  
-                </StyledTableCell>
-                <StyledTableCell align="left" width="50%">
-                  
-                  <StyledTHMobile>{t('Liquidity Token')}</StyledTHMobile>
-                    
-                </StyledTableCell>
-                <StyledTableCell align="left" width="2%"></StyledTableCell>
-              </TableRow>
-            ) : (
-              <TableRow>
-                <StyledTableCell align="left" width="35%">
-                  <StyledTH>{t('Pool Name')}</StyledTH>
-                </StyledTableCell>
-                <StyledTableCell align="left" width="45%">
-                  <StyledTH>{t('Liquidity Token')}</StyledTH>
-                </StyledTableCell>
-                <StyledTableCell align="left" width="20%"></StyledTableCell>
-              </TableRow>
-            )
-          }
-        </TableHead> */}
             <TableBody>
                 {
                     testRows[value].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
@@ -247,14 +224,27 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                             </TopDiv>
                                             <Line></Line>
                                             <BottomDiv>
-                                                <TimeDiv>
-                                                    <TimeTitle>质押时间</TimeTitle>
-                                                    <TimeValue>{farm.stakeTime}</TimeValue>
-                                                </TimeDiv>
-                                                <StakeDiv>
-                                                    <StakeTitle>当前总锁仓价值</StakeTitle>
-                                                    <StakeValue>{farm.totalStake}</StakeValue>
-                                                </StakeDiv>
+                                                { isMobile ? 
+                                                    (
+                                                        <TimeDiv>
+                                                            <TimeTitle>质押时间</TimeTitle>
+                                                            <TimeValue>{farm.stakeTime}</TimeValue>
+                                                            <StakeTitle>当前总锁仓价值</StakeTitle>
+                                                            <StakeValue>{farm.totalStake}</StakeValue>
+                                                        </TimeDiv>
+                                                      ) : (
+                                                        <>
+                                                        <TimeDiv>
+                                                            <TimeTitle>质押时间</TimeTitle>
+                                                            <TimeValue>{farm.stakeTime}</TimeValue>
+                                                        </TimeDiv>
+                                                        <StakeDiv>
+                                                            <StakeTitle>当前总锁仓价值</StakeTitle>
+                                                            <StakeValue>{farm.totalStake}</StakeValue>
+                                                        </StakeDiv>
+                                                        </>
+                                                      )
+                                                }
                                                 <EnterDiv>
                                                     <StyledNavLink to={'/customLPFarms/${farm.id}'}>
                                                         <EnterBtn>
@@ -364,7 +354,15 @@ const CreateFarmDiv = styled.button`
     }
 `
 
-const CardDiv = styled.div`
+const CardDiv = isMobile ? styled.div`
+    height: 191px;
+    width: 100%;
+    border-radius: 24px;
+    background: white;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 3px 12px 0px rgba(7,94,68,0.11);
+` : styled.div`
     height: 166px;
     width: 100%;
     border-radius: 24px;
@@ -399,7 +397,7 @@ const DetailDiv = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-left: 3px;
+    margin-left: 8px;
 `
 const TitleDiv = styled.div`
     font-size: 18px;
@@ -453,12 +451,19 @@ const TimeDiv = styled.div`
     margin-left: 20px;
 `
 
-const TimeTitle = styled.div`
+const TimeTitle = isMobile ? styled.div`
+    font-size: 12px;
+    color: #647684;
+` : styled.div`
     font-size: 14px;
     color: #647684;
 `
-const TimeValue = styled.div`
-    font-size: 14px;
+const TimeValue = isMobile ? styled.div`
+    font-size: 12px;
+    color: #647684;
+    font-weight: 700;
+` : styled.div`
+    ont-size: 14px;
     color: #647684;
     font-weight: 700;
 `
@@ -487,6 +492,7 @@ const EnterDiv = styled.div`
     background: clear;
     height: 100%;
     float: right;
+    margin-top: 26px;
 `
 
 const EnterBtn = styled.button`
@@ -498,7 +504,7 @@ const EnterBtn = styled.button`
     border: none;
     cursor: pointer;
     margin-top: 21px;
-    margin-right: 20px;
+    margin-right: 16px;
 
     &:focus {
         border: none;
@@ -506,200 +512,6 @@ const EnterBtn = styled.button`
         
     }
 `
-
-const StyledImg = styled.img `
-    height: 32px;
-    width: 32px;
-    margin: 2px;
-    margin-left: 14px;
-`
-const StyledImgMob = styled.img `
-    height: 20px;
-    width: 20px;
-    margin: 2px;
-    margin-left: 0px;
-    margin-top: 6px;
-`
-
-const StyledPoolImg = styled.img `
-    height: 32px;
-    width: 32px;
-    margin-left: 30px;
-    z-index: 999;
-`
-
-const StyledPoolImgMob = styled.img `
-    height: 20px;
-    width: 20px;
-    margin-left: 12px;
-    z-index: 999;
-    margin-top: 6px;
-`
-
-
-const StyledArrow = styled.img `
-    height: 16px;
-    width: 16px;
-    margin: 0px;
-    justify-content: center;
-    float: left;
-    margin: 20px; 
-    margin-left: 10px;  
-`
-
-const StyledImgL = styled.img `
-    height: 32px;
-    width: 32px;
-    border-radius: 16px;
-    // margin: 2px;
-    margin-left: -16px;
-    margin-right: 20px;
-`
-
-const StyledImgLMob = styled.img `
-    height: 20px;
-    width: 20px;
-    border-radius: 10px;
-    margin-left: -10px;
-    margin-top: 6px;
-`
-
-const StyledIDLabel = styled.div`
-    height: 30px;
-    float: left;
-    text-align: left;
-    padding-top: 8px;
-    font-size: 16px;
-    margin-left: 30px;
-`
-const StyledIDLabelMob = styled.div`
-    height: 30px;
-    float: left;
-    text-align: left;
-    padding-top: 0px;
-    font-size: 16px;
-    margin-left: 16px;
-    margin-top: 6px;
-`
-
-
-const StyledTokenLabel = styled.div`
-    height: 30px;
-    float: left;
-    text-align: left;
-    padding-top: 8px;
-    margin-left: 10px;
-    font-size: 14px;
-    color: #20C5A0;
-`
-
-const StyledTokenLabelMob = styled.div`
-    height: 30px;
-    float: left;
-    text-align: left;
-    padding-top: 8px;
-    font-size: 12px;
-    color: #20C5A0;
-`
-
-const StyledLPLabel = styled.div`
-    height: 30px;
-    float: left;
-    text-align: center;
-    padding-top: 8px;
-    font-size: 14px;
-    color: #647584;
-    margin-left: 10px;
-`
-
-const StyledLPLabelMob = styled.div`
-    height: 30px;
-    float: left;
-    text-align: center;
-    padding-top: 8px;
-    font-size: 12px;
-    color: #647584;
-    margin-left: 10px;
-`
-
-const StyledLPLogo = styled.div`
-    margin: 0;
-    min-height: 30px;
-    min-width: 30px;
-    text-decoration: none;
-    float: left;
-    padding-top: 0px;
-`
-
-const StyledLogo = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    min-height: 30px;
-    min-width: 30px;
-    text-decoration: none;
-    float: left;
-    padding-top: 0px;
-`
-
-const StyledPoolLogo = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    min-height: 30px;
-    min-width: 30px;
-    text-decoration: none;
-    float: left;
-    padding-top: 0px;
-`
-
-const StyledLink = styled(Link)`
-  align-items: center;
-  font-size: 14px;
-  color: #20C5A0;
-  display: flex;
-  flex: 1;
-  height: 56px;
-  justify-content: center;
-  margin: 0 ${props => -props.theme.spacing[4]}px;
-  padding: 0 ${props => props.theme.spacing[4]}px;
-  text-decoration: none;
-  float: left;
-`
-const iconStyle: React.CSSProperties = {
-
-  width: '32px',
-  height: '32px',
-  margin: '2px',
-  marginLeft: '14px',
-  borderRadius: '16px',
-}
-
-const iconStyleL: React.CSSProperties = {
-    height: '32px',
-    width: '32px',
-    borderRadius: '16px',
-    marginLeft: '-16px',
-    marginRight: '20px',
-}
-
-const iconStyleMob: React.CSSProperties = {
-  width: '20px',
-  height: '20px',
-  margin: '2px',
-  marginLeft: '0px',
-  marginTop: '6px',
-  borderRadius: '10px',
-}
-
-const iconLStyleMob: React.CSSProperties = {
-  width: '20px',
-  height: '20px',
-  borderRadius: '10px',
-  marginLeft: '-10px',
-  marginTop: '6px',
-}
-
 const StyledNavLink = styled(Link)`
     align-items: center;
     font-size: 14px;
