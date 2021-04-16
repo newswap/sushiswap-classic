@@ -21,6 +21,10 @@ import NST from "./views/NST";
 import NSP from "./views/NSP";
 import CommunityFarm from "./views/CommunityFarm"
 import TradeFarm from "./views/TradeFarm"
+import CustomLPFarms from "./views/CustomLPFarms"
+import CustomSingleFarms from "./views/CustomSingleFarms"
+import CustomCreateLPFarm from './views/CustomCreateLPFarm'
+import CustomCreateSingleFarm from './views/CustomCreateSingleFarm'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
@@ -61,7 +65,18 @@ const App: React.FC = () => {
             <Route path="/mainstreamMining">
               <MainstreamFarms />
             </Route>
-
+            <Route path="/customLPFarms">
+              <CustomLPFarms />
+            </Route>
+            <Route path="/customSingleFarms">
+              <CustomSingleFarms />
+            </Route>
+            <Route path="/customCreateLPFarms">
+              <CustomCreateLPFarm />
+            </Route>
+            <Route path="/customCreateSingleFarms">
+              <CustomCreateSingleFarm />
+            </Route>
             {/* 
             <Route path="/nstFarms">
               <Farms />

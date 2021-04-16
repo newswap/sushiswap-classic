@@ -8,6 +8,15 @@ import {isMobile} from 'react-device-detect'
 import Datetime from 'react-datetime'
 import "./datePicker.css"
 import { render } from 'react-dom'
+import { makeStyles } from '@material-ui/core/styles';
+import useModal from '../../hooks/useModal'
+import TokenSelectProviderModel from '../../components/TokenSelectProviderModel'
+
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+  } from '@material-ui/pickers';
 
 
 export interface CustomInputProps {
@@ -23,9 +32,13 @@ export interface CustomInputProps {
     data?: Array<Object>
 }
 
+const useStyles = makeStyles((theme) => ({
+    
+}));
 
 
-const CustomInput: React.FC<CustomInputProps> = ({
+
+const CustomPoolInput: React.FC<CustomInputProps> = ({
     onChange,
     placeholder,
     startAdornment,
@@ -41,7 +54,21 @@ const CustomInput: React.FC<CustomInputProps> = ({
     let inputProps = {
         placeholder: '新加坡时间',
     };
+    const classes = useStyles();
 
+    const [selectedDate, setSelectedDate] = React.useState(new Date());
+
+    const [selectToken, setSelectToken] = React.useState(placeholder)
+
+
+    const tokenSelect = (name: any) => {
+        console.log('name is:' + name)
+        setSelectToken(name)
+    }
+
+    const [onPresentWalletProviderModal] = useModal(<TokenSelectProviderModel dataSelect ={tokenSelect}/>)
+
+    
     const checkValidDate = (currentDate: any, selectedDate: any) => {
         return (currentDate/1000/60/60/24) >= (((new Date()).getTime())/1000/60/60/24)
     }
@@ -54,17 +81,13 @@ const CustomInput: React.FC<CustomInputProps> = ({
             type ? ( type == 'select' ? 
                 (
                     <>
-                    <StyledInput placeholder={placeholder} value={value} onChange={onChange} />
-                    <StyledSelectDiv id="lang" onChange={onTypeChange}>
-                        
-                        <option value="">选择通证</option>
+                    <StyledTokenDiv>{selectToken}</StyledTokenDiv>
+                    <StyledSelectBtn onClick={onPresentWalletProviderModal}>
 
-                        {
-                            data.map((token, i) => 
-                                <option value={token['name']} key={i} >{token['name']}</option>
-                            )
-                        }              
-                    </StyledSelectDiv>
+                        <StyledSelectImg src={arrowDown} />
+                    </StyledSelectBtn>
+                            
+                
                     </>
                 ) : (
                     type == 'date' ? 
@@ -78,20 +101,20 @@ const CustomInput: React.FC<CustomInputProps> = ({
                             isValidDate={checkValidDate}
                             >
                         </Datetime>
+                        
                         <StyledCalendarImg src={calendar} />
                         </>
                     ) : (
                         type == 'fee' ? 
                         (                
                             <>
-                            <StyledInput placeholder={placeholder} value={value} onChange={onChange} />            
-                            <StyledUnitDiv>NEW</StyledUnitDiv>
+                            <StyledFeeDiv>{placeholder} NEW</StyledFeeDiv>
                             </>
                         ) : (
                             type == 'duration' ? (
                                 <>
                                 <StyledInput placeholder={placeholder} value={value} onChange={onChange} />
-                                <StyledFeeDiv>挖矿效率约为：200 ABC/区块</StyledFeeDiv>
+                                <StyledUnitDiv>天</StyledUnitDiv>
                                 </>
                             ) : (
                                 <div></div>
@@ -111,7 +134,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
 const StyledFeeDiv = styled.div`
     float: right;
     height: 36px;
-    margin-top: -72px;
+    margin-top: -25px;
     font-size: 14px;
     font-weight: 500;
     color: #555A6A;
@@ -151,26 +174,28 @@ const StyledDateDiv = styled.button`
 
 const StyledSelectDiv = isMobile ? styled.select`
     float: right;
-    background: #00C99E;
-    color: white;
+    background: #F2F2F7;
+    color: #555A6A;
     border-radius: 12px;
     height: 36px;
     border: 0;
-    padding-left: 10px;
-    padding-right: 10px;
     margin-top: -44px;
     cursor: pointer;
+    width: 100px;
 ` : styled.select`
     float: right;
-    background: #00C99E;
-    color: white;
+    background: #F2F2F7;
+    color: #555A6A;
     border-radius: 12px;
     height: 36px;
     border: 0;
-    padding-left: 10px;
-    padding-right: 10px;
     margin-top: 4px;
     cursor: pointer;
+    width: 100px;
+    &:focus {
+        border: none;
+        outline: none;
+    }
 `
 
 const StyledStartDiv = styled.div`
@@ -204,7 +229,42 @@ const StyledInput = styled.input`
   outline: none;
   font-weight: 500;
   width: 80%;
-  
 `
 
-export default CustomInput
+const StyledTokenDiv = styled.div`
+  background: none;
+  border: 0;
+  color: #555A6A;
+  font-size: 16px;
+  flex: 1;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  font-weight: 500;
+  width: 80%;
+  margin-top: 12px;
+  margin-bottom: 12px;
+`
+
+const StyledSelectBtn = styled.button`
+    margin-top: -32px;
+    width: 24px;
+    height: 24px;
+    float: right;
+    padding: 0;
+    border: none;
+    background: #F2F2F7;
+    cursor: pointer;
+    &:focus {
+        border: none;
+        outline: none;
+    }
+`
+
+const StyledSelectImg = styled.img`
+    width: 24px;
+    height: 24px;   
+`
+
+export default CustomPoolInput

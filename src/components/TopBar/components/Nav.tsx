@@ -36,6 +36,17 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/communityMining">
         { t('Community Mining') }
       </StyledLink>
+      <StyledCustomDiv>
+        自定义挖矿
+        <StyledDropDown id="dropdownContent">
+          <StyledLink exact activeClassName="active" to="/customLPFarms">
+            流通性挖矿
+          </StyledLink>
+          <StyledLink exact activeClassName="active" to="/customSingleFarms">
+            单通证挖矿
+          </StyledLink>
+        </StyledDropDown>
+      </StyledCustomDiv>
       {/* 
       <StyledLink exact activeClassName="active" to="/nstFarms">
         { t('NSTFarms') }
@@ -120,6 +131,36 @@ const StyledAbsoluteLink = styled.a`
     padding-left: ${(props) => props.theme.spacing[2]}px;
     padding-right: ${(props) => props.theme.spacing[2]}px;
   }
+`
+const StyledCustomDiv = styled.div `
+  color: #061243;
+  font-weight: 700;
+  padding-left: ${(props) => props.theme.spacing[3]}px;
+  padding-right: ${(props) => props.theme.spacing[3]}px;
+  text-decoration: none;
+  &:hover #dropdownContent {
+    display: flex;
+  }
+  &.active {
+    // color: ${(props) => props.theme.color.primary.main};
+    color: #00C89D;
+  }
+  @media (max-width: 400px) {
+    padding-left: ${(props) => props.theme.spacing[2]}px;
+    padding-right: ${(props) => props.theme.spacing[2]}px;
+  }
+  word-break: keep-all; 
+  cursor: pointer;
+`
+
+const StyledDropDown = styled.div `
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 10px 4px;
+  flex-direction: column;
 `
 
 export default Nav

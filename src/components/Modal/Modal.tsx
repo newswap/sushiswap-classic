@@ -4,6 +4,7 @@ import { isMobile } from "react-device-detect"
 
 export interface ModalProps {
   onDismiss?: () => void
+  dataSelect?: (data: any) => void
 }
 
 const Modal: React.FC = ({ children }) => {
