@@ -1,5 +1,9 @@
 import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
+import { client } from '../apollo/client'
+import {
+  ALL_TOKEN_MINES
+} from '../apollo/queries'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -499,4 +503,34 @@ export const leave = async (contract, amount, account) => {
         // console.log(tx)
         return tx.transactionHash
       })
+}
+
+const TOKENMINES_TO_FETCH = 500
+// Loop through every token mines, used for search
+export const getAllTokenMines = async () => {
+  try {
+    let allFound = false
+    let tokenMines = []
+    let skipCount = 0
+    while (!allFound) {
+      let result = await client.query({
+        query: ALL_TOKEN_MINES,
+        variables: {
+          skip: skipCount
+        },
+        fetchPolicy: 'cache-first'
+      })
+      skipCount = skipCount + TOKENMINES_TO_FETCH
+      // console.log("----------->")
+      // console.log(result)
+      tokenMines = tokenMines.concat(result?.data?.tokenMines)
+      if (result?.data?.tokenMines.length < TOKENMINES_TO_FETCH || tokenMines.length > TOKENMINES_TO_FETCH) {
+        allFound = true
+      }
+    }
+    return tokenMines
+  } catch (e) {
+    console.log(e)
+    return []
+  }
 }
