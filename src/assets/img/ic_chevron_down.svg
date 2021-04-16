@@ -5,7 +5,7 @@
         <g id="icons" transform="translate(-980.000000, -70.000000)">
             <g id="ic_chevron.down" transform="translate(980.000000, 70.000000)">
                 <rect id="Rectangle" x="0" y="0" width="80" height="80"></rect>
-                <polyline id="Path-2" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" points="23.5546486 31.4272129 41.3691995 49.3764584 59.318445 31.4272129"></polyline>
+                <polyline id="Path-2" stroke="#555A6A" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" points="23.5546486 31.4272129 41.3691995 49.3764584 59.318445 31.4272129"></polyline>
             </g>
         </g>
     </g>

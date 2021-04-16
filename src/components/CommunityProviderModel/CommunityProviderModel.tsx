@@ -114,7 +114,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
           <StyledWalletCard>
             <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={''}></CustomInput>
             <CustomInput onChange={handleAddress} value={address} startAdornment={'质押的流动性通证'} placeholder={'输入流通性通证的原始合约地址(0x开头)'}></CustomInput>
-            <CustomInput onChange={handleFarmAmount} value={farmAmount} startAdornment={'矿量'} placeholder={'0.0'} type={'select'} onTyleChange={handleSelectedToken} data={tokenList}></CustomInput>
+            <CustomInput onChange={handleFarmAmount} value={farmAmount} startAdornment={'矿量'} placeholder={'0.0'} type={'select'} onTypeChange={handleSelectedToken} data={tokenList}></CustomInput>
             <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={'启动时间'} placeholder={'新加坡时间'} type={'date'}></CustomInput>
             <CustomInput onChange={handleDuration} value={duration} startAdornment={'挖矿时长'} placeholder={'0'} type={'duration'}></CustomInput>
             <CustomInput onChange={handleFee} value={fee} startAdornment={'挖矿手续费'} placeholder={'0.00'} type={'fee'}></CustomInput>
