@@ -520,6 +520,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // CST-NEW
+    pid: 24,
+    lpAddresses: {
+      1007: '',
+      1012: '0xccf438a14b8c9c7affb731e8f4cd4022b81d11c6',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x024fa3CD02d0Cbf674F0D83eC1FBd066570a4629',   
+    },
+    name: 'CST Party!',
+    symbol: 'CST-NEW LP',
+    tokenSymbol: 'CST',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
