@@ -537,6 +537,57 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // BNN-NEW
+    pid: 25,
+    lpAddresses: {
+      1007: '',
+      1012: '0x17e847cd20f7147fa230bab82d6672320f096fdf',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x787771644bFCDf0001CeafC35d2b0233B42FBe0F',   
+    },
+    name: 'BNN Party!',
+    symbol: 'BNN-NEW LP',
+    tokenSymbol: 'BNN',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // MARS-NEW
+    pid: 26,
+    lpAddresses: {
+      1007: '',
+      1012: '0x05ba041186b25607ef1ac2d3943d2a5d749f3256',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0xB313BdEcf6fEcC64Cca0CBA49FCC0800a2D376d0',   
+    },
+    name: 'MARS Party!',
+    symbol: 'MARS-NEW LP',
+    tokenSymbol: 'MARS',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
+  },
+  { // QWCII-NEW
+    pid: 27,
+    lpAddresses: {
+      1007: '',
+      1012: '0x5c7205a2391d1a6edcaa3b5f2af4fc30a1a57882',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x93C615773C642e139cEbF5Df3a13BAd7470D634e',   
+    },
+    name: 'QWCII Party!',
+    symbol: 'QWCII-NEW LP',
+    tokenSymbol: 'QWCII',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
