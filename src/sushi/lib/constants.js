@@ -588,6 +588,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // XYC-NEW
+    pid: 28,
+    lpAddresses: {
+      1007: '',
+      1012: '0x9cef566e9a43a6636e8460effc4f584398bb99f6',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x8d18101AA8489fbA202afd25EF3A6C98c391B23a',   
+    },
+    name: 'XYC Party!',
+    symbol: 'XYC-NEW LP',
+    tokenSymbol: 'XYC',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
