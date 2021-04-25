@@ -605,6 +605,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // FREE-NEW
+    pid: 29,
+    lpAddresses: {
+      1007: '',
+      1012: '0xde9269b27e8e002d0ece639a6c973453604b0133',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x5A51F333725F91cB68Dc682BAB1c7dB99ad8A028',   
+    },
+    name: 'FREE Party!',
+    symbol: 'FREE-NEW LP',
+    tokenSymbol: 'FREE',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
