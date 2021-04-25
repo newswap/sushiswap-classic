@@ -66,10 +66,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
-            to="/customLPFarms"
+            to="/customLPMining"
             onClick={onDismiss}
           >
-            流通性挖矿      
+            {t('LP Mining')}      
           </StyledLink>
 
           <StyledLink

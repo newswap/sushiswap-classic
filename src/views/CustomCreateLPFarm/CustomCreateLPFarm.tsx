@@ -122,11 +122,11 @@ const CustomCreateLPFarm: React.FC = () => {
             <StyledWalletsWrapper>
                 <StyledWalletCard>
                     <StyleHeader>
-                        <StyledNomalLink to={'/customLPFarms'}>
+                        <StyledNomalLink to={'/customLPMining'}>
                             <StyledIcon src = {arrowLeft} />
                         </StyledNomalLink>
                         <StyledLabel>创建自定义矿池-流通性挖矿</StyledLabel>
-                        <StyledNomalLink to={'/customLPFarms'}>
+                        <StyledNomalLink to={'/customLPMining'}>
                             <StyledIcon src = {issue} />
                         </StyledNomalLink>
                     </StyleHeader>

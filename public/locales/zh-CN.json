@@ -73,6 +73,25 @@
   "mainstreamMiningTimeTest": "(总量1000万枚 / 活动时间：2021.3.17 12:00 - 2022.3.16 12:00)",
   "mainstreamMiningTips": "质押主矿区矿池对应的流动性通证，获得 NEW 奖励。",
 
+
+
+  "===============================================": "自定义挖矿",
+  "Custom Mining": "自定义挖矿",
+  "LP Mining":"流动性挖矿",
+
+  "customLPMining": "自定义挖矿-流动性挖矿",
+  "customLPMiningTips": "参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。",
+  "createCustomMining": "创建自定义矿池",
+  "Live": "进行中",
+  "Upcoming": "即将开始",
+  "Finished": "已完成",
+
+
+
+  "==============================================": "自定义挖矿",
+
+
+
   "Cooking the rice ...": "Cooking the rice ...",
   "Menu": "菜单",
   "Farm": "矿池",

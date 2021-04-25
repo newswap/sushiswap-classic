@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react'
 import { useParams, Route, Switch, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
+import BigNumber from 'bignumber.js'
 import newIcon from '../../assets/img/logo.d23eaded.svg'
 import arrow from '../../../assets/img/ic_arrow_right.svg'
 
@@ -14,7 +15,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
 
-import useNodeFarms from '../../../hooks/useNodeFarms'
+import useAllTokenMines from '../../../hooks/useAllTokenMines'
+import LocalLoader from '../../../components/LocalLoader'
+
+import { TokenMine } from '../../../hooks/useAllTokenMines'
 import { NodeFarm } from '../../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
@@ -59,7 +63,8 @@ const useStyles = makeStyles({
 
 });
 
-interface FarmWithStakedValue extends NodeFarm {
+interface FarmWithStakedValue extends TokenMine {
+    // reserveUSD: BigNumber,
 }
 
 const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
@@ -78,29 +83,40 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         setPage(0);
     };
 
-    const [value, setValue] = React.useState(2);
-    const handleChange = (event: any, newValue: any) => {
-        setValue(newValue);
-        console.log('new value is: ' + newValue )
+    const [tabValue, setTabValue] = React.useState(0);
+    const handleChange = (event: any, newTabValue: any) => {
+        setTabValue(newTabValue);
+        console.log('new TabValue is: ' + newTabValue )
     };
 
-    const [nodeFarms] = useNodeFarms()
+    const tokenMines = useAllTokenMines()
+    // console.log("=====================>")
+    // console.log(tokenMines)
 
-    const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
+
+    const rows = tokenMines.reduce<FarmWithStakedValue[][]>(
         (farmRows, farm, i) => {
-
             const farmWithStakedValue = {
                 ...farm,
+                // reserveUSD: 100,  // TODO  添加锁仓价值，见MainstreamFarms/components/FarmCards
             }
+       
             const newFarmRows = [...farmRows]
-     
-            newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
-      
+            const currentTime = new Date().getTime()/1000
+
+            if(currentTime > farm.endTime) { // Finished
+                newFarmRows[2].push(farmWithStakedValue)    
+            } else if(currentTime < farm.startTime) { // Upcoming
+                newFarmRows[1].push(farmWithStakedValue)    
+            } else { // Live
+                newFarmRows[0].push(farmWithStakedValue)    
+            } 
+
             return newFarmRows
         },
-        [[]],
+        [[],[],[]],
     )
-      
+    
     const testRows = [
         [
             {
@@ -178,10 +194,10 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
     return (
         <StyledTableContainer>
             <HeadDiv>
-                <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-                    <Tab className = {classes.root} label="进行中" />
-                    <Tab className = {classes.root} label="即将开始" />
-                    <Tab className = {classes.root} label="已完成" />
+                <AntTabs value={tabValue} onChange={handleChange} aria-label="ant example">
+                    <Tab className = {classes.root} label={t('Live')} />
+                    <Tab className = {classes.root} label={t('Upcoming')} />
+                    <Tab className = {classes.root} label={t('Finished')} />
                 </AntTabs>
                 {
                     isMobile ? (
@@ -189,7 +205,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                     ) : (
                         <CreateFarmDiv>
                             <StyledNomalLink  to={'/customCreateLPFarms'} >
-                                {'创建自定义矿池 >'}
+                                {t('createCustomMining') + ' >'}
                             </StyledNomalLink>
                         </CreateFarmDiv>
                     )
@@ -198,7 +214,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
             <Table className={classes.table} aria-label="simple table">
             <TableBody>
                 {
-                    testRows[value].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
+                    testRows[tabValue].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
                         // testRows[value].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         // .map((farm, j) => {
 
@@ -246,7 +262,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                                       )
                                                 }
                                                 <EnterDiv>
-                                                    <StyledNavLink to={'/customLPFarms/${farm.id}'}>
+                                                    <StyledNavLink to={'/customLPMining/${farm.id}'}>
                                                         <EnterBtn>
                                                             进入
                                                         </EnterBtn>
@@ -265,7 +281,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                 // rowsPerPageOptions={[5, 10, 25]}
                 rowsPerPageOptions={[25]}
                 component="div"
-                count={testRows[value].length}
+                count={testRows[tabValue].length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}

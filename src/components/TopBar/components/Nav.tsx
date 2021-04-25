@@ -37,10 +37,10 @@ const Nav: React.FC = () => {
         { t('Community Mining') }
       </StyledLink>
       <StyledCustomDiv>
-        自定义挖矿
+        { t('Custom Mining')}
         <StyledDropDown id="dropdownContent">
-          <StyledLink exact activeClassName="active" to="/customLPFarms">
-            流通性挖矿
+          <StyledLink exact activeClassName="active" to="/customLPMining">
+            { t('LP Mining')}
           </StyledLink>
           <StyledLink exact activeClassName="active" to="/customSingleFarms">
             单通证挖矿

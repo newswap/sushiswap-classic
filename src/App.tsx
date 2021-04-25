@@ -65,7 +65,7 @@ const App: React.FC = () => {
             <Route path="/mainstreamMining">
               <MainstreamFarms />
             </Route>
-            <Route path="/customLPFarms">
+            <Route path="/customLPMining">
               <CustomLPFarms />
             </Route>
             <Route path="/customSingleFarms">

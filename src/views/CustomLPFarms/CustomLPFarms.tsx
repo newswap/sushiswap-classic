@@ -29,15 +29,15 @@ const CustomLPFarms: React.FC = () => {
     return (
         <Switch>
             <Page>
-                {!!account ? (
+                {/* {!!account ? ( */}
                     <>
                         <Route exact path={path}>
                             <PageHeader
                                 icon={<img src={coin} height="95" />}
-                                title={'自定义挖矿-流通性挖矿'}
-                                subtitle={'参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。'}
+                                title={t('customLPMining')}
+                                subtitle={t('customLPMiningTips')}
                                 to={'/customCreateLPFarms'}
-                                toTitle={'创建自定义矿池'}
+                                toTitle={t('createCustomMining')}
                             />
                         
                             <Spacer size="lg" />
@@ -53,6 +53,7 @@ const CustomLPFarms: React.FC = () => {
                             <CustomLPFarm />
                         </Route>
                     </>
+{/* 
                 ) : (
                     <div
                         style={{
@@ -70,6 +71,7 @@ const CustomLPFarms: React.FC = () => {
                         />
                     </div>
                 )}
+                 */}
             </Page>
         </Switch> 
     )

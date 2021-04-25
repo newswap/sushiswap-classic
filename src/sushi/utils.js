@@ -521,7 +521,7 @@ export const getAllTokenMines = async () => {
         fetchPolicy: 'cache-first'
       })
       skipCount = skipCount + TOKENMINES_TO_FETCH
-      // console.log("----------->")
+      // console.log("getAllTokenMines----------->")
       // console.log(result)
       tokenMines = tokenMines.concat(result?.data?.tokenMines)
       if (result?.data?.tokenMines.length < TOKENMINES_TO_FETCH || tokenMines.length > TOKENMINES_TO_FETCH) {

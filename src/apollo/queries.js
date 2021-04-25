@@ -8,8 +8,8 @@ export const ALL_TOKEN_MINES = gql`
       name
       stakingToken
       rewardsToken
-      startBlock
-      endBlock
+      startTime
+      endTime
       rewardAmount
       stakingTokenSymbol
       stakingTokenName
@@ -18,9 +18,11 @@ export const ALL_TOKEN_MINES = gql`
       rewardsTokenName
       rewardsTokenDecimals
       isStakingLPToken
+      token0Address
       token0Symbol
       token0Name
       token0Decimals
+      token1Address
       token1Symbol
       token1Name
       token1Decimals

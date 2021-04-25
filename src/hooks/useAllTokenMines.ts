@@ -12,8 +12,8 @@ export interface TokenMine {
   name: string
   stakingToken: string
   rewardsToken: string
-  startBlock: number
-  endBlock: number
+  startTime: number
+  endTime: number
   rewardAmount: number
 
   stakingTokenSymbol: string
@@ -24,9 +24,11 @@ export interface TokenMine {
   rewardsTokenDecimals: number
 
   isStakingLPToken: boolean
+  token0Address: string
   token0Symbol: string
   token0Name: string
   token0Decimals: number
+  token1Address: string
   token1Symbol: string
   token1Name: string
   token1Decimals: number
