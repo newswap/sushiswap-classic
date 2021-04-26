@@ -8,6 +8,7 @@ import TopBar from './components/TopBar'
 import FarmsProvider from './contexts/Farms'
 import NodeFarmsProvider from './contexts/NodeFarms'
 import MainstreamFarmsProvider from './contexts/MainstreamFarms'
+import CustomFarmsProvider from './contexts/CustomFarms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import SushiProvider from './contexts/SushiProvider'
@@ -112,7 +113,9 @@ const Providers: React.FC = ({ children }) => {
             <FarmsProvider>
               <MainstreamFarmsProvider>
                 <NodeFarmsProvider>
-                  <ModalsProvider>{children}</ModalsProvider>
+                  <CustomFarmsProvider>
+                    <ModalsProvider>{children}</ModalsProvider>
+                  </CustomFarmsProvider>
                 </NodeFarmsProvider>
               </MainstreamFarmsProvider>
             </FarmsProvider>

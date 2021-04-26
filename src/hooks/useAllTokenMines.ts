@@ -38,6 +38,7 @@ export interface TokenMine {
   createdAtBlockNumber: number
 }
 
+// TODO 删除，改用useCustomFarms
 const useAllTokenMines = () => {
   const [tokenMines, setTokenMines] = useState([] as Array<TokenMine>)
   const {
