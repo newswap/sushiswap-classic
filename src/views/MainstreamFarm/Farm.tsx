@@ -66,7 +66,8 @@ const Farm: React.FC = () => {
   // console.log("newValue:"+newAmount.toNumber())
 
   // 第三期结束时间 4月16 12:00(utc+8)
-  const endTime = 1618545600000
+  // const endTime = 1618545600000
+  const endTime = 16185456000000
 
   useEffect(() => {
     window.scrollTo(0, 0)

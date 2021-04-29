@@ -1,6 +1,10 @@
 import BigNumber from 'bignumber.js'
+import Web3 from 'web3'
 import { ethers } from 'ethers'
 import { client } from '../apollo/client'
+import TokenMineAbi from './lib/abi/tokenmine.json'
+import {isAddress} from '../utils/addressUtil'
+
 import {
   ALL_TOKEN_MINES
 } from '../apollo/queries'
@@ -454,9 +458,9 @@ export const getStakedNewMine = async (newMineContract, pid, account) => {
   }
 }
 
-export const getStakedNewMineSingle = async (newMineSingleContract, account) => {
+export const getStakedByAccount = async (miningContract, account) => {
   try {
-    const { amount } = await newMineSingleContract.methods
+    const { amount } = await miningContract.methods
       .userInfo(account)
       .call()
     return new BigNumber(amount)
@@ -533,4 +537,51 @@ export const getAllTokenMines = async () => {
     console.log(e)
     return []
   }
+}
+
+export const getTokenMineContract = (provider, address) => {
+  const web3 = new Web3(provider)
+  const contract = new web3.eth.Contract(
+    TokenMineAbi,
+    address,
+  )
+  return contract
+}
+
+export const getTokenEarned = async (tokenMineContract, account) => {
+  return tokenMineContract.methods.pendingRewardsToken(account).call()
+}
+
+export const harvestRewardToken = async (tokenMineContract, account) => {
+  return tokenMineContract.methods
+    .deposit('0')
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
+}
+
+export const stakeGeneral = async (mineContract, amount, tokenDecimals, account) => {
+  return mineContract.methods
+    .deposit(
+      new BigNumber(amount).times(new BigNumber(10).pow(tokenDecimals)).toString(),
+    )
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
+}
+
+export const unstakeGeneral= async (mineContract, amount, tokenDecimals, account) => {
+  return mineContract.methods
+    .withdraw(
+      new BigNumber(amount).times(new BigNumber(10).pow(tokenDecimals)).toString(),
+    )
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
 }

@@ -15,14 +15,15 @@ import useModal from '../../../hooks/useModal'
 
 interface DepositModalProps extends ModalProps {
   max: BigNumber
-  onConfirm: (amount: string) => any
+  tokenDecimals: number
+  onConfirm: (amount: string, decimals: number) => any
   tokenName?: string
   tokenUnit?: string
 }
 
-// TODO 和Farm中的一样，之后提到components中统一样式
 const DepositModal: React.FC<DepositModalProps> = ({
   max,
+  tokenDecimals,
   onConfirm,
   onDismiss,
   tokenName = '',
@@ -38,7 +39,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
   )
 
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max)
+    return getFullDisplayBalance(max, tokenDecimals)
   }, [max])
 
   const handleChange = useCallback(
@@ -81,7 +82,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
               return
             
             setPendingTx(true)
-            const txHash = await onConfirm(val)
+            const txHash = await onConfirm(val, tokenDecimals)
             setPendingTx(false)
             onDismiss()
             

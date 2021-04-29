@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 import Container from '../../../components/Container'
 
@@ -14,43 +15,34 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, status, tokenName, amount, time }) => {
+  const { t } = useTranslation()
+
   return (
     <Container size="lg">
       <StyledPageHeader>
         <StyledIcon>{icon}</StyledIcon>
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
-        {   
+            {   
                 status == 0 ? 
-                    ( 
+                    (                 
                         <>
-                            <StyledSubtitle>总量 <StyledSpan>{amount} {tokenName}</StyledSpan>; 挖矿开始倒计时： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
+                            <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining start counting')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
                         </>
-                    ) :  ( status == 1 ? (
+                    ) : ( status == 1 ? (
                             <>
-                                <StyledSubtitle>总量 <StyledSpan>{amount} {tokenName}</StyledSpan>; 挖矿结束倒计时： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
+                                <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining finish counting')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
                             </>
                         ) : ( status == 2 ? (
                                 <>
-                                    <StyledSubtitle>总量 <StyledSpan>{amount} {tokenName}</StyledSpan>; 挖矿已结束</StyledSubtitle>
-                                    <StyledSubtitle>挖矿奖励剩余 <StyledSpan>{amount} {tokenName}</StyledSpan></StyledSubtitle>
+                                    <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining finished')}</StyledSubtitle>
                                 </>
-                            ) : ( status == 3 ? (
-                                    <>
-                                        <StyledSubtitle>总量 <StyledSpan>{amount} {tokenName}</StyledSpan>; 挖矿已结束</StyledSubtitle>
-                                    </>
-                                ) : (
-                                    <>
-                                    </>
-                            )
-
-                        )
-
-                    )
-                       
-                )
-                
-
+                            ) : ( 
+                                  <>
+                                  </>
+                            )                     
+                        )  
+                    )               
             }
       </StyledPageHeader>
     </Container>
@@ -73,6 +65,7 @@ const StyledIcon = styled.div`
   line-height: 120px;
   text-align: center;
   width: 120px;
+  border-radius: 22.5px;
 `
 
 const StyledTitle = styled.h1`

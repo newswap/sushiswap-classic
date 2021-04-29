@@ -26,7 +26,8 @@ const Farms: React.FC = () => {
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
 
   // 第三期结束时间 4月16 12:00(utc+8)
-  const endTime = 1618545600000
+  // const endTime = 1618545600000
+  const endTime = 16185456000000
 
   return (
     <Switch>

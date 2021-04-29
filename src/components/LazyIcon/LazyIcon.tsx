@@ -11,6 +11,7 @@ import { render } from 'react-dom'
 import { LazyImage } from "react-lazy-images";
 import { LazyImageFull, ImageState } from "react-lazy-images";
 import placeholderIcon from '../../assets/img/placeholder_token.png'
+import { getLogoURLByAddress } from '../../utils/addressUtil'
 
 
 export interface LazyIconProps {
@@ -18,12 +19,11 @@ export interface LazyIconProps {
     customStyle?: React.CSSProperties
 }
 
-const env = process.env.REACT_APP_CHAIN_ID
 const LazyIcon: React.FC<LazyIconProps> = ({
     address,
     customStyle
 }) => {
-    const iconSrc =  "https://misc.newswap.org/tokenlist/assets/" + env + "/" + address + "/logo.png"
+    const iconSrc =  getLogoURLByAddress(address)
     // console.log("Address is: " + iconSrc)
     return (
         // <LazyImage 

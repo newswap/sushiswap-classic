@@ -7,7 +7,7 @@ import { Contract } from 'web3-eth-contract'
 
 import { approve, getMasterChefContract } from '../sushi/utils'
 
-const useApprove = (lpContract: Contract) => {
+const useApproveMasterChef = (lpContract: Contract) => {
   const { account }: { account: string; ethereum: provider } = useWallet()
   const sushi = useSushi()
   const masterChefContract = getMasterChefContract(sushi)
@@ -24,4 +24,4 @@ const useApprove = (lpContract: Contract) => {
   return { onApprove: handleApprove }
 }
 
-export default useApprove
+export default useApproveMasterChef

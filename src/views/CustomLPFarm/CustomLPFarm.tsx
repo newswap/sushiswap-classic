@@ -2,6 +2,9 @@ import BigNumber from 'bignumber.js'
 import React, { useEffect, useMemo } from 'react'
 import { useParams, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import { provider } from 'web3-core'
+import dayjs from 'dayjs'
+
 import {newCoin} from '../../sushi/lib/constants'
 import Button from '../../components/Button'
 import { useWallet } from 'use-wallet'
@@ -9,7 +12,9 @@ import Page from '../../components/Page'
 import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
-import useMainstreamFarm from '../../hooks/useMainstreamFarm'
+import { getBalanceNumber } from '../../utils/formatBalance'
+import { CustomFarm } from '../../contexts/CustomFarms'
+import useCustomFarm from '../../hooks/useCustomFarm'
 import useModal from '../../hooks/useModal'
 import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
 import useTotalSupply from '../../hooks/useTotalSupply'
@@ -18,70 +23,90 @@ import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
 import {contractAddresses} from '../../sushi/lib/constants'
+import { getContract } from '../../utils/erc20'
+import { getLogoURLByAddress } from '../../utils/addressUtil'
+import {getTokenMineContract} from '../../sushi/utils'
 import coin from '../../assets/img/new.a6cfc11f.png'
 import PageHeader from './components/PageHeader'
+import { badEnumValueMessage } from 'graphql/validation/rules/ValuesOfCorrectType'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const INFO_URL = process.env.REACT_APP_INFO_URL
-const BLOCKS_PER_YEAR = new BigNumber(10512000)
 
 const CustomLPFarm: React.FC = () => {
   const { ethereum, account } = useWallet()
   const { t } = useTranslation()
 
   const { farmId } = useParams()
+
   // console.log("farmId:"+farmId)
   const {
-    lpToken,
-    lpTokenAddress,
-    lpContract,
-    tokenAddress,
-    tokenSymbol,
-    miningAddress,
-    miningContract,
-    newPerBlock
-  } = useMainstreamFarm(farmId) || {
-    lpToken: '',
-    lpTokenAddress: '',
-    lpContract: null,
-    tokenAddress: '',
-    tokenSymbol: '',
-    miningAddress: '',
-    miningContract: null,
-    newPerBlock:0
+    id,
+    owner,
+    name,
+    stakingToken,
+    rewardsToken,
+    startTime,
+    endTime,
+    rewardAmount,
+    stakingTokenSymbol,
+    stakingTokenDecimals,
+    rewardsTokenSymbol,
+    rewardsTokenDecimals,
+    isStakingLPToken,
+    token0Address,
+    token0Symbol,
+    token1Address,
+    token1Symbol
+  } = useCustomFarm(farmId) || {
+    id: '',
+    owner: '',
+    name: '',
+    stakingToken: '',
+    rewardsToken: '',
+    startTime: 0,
+    endTime: 0,
+    rewardAmount: '0',
+    stakingTokenSymbol: '',
+    stakingTokenDecimals: 0,
+    rewardsTokenSymbol: '',
+    rewardsTokenDecimals: 0,
+    isStakingLPToken: true,
+    token0Address: '',
+    token0Symbol: '',
+    token1Address: '',
+    token1Symbol: ''
   }
 
-  
+  const miningContract = useMemo(() => {
+    if(ethereum && id) 
+      return getTokenMineContract(ethereum as provider, id)
+    else 
+      return null    
+  }, [ethereum, id])
+
+  const stakingTokenContract = useMemo(() => {
+    if(ethereum && stakingToken)
+      return getContract(ethereum as provider, stakingToken)
+    else
+      return null
+  }, [ethereum, stakingToken])
+
+  const currentTime = new Date().getTime()/1000
   /// enum status
   /// case 0    Start counting
   /// case 1    End counting
-  /// case 2    Done
-  /// case 3    Over
+  /// case 2    Finished 
   const [status, setStatus] = React.useState(0);
-//   const [tokenUnit, setTokenUnit] = React.useState('DVC');
-  const [stakeTokenUnit, setStakeTokenUnit] = React.useState('DOGE-NEW');
-  const [rewardTokenUnit, setRewardTokenUnit] = React.useState('DVC');
-  const [totalAmount, setTotalAmount] = React.useState('1,000');
-  const [countTime, setCountTime] = React.useState('0天8时5分16秒')
+  useEffect(() => {
+    setStatus(currentTime < startTime ? 0 : ( currentTime > endTime ? 2 : 1))
+  }, [startTime, endTime])
 
-  // 锁仓合约质押的lp数量
-  const lpBalance = useTokenBalanceOf(lpTokenAddress, miningAddress)
-  // console.log("lpBalance:"+lpBalance.toNumber())
-  // lp总量
-  const totalSupply = useTotalSupply(lpTokenAddress)
-  // console.log("totalSupply:"+totalSupply.toNumber())
-  // lp合约持有的new数量
-  const newBalance = useTokenBalanceOf(contractAddresses.weth[CHAIN_ID], lpTokenAddress)
-  // console.log("newBalance:"+newBalance.toNumber())
-  const newPrice = useNewPrice()
-  // console.log("newPrice:"+newPrice.toNumber())
-  // 锁仓合约质押LP对应价值NEW数量
-  const newAmount = lpBalance.div(new BigNumber(10).pow(18)).times(newBalance).times(2).div(totalSupply)
-  // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
-  // console.log("newValue:"+newAmount.toNumber())
-
-  // 第三期结束时间 4月16 12:00(utc+8)
-  const endTime = 1618545600000
+  // TODO 倒计时修改status状态
+  const [countTime, setCountTime] = React.useState('')
+  useEffect(() => {
+    setCountTime(dayjs.unix(startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(endTime).format('YYYY-MM-DD HH:mm'))
+  }, [startTime, endTime])
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -95,60 +120,45 @@ const CustomLPFarm: React.FC = () => {
         {!!account ? (
           <>
             <PageHeader
-                icon={<img src={coin} height="95" />}
-                title={'Penguin 的宝藏'}
-                subtitle={'将 ' + stakeTokenUnit + ' 的流动性通证质押入矿池，获得 ' + rewardTokenUnit + ' 奖励'}
+                icon={<img src={getLogoURLByAddress(rewardsToken)} height="95"/>}
+                title={name}
+                subtitle= {t('stakeSubtitle', {tokenSymbol: token0Symbol==='WNEW' ? 'NEW' : token0Symbol, new: token1Symbol==='WNEW' ? 'NEW' : token1Symbol, token: rewardsTokenSymbol})} 
                 status = {status}
-                tokenName = {stakeTokenUnit}
-                amount = {totalAmount}
+                tokenName = {rewardsTokenSymbol}
+                amount = {getBalanceNumber(new BigNumber(rewardAmount), rewardsTokenDecimals).toLocaleString('en-US')}
                 time = {countTime}
             />
-            
-            <StyledTotalBaseDiv>
-              <StyledTotalDiv>
-                { new Date().getTime() < endTime ? 
-                     `${t('Total Stake Value')}: 
-                        ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
-                      : t('unMingClose', {Number:4} )
-                }
-              </StyledTotalDiv>
-              <StyledSpeedDiv>
-                { new Date().getTime() < endTime ? 
-                      `${t('APY(Estimated)')}:
-                          ${newAmount.toNumber() > 0 ? 
-                              BLOCKS_PER_YEAR.times(new BigNumber(newPerBlock)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
-                      : t('unMingCloseTips', {Number:3} )
-                }
-              </StyledSpeedDiv>
-            </StyledTotalBaseDiv>
-            <Spacer />
+
+            {/* <StyledSubtitle>挖矿奖励剩余 <StyledSpan>{amount} {tokenName}</StyledSpan></StyledSubtitle> */}
+
             <StyledFarm>
               <StyledCardsWrapper>
                 <StyledCardWrapper>
                   <Harvest 
                     miningContract={miningContract}
-                    icon={newCoin}
-                    tokenUnit={stakeTokenUnit}
+                    icon={getLogoURLByAddress(rewardsToken)}
+                    tokenName={rewardsTokenSymbol}
+                    tokenDecimals = {rewardsTokenDecimals}
                   />
                 </StyledCardWrapper>
                 <Spacer />
                 <StyledCardWrapper>
                   <Stake
-                    lpContract={lpContract}
+                    stakingContract={stakingTokenContract}
                     miningContract={miningContract}
-                    tokenName={lpToken}
-                    tokenAddress = {tokenAddress}
-                    iconR={newCoin}
-                    tokenUnit={stakeTokenUnit}
+                    stakingTokenDecimals = {stakingTokenDecimals}
+                    token0Address = {token0Address}
+                    token1Address = {token1Address}
+                    stakingTokenName={(token0Symbol==='WNEW' ? 'NEW' : token0Symbol) + '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol)}
                   />
                 </StyledCardWrapper>
               </StyledCardsWrapper>
               <Spacer size="lg" />
               <StyledLink
                 target="__blank"
-                href={INFO_URL + `/pair/${lpTokenAddress}`}
+                href={INFO_URL + `/pair/${stakingToken}`}
               >
-                {lpToken} {t('Info')}
+                {(token0Symbol==='WNEW' ? 'NEW' : token0Symbol)+ '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol)} {t('Info')}
               </StyledLink>
               <Spacer size="lg" />
 

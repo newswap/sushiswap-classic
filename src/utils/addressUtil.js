@@ -6,6 +6,7 @@
  * @copyright (c) 2020 Newton Foundation. All rights reserved.
  */
 import base58 from 'base58check'
+import { ethers } from 'ethers'
 
 const fromHexString = hexString =>
   new Uint8Array(hexString.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
@@ -47,4 +48,17 @@ export function hexAddress2NewAddress (hexAddress, chainId) {
     data = '0' + data
   }
   return PREFIX + base58check.encode(data)
+}
+
+export const isAddress = value => {
+  try {
+    return ethers.utils.getAddress(value.toLowerCase())
+  } catch {
+    return false
+  }
+}
+
+const LOGO_BASE_URL = process.env.REACT_APP_LOGO_BASE_URL
+export const getLogoURLByAddress= (address) => {
+  return LOGO_BASE_URL + `/${ isAddress(address) }/logo.png`  
 }

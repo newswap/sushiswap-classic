@@ -10,7 +10,7 @@ export interface CustomFarm {
   rewardsToken: string
   startTime: number
   endTime: number
-  rewardAmount: number
+  rewardAmount: string
 
   stakingTokenSymbol: string
   stakingTokenName: string

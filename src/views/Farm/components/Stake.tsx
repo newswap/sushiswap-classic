@@ -10,8 +10,8 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useAllowance from '../../../hooks/useAllowance'
-import useApprove from '../../../hooks/useApprove'
+import useAllowanceMasterChef from '../../../hooks/useAllowanceMasterChef'
+import useApproveMasterChef from '../../../hooks/useApproveMasterChef'
 import useModal from '../../../hooks/useModal'
 import useStake from '../../../hooks/useStake'
 import useStakedBalance from '../../../hooks/useStakedBalance'
@@ -37,10 +37,10 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, iconR, tokenA
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { t } = useTranslation()
 
-  const allowance = useAllowance(lpContract)
+  const allowance = useAllowanceMasterChef(lpContract)
   const nstPerBlock = useNSTPerBlock(pid)
 
-  const { onApprove } = useApprove(lpContract)
+  const { onApprove } = useApproveMasterChef(lpContract)
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
   const stakedBalance = useStakedBalance(pid)

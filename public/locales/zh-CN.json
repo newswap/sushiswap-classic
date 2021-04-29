@@ -88,6 +88,14 @@
   "Total Rewards": "总奖励",
   "Stake Time": "质押时间",
   "None Mining": "暂无矿池",
+  "Total": "总量",
+  "Mining start counting": "挖矿开始倒计时",
+  "Mining finish counting": "挖矿结束倒计时",
+  "Mining finished": "挖矿已结束",
+  "tokenEarned": "待领取的{{token}}",
+
+  
+
 
 
   "==============================================": "自定义挖矿",

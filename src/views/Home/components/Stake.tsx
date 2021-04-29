@@ -15,10 +15,10 @@ import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import { getNewMineSingleContract } from '../../../sushi/utils'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useAllowanceNewMineSingle from '../../../hooks/useAllowanceNewMineSingle'
-import useApproveNewMineSingle from '../../../hooks/useApproveNewMineSingle'
+import useAllowanceGeneral from '../../../hooks/useAllowanceGeneral'
+import useApproveGeneral from '../../../hooks/useApproveGeneral'
 import useStakeNewMineSingle from '../../../hooks/useStakeNewMineSingle'
-import useStakedBalanceNewMineSingle from '../../../hooks/useStakedBalanceNewMineSingle'
+import useStakedBalanceByAccount from '../../../hooks/useStakedBalanceByAccount'
 import useUnstakeNewMineSingle from '../../../hooks/useUnstakeNewMineSingle'
 import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
@@ -40,11 +40,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, tokenName, iconL, iconR }) =>
   const sushi = useSushi()
   const newMineContract = getNewMineSingleContract(sushi)
 
-  const allowance = useAllowanceNewMineSingle(lpContract, newMineContract)
-  const { onApprove } = useApproveNewMineSingle(lpContract, newMineContract)
+  const allowance = useAllowanceGeneral(lpContract, newMineContract)
+  const { onApprove } = useApproveGeneral(lpContract, newMineContract)
 
   const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useStakedBalanceNewMineSingle(newMineContract)
+  const stakedBalance = useStakedBalanceByAccount(newMineContract)
 
   const { onStake } = useStakeNewMineSingle(newMineContract)
   const { onUnstake } = useUnstakeNewMineSingle(newMineContract)

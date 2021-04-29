@@ -24,13 +24,13 @@ const BLOCKS_PER_YEAR = new BigNumber(10512000)
 //   const [end, setEnd] = useState(0)
 //   const [scale, setScale] = useState(1)
 
-//   const allEarnings = useAllEarningsNew()
-//   let sumEarning = 0
-//   for (let earning of allEarnings) {
-//     sumEarning += new BigNumber(earning)
-//       .div(new BigNumber(10).pow(18))
-//       .toNumber()
-//   }
+  // const allEarnings = useAllEarningsNew()
+  // let sumEarning = 0
+  // for (let earning of allEarnings) {
+  //   sumEarning += new BigNumber(earning)
+  //     .div(new BigNumber(10).pow(18))
+  //     .toNumber()
+  // }
 
 //   useEffect(() => {
 //     setStart(end)
@@ -93,8 +93,9 @@ const Balances: React.FC = () => {
   }
 
   //第二期结束时间 2021/04/12 12:00
-  const endTime = 1618200000000  
-  
+  // const endTime = 1618200000000  
+  const endTime = 16182000000000  
+
   return (
     <StyledWrapper>
       { new Date().getTime() < endTime ? (

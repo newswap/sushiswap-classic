@@ -13,10 +13,10 @@ import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useAllowanceNewMineSingle from '../../../hooks/useAllowanceNewMineSingle'
-import useApproveNewMineSingle from '../../../hooks/useApproveNewMineSingle'
+import useAllowanceGeneral from '../../../hooks/useAllowanceGeneral'
+import useApproveGeneral from '../../../hooks/useApproveGeneral'
 import useStakeNewMineSingle from '../../../hooks/useStakeNewMineSingle'
-import useStakedBalanceNewMineSingle from '../../../hooks/useStakedBalanceNewMineSingle'
+import useStakedBalanceByAccount from '../../../hooks/useStakedBalanceByAccount'
 import useUnstakeNewMineSingle from '../../../hooks/useUnstakeNewMineSingle'
 import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
@@ -40,11 +40,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, miningContract, tokenName, ic
 
   const { t } = useTranslation()
 
-  const allowance = new BigNumber(0)//useAllowanceNewMineSingle(lpContract, miningContract)
-  const { onApprove } = useApproveNewMineSingle(lpContract, miningContract)
+  const allowance = useAllowanceGeneral(lpContract, miningContract)
+  const { onApprove } = useApproveGeneral(lpContract, miningContract)
 
   const tokenBalance = useTokenBalance(lpContract?.options.address)
-  const stakedBalance = useStakedBalanceNewMineSingle(miningContract)
+  const stakedBalance = useStakedBalanceByAccount(miningContract)
 
   const { onStake } = useStakeNewMineSingle(miningContract)
   const { onUnstake } = useUnstakeNewMineSingle(miningContract)

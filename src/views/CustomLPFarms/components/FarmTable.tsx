@@ -13,7 +13,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
-
+import { getLogoURLByAddress } from '../../../utils/addressUtil'
 import LocalLoader from '../../../components/LocalLoader'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
@@ -151,10 +151,10 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                         <CardDiv>
                                             <TopDiv>
                                                 <TopLeftDiv>
-                                                    <StyledIcon></StyledIcon>
+                                                    <StyledIcon src = {getLogoURLByAddress(farm.rewardsToken)} />
                                                     <DetailDiv>
                                                         <TitleDiv>{farm.name}</TitleDiv>
-                                                        <TitleDetailDiv>{t('Deposit')} <StyledSpan>{farm.token0Symbol==='WNEW' ? 'NEW' : farm.token0Symbol}-{farm.token1Symbol}</StyledSpan>, {t('Earn')}<StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
+                                                        <TitleDetailDiv>{t('Deposit')} <StyledSpan>{farm.token0Symbol==='WNEW' ? 'NEW' : farm.token0Symbol}-{farm.token1Symbol==='WNEW' ? 'NEW' : farm.token1Symbol}</StyledSpan>, {t('Earn')}<StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
                                                     </DetailDiv>
                                 
                                                 </TopLeftDiv>
@@ -170,8 +170,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                                         <TimeDiv>
                                                             <TimeTitle>{t('Stake Time')}</TimeTitle>
                                                             <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
-                                                            <StakeTitle>{t('Total Stake Value')}</StakeTitle>
-                                                            <StakeValue>--</StakeValue>
+                                                            {/* <StakeTitle>{t('Total Stake Value')}</StakeTitle>
+                                                            <StakeValue>--</StakeValue> */}
                                                         </TimeDiv>
                                                       ) : (
                                                         <>
@@ -179,10 +179,10 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                                             <TimeTitle>{t('Stake Time')}</TimeTitle>
                                                             <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
                                                         </TimeDiv>
-                                                        <StakeDiv>
+                                                        {/* <StakeDiv>
                                                             <StakeTitle>{t('Total Stake Value')}</StakeTitle>
                                                             <StakeValue>--</StakeValue>
-                                                        </StakeDiv>
+                                                        </StakeDiv> */}
                                                         </>
                                                       )
                                                 }
@@ -331,7 +331,6 @@ const StyledIcon = styled.img `
     height: 45px;
     width: 45px;
     border-radius: 22.5px;
-    background: pink;
     margin-top: 28px;
     margin-left: 20px;
 `

@@ -34,8 +34,9 @@ const NodeFarms: React.FC = () => {
   }
 
   //第二期结束时间 2021/04/12 12:00
-  const endTime = 1618200000000  
-  
+  // const endTime = 1618200000000  
+  const endTime = 16182000000000  
+
   return (
     <Switch>
       <Page>

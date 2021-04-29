@@ -4,7 +4,7 @@ import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 import { approve } from '../sushi/utils'
 
-const useApproveNewMineSingle = (lpContract: Contract, newMineContract: Contract) => {
+const useApproveGeneral = (lpContract: Contract, newMineContract: Contract) => {
   const { account }: { account: string; ethereum: provider } = useWallet()
 
   const handleApprove = useCallback(async () => {
@@ -19,4 +19,4 @@ const useApproveNewMineSingle = (lpContract: Contract, newMineContract: Contract
   return { onApprove: handleApprove }
 }
 
-export default useApproveNewMineSingle
+export default useApproveGeneral
