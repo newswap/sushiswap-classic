@@ -8,6 +8,7 @@ import WETHAbi from './abi/weth.json'
 import NSPAbi from './abi/nsp.json'
 import XNSPAbi from './abi/xnsp.json'
 import NewMineForNodeAbi from './abi/newminefornode.json'
+import TokenMineFactoryAbi from './abi/tokenminefactory.json'
 import NewMineSingleAbi from './abi/newminesingle.json'
 import MerkleDistributorAbi from './abi/merkleDistributor.json'
 
@@ -39,6 +40,8 @@ export class Contracts {
 
     // 社群矿区
     this.newMineForNode = new this.web3.eth.Contract(NewMineForNodeAbi)
+
+    this.tokenMineFactory = new this.web3.eth.Contract(TokenMineFactoryAbi)
 
     // Community Pools
     this.nodePools = nodeSupportedPools.map((pool) =>
@@ -99,6 +102,7 @@ export class Contracts {
     setProvider(this.newNUSDTPair, contractAddresses.newNUSDTPair[networkId])
     setProvider(this.newMineSingle, contractAddresses.newMineSingle[networkId])
     setProvider(this.newMineForNode, contractAddresses.newMineForNode[networkId])
+    setProvider(this.tokenMineFactory, contractAddresses.tokenMineFactory[networkId])
 
     this.nodePools.forEach(
       ({ lpContract, lpAddress, tokenContract, tokenAddress }) => {

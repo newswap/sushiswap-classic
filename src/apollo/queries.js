@@ -31,3 +31,21 @@ export const ALL_TOKEN_MINES = gql`
     }
   }
 `
+
+export const ALL_PAIRS = gql`
+  query pairs($skip: Int!) {
+    pairs(first: 500, skip: $skip, orderBy: trackedReserveETH, orderDirection: desc) {
+      id
+      token0 {
+        id
+        symbol
+        name
+      }
+      token1 {
+        id
+        symbol
+        name
+      }
+    }
+  }
+`

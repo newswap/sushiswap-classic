@@ -49,7 +49,10 @@ export const contractAddresses = {
     1007: '0xfa292419afc73fc14dc8ea0d7cdc6a65cc616b56',  //小写
     1012: '0xd1d4105c4dfa8f76b10fd99645f9cad73afc548b'
   },
-
+  tokenMineFactory: { // 自定义挖矿工厂
+    1007: '0x10d6e4042782c2967d4e9fb59de0606e605ab3a0',  //小写
+    1012: ''
+  },
 
   masterChef: {
     1007: 'TODO',  //小写

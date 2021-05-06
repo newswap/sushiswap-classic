@@ -2,12 +2,12 @@ import Web3 from 'web3'
 import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 import { AbiItem } from 'web3-utils'
-import ERC20ABI from '../constants/abi/ERC20.json'
+import ERC20ABI from '../sushi/lib/abi/erc20.json'
 
 export const getContract = (provider: provider, address: string) => {
   const web3 = new Web3(provider)
   const contract = new web3.eth.Contract(
-    (ERC20ABI.abi as unknown) as AbiItem,
+    (ERC20ABI as unknown) as AbiItem,
     address,
   )
   return contract
@@ -23,6 +23,33 @@ export const getAllowance = async (
       .allowance(owner, spender)
       .call()
     return allowance
+  } catch (e) {
+    return '0'
+  }
+}
+
+export const getSymbol = async (
+  contract: Contract,
+): Promise<string> => {
+  try {
+    const symbol: string = await contract.methods
+      .symbol()
+      .call()
+    return symbol
+  } catch (e) {
+    console.log(e)
+    return ''
+  }
+}
+
+export const getDecimals = async (
+  contract: Contract,
+): Promise<string> => {
+  try {
+    const decimals: string = await contract.methods
+      .decimals()
+      .call()
+    return decimals
   } catch (e) {
     return '0'
   }

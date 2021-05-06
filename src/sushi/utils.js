@@ -1,12 +1,13 @@
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
 import { ethers } from 'ethers'
-import { client } from '../apollo/client'
+import { client, newSwapClient } from '../apollo/client'
 import TokenMineAbi from './lib/abi/tokenmine.json'
 import {isAddress} from '../utils/addressUtil'
 
 import {
-  ALL_TOKEN_MINES
+  ALL_TOKEN_MINES,
+  ALL_PAIRS
 } from '../apollo/queries'
 
 BigNumber.config({
@@ -39,6 +40,9 @@ export const getNewNUSDTPairAddress = (sushi) => {
 export const getNewMineForNodeAddress = (sushi) => {
   return sushi && sushi.newMineForNodeAddress
 }
+export const getTokenMineFactoryAddress = (sushi) => {
+  return sushi && sushi.tokenMineFactoryAddress
+}
 export const getNewMineSingleAddress = (sushi) => {
   return sushi && sushi.newMineSingleAddress
 }
@@ -69,7 +73,9 @@ export const getXNSPStakingContract = (sushi) => {
 export const getNewMineForNodeContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMineForNode
 }
-
+export const getTokenMineFactoryContract = (sushi) => {
+  return sushi && sushi.contracts && sushi.contracts.tokenMineFactory
+}
 // TODO DEL
 export const getNewMineSingleContract = (sushi) => {
   return sushi && sushi.contracts && sushi.contracts.newMineSingle
@@ -538,6 +544,37 @@ export const getAllTokenMines = async () => {
     return []
   }
 }
+
+const PAIRS_TO_FETCH = 500
+// Loop through every pair on uniswap, used for search
+export const getAllPairs = async () => {
+  try {
+    let allFound = false
+    let pairs = []
+    let skipCount = 0
+    while (!allFound) {
+      let result = await newSwapClient.query({
+        query: ALL_PAIRS,
+        variables: {
+          skip: skipCount
+        },
+        fetchPolicy: 'cache-first'
+      })
+      skipCount = skipCount + PAIRS_TO_FETCH
+      // console.log("getAllPairs----------->")
+      // console.log(result)
+      pairs = pairs.concat(result?.data?.pairs)
+      if (result?.data?.pairs.length < PAIRS_TO_FETCH || pairs.length > PAIRS_TO_FETCH) {
+        allFound = true
+      }
+    }
+    return pairs
+  } catch (e) {
+    console.log(e)
+    return []
+  }
+}
+
 
 export const getTokenMineContract = (provider, address) => {
   const web3 = new Web3(provider)

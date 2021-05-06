@@ -94,8 +94,19 @@
   "Mining finished": "挖矿已结束",
   "tokenEarned": "待领取的{{token}}",
 
-  
-
+  "createCustomLPMining": "创建自定义矿池-流通性挖矿",
+  "inputPoolName": "请输入矿池名称",
+  "stakeLPToken": "质押的流动性通证",
+  "rewardAddress": "奖励通证的地址",
+  "inputRewardAddress": "请输入奖励通证地址",
+  "rewardAmount": "奖励数量",
+  "startTime": "启动时间",
+  "SGT": "新加坡时间",
+  "miningDuration": "挖矿时长",
+  "miningFee": "开矿手续费",
+  "createMine": "开启挖矿",
+  "rewardAddressError": "奖励通证的地址格式错误",
+  "stakeAddressError": "质押通证的地址格式错误",
 
 
   "==============================================": "自定义挖矿",

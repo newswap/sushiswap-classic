@@ -1,4 +1,4 @@
-import React, {  useEffect, useState, useCallback  } from 'react'
+import React, {  useEffect, useState, useCallback, useMemo } from 'react'
 import { useParams, Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import { useWallet } from 'use-wallet'
@@ -7,11 +7,20 @@ import Spacer from '../../components/Spacer'
 import Button from '../../components/Button'
 import Page from '../../components/Page'
 import { useTranslation } from 'react-i18next'
+import { provider } from 'web3-core'
 import useModal from '../../hooks/useModal'
 import coin from '../../assets/img/new.a6cfc11f.png'
+import { getContract } from '../../utils/erc20'
+import {isAddress} from '../../utils/addressUtil'
 import WalletProviderModal from '../../components/WalletProviderModal'
-// import FarmCards from './components/FarmCards'
+import useSushi from '../../hooks/useSushi'
+import useAllowanceGeneral from '../../hooks/useAllowanceGeneral'
+import useApproveGeneral from '../../hooks/useApproveGeneral'
+import useERC20Decimals from '../../hooks/useERC20Decimals'
+import useERC20Symbol from '../../hooks/useERC20Symbol'
 import Container from '../../components/Container'
+import useAllPairs from '../../hooks/useAllPairs'
+import { getTokenMineFactoryContract, getNewMineForNodeContract} from '../../sushi/utils'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
 import arrowLeft from '../../assets/img/ic_arrow_left.svg'
@@ -24,8 +33,13 @@ const CustomCreateLPFarm: React.FC = () => {
     const { path } = useRouteMatch()
     const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
 
-    const { account, connect } = useWallet()
-    const tokenList = [{name: "NEW-USDT"}, {name: "MCT-CICI"}]
+    const { account, ethereum } = useWallet()
+    
+    // const tokenList = [{name: "NEW-USDT"}, {name: "MCT-CICI"}]
+    // [{id:**, token0:{id:**,symbol:**,name:**},token1:{...}}]
+    const pairs = useAllPairs()
+    // console.log("useAllPairs=====>")
+    // console.log(pairs)
 
     /// Farm Name
     const [name, setName] = useState('')
@@ -35,20 +49,22 @@ const CustomCreateLPFarm: React.FC = () => {
         },
         [setName],
     )
-
-    /// Stake Token Address
-    const [token, setToken] = useState(tokenList[0].name)
-    const handleToken = useCallback(
+    
+    /// Stake Token Address   如果是输入，支持new格式转成0x地址
+    const [stakeToken, setStakeToken] = useState(pairs[0]?.name)
+    const handleStakeToken = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-            setToken(e.currentTarget.value)
+            setStakeToken(e.currentTarget.value)
         },
-        [setToken],
+        [setStakeToken],
     )
 
+    // TODO 若是new地址转成0x使用
     /// Reward Token Address
     const [rewardAddress, setRewardAddress] = useState('')
     const handleRewardAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
+            // console.log("setRewardAddress======>"+e.currentTarget.value)
             setRewardAddress(e.currentTarget.value)
         },
         [setRewardAddress],
@@ -79,22 +95,20 @@ const CustomCreateLPFarm: React.FC = () => {
         [setDuration],
     )
 
-    /// Mining Fee
-    const [fee, setFee] = useState('')
-    const handleFee = useCallback(
-        (e: React.FormEvent<HTMLInputElement>) => {
-            setFee(e.currentTarget.value)
-        },
-        [setFee],
-    )
-
+    // /// Mining Fee
+    // const [fee, setFee] = useState('')
+    // const handleFee = useCallback(
+    //     (e: React.FormEvent<HTMLInputElement>) => {
+    //         setFee(e.currentTarget.value)
+    //     },
+    //     [setFee],
+    // )
     // Token Type
-    const [selectedToken, setSelectedToken] = React.useState('');
-    const handleSelectedToken = (event: any) => {
-        // console.log(event.target.value)
-        
-        setSelectedToken(event.target.value);
-    };
+    // const [selectedToken, setSelectedToken] = React.useState('');
+    // const handleSelectedToken = (event: any) => {
+    //     // console.log(event.target.value)       
+    //     setSelectedToken(event.target.value);
+    // };
 
 
     // const [dataFilled, setDataFilled] = useState(false)
@@ -107,15 +121,62 @@ const CustomCreateLPFarm: React.FC = () => {
         // console.log('==selectedToken' + selectedToken)
         // console.log('==selected Date' + selectedDate)
         // setDataFilled(name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='')
-        if (name!=''&&token!=''&&rewardAddress!=''&&rewardAmount!=''&&duration!=''&&fee!=''&&selectedToken!='') {
+        
+        if (name!=''&&stakeToken!=''&&rewardAddress!=''&&rewardAmount!=''&&duration!='') {
             /// Submit data
+            // TODO 地址判断格式是否正确    可将new地址转成0x   rewardAmount判断精度
+            // 时间不能小于当前时间  不能超过30天
         } else {
             alert('All field required')
         }
-
     }
 
+    const sushi = useSushi()
+    const [requestedApproval, setRequestedApproval] = useState(false)
+    const TokenMineFactoryContract = getTokenMineFactoryContract(sushi)
+    const rewardTokenContract = useMemo(() => {
+        if(ethereum && rewardAddress && isAddress(rewardAddress))
+          return getContract(ethereum as provider, rewardAddress)
+        else
+          return null
+      }, [ethereum, rewardAddress])
 
+    const allowance = useAllowanceGeneral(rewardTokenContract, TokenMineFactoryContract)
+    const rewardTokenSymbol = useERC20Symbol(rewardTokenContract)
+    const rewardTokenDecimals = useERC20Decimals(rewardTokenContract)
+    // console.log("+++++++++++++++++++++")
+    // console.log("TokenMineFactoryContract:"+TokenMineFactoryContract?.options?.address)
+    // console.log("rewardTokenContract:"+rewardTokenContract?.options?.address)
+    // console.log("rewardAddress:"+rewardAddress)
+    // console.log("allowance:"+allowance.toString())
+    // console.log("rewardTokenSymbol:"+rewardTokenSymbol)
+    // console.log("rewardTokenDecimals:"+rewardTokenDecimals)
+
+    const { onApprove } = useApproveGeneral(rewardTokenContract, TokenMineFactoryContract)
+  
+    useEffect(() => {
+        setRequestedApproval(false)
+      }, [account, setRequestedApproval])
+    
+      const handleApprove = useCallback(async () => {
+        try {
+          // TODO 判断地址是否正确，支持NEW格式
+          if(!isAddress(rewardAddress)){
+            alert(t('rewardAddressError'))
+            return
+          }
+
+          setRequestedApproval(true)
+          const txHash = await onApprove()
+          // user rejected tx or didn't go thru
+        //   if (!txHash) {
+          setRequestedApproval(false)
+        //   }
+        } catch (e) {
+          console.log(e)
+        }
+      }, [onApprove, setRequestedApproval])
+    
     return (
         <Container size = 'md'>
             <Spacer size = 'lg'/>
@@ -125,22 +186,32 @@ const CustomCreateLPFarm: React.FC = () => {
                         <StyledNomalLink to={'/customLPMining'}>
                             <StyledIcon src = {arrowLeft} />
                         </StyledNomalLink>
-                        <StyledLabel>创建自定义矿池-流通性挖矿</StyledLabel>
-                        <StyledNomalLink to={'/customLPMining'}>
+                        <StyledLabel>{t('createCustomLPMining')}</StyledLabel>
+                        {/* <StyledNomalLink to={'/customLPMining'}>
                             <StyledIcon src = {issue} />
-                        </StyledNomalLink>
+                        </StyledNomalLink> */}
                     </StyleHeader>
-                    <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={'请输入矿池名称'}></CustomInput>
-                    <CustomInput onChange={handleToken} value={token} startAdornment={'质押的流动性通证'} placeholder={'NUSDT-NEW'} type={'select'} onTypeChange={handleToken} data={tokenList}></CustomInput>
+                    <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={t('inputPoolName')}></CustomInput>
+                    <CustomInput onChange={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={pairs[0]?.name} type={'select'} onTypeChange={handleStakeToken} data={pairs}></CustomInput>
 
-                    <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={'奖励通证的地址'} placeholder={'请输入奖励通证地址'}></CustomInput>
-                    <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={'奖励数量'} placeholder={'0.0'}></CustomInput>
+                    <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={t('rewardAddress')} placeholder={t('inputRewardAddress')}></CustomInput>
+                    <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('rewardAmount')} placeholder={'0.0'}></CustomInput>
 
-                    <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={'启动时间'} placeholder={'新加坡时间'} type={'date'}></CustomInput>
-                    <CustomInput onChange={handleDuration} value={duration} startAdornment={'挖矿时长'} placeholder={'0'} type={'duration'}></CustomInput>
-                    <CustomInput onChange={handleFee} value={fee} startAdornment={'开矿手续费'} placeholder={'100,000'} type={'fee'}></CustomInput>
-            
-                    <Button text={'开启挖矿'} size={'new'} variant={'green'} onClick={checkDataFilled}></Button>
+                    <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={t('startTime')} placeholder={t('SGT')} type={'date'}></CustomInput>
+                    <CustomInput onChange={handleDuration} value={duration} startAdornment={t('miningDuration')} placeholder={'0'} type={'duration'}></CustomInput>
+                    <CustomInput onChange={null} value={'100000'} startAdornment={t('miningFee')} placeholder={'100,000'} type={'fee'}></CustomInput>
+                    
+                    {!allowance.toNumber() ? (
+                        <Button
+                            disabled={requestedApproval}
+                            onClick={handleApprove}
+                            text={requestedApproval ? t('Approving...') : t('Approve') + ` ${rewardTokenSymbol}`}
+                            size = 'new'
+                            variant = 'green'
+                        />
+                    ) : (
+                        <Button text={t('createMine')} size={'new'} variant={'green'} onClick={checkDataFilled}></Button>
+                    )}
                     {/* <StyledTip>
                         *创建社群矿池需要支付 10 NSP 的开矿手续费
                     </StyledTip> */}
