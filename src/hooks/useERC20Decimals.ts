@@ -11,9 +11,7 @@ const useERC20Decimals = (tokenContract: Contract) => {
   }, [tokenContract])
 
   useEffect(() => {
-    if (tokenContract) {
-      fetchDecimals()
-    }
+    fetchDecimals()
   }, [fetchDecimals, tokenContract])
 
   return decimals

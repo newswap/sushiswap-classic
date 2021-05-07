@@ -7,6 +7,7 @@ import metamaskLogo from '../../assets/img/metamask-fox.svg'
 import newLogo from '../../assets/img/metamask.da7f0b29.png'
 import walletConnectLogo from '../../assets/img/wallet-connect.svg'
 import { makeStyles, withStyles} from '@material-ui/core/styles';
+import { getLogoURLByAddress } from '../../utils/addressUtil'
 
 import Button from '../Button'
 import CustomInput from '../CustomInput'
@@ -24,15 +25,20 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 
+interface TokenSelectProps extends ModalProps {
+    tokenList?: any[]
+  }
 
-
-const TokenSelectProviderModel: React.FC<ModalProps> = ({ onDismiss, dataSelect}) => {
+const TokenSelectProviderModel: React.FC<TokenSelectProps> = ({ onDismiss, tokenList, dataSelect}) => {
     const { account, connect } = useWallet()
     const { t } = useTranslation()
 
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
-    const [rowsPerPage, setRowsPerPage] = React.useState(25);
+    const [rowsPerPage, setRowsPerPage] = React.useState(4);
+
+    // console.log("TokenSelectProviderModel tokenList=======>")
+    // console.log(tokenList)
 
     const handleChangePage = (name: any, newPage: any) => {
         setPage(newPage);
@@ -44,20 +50,34 @@ const TokenSelectProviderModel: React.FC<ModalProps> = ({ onDismiss, dataSelect}
     }
 
     const handleChangeRowsPerPage = (event: any) => {
-        setRowsPerPage(parseInt(event.target.value, 25));
+        setRowsPerPage(parseInt(event.target.value, 4));
         setPage(0);
     };
 
-    /// Farm Name
-    const [keyword, setKeyword] = useState('')
+    // const [keyword, setKeyword] = useState('')
+    const [showPairs, setShowPairs] = React.useState(tokenList);
     const handleKeyword = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-            setKeyword(e.currentTarget.value)
+            // console.log("handleKeyword:"+e.currentTarget.value)
+
+            if(e.currentTarget.value) {
+              let pairsFound: any= []
+
+              tokenList &&
+                tokenList.map(pair => {
+                  if (pair.name.includes(e.currentTarget.value.toUpperCase())) {
+                    pairsFound.push(pair)
+                  }
+                })
+ 
+                setShowPairs(pairsFound)
+            } else {
+              setShowPairs(tokenList)
+            }    
         },
-        [setKeyword],
+        [setShowPairs],
     )
 
-    
     const useStyles = makeStyles({
         root: {
             color: '#647684',
@@ -90,8 +110,6 @@ const TokenSelectProviderModel: React.FC<ModalProps> = ({ onDismiss, dataSelect}
     });
     const classes = useStyles();
    
-    const tokenList = [{name: "MCT-NEW"}, {name: "NUST-NEW"}, {name: "MZD-NEW"}, {name: "IMX-NEW"}]
-
     // const [dataFilled, setDataFilled] = useState(false)
     useEffect(() => {
     }, [account, onDismiss])
@@ -99,39 +117,35 @@ const TokenSelectProviderModel: React.FC<ModalProps> = ({ onDismiss, dataSelect}
     return (
         <Modal>
             <div>
-                <ModalTitle text={'请选择一个流动性通证'} />
+                <ModalTitle text={t('selectLPToken')} />
                 <StyledLabel>
                     <Button text={t('Cancel')} variant="normal" size="normal" onClick={onDismiss} />
                 </StyledLabel>
             </div>
             <StyledWalletCard>
                 <StyledInputDiv>
-                    <StyledInput onChange={handleKeyword} placeholder={'搜索流动性通证名称'}></StyledInput>
+                    <StyledInput onChange={handleKeyword} placeholder={t('searchLPToken')}></StyledInput>
                 </StyledInputDiv>
                 <StyledTableContainer> 
                     <StyledTableHeader>
-                        通证地址
+                        {t('LP Token Name')}
                     </StyledTableHeader>
                     <Line />
 
                     <Table className={classes.table} aria-label="simple table">
                         <TableBody>
                             {   
-                                tokenList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
-                        
+                                showPairs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((pair, j) => {
+                   
                                     return (
-                                        <StyledTableRow key={j} onClick={(e) => selectRow(farm.name)}>
+                                        <StyledTableRow key={j} onClick={(e) => selectRow(pair?.name)}>
                                             <StyledTD>
                                             <StyledIconDiv> 
-                                                <StyledRightIcon>
-
-                                                </StyledRightIcon>
-                                                <StyledLeftIcon>
-
-                                                </StyledLeftIcon>
+                                                <StyledRightIcon src = {getLogoURLByAddress(pair?.token1?.id)} />
+                                                <StyledLeftIcon src = {getLogoURLByAddress(pair?.token0?.id)} />
                                             </StyledIconDiv>
 
-                                            <StyledLPNameDiv>{farm.name}</StyledLPNameDiv>
+                                            <StyledLPNameDiv>{pair?.name}</StyledLPNameDiv>
                                             </StyledTD>
                                         </StyledTableRow>
                                     )
@@ -140,9 +154,9 @@ const TokenSelectProviderModel: React.FC<ModalProps> = ({ onDismiss, dataSelect}
                         </TableBody>
                     </Table>
                     <TablePagination
-                        rowsPerPageOptions={[25]}
+                        rowsPerPageOptions={[4]}
                         component="div"
-                        count={tokenList.length}
+                        count={showPairs.length}
                         rowsPerPage={rowsPerPage}
                         page={page}
                         onChangePage={handleChangePage}
@@ -282,19 +296,19 @@ const StyledIconDiv = styled.div`
     margin-left: 4px;
 `
 
+//    background: green;
 const StyledLeftIcon = styled.img`
     height: 25px;
     width: 25px;
-    background: green;
     float: left;
     margin-top: -25px;
     border-radius: 12.5px;
 `
 
+//     background: yellow;
 const StyledRightIcon = styled.img`
     height: 25px;
     width: 25px;
-    background: yellow;
     float: right;
     border-radius: 12.5px;
 `

@@ -1,8 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-
-import BigNumber from 'bignumber.js'
-import { useWallet } from 'use-wallet'
-import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
 import { getSymbol } from '../utils/erc20'
 
@@ -15,9 +11,7 @@ const useERC20Symbol = (tokenContract: Contract) => {
   }, [tokenContract])
 
   useEffect(() => {
-    if (tokenContract) {
-      fetchSymbol()
-    }
+    fetchSymbol()
   }, [fetchSymbol, tokenContract])
 
   return symbol

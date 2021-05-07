@@ -7,7 +7,7 @@ import { getAllPairs } from '../sushi/utils'
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 
 const useAllPairs = () => {
-  const [pairs, setPairs] = useState([{id:contractAddresses.newNUSDTPair[CHAIN_ID], name:'NUSDT-NEW'}])
+  const [pairs, setPairs] = useState([{id:contractAddresses.newNUSDTPair[CHAIN_ID], name: CHAIN_ID===1012 ? 'NUSDT-NEW' : 'NEW-NUSDT'}])
   const {
     ethereum,
   }: { ethereum: provider } = useWallet()

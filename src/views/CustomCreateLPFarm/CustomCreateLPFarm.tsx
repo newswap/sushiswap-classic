@@ -1,6 +1,6 @@
 import React, {  useEffect, useState, useCallback, useMemo } from 'react'
 import { useParams, Route, Switch, useRouteMatch } from 'react-router-dom'
-
+import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
@@ -35,8 +35,7 @@ const CustomCreateLPFarm: React.FC = () => {
 
     const { account, ethereum } = useWallet()
     
-    // const tokenList = [{name: "NEW-USDT"}, {name: "MCT-CICI"}]
-    // [{id:**, token0:{id:**,symbol:**,name:**},token1:{...}}]
+    // const tokenList = [{name: "NEW-USDT",id:**, token0:{id:**,symbol:**,name:**},token1:{...}}, {name: "MCT-CICI",...}]
     const pairs = useAllPairs()
     // console.log("useAllPairs=====>")
     // console.log(pairs)
@@ -50,14 +49,13 @@ const CustomCreateLPFarm: React.FC = () => {
         [setName],
     )
     
-    /// Stake Token Address   如果是输入，支持new格式转成0x地址
+    /// Stake Token name   如果是输入，支持new格式转成0x地址
     const [stakeToken, setStakeToken] = useState(pairs[0]?.name)
-    const handleStakeToken = useCallback(
-        (e: React.FormEvent<HTMLInputElement>) => {
-            setStakeToken(e.currentTarget.value)
-        },
-        [setStakeToken],
-    )
+    const handleStakeToken = (data: string) => {
+      // console.log('select name is' + date)
+      setStakeToken(data);
+    };
+    // console.log("stakeToken======>"+ stakeToken)
 
     // TODO 若是new地址转成0x使用
     /// Reward Token Address
@@ -80,10 +78,12 @@ const CustomCreateLPFarm: React.FC = () => {
     )
 
     /// Start Date
-    const [selectedDate, setSelectedDate] = React.useState((new Date()).toString());
+    const [selectedDate, setSelectedDate] = useState((new Date()).toString());
     const handleDateChange = (date: string) => {
-        console.log('date is' + date)
-        setSelectedDate(date);
+        // console.log("handleDateChange===========")
+        // console.log(date)
+        // console.log('date is:' + date)
+        setSelectedDate(date+"");
     };
 
     /// Mining Duration
@@ -110,27 +110,6 @@ const CustomCreateLPFarm: React.FC = () => {
     //     setSelectedToken(event.target.value);
     // };
 
-
-    // const [dataFilled, setDataFilled] = useState(false)
-    const checkDataFilled = () => {
-        // console.log('==name' + name)
-        // console.log('==address' + address)
-        // console.log('==farmAmount' + farmAmount)
-        // console.log('==duration' + duration)
-        // console.log('==fee' + fee)
-        // console.log('==selectedToken' + selectedToken)
-        // console.log('==selected Date' + selectedDate)
-        // setDataFilled(name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='')
-        
-        if (name!=''&&stakeToken!=''&&rewardAddress!=''&&rewardAmount!=''&&duration!='') {
-            /// Submit data
-            // TODO 地址判断格式是否正确    可将new地址转成0x   rewardAmount判断精度
-            // 时间不能小于当前时间  不能超过30天
-        } else {
-            alert('All field required')
-        }
-    }
-
     const sushi = useSushi()
     const [requestedApproval, setRequestedApproval] = useState(false)
     const TokenMineFactoryContract = getTokenMineFactoryContract(sushi)
@@ -149,8 +128,7 @@ const CustomCreateLPFarm: React.FC = () => {
     // console.log("rewardTokenContract:"+rewardTokenContract?.options?.address)
     // console.log("rewardAddress:"+rewardAddress)
     // console.log("allowance:"+allowance.toString())
-    // console.log("rewardTokenSymbol:"+rewardTokenSymbol)
-    // console.log("rewardTokenDecimals:"+rewardTokenDecimals)
+
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, TokenMineFactoryContract)
   
@@ -158,7 +136,7 @@ const CustomCreateLPFarm: React.FC = () => {
         setRequestedApproval(false)
       }, [account, setRequestedApproval])
     
-      const handleApprove = useCallback(async () => {
+    const handleApprove = useCallback(async () => {
         try {
           // TODO 判断地址是否正确，支持NEW格式
           if(!isAddress(rewardAddress)){
@@ -175,8 +153,52 @@ const CustomCreateLPFarm: React.FC = () => {
         } catch (e) {
           console.log(e)
         }
-      }, [onApprove, setRequestedApproval])
+    }, [onApprove, setRequestedApproval])
     
+    // const [dataFilled, setDataFilled] = useState(false)
+    // TODO 改成ansy
+    const checkDataFilled = () => {
+      console.log('name==' + name)
+      console.log('stakeToken==' + stakeToken)
+      console.log('rewardAddress==' + rewardAddress)
+      console.log('rewardAmount==' + rewardAmount)
+      console.log("rewardTokenDecimals=="+rewardTokenDecimals)
+      console.log('selectedDate==' + selectedDate)
+      console.log('duration==' + duration)
+      
+      const pair = pairs.find((pair) => pair.name === stakeToken)
+      console.log("stakeTokenAddress pair?.id="+pair?.id)
+
+      if (name && stakeToken && pair?.id && rewardAddress && rewardAmount && selectedDate && duration) {
+          if(rewardTokenDecimals === 0 ){
+            alert(t('rewardAddressError'))
+            return
+          } 
+          const intervalForStart = new BigNumber(selectedDate).minus(new Date().getTime()).toNumber()
+          // 开始时间不能小于当前时间(+10s合约交互)
+          if(intervalForStart < 10*1000) {
+            alert(t('minMiningStartTime'))
+            return
+          }
+          // 开始时间在30天内
+          if(intervalForStart > 30*86400*1000) {
+            alert(t('maxMiningStartTime'))
+            return
+          }
+
+          // TODO 地址判断格式是否正确    可将new地址转成0x   
+
+
+          // TODO 创建矿池   rewardAmount * 精度    2个数字要判断>0  天不允许有小数   
+
+
+
+
+      } else {
+          alert(t('All field required'))
+      }
+    }
+
     return (
         <Container size = 'md'>
             <Spacer size = 'lg'/>
@@ -192,10 +214,10 @@ const CustomCreateLPFarm: React.FC = () => {
                         </StyledNomalLink> */}
                     </StyleHeader>
                     <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={t('inputPoolName')}></CustomInput>
-                    <CustomInput onChange={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={pairs[0]?.name} type={'select'} onTypeChange={handleStakeToken} data={pairs}></CustomInput>
+                    <CustomInput onClick={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={stakeToken} type={'select'} data={pairs}></CustomInput>
 
                     <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={t('rewardAddress')} placeholder={t('inputRewardAddress')}></CustomInput>
-                    <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('rewardAmount')} placeholder={'0.0'}></CustomInput>
+                    <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('rewardAmount')} placeholder={'0.0'} type={'number'}></CustomInput>
 
                     <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={t('startTime')} placeholder={t('SGT')} type={'date'}></CustomInput>
                     <CustomInput onChange={handleDuration} value={duration} startAdornment={t('miningDuration')} placeholder={'0'} type={'duration'}></CustomInput>

@@ -11,6 +11,7 @@ import { render } from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import useModal from '../../hooks/useModal'
 import TokenSelectProviderModel from '../../components/TokenSelectProviderModel'
+import { useTranslation } from 'react-i18next'
 
 export interface CustomInputProps {
     onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
@@ -18,8 +19,8 @@ export interface CustomInputProps {
     placeholder?: string,
     startAdornment: React.ReactNode,
     value: string,
-    type?: 'select' | 'date' | 'fee' | 'duration',
-    onClick?: () => void,
+    type?: 'select' | 'date' | 'fee' | 'duration' | 'number',
+    onClick?: (data: any) => void,
     onDateSelected?: (date: any) => void
     date?: Date,
     data?: Array<Object>
@@ -43,9 +44,10 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
     date,
     data
 }) => {
+    const { t } = useTranslation()
 
     let inputProps = {
-        placeholder: '新加坡时间',
+        placeholder: placeholder,
     };
     const classes = useStyles();
 
@@ -53,37 +55,35 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
 
     const [selectToken, setSelectToken] = React.useState(placeholder)
 
-
     const tokenSelect = (name: any) => {
-        console.log('name is:' + name)
+        // console.log('name is:' + name)
         setSelectToken(name)
+        onClick(name)
     }
 
-    const [onPresentWalletProviderModal] = useModal(<TokenSelectProviderModel dataSelect ={tokenSelect}/>)
+    const [onPresentWalletProviderModal] = useModal(<TokenSelectProviderModel tokenList={data} dataSelect ={tokenSelect}/>)
 
     
     const checkValidDate = (currentDate: any, selectedDate: any) => {
-        return (currentDate/1000/60/60/24) >= (((new Date()).getTime())/1000/60/60/24)
+        return (currentDate/1000/60/60/24) >= ((((new Date()).getTime())/1000/60/60/24)-1) && 
+            (currentDate/1000/60/60/24) <= ((((new Date()).getTime())/1000/60/60/24)+30)
     }
-
 
     return (
     <StyledInputWrapper>
         <StyledStartDiv>{startAdornment}</StyledStartDiv>
         { 
-            type ? ( type == 'select' ? 
+            type ? ( type === 'select' ? 
                 (
                     <>
                     <StyledTokenDiv>{selectToken}</StyledTokenDiv>
                     <StyledSelectBtn onClick={onPresentWalletProviderModal}>
-
                         <StyledSelectImg src={arrowDown} />
                     </StyledSelectBtn>
-                            
-                
+                                       
                     </>
                 ) : (
-                    type == 'date' ? 
+                    type === 'date' ? 
                     (
                         <>
                         <Datetime 
@@ -98,21 +98,24 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
                         <StyledCalendarImg src={calendar} />
                         </>
                     ) : (
-                        type == 'fee' ? 
+                        type === 'fee' ? 
                         (                
                             <>
                             <StyledFeeDiv>{placeholder} NEW</StyledFeeDiv>
                             </>
                         ) : (
-                            type == 'duration' ? (
+                            type === 'duration' ? (
                                 <>
-                                <StyledInput placeholder={placeholder} value={value} onChange={onChange} />
-                                <StyledUnitDiv>天</StyledUnitDiv>
+                                <StyledInput placeholder={placeholder} value={value} onChange={onChange}/>
+                                <StyledUnitDiv>{t('days')}</StyledUnitDiv>
                                 </>
-                            ) : (
-                                <div></div>
-                            )
-                            
+                            ) : ( 
+                                type === 'number' ? (
+                                    <StyledInput placeholder={placeholder} value={value} onChange={onChange} type="number"/>
+                                ) : (
+                                    <div></div>
+                                )
+                            )                                              
                         )
                     )
                 )
