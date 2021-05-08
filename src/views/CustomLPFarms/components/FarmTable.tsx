@@ -90,7 +90,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
     };
 
     const [customFarms] = useCustomFarms()
-    // console.log("=====================>")
+    // console.log("FarmTable=====================>")
     // console.log(customFarms)
 
     const currentTime = new Date().getTime()/1000
@@ -297,7 +297,7 @@ const CreateFarmDiv = styled.button`
 `
 
 const CardDiv = isMobile ? styled.div`
-    height: 191px;
+    height: 160px;
     width: 100%;
     border-radius: 24px;
     background: white;
@@ -313,6 +313,7 @@ const CardDiv = isMobile ? styled.div`
     border-radius: 12px;
     box-shadow: 0px 3px 12px 0px rgba(7,94,68,0.11);
 `
+
 
 const TopDiv = styled.div`
     background: clear;
@@ -381,7 +382,7 @@ const Line = styled.div`
 const BottomDiv = styled.div`
     background: clear;
     width: 100%;
-    height: 74px;
+    height: 64px;
 `
 
 const TimeDiv = styled.div`
@@ -433,7 +434,7 @@ const EnterDiv = styled.div`
     background: clear;
     height: 100%;
     float: right;
-    margin-top: 26px;
+    margin-top: 16px;
 `
 
 const EnterBtn = styled.button`
@@ -444,7 +445,7 @@ const EnterBtn = styled.button`
     color: white;
     border: none;
     cursor: pointer;
-    margin-top: 21px;
+    margin-top: 0px;
     margin-right: 16px;
 
     &:focus {

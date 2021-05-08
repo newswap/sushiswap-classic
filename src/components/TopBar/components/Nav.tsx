@@ -43,7 +43,7 @@ const Nav: React.FC = () => {
             { t('LP Mining')}
           </StyledLink>
           <StyledLink exact activeClassName="active" to="/customSingleFarms">
-            单通证挖矿
+            { t('Token Mining')}
           </StyledLink>
         </StyledDropDown>
       </StyledCustomDiv>

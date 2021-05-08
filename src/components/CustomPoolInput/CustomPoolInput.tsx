@@ -106,7 +106,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
                         ) : (
                             type === 'duration' ? (
                                 <>
-                                <StyledInput placeholder={placeholder} value={value} onChange={onChange}/>
+                                <StyledInput placeholder={placeholder} value={value} onChange={onChange} type="number" />
                                 <StyledUnitDiv>{t('days')}</StyledUnitDiv>
                                 </>
                             ) : ( 

@@ -528,7 +528,8 @@ export const getAllTokenMines = async () => {
         variables: {
           skip: skipCount
         },
-        fetchPolicy: 'cache-first'
+        // fetchPolicy: 'cache-first'
+        fetchPolicy: 'network-only'       
       })
       skipCount = skipCount + TOKENMINES_TO_FETCH
       // console.log("getAllTokenMines----------->")
@@ -594,6 +595,27 @@ export const harvestRewardToken = async (tokenMineContract, account) => {
     .deposit('0')
     .send({ from: account })
     .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
+}
+
+export const createMine = async (tokenMineFactoryContract, name, stakingToken, rewardsToken, 
+  startTime, endTime, rewardAmount, isStakingLPToken, fee, account) => {
+
+  return tokenMineFactoryContract.methods
+    .deploy(
+      name,
+      stakingToken, 
+      rewardsToken, 
+      startTime, 
+      endTime, 
+      rewardAmount, 
+      isStakingLPToken
+    )
+    .send({ from: account, value: fee })
+    .on('transactionHash', (tx) => {
+      // console.log("createMine==========>")
       // console.log(tx)
       return tx.transactionHash
     })

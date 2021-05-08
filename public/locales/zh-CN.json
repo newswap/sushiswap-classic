@@ -78,6 +78,9 @@
   "===============================================": "自定义挖矿",
   "Custom Mining": "自定义挖矿",
   "LP Mining":"流动性挖矿",
+  "Token Mining":"单通证挖矿",
+  "Custom LP Mining":"自定义流动性挖矿",
+  "Custom Token Mining":"自定义单通证挖矿",
 
   "customLPMining": "自定义挖矿-流动性挖矿",
   "customLPMiningTips": "参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。",
@@ -115,6 +118,7 @@
   "LP Token Name": "流动性通证名称",
   "minMiningStartTime": "挖矿开启时间不能小于当前时间",
   "maxMiningStartTime": "挖矿开启时间需在30天内",
+  "miningDurationTips": "挖矿时长不小于1天",
 
   "==============================================": "自定义挖矿",
 

@@ -37,7 +37,6 @@ export const getSymbol = async (
       .call()
     return symbol
   } catch (e) {
-    console.log(e)
     return ''
   }
 }

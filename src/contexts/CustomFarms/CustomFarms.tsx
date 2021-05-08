@@ -3,15 +3,18 @@ import { useWallet } from 'use-wallet'
 import Context from './context'
 import { getAllTokenMines } from '../../sushi/utils'
 import { CustomFarm } from './types'
+import useBlock from '../../hooks/useBlock'
 
 const CustomFarms: React.FC = ({ children }) => {
   const [unharvested, setUnharvested] = useState(0)
   const [customFarms, setCustomFarms] = useState([] as Array<CustomFarm>)
   const { ethereum}: { ethereum: any } = useWallet()
-  // const block = useBlock()
+  const block = useBlock()
 
   const fetchAllCustomFarms= useCallback(async () => {
     const allCustomFarms= await getAllTokenMines()
+    // console.log('fetchAllCustomFarms============>')
+    // console.log(allCustomFarms)
     setCustomFarms(allCustomFarms)
   }, [ethereum])
 
@@ -19,7 +22,7 @@ const CustomFarms: React.FC = ({ children }) => {
     if (ethereum) {
       fetchAllCustomFarms()
     }
-  }, [ethereum]) //[ethereum, block]
+  }, [ethereum, block])
 
   return (
     <Context.Provider

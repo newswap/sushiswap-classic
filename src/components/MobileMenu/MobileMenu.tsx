@@ -69,7 +69,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             to="/customLPMining"
             onClick={onDismiss}
           >
-            {t('LP Mining')}      
+            {t('Custom LP Mining')}      
           </StyledLink>
 
           <StyledLink
@@ -78,7 +78,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             to="/customSingleFarms"
             onClick={onDismiss}
           >
-            单通证挖矿         
+            {t('Custom Token Mining')}         
           </StyledLink>
 
           <StyledAbsoluteLink
