@@ -11,6 +11,7 @@ import { render } from 'react-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import useModal from '../../hooks/useModal'
 import TokenSelectProviderModel from '../../components/TokenSelectProviderModel'
+import ResultModal from '../../components/ResultModal'
 import { useTranslation } from 'react-i18next'
 
 export interface CustomInputProps {
@@ -62,12 +63,14 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
     }
 
     const [onPresentSelectTokenModal] = useModal(<TokenSelectProviderModel tokenList={data} dataSelect ={tokenSelect}/>)
+    const [onPresentFeatchDataError] = useModal(<ResultModal title={t('featchDataError')}/>)
+
 
     const handleSelectTokenClick = useCallback(() => {
         if (data.length > 1)
             onPresentSelectTokenModal()
         else
-            alert(t('featchDataError'))
+            onPresentFeatchDataError()
       }, [onPresentSelectTokenModal])
     
     const checkValidDate = (currentDate: any, selectedDate: any) => {

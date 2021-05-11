@@ -24,6 +24,7 @@ import useCreateMine from '../../hooks/useCreateMine'
 import { getTokenMineFactoryContract, getNewMineForNodeContract} from '../../sushi/utils'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
+import ResultModal from '../../components/ResultModal'
 import arrowLeft from '../../assets/img/ic_arrow_left.svg'
 import issue from '../../assets/img/ic_issue.svg'
 import { Link } from 'react-router-dom'
@@ -142,6 +143,13 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     // console.log("rewardAddress:"+rewardAddress)
     // console.log("allowance:"+allowance.toString())
 
+    const [onPresentRewardAddressError] = useModal(<ResultModal title={t('rewardAddressError')}/>)
+    const [onPresentStakeAddressError] = useModal(<ResultModal title={t('stakeAddressError')}/>)
+    const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('minRewardAmount')}/>)
+    const [onPresentMinMiningStartTime] = useModal(<ResultModal title={t('minMiningStartTime')}/>)
+    const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('maxMiningStartTime')}/>)
+    const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('miningDurationTips')}/>)
+    const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All field required')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   
@@ -153,7 +161,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         try {
           // TODO 判断地址是否正确，支持NEW格式
           if(!isAddress(rewardAddress)){
-            alert(t('rewardAddressError'))
+            onPresentRewardAddressError()
             return
           }
 
@@ -193,32 +201,36 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
       console.log("inputStakeAddress="+inputStakeAddress)
 
       if(!isAddress(inputStakeAddress)){
-        alert(t('stakeAddressError'))
+        onPresentStakeAddressError()
         return
       }
 
       // TODO 地址判断格式是否正确    可将new地址转成0x   
       if (name && rewardAddress && rewardAmount && selectedDate && duration) {
           if(rewardTokenDecimals === 0 || !isAddress(rewardAddress)){
-            alert(t('rewardAddressError'))
+            onPresentRewardAddressError()
             return
           } 
 
           const intervalForStart = new BigNumber(selectedDate).minus(new Date().getTime()).toNumber()
           // 开始时间不能小于当前时间(+10s合约交互)
           if(intervalForStart < 10*1000) {
-            alert(t('minMiningStartTime'))
+            onPresentMinMiningStartTime()
             return
           }
           // 开始时间在30天内
           if(intervalForStart > 30*86400*1000) {
-            alert(t('maxMiningStartTime'))
+            onPresentMaxMiningStartTime()
             return
           }
-
+          if(parseFloat(rewardAmount) <= 0){
+            onPresentMinRewardAmount()
+            return              
+          }
+          
           // TODO 天不允许有小数
           if(parseInt(duration) < 1) {
-            alert(t('miningDurationTips'))
+            onPresentMiningDurationTips()
             return           
           }
 
@@ -239,7 +251,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
           }
 
       } else {
-          alert(t('All field required'))
+        onPresentAllFieldRequired()
       }
     }
 

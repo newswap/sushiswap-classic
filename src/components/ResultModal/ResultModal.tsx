@@ -14,7 +14,6 @@ interface ResultModalProps extends ModalProps {
   type?: 'stake' | 'unstake' 
 }
 
-// TODO 和Farm中的一样，之后提到components中统一样式
 const ResultModal: React.FC<ResultModalProps> = ({
     title,
     onDismiss,
