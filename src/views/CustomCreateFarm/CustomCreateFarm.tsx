@@ -28,7 +28,11 @@ import arrowLeft from '../../assets/img/ic_arrow_left.svg'
 import issue from '../../assets/img/ic_issue.svg'
 import { Link } from 'react-router-dom'
 
-const CustomCreateLPFarm: React.FC = () => {
+interface CustomCreateFarmProps {
+  stakeTokenType: 'lpToken' | 'singleToken'
+}
+
+const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => {
     const { t } = useTranslation()
     const history = useHistory();
 
@@ -48,13 +52,23 @@ const CustomCreateLPFarm: React.FC = () => {
         [setName],
     )
     
-    /// Stake Token name   如果是输入，支持new格式转成0x地址
+    /// 当质押lp时，选择Stake Token name  
     const [stakeToken, setStakeToken] = useState(pairs[0]?.name)
     const handleStakeToken = (data: string) => {
-      // console.log('select name is' + date)
+      // console.log('stakeToken======>' + date)
       setStakeToken(data);
     };
-    // console.log("stakeToken======>"+ stakeToken)
+
+    // TODO 支持new格式转成0x地址
+    // 当质押单通证时，输入Stake Token Address     
+    const [stakeAddress, setStakeAddress] = useState('')
+    const handleStakeAddress = useCallback(
+        (e: React.FormEvent<HTMLInputElement>) => {
+            // console.log("stakeAddress======>"+ e.currentTarget.value)
+            setStakeAddress(e.currentTarget.value)
+        },
+        [setStakeAddress],
+    )
 
     // TODO 若是new地址转成0x使用
     /// Reward Token Address
@@ -152,34 +166,44 @@ const CustomCreateLPFarm: React.FC = () => {
     }, [onApprove, setRequestedApproval])
     
 
-
-
     // function sleep(ms:number){
     //   return new Promise((resolve)=>setTimeout(resolve,ms));
     // }
 
     const { onCreateMine } = useCreateMine(tokenMineFactoryContract)
     const [pendingTx, setPendingTx] = useState(false)
-    // useCallback？
     const createMine = async() => {
+      console.log("stakeTokenType==" + stakeTokenType)
       console.log('name==' + name)
       console.log('stakeToken==' + stakeToken)
+      console.log('stakeAddress==' + stakeAddress)
       console.log('rewardAddress==' + rewardAddress)
       console.log('rewardAmount==' + rewardAmount)
       console.log("rewardTokenDecimals=="+rewardTokenDecimals)
       console.log('selectedDate==' + selectedDate)
       console.log('duration==' + duration)
       
-      const pair = pairs.find((pair) => pair.name === stakeToken)
-      const stakeAddress = pair?.id
-      console.log("stakeAddress="+stakeAddress)
+      let inputStakeAddress 
+      if(stakeTokenType === 'lpToken') {
+        const pair = pairs.find((pair) => pair.name === stakeToken)
+        inputStakeAddress = pair?.id
+      } else {
+        inputStakeAddress = stakeAddress
+      }     
+      console.log("inputStakeAddress="+inputStakeAddress)
+
+      if(!isAddress(inputStakeAddress)){
+        alert(t('stakeAddressError'))
+        return
+      }
 
       // TODO 地址判断格式是否正确    可将new地址转成0x   
-      if (name && stakeAddress && rewardAddress && rewardAmount && selectedDate && duration) {
-          if(rewardTokenDecimals === 0 ){
+      if (name && rewardAddress && rewardAmount && selectedDate && duration) {
+          if(rewardTokenDecimals === 0 || !isAddress(rewardAddress)){
             alert(t('rewardAddressError'))
             return
           } 
+
           const intervalForStart = new BigNumber(selectedDate).minus(new Date().getTime()).toNumber()
           // 开始时间不能小于当前时间(+10s合约交互)
           if(intervalForStart < 10*1000) {
@@ -199,11 +223,11 @@ const CustomCreateLPFarm: React.FC = () => {
           }
 
           setPendingTx(true)
-          const txHash = await onCreateMine(name, stakeAddress, rewardAddress, 
+          const txHash = await onCreateMine(name, inputStakeAddress, rewardAddress, 
             new BigNumber(selectedDate).dividedToIntegerBy(1000).toString(),
             new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toString(),
             new BigNumber(rewardAmount).times(new BigNumber(10).pow(rewardTokenDecimals)).toString(),
-            true,
+            stakeTokenType === 'lpToken' ? true : false,
             new BigNumber(100000).times(new BigNumber(10).pow(18)).toString()
           )
           setPendingTx(false)
@@ -232,17 +256,19 @@ const CustomCreateLPFarm: React.FC = () => {
               <StyledWalletsWrapper>
                   <StyledWalletCard>
                       <StyleHeader>
-                          {/* <StyledNomalLink  to={'/customLPMining'}> */}
-                              <StyledIcon src = {arrowLeft} onClick={() => {history.goBack()}}/>
-                          {/* </StyledNomalLink> */}
-                          <StyledLabel>{t('createCustomLPMining')}</StyledLabel>
-                          {/* <StyledNomalLink to={'/customLPMining'}>
+                          <StyledIcon src = {arrowLeft} onClick={() => {history.goBack()}}/>
+                          <StyledLabel>{stakeTokenType === 'lpToken' ? t('createCustomLPMining') : t('createCustomSingleMining')}</StyledLabel>             
+                          {/* <StyledNomalLink to={'/'}>
                               <StyledIcon src = {issue} />
                           </StyledNomalLink> */}
                       </StyleHeader>
                       <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={t('inputPoolName')}></CustomInput>
-                      <CustomInput onClick={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={stakeToken} type={'select'} data={pairs}></CustomInput>
-
+                      {
+                        stakeTokenType === 'lpToken' ?
+                          <CustomInput onClick={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={stakeToken} type={'select'} data={pairs}></CustomInput> 
+                          :
+                          <CustomInput onChange={handleStakeAddress} value={stakeAddress} startAdornment={t('stakeAddress')} placeholder={t('inputStakeAddress')}></CustomInput>
+                      }
                       <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={t('rewardAddress')} placeholder={t('inputRewardAddress')}></CustomInput>
                       <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('rewardAmount')} placeholder={'0.0'} type={'number'}></CustomInput>
 
@@ -352,4 +378,4 @@ const StyledNomalLink = styled(Link)`
     color: #20C5A0;
 `
 
-export default CustomCreateLPFarm
+export default CustomCreateFarm

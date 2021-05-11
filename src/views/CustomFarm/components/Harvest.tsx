@@ -7,22 +7,23 @@ import CardContent from '../../../components/CardContent'
 import { Contract } from 'web3-eth-contract'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useNewEarningsSingle from '../../../hooks/useNewEarningsSingle'
-import useNewRewardSingle from '../../../hooks/useNewRewardSingle'
+import useTokenEarnings from '../../../hooks/useTokenEarnings'
+import useHarvestReward from '../../../hooks/useHarvestReward'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import { useTranslation } from 'react-i18next'
+import LazyIcon from '../../../components/LazyIcon'
 
 interface HarvestProps {
   miningContract: Contract
-  icon: string
+  rewardsToken: string
   tokenName?: string
-  tokenUnit?: string
+  tokenDecimals: number
 }
 
-const Harvest: React.FC<HarvestProps> = ({miningContract, icon, tokenName, tokenUnit} ) => {
-  const earnings = useNewEarningsSingle(miningContract)
+const Harvest: React.FC<HarvestProps> = ({miningContract, rewardsToken, tokenName, tokenDecimals} ) => {
+  const earnings = useTokenEarnings(miningContract)
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useNewRewardSingle(miningContract)
+  const { onReward } = useHarvestReward(miningContract)
   const { t } = useTranslation()
 
   return (
@@ -30,17 +31,18 @@ const Harvest: React.FC<HarvestProps> = ({miningContract, icon, tokenName, token
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            {/* <CardIcon>🍣</CardIcon> */}
-            <NewCardIcon icon = {icon}></NewCardIcon>
-            <Value value={getBalanceNumber(earnings)} />
-            <Label text={tokenUnit + ' Earned'} />
+            {/* <NewCardIcon icon = {icon}></NewCardIcon> */}
+            <LazyIcon address={rewardsToken} customStyle={iconStyle}/>
+            <Spacer height={20} />
+            <Value value={getBalanceNumber(earnings,tokenDecimals)} />
+            <Label text={t('tokenEarned', {token:tokenName})} />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               size = 'new'
               variant = 'green'
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? 'Collecting ' + tokenUnit : t('Harvest')}
+              text={pendingTx ? 'Collecting ' + tokenName : t('Harvest')}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()
@@ -54,6 +56,13 @@ const Harvest: React.FC<HarvestProps> = ({miningContract, icon, tokenName, token
   )
 }
 
+interface SpacerProps{
+  height: number
+}
+
+const Spacer = styled.div<SpacerProps>`
+  height: ${props => props.height}px;
+`
 const StyledCardHeader = styled.div`
   align-items: center;
   display: flex;
@@ -78,5 +87,12 @@ const StyledCardContentInner = styled.div`
   flex-direction: column;
   justify-content: space-between;
 `
+
+const iconStyle: React.CSSProperties = {
+  width: '60px',
+  height: '60px',
+  borderRadius: '30px',
+  // background: 'white',
+}
 
 export default Harvest

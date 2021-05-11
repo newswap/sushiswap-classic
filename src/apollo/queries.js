@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export const ALL_TOKEN_MINES = gql`
   query tokenMines($skip: Int!) {
-    tokenMines(first: 500, skip: $skip, orderBy: startTime, orderDirection: desc) {
+    tokenMines(first: 500, skip: $skip, orderBy: startTime, orderDirection: asc) {
       id
       owner
       name

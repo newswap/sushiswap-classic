@@ -75,7 +75,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
-            to="/customSingleFarms"
+            to="/customSingleMining"
             onClick={onDismiss}
           >
             {t('Custom Token Mining')}         

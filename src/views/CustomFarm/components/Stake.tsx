@@ -13,11 +13,12 @@ import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useModal from '../../../hooks/useModal'
 import useTokenBalance from '../../../hooks/useTokenBalance'
+import { getLogoURLByAddress } from '../../../utils/addressUtil'
 import useAllowanceGeneral from '../../../hooks/useAllowanceGeneral'
 import useApproveGeneral from '../../../hooks/useApproveGeneral'
-import useStakeNewMineSingle from '../../../hooks/useStakeNewMineSingle'
+import useStakeGeneral from '../../../hooks/useStakeGeneral'
 import useStakedBalanceByAccount from '../../../hooks/useStakedBalanceByAccount'
-import useUnstakeNewMineSingle from '../../../hooks/useUnstakeNewMineSingle'
+import useUnstakeGeneral from '../../../hooks/useUnstakeGeneral'
 import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
@@ -25,43 +26,44 @@ import { useTranslation } from 'react-i18next'
 import LazyIcon from '../../../components/LazyIcon'
 
 interface StakeProps {
-  lpContract: Contract
+  stakingContract: Contract
   miningContract: Contract
-  tokenName: string
-  iconR: string
-  tokenAddress?: string
-  tokenUnit?: string
-
+  stakingTokenName: string
+  isStakingLPToken: boolean
+  stakingToken?: string
+  token0Address?: string
+  token1Address?: string
+  stakingTokenDecimals: number
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, miningContract, tokenName, iconR, tokenAddress }) => {
+const Stake: React.FC<StakeProps> = ({ stakingContract, miningContract, stakingTokenName, isStakingLPToken, stakingToken, token0Address, token1Address, stakingTokenDecimals }) => {
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWallet()
-
   const { t } = useTranslation()
 
-  const allowance = useAllowanceGeneral(lpContract, miningContract)
-  const { onApprove } = useApproveGeneral(lpContract, miningContract)
-
-  const tokenBalance = useTokenBalance(lpContract?.options.address)
+  const allowance = useAllowanceGeneral(stakingContract, miningContract)
+  const tokenBalance = useTokenBalance(stakingContract?.options.address)
   const stakedBalance = useStakedBalanceByAccount(miningContract)
 
-  const { onStake } = useStakeNewMineSingle(miningContract)
-  const { onUnstake } = useUnstakeNewMineSingle(miningContract)
+  const { onApprove } = useApproveGeneral(stakingContract, miningContract)
+  const { onStake } = useStakeGeneral(miningContract)
+  const { onUnstake } = useUnstakeGeneral(miningContract)
 
   const [onPresentDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
+      tokenDecimals = {stakingTokenDecimals}
       onConfirm={onStake}
-      tokenName={tokenName}
+      tokenName={stakingTokenName}
     />,
   )
 
   const [onPresentWithdraw] = useModal(
     <WithdrawModal
       max={stakedBalance}
+      tokenDecimals = {stakingTokenDecimals}
       onConfirm={onUnstake}
-      tokenName={tokenName}
+      tokenName={stakingTokenName}
     />,
   )
 
@@ -89,18 +91,29 @@ const Stake: React.FC<StakeProps> = ({ lpContract, miningContract, tokenName, ic
           <StyledCardHeader>
             {/* <CardIcon>👨🏻‍🍳</CardIcon> */}
             <StyledDiv>
-              <LazyIcon address={tokenAddress} customStyle={iconStyle}/>
+              {
+                isStakingLPToken ? 
+                <>
+                  {/* <StyledImg src={getLogoURLByAddress(token1Address)}></StyledImg>
+                  <StyledImgL src={getLogoURLByAddress(token0Address)}></StyledImgL> */}
+                  <LazyIcon address={token1Address} customStyle={iconStyleR}/>
+                  <LazyIcon address={token0Address} customStyle={iconStyleL}/>
+                </> :
+                <>
+                  <LazyIcon address={stakingToken} customStyle={iconStyle}/>
+                </>
+              }
             </StyledDiv>
             <Spacer height={20} />
-            <Value value={getDisplayBalance(stakedBalance)} />
-            <Label text={`${tokenName} ` + t('Tokens Staked')} />
+            <Value value={getDisplayBalance(stakedBalance, stakingTokenDecimals)} />
+            <Label text={`${stakingTokenName} ` + t('Tokens Staked')} />
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={requestedApproval ? t('Approving...') : t('Approve') + ` ${tokenName}`}
+                text={requestedApproval ? t('Approving...') : t('Approve') + ` ${stakingTokenName}`}
                 size = 'new'
                 variant = 'green'
               />
@@ -170,7 +183,7 @@ const StyledImg = styled.img `
     margin-left: 26px;
 `
 
-const StyledImgR = styled.img `
+const StyledImgL = styled.img `
     float: left;
     width: 60px;
     height: 60px;
@@ -179,18 +192,38 @@ const StyledImgR = styled.img `
     margin-top: -60px;
 `
 const StyledDiv = styled.div`
-//   width: 86px;
+  width: 86px;
 
 `
 
 const iconStyle: React.CSSProperties = {
-//   float: 'left',
+  // float: 'left',
   width: '60px',
   height: '60px',
   borderRadius: '30px',
-//   marginRight: '-26px',
-//   marginTop: '-60px',
-  background: 'white',
+  marginLeft: '13px',
+  // marginTop: '-60px',
+  // background: 'white',
 }
+
+const iconStyleR: React.CSSProperties = {
+  float: 'left',
+  width: '60px',
+  height: '60px',
+  borderRadius: '30px',
+  marginLeft: '26px',
+  // background: 'white',
+}
+
+const iconStyleL: React.CSSProperties = {
+  float: 'left',
+  width: '60px',
+  height: '60px',
+  borderRadius: '30px',
+  marginRight: '-26px',
+  marginTop: '-60px',
+  // background: 'white',
+}
+
 
 export default Stake

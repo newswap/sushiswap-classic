@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
 import Container from '../../../components/Container'
+import LazyIcon from '../../../components/LazyIcon'
 
 interface PageHeaderProps {
-  icon: React.ReactNode
+  icon: string
   subtitle?: string
   title?: string
   status?: number
@@ -20,7 +21,8 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, status, 
   return (
     <Container size="lg">
       <StyledPageHeader>
-        <StyledIcon>{icon}</StyledIcon>
+        <LazyIcon address={icon} customStyle={iconStyle}/>
+        {/* <StyledIcon>{icon}</StyledIcon> */}
         <StyledTitle>{title}</StyledTitle>
         <StyledSubtitle>{subtitle}</StyledSubtitle>
             {   
@@ -67,6 +69,14 @@ const StyledIcon = styled.div`
   width: 120px;
   border-radius: 22.5px;
 `
+
+const iconStyle: React.CSSProperties = {
+  width: '95px',
+  height: '95px',
+  textAlign: 'center',
+  borderRadius: '22.5px',
+}
+
 
 const StyledTitle = styled.h1`
   font-family: 'PingFang SC Medium', sans-serif;

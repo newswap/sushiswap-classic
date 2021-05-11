@@ -1,8 +1,8 @@
 import React, { useContext, useMemo } from 'react'
+import dayjs from 'dayjs'
 import { useParams, Route, Switch, useRouteMatch } from 'react-router-dom'
 import styled from 'styled-components'
-import newIcon from '../../assets/img/logo.d23eaded.svg'
-import arrow from '../../../assets/img/ic_arrow_right.svg'
+import BigNumber from 'bignumber.js'
 
 import { makeStyles, withStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -13,8 +13,13 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TablePagination from '@material-ui/core/TablePagination';
+import { getLogoURLByAddress } from '../../../utils/addressUtil'
+import LocalLoader from '../../../components/LocalLoader'
+import { getBalanceNumber } from '../../../utils/formatBalance'
 
-import useNodeFarms from '../../../hooks/useNodeFarms'
+import { CustomFarm } from '../../../contexts/CustomFarms'
+import useCustomFarms from '../../../hooks/useCustomFarms'
+
 import { NodeFarm } from '../../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
@@ -22,10 +27,10 @@ import { useTranslation } from 'react-i18next'
 import LazyIcon from '../../../components/LazyIcon'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import CustomCreateLPFarm from '../../../views/CustomCreateLPFarm'
 
 interface FarmTableProps {
-  dataSource: []
+  dataSource?: [],
+  stakeTokenType: 'lpToken' | 'singleToken'
 }
 
 const useStyles = makeStyles({
@@ -59,10 +64,11 @@ const useStyles = makeStyles({
 
 });
 
-interface FarmWithStakedValue extends NodeFarm {
+interface FarmWithStakedValue extends CustomFarm {
+    // reserveUSD: BigNumber,
 }
 
-const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
+const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
     const { t } = useTranslation()
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -78,150 +84,91 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
         setPage(0);
     };
 
-    const [value, setValue] = React.useState(2);
-    const handleChange = (event: any, newValue: any) => {
-        setValue(newValue);
-        console.log('new value is: ' + newValue )
+    const [tabValue, setTabValue] = React.useState(0);
+    const handleChange = (event: any, newTabValue: any) => {
+        setTabValue(newTabValue);
+        // console.log('new TabValue is: ' + newTabValue )
     };
 
-    const [nodeFarms] = useNodeFarms()
+    const [customFarms] = useCustomFarms()
+    // console.log("FarmTable=====================>")
+    // console.log(customFarms)
 
-    const rows = nodeFarms.reduce<FarmWithStakedValue[][]>(
+    const currentTime = new Date().getTime()/1000
+    const rows = customFarms.reduce<FarmWithStakedValue[][]>(
         (farmRows, farm, i) => {
-
             const farmWithStakedValue = {
                 ...farm,
+                // reserveUSD: 100,  // TODO  添加锁仓价值，见MainstreamFarms/components/FarmCards
             }
+       
             const newFarmRows = [...farmRows]
-     
-            newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
-      
+            
+            if((stakeTokenType === 'lpToken' && farm.isStakingLPToken)  || 
+                    (stakeTokenType === 'singleToken' && !farm.isStakingLPToken)){
+
+                if(currentTime > farm.endTime) { // Finished
+                    newFarmRows[2].push(farmWithStakedValue)    
+                } else if(currentTime < farm.startTime) { // Upcoming
+                    newFarmRows[1].push(farmWithStakedValue)    
+                } else { // Live
+                    newFarmRows[0].push(farmWithStakedValue)    
+                } 
+            }
+
             return newFarmRows
         },
-        [[]],
+        [[],[],[]],
     )
-      
-    const testRows = [
-        [
-            {
-                id: "0",
-                farmName: "西西矿区",
-                stakeToken: "CICI",
-                rewardToken: "MCT",
-                rewardAmount: "1,300",
-                stakeTime: "2021.03.05 13:22 - 03.17 13:22",
-                totalStake: "$123,456,789"
-            },
-            {
-                id: "1",
-                farmName: "飞天矿区",
-                stakeToken: "FTT",
-                rewardToken: "MCT",
-                rewardAmount: "900",
-                stakeTime: "2021.03.05 13:22 - 03.17 13:22",
-                totalStake: "$13,456,789"
-            }
-        ],
-        [
-            {
-                id: "2",
-                farmName: "共赢矿区",
-                stakeToken: "GYSQ",
-                rewardToken: "BIA",
-                rewardAmount: "1,100",
-                stakeTime: "2021.03.01 21:22 - 03.12 21:22",
-                totalStake: "$123,456,789"
-            }
-        ],
-        [
-            {
-                id: "3",
-                farmName: "比特全球",
-                stakeToken: "BTQ",
-                rewardToken: "CICI",
-                rewardAmount: "1,400",
-                stakeTime: "2021.02.28 05:16 - 03.06 05:16",
-                totalStake: "--"
-            },
-            {
-                id: "4",
-                farmName: "飞毛腿宇宙",
-                stakeToken: "FMT",
-                rewardToken: "CICI",
-                rewardAmount: "2,400",
-                stakeTime: "2021.02.28 05:16 - 05.06 05:16",
-                totalStake: "$222,222,22"
-            },
-            {
-                id: "5",
-                farmName: "比特全球",
-                stakeToken: "BTQ",
-                rewardToken: "CICI",
-                rewardAmount: "1,400",
-                stakeTime: "2021.02.28 05:16 - 03.06 05:16",
-                totalStake: "--"
-            },
-            {
-                id: "6",
-                farmName: "飞毛腿宇宙",
-                stakeToken: "FMT",
-                rewardToken: "CICI",
-                rewardAmount: "2,400",
-                stakeTime: "2021.02.28 05:16 - 05.06 05:16",
-                totalStake: "$222,222,22"
-            }
-        ]
-    ]
-
-
-
+    
     return (
         <StyledTableContainer>
             <HeadDiv>
-                <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-                    <Tab className = {classes.root} label="进行中" />
-                    <Tab className = {classes.root} label="即将开始" />
-                    <Tab className = {classes.root} label="已完成" />
+                <AntTabs value={tabValue} onChange={handleChange} aria-label="ant example">
+                    <Tab className = {classes.root} label={t('Live')} />
+                    <Tab className = {classes.root} label={t('Upcoming')} />
+                    <Tab className = {classes.root} label={t('Finished')} />
                 </AntTabs>
                 {
                     isMobile ? (
                         <></>
                     ) : (
                         <CreateFarmDiv>
-                            <StyledNomalLink  to={'/customCreateSingleFarms'} >
-                                {'创建自定义矿池 >'}
+                            <StyledNomalLink  to={stakeTokenType === 'lpToken' ? '/customCreateLPMining' : '/customCreateSingleMining'} >
+                                {t('createCustomMining') + ' >'}
                             </StyledNomalLink>
                         </CreateFarmDiv>
                     )
                 }
-                
             </HeadDiv>
             <Table className={classes.table} aria-label="simple table">
-        
             <TableBody>
-                {
-                    testRows[value].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
-                        // testRows[value].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                        // .map((farm, j) => {
-
+                {   rows[tabValue].length === 0 ? (     
+                        <TitleDiv>{t('None Mining')}</TitleDiv>
+                    ) :
+                    (rows[tabValue].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
                             // let address = farm.tokenAddress
-
                             return (
                                 // <StyledNavLink to={`/communityMining/`}>
                                     <StyledTableRow key={j}>
                                         <CardDiv>
                                             <TopDiv>
                                                 <TopLeftDiv>
-                                                    <StyledIcon></StyledIcon>
+                                                    <LazyIcon address={farm.rewardsToken} customStyle={iconStyle}/>
+                                                    {/* <StyledIcon src = {getLogoURLByAddress(farm.rewardsToken)} /> */}
                                                     <DetailDiv>
-                                                        <TitleDiv>{farm.farmName}</TitleDiv>
-                                                        <TitleDetailDiv>质押 <StyledSpan>{farm.stakeToken}</StyledSpan>, 获得<StyledSpan>{farm.rewardToken}</StyledSpan></TitleDetailDiv>
+                                                        <TitleDiv>{farm.name}</TitleDiv>
+                                                        <TitleDetailDiv>{t('Deposit')} <StyledSpan>{ 
+                                                            stakeTokenType === 'lpToken' ?
+                                                                ((farm.token0Symbol==='WNEW' ? 'NEW' : farm.token0Symbol) + '-' + (farm.token1Symbol==='WNEW' ? 'NEW' : farm.token1Symbol)) :
+                                                                farm.stakingTokenSymbol
+                                                            }</StyledSpan>, {t('Earn')}<StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
                                                     </DetailDiv>
                                 
                                                 </TopLeftDiv>
                                                 <TopRightDiv>
-                                                    <AwardDiv>{farm.rewardAmount}</AwardDiv>
-                                                    <AwardTip>总奖励</AwardTip>
+                                                    <AwardDiv>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</AwardDiv>
+                                                    <AwardTip>{t('Total Rewards')}</AwardTip>
                                                 </TopRightDiv>
                                             </TopDiv>
                                             <Line></Line>
@@ -229,28 +176,28 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                                 { isMobile ? 
                                                     (
                                                         <TimeDiv>
-                                                            <TimeTitle>质押时间</TimeTitle>
-                                                            <TimeValue>{farm.stakeTime}</TimeValue>
-                                                            <StakeTitle>当前总锁仓价值</StakeTitle>
-                                                            <StakeValue>{farm.totalStake}</StakeValue>
+                                                            <TimeTitle>{t('Stake Time')}</TimeTitle>
+                                                            <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
+                                                            {/* <StakeTitle>{t('Total Stake Value')}</StakeTitle>
+                                                            <StakeValue>--</StakeValue> */}
                                                         </TimeDiv>
                                                       ) : (
                                                         <>
                                                         <TimeDiv>
-                                                            <TimeTitle>质押时间</TimeTitle>
-                                                            <TimeValue>{farm.stakeTime}</TimeValue>
+                                                            <TimeTitle>{t('Stake Time')}</TimeTitle>
+                                                            <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
                                                         </TimeDiv>
-                                                        <StakeDiv>
-                                                            <StakeTitle>当前总锁仓价值</StakeTitle>
-                                                            <StakeValue>{farm.totalStake}</StakeValue>
-                                                        </StakeDiv>
+                                                        {/* <StakeDiv>
+                                                            <StakeTitle>{t('Total Stake Value')}</StakeTitle>
+                                                            <StakeValue>--</StakeValue>
+                                                        </StakeDiv> */}
                                                         </>
                                                       )
                                                 }
                                                 <EnterDiv>
-                                                    <StyledNavLink to={'/customSingleFarms/${farm.id}'}>
+                                                    <StyledNavLink to={`/customLPMining/${farm.id}`}>
                                                         <EnterBtn>
-                                                            进入
+                                                            {t('Select')}
                                                         </EnterBtn>
                                                     </StyledNavLink>
                                                 </EnterDiv>
@@ -260,19 +207,20 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource}) => {
                                 // </StyledNavLink>
                             )
                         })
-                    }
+                    )
+                }
                 </TableBody>
             </Table>
-            <TablePagination
+            {/* <TablePagination
                 // rowsPerPageOptions={[5, 10, 25]}
                 rowsPerPageOptions={[25]}
                 component="div"
-                count={testRows[value].length}
+                count={rows[tabValue].length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onChangePage={handleChangePage}
                 onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
+            /> */}
         </StyledTableContainer>
     )
 }
@@ -304,6 +252,13 @@ const StyledTableCell = withStyles((theme) => ({
     }
 
 }))(TableCell);
+
+// const StyledTH = styled.span`
+//     margin-left: 30px;
+// `
+// const StyledTHMobile = styled.span`
+//     margin-left: 16px;
+// `
  
 const StyledTableContainer = withStyles((theme) => ({
     root: {
@@ -350,7 +305,7 @@ const CreateFarmDiv = styled.button`
 `
 
 const CardDiv = isMobile ? styled.div`
-    height: 191px;
+    height: 160px;
     width: 100%;
     border-radius: 24px;
     background: white;
@@ -366,6 +321,7 @@ const CardDiv = isMobile ? styled.div`
     border-radius: 12px;
     box-shadow: 0px 3px 12px 0px rgba(7,94,68,0.11);
 `
+
 
 const TopDiv = styled.div`
     background: clear;
@@ -384,10 +340,18 @@ const StyledIcon = styled.img `
     height: 45px;
     width: 45px;
     border-radius: 22.5px;
-    background: pink;
     margin-top: 28px;
     margin-left: 20px;
 `
+
+const iconStyle: React.CSSProperties = {
+    width: '45px',
+    height: '45px',
+    borderRadius: '22.5px',
+    marginLeft: '20px',
+    marginTop: '28px',
+  }
+
 const DetailDiv = styled.div`
     height: 100%;
     display: flex;
@@ -435,7 +399,7 @@ const Line = styled.div`
 const BottomDiv = styled.div`
     background: clear;
     width: 100%;
-    height: 74px;
+    height: 64px;
 `
 
 const TimeDiv = styled.div`
@@ -487,7 +451,7 @@ const EnterDiv = styled.div`
     background: clear;
     height: 100%;
     float: right;
-    margin-top: 26px;
+    margin-top: 16px;
 `
 
 const EnterBtn = styled.button`
@@ -498,7 +462,7 @@ const EnterBtn = styled.button`
     color: white;
     border: none;
     cursor: pointer;
-    margin-top: 21px;
+    margin-top: 0px;
     margin-right: 16px;
 
     &:focus {
@@ -507,7 +471,6 @@ const EnterBtn = styled.button`
         
     }
 `
-
 const StyledNavLink = styled(Link)`
     align-items: center;
     font-size: 14px;
@@ -522,5 +485,6 @@ const StyledNomalLink = styled(Link)`
     text-decoration: none;
     color: #20C5A0;
 `
+
 
 export default FarmTable

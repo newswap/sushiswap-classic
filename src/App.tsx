@@ -18,14 +18,12 @@ import Farms from './views/Farms'
 import NodeFarms from './views/NodeFarms'
 import MainstreamFarms from './views/MainstreamFarms'
 import Home from './views/Home'
-import NST from "./views/NST";
-import NSP from "./views/NSP";
-import CommunityFarm from "./views/CommunityFarm"
-import TradeFarm from "./views/TradeFarm"
-import CustomLPFarms from "./views/CustomLPFarms"
-import CustomSingleFarms from "./views/CustomSingleFarms"
-import CustomCreateLPFarm from './views/CustomCreateLPFarm'
-import CustomCreateSingleFarm from './views/CustomCreateSingleFarm'
+import NST from './views/NST'
+import NSP from './views/NSP'
+import CommunityFarm from './views/CommunityFarm'
+import TradeFarm from './views/TradeFarm'
+import CustomFarms from './views/CustomFarms'
+import CustomCreateFarm from './views/CustomCreateFarm'
 
 const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 const NEWCHAIN_RPC = process.env.REACT_APP_NEWCHAIN_RPC
@@ -67,17 +65,18 @@ const App: React.FC = () => {
               <MainstreamFarms />
             </Route>
             <Route path="/customLPMining">
-              <CustomLPFarms />
+              <CustomFarms stakeTokenType='lpToken' />
             </Route>
-            <Route path="/customSingleFarms">
-              <CustomSingleFarms />
+            <Route path="/customSingleMining">
+              <CustomFarms stakeTokenType='singleToken' />
             </Route>
-            <Route path="/customCreateLPFarms">
-              <CustomCreateLPFarm />
+            <Route path="/customCreateLPMining">
+              <CustomCreateFarm stakeTokenType='lpToken'/>
             </Route>
-            <Route path="/customCreateSingleFarms">
-              <CustomCreateSingleFarm />
+            <Route path="/customCreateSingleMining">
+              <CustomCreateFarm stakeTokenType='singleToken'/>
             </Route>
+
             {/* 
             <Route path="/nstFarms">
               <Farms />

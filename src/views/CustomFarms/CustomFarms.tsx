@@ -10,16 +10,17 @@ import { useTranslation } from 'react-i18next'
 import useModal from '../../hooks/useModal'
 import coin from '../../assets/img/new.a6cfc11f.png'
 import WalletProviderModal from '../../components/WalletProviderModal'
-// import FarmCards from './components/FarmCards'
 import FarmTable from './components/FarmTable'
 import Container from '../../components/Container'
 import styled from 'styled-components'
-import CustomSingleFarm from '../CustomSingleFarm'
+import CustomFarm from '../CustomFarm'
 
 
-const INFO_URL = process.env.REACT_APP_INFO_URL
+interface CustomFarmsProps {
+    stakeTokenType: 'lpToken' | 'singleToken'
+}
 
-const CustomSingleFarms: React.FC = () => {
+const CustomFarms: React.FC<CustomFarmsProps> = ({stakeTokenType}) => {
     const { t } = useTranslation()
 
     const { path } = useRouteMatch()
@@ -29,30 +30,31 @@ const CustomSingleFarms: React.FC = () => {
     return (
         <Switch>
             <Page>
-                {!!account ? (
+                {/* {!!account ? ( */}
                     <>
                         <Route exact path={path}>
                             <PageHeader
                                 icon={<img src={coin} height="95" />}
-                                title={'自定义挖矿-单通证挖矿'}
-                                subtitle={'参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。'}
-                                to={'/customCreateSingleFarms'}
-                                toTitle={'创建自定义矿池'}
+                                title={stakeTokenType === 'lpToken' ? t('customLPMining') : t('customTokenMining')}
+                                subtitle={t('customLPMiningTips')}
+                                to={stakeTokenType === 'lpToken' ? '/customCreateLPMining' : '/customCreateSingleMining'}
+                                toTitle={t('createCustomMining')}
                             />
                         
                             <Spacer size="lg" />
                             <Container size = 'md'>
                                 <StyledTableDiv>
-                                    <FarmTable dataSource={[]}></FarmTable>
+                                    <FarmTable stakeTokenType={stakeTokenType} ></FarmTable>
                                  </StyledTableDiv>
                             </Container>
                             <Spacer size="lg" />
                             <Spacer size="lg" />
                         </Route>
                         <Route path={`${path}/:farmId`}>
-                            <CustomSingleFarm />
+                            <CustomFarm />
                         </Route>
                     </>
+{/* 
                 ) : (
                     <div
                         style={{
@@ -70,6 +72,7 @@ const CustomSingleFarms: React.FC = () => {
                         />
                     </div>
                 )}
+                 */}
             </Page>
         </Switch> 
     )
@@ -85,4 +88,4 @@ const StyledTableDiv = styled.div`
 //   padding-bottom: 10px
 `
 
-export default CustomSingleFarms
+export default CustomFarms
