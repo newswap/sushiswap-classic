@@ -61,8 +61,14 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
         onClick(name)
     }
 
-    const [onPresentWalletProviderModal] = useModal(<TokenSelectProviderModel tokenList={data} dataSelect ={tokenSelect}/>)
+    const [onPresentSelectTokenModal] = useModal(<TokenSelectProviderModel tokenList={data} dataSelect ={tokenSelect}/>)
 
+    const handleSelectTokenClick = useCallback(() => {
+        if (data.length > 1)
+            onPresentSelectTokenModal()
+        else
+            alert(t('featchDataError'))
+      }, [onPresentSelectTokenModal])
     
     const checkValidDate = (currentDate: any, selectedDate: any) => {
         return (currentDate/1000/60/60/24) >= ((((new Date()).getTime())/1000/60/60/24)-1) && 
@@ -77,7 +83,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
                 (
                     <>
                     <StyledTokenDiv>{selectToken}</StyledTokenDiv>
-                    <StyledSelectBtn onClick={onPresentWalletProviderModal}>
+                    <StyledSelectBtn onClick={handleSelectTokenClick}>
                         <StyledSelectImg src={arrowDown} />
                     </StyledSelectBtn>
                                        

@@ -126,6 +126,7 @@
   "minMiningStartTime": "挖矿开启时间不能小于当前时间",
   "maxMiningStartTime": "挖矿开启时间需在30天内",
   "miningDurationTips": "挖矿时长不小于1天",
+  "featchDataError": "数据获取失败，请检查网络！",
 
   "==============================================": "自定义挖矿",
 

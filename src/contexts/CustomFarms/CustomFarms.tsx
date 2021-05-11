@@ -14,7 +14,7 @@ const CustomFarms: React.FC = ({ children }) => {
   const fetchAllCustomFarms= useCallback(async () => {
     const allCustomFarms= await getAllTokenMines()
     // console.log('fetchAllCustomFarms============>')
-    // console.log(allCustomFarms)
+    // console.log(allCustomFarms)  
     setCustomFarms(allCustomFarms)
   }, [ethereum])
 

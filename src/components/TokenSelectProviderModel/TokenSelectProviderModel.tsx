@@ -24,7 +24,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
-
+import LazyIcon from '../LazyIcon'
 interface TokenSelectProps extends ModalProps {
     tokenList?: any[]
   }
@@ -141,8 +141,10 @@ const TokenSelectProviderModel: React.FC<TokenSelectProps> = ({ onDismiss, token
                                         <StyledTableRow key={j} onClick={(e) => selectRow(pair?.name)}>
                                             <StyledTD>
                                             <StyledIconDiv> 
-                                                <StyledRightIcon src = {getLogoURLByAddress(pair?.token1?.id)} />
-                                                <StyledLeftIcon src = {getLogoURLByAddress(pair?.token0?.id)} />
+                                                {/* <StyledRightIcon src = {getLogoURLByAddress(pair?.token1?.id)} />
+                                                <StyledLeftIcon src = {getLogoURLByAddress(pair?.token0?.id)} /> */}
+                                                <LazyIcon address={pair?.token1?.id} customStyle={iconStyleR}/>
+                                                <LazyIcon address={pair?.token0?.id} customStyle={iconStyleL}/>
                                             </StyledIconDiv>
 
                                             <StyledLPNameDiv>{pair?.name}</StyledLPNameDiv>
@@ -312,6 +314,22 @@ const StyledRightIcon = styled.img`
     float: right;
     border-radius: 12.5px;
 `
+const iconStyleR: React.CSSProperties = {
+  float: 'right',
+  width: '25px',
+  height: '25px',
+  borderRadius: '12.5px',
+  // background: 'white',
+}
+
+const iconStyleL: React.CSSProperties = {
+  float: 'left',
+  width: '25px',
+  height: '25px',
+  borderRadius: '12.5px',
+  marginTop: '-25px',
+  // background: 'white',
+}
 
 const StyledLPNameDiv = styled. div`
     height: 32px;
