@@ -5,7 +5,7 @@
  * @description
  * @copyright (c) 2020 Newton Foundation. All rights reserved.
  */
-import base58 from 'base58check'
+import base58check from 'base58check'
 import { ethers } from 'ethers'
 
 const fromHexString = hexString =>
@@ -14,14 +14,6 @@ const fromHexString = hexString =>
 const toHexString = bytes =>
   bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 
-const base58check = {
-  encode: function (data) { // hex str without leading 0x, e.g. 03fe...
-    return base58.encode(data);
-  },
-  decode: function (data) { // encoded str, returning hex str has no 0x
-    return toHexString(base58.decode(data).payload);
-  }
-};
 const PREFIX = 'NEW'
 /**
  * convert hex address to new address.
@@ -29,7 +21,7 @@ const PREFIX = 'NEW'
  * @param {number} chainId
  */
 export function hexAddress2NewAddress (hexAddress, chainId) {
-  if (hexAddress === undefined) {
+  if (hexAddress === undefined || hexAddress === null || chainId === undefined) {
     return ''
   }
   hexAddress = hexAddress.trim()
@@ -50,15 +42,35 @@ export function hexAddress2NewAddress (hexAddress, chainId) {
   return PREFIX + base58check.encode(data)
 }
 
-export const isAddress = value => {
+/**
+ * convert new address to hex address.
+ * @param {string|undefined} newAddress
+ * @return {string} hexAddress
+ */
+ export function newAddress2HexAddress(newAddress) {
+  if (newAddress === undefined || newAddress === null) {
+    return ''
+  }
+  newAddress = newAddress.trim()
+  if (newAddress.startsWith(PREFIX) && newAddress.length === 39) {
+    return '0x' + base58check.decode(newAddress.slice(3), 'hex').data.slice(4)
+  } else {
+    return ''
+  }
+}
+
+export const getHexAddress = value => {
   try {
-    return ethers.utils.getAddress(value.toLowerCase())
+    if(value.startsWith(PREFIX))
+      return ethers.utils.getAddress(newAddress2HexAddress(value).toLowerCase())    
+    else
+      return ethers.utils.getAddress(value.toLowerCase())
   } catch {
-    return false
+    return ''
   }
 }
 
 const LOGO_BASE_URL = process.env.REACT_APP_LOGO_BASE_URL
 export const getLogoURLByAddress= (address) => {
-  return LOGO_BASE_URL + `/${ isAddress(address) }/logo.png`  
+  return LOGO_BASE_URL + `/${ getHexAddress(address) }/logo.png`  
 }

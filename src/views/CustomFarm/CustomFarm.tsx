@@ -164,17 +164,31 @@ const CustomFarm: React.FC = () => {
                 </StyledCardWrapper>
               </StyledCardsWrapper>
               <Spacer size="lg" />
-              <StyledLink
-                target="__blank"
-                href={ isStakingLPToken ? (INFO_URL + `/pair/${stakingToken}`) : (EXPLORER_URL + `/token/${stakingToken}`)}  
+              <div
+                style={{
+                  alignItems: 'center',
+                  display: 'flex',
+                  flex: 1,
+                  justifyContent: 'center',
+                }}
               >
-                { isStakingLPToken ?
-                    (token0Symbol==='WNEW' ? 'NEW' : token0Symbol)+ '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol) + ' ' + t('Info') :
-                    stakingTokenSymbol + " " + t('Address')
-                }
-              </StyledLink>
+                <StyledLink
+                  target="__blank"
+                  href={EXPLORER_URL + `/token/${rewardsToken}`}  
+                >
+                  { rewardsTokenSymbol + " " + t('Address') }        
+                </StyledLink>
+                <StyledLink
+                  target="__blank"
+                  href={ isStakingLPToken ? (INFO_URL + `/pair/${stakingToken}`) : (EXPLORER_URL + `/token/${stakingToken}`)}  
+                >
+                  { isStakingLPToken ?
+                      (token0Symbol==='WNEW' ? 'NEW' : token0Symbol)+ '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol) + ' ' + t('Info') :
+                      stakingTokenSymbol + " " + t('Address')
+                  }
+                </StyledLink>
+              </div>
               <Spacer size="lg" />
-
             </StyledFarm>
           </>
         ) : (

@@ -11,7 +11,7 @@ import { provider } from 'web3-core'
 import useModal from '../../hooks/useModal'
 import coin from '../../assets/img/new.a6cfc11f.png'
 import { getContract } from '../../utils/erc20'
-import {isAddress} from '../../utils/addressUtil'
+import {getHexAddress} from '../../utils/addressUtil'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import useSushi from '../../hooks/useSushi'
 import useAllowanceGeneral from '../../hooks/useAllowanceGeneral'
@@ -128,8 +128,8 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [requestedApproval, setRequestedApproval] = useState(false)
     const tokenMineFactoryContract = getTokenMineFactoryContract(sushi)
     const rewardTokenContract = useMemo(() => {
-        if(ethereum && rewardAddress && isAddress(rewardAddress))
-          return getContract(ethereum as provider, rewardAddress)
+        if(ethereum && rewardAddress && getHexAddress(rewardAddress))
+          return getContract(ethereum as provider, getHexAddress(rewardAddress))
         else
           return null
       }, [ethereum, rewardAddress])
@@ -150,6 +150,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('maxMiningStartTime')}/>)
     const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('miningDurationTips')}/>)
     const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All field required')}/>)
+    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Mine created success')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   
@@ -159,8 +160,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     
     const handleApprove = useCallback(async () => {
         try {
-          // TODO 判断地址是否正确，支持NEW格式
-          if(!isAddress(rewardAddress)){
+          if(!getHexAddress(rewardAddress)){
             onPresentRewardAddressError()
             return
           }
@@ -174,9 +174,9 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     }, [onApprove, setRequestedApproval])
     
 
-    // function sleep(ms:number){
-    //   return new Promise((resolve)=>setTimeout(resolve,ms));
-    // }
+    function sleep(ms:number){
+      return new Promise((resolve)=>setTimeout(resolve,ms));
+    }
 
     const { onCreateMine } = useCreateMine(tokenMineFactoryContract)
     const [pendingTx, setPendingTx] = useState(false)
@@ -200,14 +200,14 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
       }     
       console.log("inputStakeAddress="+inputStakeAddress)
 
-      if(!isAddress(inputStakeAddress)){
+      if(!getHexAddress(inputStakeAddress)){
         onPresentStakeAddressError()
         return
       }
 
       // TODO 地址判断格式是否正确    可将new地址转成0x   
       if (name && rewardAddress && rewardAmount && selectedDate && duration) {
-          if(rewardTokenDecimals === 0 || !isAddress(rewardAddress)){
+          if(rewardTokenDecimals === 0 || !getHexAddress(rewardAddress)){
             onPresentRewardAddressError()
             return
           } 
@@ -234,8 +234,22 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             return           
           }
 
+
+          // setPendingTx(true)
+          // await sleep(3000)
+          // setPendingTx(false)
+          // //1. 文案修改，数据同步中
+          // //2. 解析交易记录，获得新创建的tokenMine 地址
+          // //3. 确定本地拿到了这个tokenMine,结束    ====》这一步还有一个方案，将第二步数据手工插入，但这个时候就不能再每3s自动刷新一次数据了(这不就正好是你需要的嘛？)
+          // while(true){
+          //   if(确定本地拿到了这个tokenMine)
+          //     break;
+          // }
+          // history.goBack();
+          // onPresentCreatedSuccessTips()
+
           setPendingTx(true)
-          const txHash = await onCreateMine(name, inputStakeAddress, rewardAddress, 
+          const txHash = await onCreateMine(name, getHexAddress(inputStakeAddress), getHexAddress(rewardAddress), 
             new BigNumber(selectedDate).dividedToIntegerBy(1000).toString(),
             new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toString(),
             new BigNumber(rewardAmount).times(new BigNumber(10).pow(rewardTokenDecimals)).toString(),
@@ -248,6 +262,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             // TODO 休眠3s再跳转？？？
             // await sleep(3000)
             history.goBack();
+            onPresentCreatedSuccessTips()
           }
 
       } else {

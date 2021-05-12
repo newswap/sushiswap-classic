@@ -3,7 +3,6 @@ import Web3 from 'web3'
 import { ethers } from 'ethers'
 import { client, newSwapClient } from '../apollo/client'
 import TokenMineAbi from './lib/abi/tokenmine.json'
-import {isAddress} from '../utils/addressUtil'
 
 import {
   ALL_TOKEN_MINES,
@@ -602,7 +601,8 @@ export const harvestRewardToken = async (tokenMineContract, account) => {
 
 export const createMine = async (tokenMineFactoryContract, name, stakingToken, rewardsToken, 
   startTime, endTime, rewardAmount, isStakingLPToken, fee, account) => {
-
+  
+  console.log('rewardAmount==========>'+rewardAmount)
   return tokenMineFactoryContract.methods
     .deploy(
       name,
