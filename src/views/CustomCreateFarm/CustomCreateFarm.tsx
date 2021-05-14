@@ -144,7 +144,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('maxMiningStartTime')}/>)
     const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('miningDurationTips')}/>)
     const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All field required')}/>)
-    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Mine created success')}/>)
+    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('mineCreatedSuccess')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   

@@ -13,6 +13,7 @@
   "Pending Confirmation": "确认中",
   "Confirm": "确认",
   "NEW Earned": "待领取的NEW",
+  "Collecting ": "正在领取",
   "Collecting NEW": "正在领取奖励",
   "Harvest": "领取奖励",
   "Tokens Staked": "已质押通证",
@@ -128,7 +129,7 @@
   "miningDurationTips": "挖矿时长不小于1天",
   "minRewardAmount": "奖励数量不能小于0",
   "featchDataError": "数据获取失败，请检查网络！",
-  "Mine created success": "矿池创建成功",
+  "mineCreatedSuccess": "矿池创建成功,并同步到列表",
   "loadingCreatedMine": "矿池创建成功，正在同步链上数据...",
 
 
