@@ -129,7 +129,9 @@
   "minRewardAmount": "奖励数量不能小于0",
   "featchDataError": "数据获取失败，请检查网络！",
   "Mine created success": "矿池创建成功",
-  
+  "loadingCreatedMine": "矿池创建成功，正在同步链上数据...",
+
+
   "==============================================": "自定义挖矿",
 
 

@@ -14,6 +14,7 @@ import { getContract } from '../../utils/erc20'
 import {getHexAddress} from '../../utils/addressUtil'
 import WalletProviderModal from '../../components/WalletProviderModal'
 import useSushi from '../../hooks/useSushi'
+import useCustomFarms from '../../hooks/useCustomFarms'
 import useAllowanceGeneral from '../../hooks/useAllowanceGeneral'
 import useApproveGeneral from '../../hooks/useApproveGeneral'
 import useERC20Decimals from '../../hooks/useERC20Decimals'
@@ -21,7 +22,7 @@ import useERC20Symbol from '../../hooks/useERC20Symbol'
 import Container from '../../components/Container'
 import useAllPairs from '../../hooks/useAllPairs'
 import useCreateMine from '../../hooks/useCreateMine'
-import { getTokenMineFactoryContract, getNewMineForNodeContract} from '../../sushi/utils'
+import { getTokenMineFactoryContract} from '../../sushi/utils'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
 import ResultModal from '../../components/ResultModal'
@@ -39,18 +40,25 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
     const { account, ethereum } = useWallet()
     
-    // const tokenList = [{name: "NEW-USDT",id:**, token0:{id:**,symbol:**,name:**},token1:{...}}, {name: "MCT-CICI",...}]
-    const pairs = useAllPairs()
+    const [customFarms] = useCustomFarms()
+    // console.log("useCustomFarms=====================>")
+    // console.log(customFarms)
+
+    const pairs = useAllPairs()   // [{name: "NEW-USDT",id:**, token0:{id:**,symbol:**,name:**},token1:{...}}, {name: "MCT-CICI",...}]
     // console.log("useAllPairs=====>")
     // console.log(pairs)
+
+    const [requestedLoadingCreatedMine, setRequestedLoadingCreatedMine] = useState(false)
 
     /// Farm Name
     const [name, setName] = useState('')
     const handleName = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
+          if(!requestedLoadingCreatedMine){
             setName(e.currentTarget.value)
+          }          
         },
-        [setName],
+        [setName, requestedLoadingCreatedMine],
     )
     
     /// 当质押lp时，选择Stake Token name  
@@ -58,26 +66,24 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const handleStakeToken = (data: string) => {
       // console.log('stakeToken======>' + date)
       setStakeToken(data);
-    };
+    }
 
-    // TODO 支持new格式转成0x地址
     // 当质押单通证时，输入Stake Token Address     
     const [stakeAddress, setStakeAddress] = useState('')
     const handleStakeAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-            // console.log("stakeAddress======>"+ e.currentTarget.value)
-            setStakeAddress(e.currentTarget.value)
+          // console.log("stakeAddress======>"+ e.currentTarget.value)
+          setStakeAddress(e.currentTarget.value)
         },
         [setStakeAddress],
     )
 
-    // TODO 若是new地址转成0x使用
     /// Reward Token Address
     const [rewardAddress, setRewardAddress] = useState('')
     const handleRewardAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-            // console.log("setRewardAddress======>"+e.currentTarget.value)
-            setRewardAddress(e.currentTarget.value)
+          // console.log("setRewardAddress======>"+e.currentTarget.value)
+          setRewardAddress(e.currentTarget.value)
         },
         [setRewardAddress],
     )
@@ -86,7 +92,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [rewardAmount, setRewardAmount] = useState('')
     const handleRewardAmount = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-            setRewardAmount(e.currentTarget.value)
+          setRewardAmount(e.currentTarget.value)
         },
         [setRewardAmount],
     )
@@ -97,32 +103,19 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         // console.log("handleDateChange===========")
         // console.log(date)
         // console.log('date is:' + date)
-        setSelectedDate(date+"");
+        if(!requestedLoadingCreatedMine)
+          setSelectedDate(date+"");
     };
 
     /// Mining Duration
     const [duration, setDuration] = useState('')
     const handleDuration = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
+          if(!requestedLoadingCreatedMine)
             setDuration(e.currentTarget.value)
         },
-        [setDuration],
+        [setDuration, requestedLoadingCreatedMine],
     )
-
-    // /// Mining Fee
-    // const [fee, setFee] = useState('')
-    // const handleFee = useCallback(
-    //     (e: React.FormEvent<HTMLInputElement>) => {
-    //         setFee(e.currentTarget.value)
-    //     },
-    //     [setFee],
-    // )
-    // Token Type
-    // const [selectedToken, setSelectedToken] = React.useState('');
-    // const handleSelectedToken = (event: any) => {
-    //     // console.log(event.target.value)       
-    //     setSelectedToken(event.target.value);
-    // };
 
     const sushi = useSushi()
     const [requestedApproval, setRequestedApproval] = useState(false)
@@ -143,6 +136,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     // console.log("rewardAddress:"+rewardAddress)
     // console.log("allowance:"+allowance.toString())
 
+    // TODO 合并
     const [onPresentRewardAddressError] = useModal(<ResultModal title={t('rewardAddressError')}/>)
     const [onPresentStakeAddressError] = useModal(<ResultModal title={t('stakeAddressError')}/>)
     const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('minRewardAmount')}/>)
@@ -171,8 +165,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         } catch (e) {
           console.log(e)
         }
-    }, [onApprove, setRequestedApproval])
-    
+    }, [onApprove, setRequestedApproval])  
 
     function sleep(ms:number){
       return new Promise((resolve)=>setTimeout(resolve,ms));
@@ -180,6 +173,39 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
     const { onCreateMine } = useCreateMine(tokenMineFactoryContract)
     const [pendingTx, setPendingTx] = useState(false)
+
+    useEffect(() => {
+      console.log("useEffect() loadingCreatedTokenMine requestedLoadingCreatedMine=" + requestedLoadingCreatedMine)
+      console.log("customFarms=====================>")
+      console.log(customFarms)
+
+      if (requestedLoadingCreatedMine) {
+        loadingCreatedTokenMine()
+      }
+    }, [requestedLoadingCreatedMine, customFarms])
+
+    const loadingCreatedTokenMine = useCallback(
+      async () => {
+        console.log("loadingCreatedTokenMine======矿池创建成功，正在同步链上数据...")
+
+        const startTime = new BigNumber(selectedDate).dividedToIntegerBy(1000).toNumber()
+        const endTime = new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toNumber()
+        const customFarm = customFarms.find((customFarm) => (customFarm.name == name && customFarm.startTime == startTime && customFarm.endTime == endTime))
+        console.log("customFarm-------")
+        console.log(customFarm)
+
+        if(customFarm?.id){
+          console.log("=========》新矿池同步到，返回")
+          setPendingTx(false)
+          setRequestedLoadingCreatedMine(false)
+
+          history.goBack();
+          onPresentCreatedSuccessTips()
+        }
+      },
+      [customFarms, selectedDate, duration, name],
+    )
+
     const createMine = async() => {
       console.log("stakeTokenType==" + stakeTokenType)
       console.log('name==' + name)
@@ -205,7 +231,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         return
       }
 
-      // TODO 地址判断格式是否正确    可将new地址转成0x   
       if (name && rewardAddress && rewardAmount && selectedDate && duration) {
           if(rewardTokenDecimals === 0 || !getHexAddress(rewardAddress)){
             onPresentRewardAddressError()
@@ -234,37 +259,22 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             return           
           }
 
-
-          // setPendingTx(true)
-          // await sleep(3000)
-          // setPendingTx(false)
-          // //1. 文案修改，数据同步中
-          // //2. 解析交易记录，获得新创建的tokenMine 地址
-          // //3. 确定本地拿到了这个tokenMine,结束    ====》这一步还有一个方案，将第二步数据手工插入，但这个时候就不能再每3s自动刷新一次数据了(这不就正好是你需要的嘛？)
-          // while(true){
-          //   if(确定本地拿到了这个tokenMine)
-          //     break;
-          // }
-          // history.goBack();
-          // onPresentCreatedSuccessTips()
-
           setPendingTx(true)
           const txHash = await onCreateMine(name, getHexAddress(inputStakeAddress), getHexAddress(rewardAddress), 
-            new BigNumber(selectedDate).dividedToIntegerBy(1000).toString(),
-            new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toString(),
+            new BigNumber(selectedDate).dividedToIntegerBy(1000).toNumber(), 
+            new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toNumber(),
             new BigNumber(rewardAmount).times(new BigNumber(10).pow(rewardTokenDecimals)).toString(),
             stakeTokenType === 'lpToken' ? true : false,
             new BigNumber(100000).times(new BigNumber(10).pow(18)).toString()
           )
-          setPendingTx(false)
+          // sleep(3000)
 
           if(txHash) {
-            // TODO 休眠3s再跳转？？？
-            // await sleep(3000)
-            history.goBack();
-            onPresentCreatedSuccessTips()
+            console.log("----------矿池创建成功")
+            setRequestedLoadingCreatedMine(true)
+          } else {
+            setPendingTx(false)
           }
-
       } else {
         onPresentAllFieldRequired()
       }
@@ -314,7 +324,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
                       ) : (
                           <Button 
                             disabled={pendingTx}
-                            text={pendingTx ? t('Pending Confirmation') : t('createMine')}
+                            text={requestedLoadingCreatedMine? t('loadingCreatedMine') : (pendingTx ? t('Pending Confirmation') : t('createMine'))}
                             size={'new'} 
                             variant={'green'} 
                             onClick={createMine}></Button>

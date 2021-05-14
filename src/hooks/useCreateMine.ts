@@ -7,8 +7,8 @@ const useCreateMine = (tokenMineFactoryContract: Contract) => {
   const { account } = useWallet()
 
   const handleCreateMine = useCallback(
-    async (name: string, stakingToken: string, rewardsToken: string, startTime: string,
-            endTime: string, rewardAmount: string, isStakingLPToken: boolean, fee: string) => {
+    async (name: string, stakingToken: string, rewardsToken: string, startTime: number,
+            endTime: number, rewardAmount: string, isStakingLPToken: boolean, fee: string) => {
       try {
         const txHash = await createMine(
           tokenMineFactoryContract,
