@@ -92,8 +92,8 @@ const Balances: React.FC = () => {
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
-  //第二期结束时间 2021/04/28 12:00
-  const endTime = 1619582400000  
+  //第四期结束时间 2021/06/13 12:00
+  const endTime = 1623556800000  
   
   return (
     <StyledWrapper>
@@ -127,11 +127,11 @@ const Balances: React.FC = () => {
           <Card>
             <CardContent>
               <StyledCloseDiv>
-                {t('unMingClose', {Number:4} )}
+                {t('unMingClose', {Number:5} )}
               </StyledCloseDiv>
             </CardContent>
             <Footnote>
-              {t('unMingCloseTips', {Number:3} )}
+              {t('unMingCloseTips', {Number:4} )}
             </Footnote>
           </Card>
         )
