@@ -622,6 +622,23 @@ export const nodeSupportedPools = [
     icon: '',
     iconL: '',
     iconR: newcoin
+  },
+  { // NSB-NEW
+    pid: 30,
+    lpAddresses: {
+      1007: '',
+      1012: '0x9c4c758c8eacd97a893842d561cc43b2cfc9668a',
+    },
+    tokenAddresses: {
+      1007: '', 
+      1012: '0x23262131c5EE341470df6A2D037d0Cd78A49A43a',   
+    },
+    name: 'NSB Party!',
+    symbol: 'NSB-NEW LP',
+    tokenSymbol: 'NSB',
+    icon: '',
+    iconL: '',
+    iconR: newcoin
   }
 
   // { // ?-NEW
