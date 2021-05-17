@@ -102,10 +102,36 @@ const CustomFarm: React.FC = () => {
     setStatus(currentTime < startTime ? 0 : ( currentTime > endTime ? 2 : 1))
   }, [startTime, endTime])
 
-  // TODO 倒计时修改status状态
   const [countTime, setCountTime] = React.useState('')
   useEffect(() => {
-    setCountTime(dayjs.unix(startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(endTime).format('YYYY-MM-DD HH:mm'))
+    if (!startTime || !endTime) return
+
+    const interval = setInterval(async () => {      
+      const currentTime = parseInt(new Date().getTime()/1000+"")
+      // console.log("currentTime==" + currentTime)
+      
+      let countdown = 0
+      if(currentTime < startTime) { // 开始倒计时
+        countdown = startTime- currentTime
+
+      } else if(currentTime > endTime) { //结束
+        if(status === 1)
+          setStatus(2)   
+
+      } else { // 结束倒计时
+        countdown = endTime- currentTime
+        if(status === 0)
+          setStatus(1)
+      }
+
+      const days =  parseInt(countdown/86400 +'')
+      const hours = parseInt((countdown-days*86400)/3600 + '')
+      const minutes = parseInt((countdown-days*86400-hours*3600)/60 + '')
+      const seconds = countdown-days*86400-hours*3600-minutes*60
+      setCountTime(days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes ') + seconds + t(' seconds'))
+    }, 1000)
+
+    return () => clearInterval(interval)
   }, [startTime, endTime])
 
   useEffect(() => {

@@ -143,6 +143,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [onPresentMinMiningStartTime] = useModal(<ResultModal title={t('minMiningStartTime')}/>)
     const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('maxMiningStartTime')}/>)
     const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('miningDurationTips')}/>)
+    const [onPresentMaxMiningDurationTips] = useModal(<ResultModal title={t('maxMiningDurationTips')}/>)
     const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All field required')}/>)
     const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('mineCreatedSuccess')}/>)
 
@@ -175,9 +176,9 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [pendingTx, setPendingTx] = useState(false)
 
     useEffect(() => {
-      console.log("useEffect() loadingCreatedTokenMine requestedLoadingCreatedMine=" + requestedLoadingCreatedMine)
-      console.log("customFarms=====================>")
-      console.log(customFarms)
+      // console.log("useEffect() loadingCreatedTokenMine requestedLoadingCreatedMine=" + requestedLoadingCreatedMine)
+      // console.log("customFarms=====================>")
+      // console.log(customFarms)
 
       if (requestedLoadingCreatedMine) {
         loadingCreatedTokenMine()
@@ -186,16 +187,16 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
     const loadingCreatedTokenMine = useCallback(
       async () => {
-        console.log("loadingCreatedTokenMine======矿池创建成功，正在同步链上数据...")
+        // console.log("loadingCreatedTokenMine======矿池创建成功，正在同步链上数据...")
 
         const startTime = new BigNumber(selectedDate).dividedToIntegerBy(1000).toNumber()
         const endTime = new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toNumber()
         const customFarm = customFarms.find((customFarm) => (customFarm.name == name && customFarm.startTime == startTime && customFarm.endTime == endTime))
-        console.log("customFarm-------")
-        console.log(customFarm)
+        // console.log("customFarm-------")
+        // console.log(customFarm)
 
         if(customFarm?.id){
-          console.log("=========》新矿池同步到，返回")
+          // console.log("=========》新矿池同步到，返回")
           setPendingTx(false)
           setRequestedLoadingCreatedMine(false)
 
@@ -258,6 +259,10 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             onPresentMiningDurationTips()
             return           
           }
+          if(parseInt(duration) > 365) {
+            onPresentMaxMiningDurationTips()
+            return           
+          }
 
           setPendingTx(true)
           const txHash = await onCreateMine(name, getHexAddress(inputStakeAddress), getHexAddress(rewardAddress), 
@@ -270,7 +275,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
           // sleep(3000)
 
           if(txHash) {
-            console.log("----------矿池创建成功")
+            // console.log("----------矿池创建成功")
             setRequestedLoadingCreatedMine(true)
           } else {
             setPendingTx(false)
