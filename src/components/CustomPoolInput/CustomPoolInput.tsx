@@ -63,7 +63,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
     }
 
     const [onPresentSelectTokenModal] = useModal(<TokenSelectProviderModel tokenList={data} dataSelect ={tokenSelect}/>)
-    const [onPresentFeatchDataError] = useModal(<ResultModal title={t('featchDataError')}/>)
+    const [onPresentFeatchDataError] = useModal(<ResultModal title={t('Failed to fetch data, please check the network connection!')}/>)
 
 
     const handleSelectTokenClick = useCallback(() => {
@@ -116,7 +116,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
                             type === 'duration' ? (
                                 <>
                                 <StyledInput placeholder={placeholder} value={value} onChange={onChange} type="number" />
-                                <StyledUnitDiv>{t(' days ')}</StyledUnitDiv>
+                                <StyledUnitDiv>{t('days')}</StyledUnitDiv>
                                 </>
                             ) : ( 
                                 type === 'number' ? (

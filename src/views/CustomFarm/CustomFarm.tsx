@@ -108,7 +108,6 @@ const CustomFarm: React.FC = () => {
 
     const interval = setInterval(async () => {      
       const currentTime = parseInt(new Date().getTime()/1000+"")
-      // console.log("currentTime==" + currentTime)
       
       let countdown = 0
       if(currentTime < startTime) { // 开始倒计时
@@ -128,7 +127,7 @@ const CustomFarm: React.FC = () => {
       const hours = parseInt((countdown-days*86400)/3600 + '')
       const minutes = parseInt((countdown-days*86400-hours*3600)/60 + '')
       const seconds = countdown-days*86400-hours*3600-minutes*60
-      setCountTime(days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes ') + seconds + t(' seconds'))
+      setCountTime(days + t(' D ') + hours + t(' H ') + minutes + t(' M ') + seconds + t(' S '))
     }, 1000)
 
     return () => clearInterval(interval)
@@ -210,7 +209,7 @@ const CustomFarm: React.FC = () => {
                 >
                   { isStakingLPToken ?
                       (token0Symbol==='WNEW' ? 'NEW' : token0Symbol)+ '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol) + ' ' + t('Info') :
-                      stakingTokenSymbol + " " + t('Address')
+                      rewardsToken !== stakingToken ? stakingTokenSymbol + " " + t('Address') : ''
                   }
                 </StyledLink>
               </div>

@@ -35,18 +35,15 @@ interface CustomCreateFarmProps {
 }
 
 const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => {
+    // var moment = require('moment');
+    // require('moment/locale/fr');
+
     const { t } = useTranslation()
     const history = useHistory();
 
     const { account, ethereum } = useWallet()
-    
     const [customFarms] = useCustomFarms()
-    // console.log("useCustomFarms=====================>")
-    // console.log(customFarms)
-
     const pairs = useAllPairs()   // [{name: "NEW-USDT",id:**, token0:{id:**,symbol:**,name:**},token1:{...}}, {name: "MCT-CICI",...}]
-    // console.log("useAllPairs=====>")
-    // console.log(pairs)
 
     const [requestedLoadingCreatedMine, setRequestedLoadingCreatedMine] = useState(false)
 
@@ -64,7 +61,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     /// 当质押lp时，选择Stake Token name  
     const [stakeToken, setStakeToken] = useState(pairs[0]?.name)
     const handleStakeToken = (data: string) => {
-      // console.log('stakeToken======>' + date)
       setStakeToken(data);
     }
 
@@ -72,7 +68,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [stakeAddress, setStakeAddress] = useState('')
     const handleStakeAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-          // console.log("stakeAddress======>"+ e.currentTarget.value)
           setStakeAddress(e.currentTarget.value)
         },
         [setStakeAddress],
@@ -82,7 +77,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [rewardAddress, setRewardAddress] = useState('')
     const handleRewardAddress = useCallback(
         (e: React.FormEvent<HTMLInputElement>) => {
-          // console.log("setRewardAddress======>"+e.currentTarget.value)
           setRewardAddress(e.currentTarget.value)
         },
         [setRewardAddress],
@@ -100,9 +94,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     /// Start Date
     const [selectedDate, setSelectedDate] = useState((new Date()).toString());
     const handleDateChange = (date: string) => {
-        // console.log("handleDateChange===========")
-        // console.log(date)
-        // console.log('date is:' + date)
         if(!requestedLoadingCreatedMine)
           setSelectedDate(date+"");
     };
@@ -130,22 +121,17 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const allowance = useAllowanceGeneral(rewardTokenContract, tokenMineFactoryContract)
     const rewardTokenSymbol = useERC20Symbol(rewardTokenContract)
     const rewardTokenDecimals = useERC20Decimals(rewardTokenContract)
-    // console.log("+++++++++++++++++++++")
-    // console.log("tokenMineFactoryContract:"+tokenMineFactoryContract?.options?.address)
-    // console.log("rewardTokenContract:"+rewardTokenContract?.options?.address)
-    // console.log("rewardAddress:"+rewardAddress)
-    // console.log("allowance:"+allowance.toString())
 
     // TODO 合并
-    const [onPresentRewardAddressError] = useModal(<ResultModal title={t('rewardAddressError')}/>)
-    const [onPresentStakeAddressError] = useModal(<ResultModal title={t('stakeAddressError')}/>)
-    const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('minRewardAmount')}/>)
-    const [onPresentMinMiningStartTime] = useModal(<ResultModal title={t('minMiningStartTime')}/>)
-    const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('maxMiningStartTime')}/>)
-    const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('miningDurationTips')}/>)
-    const [onPresentMaxMiningDurationTips] = useModal(<ResultModal title={t('maxMiningDurationTips')}/>)
-    const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All field required')}/>)
-    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('mineCreatedSuccess')}/>)
+    const [onPresentRewardAddressError] = useModal(<ResultModal title={t('Incorrect Reward Token Address')}/>)
+    const [onPresentStakeAddressError] = useModal(<ResultModal title={t('Incorrect Staked Token Address')}/>)
+    const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('Reward amount cannot be less than 0')}/>)
+    const [onPresentMinMiningStartTime] = useModal(<ResultModal title={t('Mining start time cannot be less than current time')}/>)
+    const [onPresentMaxMiningStartTime] = useModal(<ResultModal title={t('Mining start time must be within 30 days')}/>)
+    const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('Mining duration must be no less than 1 day')}/>)
+    const [onPresentMaxMiningDurationTips] = useModal(<ResultModal title={t('Mining duration must be no more than 365 days')}/>)
+    const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All Parameters Required')}/>)
+    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Mining pool created successfully and synchronized to the list')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   
@@ -168,18 +154,14 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         }
     }, [onApprove, setRequestedApproval])  
 
-    function sleep(ms:number){
-      return new Promise((resolve)=>setTimeout(resolve,ms));
-    }
+    // function sleep(ms:number){
+    //   return new Promise((resolve)=>setTimeout(resolve,ms));
+    // }
 
     const { onCreateMine } = useCreateMine(tokenMineFactoryContract)
     const [pendingTx, setPendingTx] = useState(false)
 
     useEffect(() => {
-      // console.log("useEffect() loadingCreatedTokenMine requestedLoadingCreatedMine=" + requestedLoadingCreatedMine)
-      // console.log("customFarms=====================>")
-      // console.log(customFarms)
-
       if (requestedLoadingCreatedMine) {
         loadingCreatedTokenMine()
       }
@@ -187,16 +169,11 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
     const loadingCreatedTokenMine = useCallback(
       async () => {
-        // console.log("loadingCreatedTokenMine======矿池创建成功，正在同步链上数据...")
-
         const startTime = new BigNumber(selectedDate).dividedToIntegerBy(1000).toNumber()
         const endTime = new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toNumber()
         const customFarm = customFarms.find((customFarm) => (customFarm.name == name && customFarm.startTime == startTime && customFarm.endTime == endTime))
-        // console.log("customFarm-------")
-        // console.log(customFarm)
 
         if(customFarm?.id){
-          // console.log("=========》新矿池同步到，返回")
           setPendingTx(false)
           setRequestedLoadingCreatedMine(false)
 
@@ -208,15 +185,15 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     )
 
     const createMine = async() => {
-      console.log("stakeTokenType==" + stakeTokenType)
-      console.log('name==' + name)
-      console.log('stakeToken==' + stakeToken)
-      console.log('stakeAddress==' + stakeAddress)
-      console.log('rewardAddress==' + rewardAddress)
-      console.log('rewardAmount==' + rewardAmount)
-      console.log("rewardTokenDecimals=="+rewardTokenDecimals)
-      console.log('selectedDate==' + selectedDate)
-      console.log('duration==' + duration)
+      // console.log("stakeTokenType==" + stakeTokenType)
+      // console.log('name==' + name)
+      // console.log('stakeToken==' + stakeToken)
+      // console.log('stakeAddress==' + stakeAddress)
+      // console.log('rewardAddress==' + rewardAddress)
+      // console.log('rewardAmount==' + rewardAmount)
+      // console.log("rewardTokenDecimals=="+rewardTokenDecimals)
+      // console.log('selectedDate==' + selectedDate)
+      // console.log('duration==' + duration)
       
       let inputStakeAddress 
       if(stakeTokenType === 'lpToken') {
@@ -225,7 +202,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
       } else {
         inputStakeAddress = stakeAddress
       }     
-      console.log("inputStakeAddress="+inputStakeAddress)
+      // console.log("inputStakeAddress="+inputStakeAddress)
 
       if(!getHexAddress(inputStakeAddress)){
         onPresentStakeAddressError()
@@ -273,9 +250,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             new BigNumber(100000).times(new BigNumber(10).pow(18)).toString()
           )
           // sleep(3000)
-
           if(txHash) {
-            // console.log("----------矿池创建成功")
             setRequestedLoadingCreatedMine(true)
           } else {
             setPendingTx(false)
@@ -299,24 +274,24 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
                   <StyledWalletCard>
                       <StyleHeader>
                           <StyledIcon src = {arrowLeft} onClick={() => {history.goBack()}}/>
-                          <StyledLabel>{stakeTokenType === 'lpToken' ? t('createCustomLPMining') : t('createCustomSingleMining')}</StyledLabel>             
+                          <StyledLabel>{stakeTokenType === 'lpToken' ? t('Create Customized Mining Pool - Liquidity Mining') : t('Create Customized Mining Pool - Single Token Mining')}</StyledLabel>             
                           {/* <StyledNomalLink to={'/'}>
                               <StyledIcon src = {issue} />
                           </StyledNomalLink> */}
                       </StyleHeader>
-                      <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={t('inputPoolName')}></CustomInput>
+                      <CustomInput onChange={handleName} value={name} startAdornment={t('Pool Name')} placeholder={t('Please input the name of the mining pool')}></CustomInput>
                       {
                         stakeTokenType === 'lpToken' ?
-                          <CustomInput onClick={handleStakeToken} value={stakeToken} startAdornment={t('stakeLPToken')} placeholder={stakeToken} type={'select'} data={pairs}></CustomInput> 
+                          <CustomInput onClick={handleStakeToken} value={stakeToken} startAdornment={t('Staked liquidity token')} placeholder={stakeToken} type={'select'} data={pairs}></CustomInput> 
                           :
-                          <CustomInput onChange={handleStakeAddress} value={stakeAddress} startAdornment={t('stakeAddress')} placeholder={t('inputStakeAddress')}></CustomInput>
+                          <CustomInput onChange={handleStakeAddress} value={stakeAddress} startAdornment={t('Address of the staked token')} placeholder={t('Pleae input the address of the staked token')}></CustomInput>
                       }
-                      <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={t('rewardAddress')} placeholder={t('inputRewardAddress')}></CustomInput>
-                      <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('rewardAmount')} placeholder={'0.0'} type={'number'}></CustomInput>
+                      <CustomInput onChange={handleRewardAddress} value={rewardAddress} startAdornment={t('Address of the reward token')} placeholder={t('Please input the address of the reward token')}></CustomInput>
+                      <CustomInput onChange={handleRewardAmount} value={rewardAmount} startAdornment={t('Amount rewarded')} placeholder={'0.0'} type={'number'}></CustomInput>
 
-                      <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={t('startTime')} placeholder={t('SGT')} type={'date'}></CustomInput>
-                      <CustomInput onChange={handleDuration} value={duration} startAdornment={t('miningDuration')} placeholder={'0'} type={'duration'}></CustomInput>
-                      <CustomInput onChange={null} value={'100000'} startAdornment={t('miningFee')} placeholder={'100,000'} type={'fee'}></CustomInput>
+                      <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={t('Start time')} placeholder={t('Singapore Time')} type={'date'}></CustomInput>
+                      <CustomInput onChange={handleDuration} value={duration} startAdornment={t('Mining Duration')} placeholder={'0'} type={'duration'}></CustomInput>
+                      <CustomInput onChange={null} value={'100000'} startAdornment={t('Fee For Opening New Mining Pool')} placeholder={'100,000'} type={'fee'}></CustomInput>
                       
                       {!allowance.toNumber() ? (
                           <Button
@@ -329,7 +304,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
                       ) : (
                           <Button 
                             disabled={pendingTx}
-                            text={requestedLoadingCreatedMine? t('loadingCreatedMine') : (pendingTx ? t('Pending Confirmation') : t('createMine'))}
+                            text={requestedLoadingCreatedMine? t('Mining pool created successfully and synchronizing on-chain data...') : (pendingTx ? t('Pending Confirmation') : t('Create Mining Pool'))}
                             size={'new'} 
                             variant={'green'} 
                             onClick={createMine}></Button>

@@ -29,15 +29,15 @@ const PageHeader: React.FC<PageHeaderProps> = ({ icon, subtitle, title, status, 
                 status == 0 ? 
                     (                 
                         <>
-                            <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining start counting')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
+                            <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Countdown To Mining Start')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
                         </>
                     ) : ( status == 1 ? (
                             <>
-                                <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining finish counting')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
+                                <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Countdown To Mining End')}： <StyledSpan>{time}</StyledSpan></StyledSubtitle>
                             </>
                         ) : ( status == 2 ? (
                                 <>
-                                    <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining finished')}</StyledSubtitle>
+                                    <StyledSubtitle>{t('Total')} <StyledSpan>{amount} {tokenName}</StyledSpan>; {t('Mining Already Ended')}</StyledSubtitle>
                                 </>
                             ) : ( 
                                   <>

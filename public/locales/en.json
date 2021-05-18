@@ -1,6 +1,8 @@
 {
   "estimateMiningEfficient": "Overall Farm Rate",
   "stakeSubtitle": "Stake {{tokenSymbol}}-{{new}} liquidity token and get {{token}} reward.",
+  "stakeSingleSubtitle": "Stake {{tokenSymbol}} token and get {{token}} reward.",
+
   "newPerBlock": "Overall Farm Rate: {{new}}NEW/block",
   "addRemoveLPTips": "*Add/remove LP tokens will harvest your current reward for you at the same time.",
   "unMingClose": "Stay tuned on the upcoming Phase {{Number}}",
@@ -30,6 +32,9 @@
   "xNSTTips": "You will earn a portion of the swaps fees based on the amount of xNST held relative the weight of the staking. xNST can be minted by staking NST. To redeem NST staked plus swap fees convert xNST back to NST.",
   "xNSPTips": "You will earn a portion of the swaps fees based on the amount of xNSP held relative the weight of the staking. xNSP can be minted by staking NSP. To redeem NSP staked plus swap fees convert xNSP back to NSP.",
   "welcomeNSPBar": "Welcome to the NSP Bar, stake NSP to earn NSP.",
+
+  "customMiningTips": "Participate the customized mining created by newton community and stake the corresponding token to the mining pool and win the reward tokens.",
+  "tokenEarned": "{{token}} Earned",
 
   "nstPerBlock": "预计挖矿效率: {{nst}}NST/区块",
   "nstMiningFee": "*每次增加流动性将会收取0.1%的挖矿手续费",

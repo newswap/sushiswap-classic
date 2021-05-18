@@ -94,7 +94,7 @@ const CommunityProviderModel: React.FC<ModalProps> = ({ onDismiss }) => {
         if (name!=''&&address!=''&&farmAmount!=''&&duration!=''&&fee!=''&&selectedToken!='') {
             /// Submit data
         } else {
-            alert('All field required')
+            alert('All Parameters Required')
         }
 
     }

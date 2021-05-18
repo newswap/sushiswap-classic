@@ -87,7 +87,6 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
     const [tabValue, setTabValue] = React.useState(0);
     const handleChange = (event: any, newTabValue: any) => {
         setTabValue(newTabValue);
-        // console.log('new TabValue is: ' + newTabValue )
     };
 
     const [customFarms] = useCustomFarms()
@@ -135,7 +134,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                     ) : (
                         <CreateFarmDiv>
                             <StyledNomalLink  to={stakeTokenType === 'lpToken' ? '/customCreateLPMining' : '/customCreateSingleMining'} >
-                                {t('createCustomMining') + ' >'}
+                                {t('Create Customized Mining Pool') + ' >'}
                             </StyledNomalLink>
                         </CreateFarmDiv>
                     )
@@ -144,7 +143,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
             <Table className={classes.table} aria-label="simple table">
             <TableBody>
                 {   rows[tabValue].length === 0 ? (     
-                        <TitleDiv>{t('None Mining')}</TitleDiv>
+                        <TitleDiv>{t('No Mining Pool Temporarily')}</TitleDiv>
                     ) :
                     (rows[tabValue].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
                             // let address = farm.tokenAddress
@@ -162,7 +161,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                                                             stakeTokenType === 'lpToken' ?
                                                                 ((farm.token0Symbol==='WNEW' ? 'NEW' : farm.token0Symbol) + '-' + (farm.token1Symbol==='WNEW' ? 'NEW' : farm.token1Symbol)) :
                                                                 farm.stakingTokenSymbol
-                                                            }</StyledSpan>, {t('Earn')}<StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
+                                                            }</StyledSpan>, {t('Earn')} <StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
                                                     </DetailDiv>
                                 
                                                 </TopLeftDiv>

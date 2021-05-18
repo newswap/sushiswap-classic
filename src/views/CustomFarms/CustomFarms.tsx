@@ -35,10 +35,10 @@ const CustomFarms: React.FC<CustomFarmsProps> = ({stakeTokenType}) => {
                         <Route exact path={path}>
                             <PageHeader
                                 icon={<img src={coin} height="95" />}
-                                title={stakeTokenType === 'lpToken' ? t('customLPMining') : t('customTokenMining')}
-                                subtitle={t('customLPMiningTips')}
+                                title={stakeTokenType === 'lpToken' ? t('Customized Mining - Liquidity Mining') : t('Customized Mining - Single Token Mining')}
+                                subtitle={t('customMiningTips')}
                                 to={stakeTokenType === 'lpToken' ? '/customCreateLPMining' : '/customCreateSingleMining'}
-                                toTitle={t('createCustomMining')}
+                                toTitle={t('Create Customized Mining Pool')}
                             />
                         
                             <Spacer size="lg" />

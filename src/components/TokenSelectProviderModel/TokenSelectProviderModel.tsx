@@ -117,18 +117,18 @@ const TokenSelectProviderModel: React.FC<TokenSelectProps> = ({ onDismiss, token
     return (
         <Modal>
             <div>
-                <ModalTitle text={t('selectLPToken')} />
+                <ModalTitle text={t('Please choose a liquidity token')} />
                 <StyledLabel>
                     <Button text={t('Cancel')} variant="normal" size="normal" onClick={onDismiss} />
                 </StyledLabel>
             </div>
             <StyledWalletCard>
                 <StyledInputDiv>
-                    <StyledInput onChange={handleKeyword} placeholder={t('searchLPToken')}></StyledInput>
+                    <StyledInput onChange={handleKeyword} placeholder={t('Search for liquidity token name')}></StyledInput>
                 </StyledInputDiv>
                 <StyledTableContainer> 
                     <StyledTableHeader>
-                        {t('LP Token Name')}
+                        {t('Liquidity Token Name')}
                     </StyledTableHeader>
                     <Line />
 

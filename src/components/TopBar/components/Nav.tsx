@@ -37,13 +37,13 @@ const Nav: React.FC = () => {
         { t('Community Mining') }
       </StyledLink>
       <StyledCustomDiv>
-        { t('Custom Mining')}
+        { t('Customized Mining')}
         <StyledDropDown id="dropdownContent">
           <StyledLink exact activeClassName="active" to="/customLPMining">
-            { t('LP Mining')}
+            { t('Liquidity Mining')}
           </StyledLink>
           <StyledLink exact activeClassName="active" to="/customSingleMining">
-            { t('Token Mining')}
+            { t('Single Token Mining')}
           </StyledLink>
         </StyledDropDown>
       </StyledCustomDiv>
