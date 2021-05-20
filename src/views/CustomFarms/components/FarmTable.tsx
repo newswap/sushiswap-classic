@@ -165,16 +165,24 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                                                     </DetailDiv>
                                 
                                                 </TopLeftDiv>
-                                                <TopRightDiv>
-                                                    <AwardDiv>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</AwardDiv>
-                                                    <AwardTip>{t('Total Rewards')}</AwardTip>
-                                                </TopRightDiv>
+                                                {
+                                                    isMobile ? (
+                                                        <></>
+                                                    ) : (
+                                                        <TopRightDiv>
+                                                            <AwardDiv>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</AwardDiv>
+                                                            <AwardTip>{t('Total Rewards')}</AwardTip>
+                                                        </TopRightDiv>  
+                                                    )
+                                                }                               
                                             </TopDiv>
                                             <Line></Line>
                                             <BottomDiv>
                                                 { isMobile ? 
                                                     (
                                                         <TimeDiv>
+                                                            <StakeTitle>{t('Total Rewards')}</StakeTitle>
+                                                            <StakeValue>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</StakeValue>
                                                             <TimeTitle>{t('Stake Time')}</TimeTitle>
                                                             <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
                                                             {/* <StakeTitle>{t('Total Stake Value')}</StakeTitle>
@@ -304,7 +312,7 @@ const CreateFarmDiv = styled.button`
 `
 
 const CardDiv = isMobile ? styled.div`
-    height: 160px;
+    height: 190px;
     width: 100%;
     border-radius: 24px;
     background: white;
@@ -398,7 +406,7 @@ const Line = styled.div`
 const BottomDiv = styled.div`
     background: clear;
     width: 100%;
-    height: 64px;
+    height: 94px;
 `
 
 const TimeDiv = styled.div`
@@ -441,12 +449,16 @@ const StakeTitle = styled.div`
 `
 const StakeValue = styled.div`
     font-size: 14px;
-    color: #647684;
+    color: #20C5A0;
     font-weight: 700;
 `
 
-
-const EnterDiv = styled.div`
+const EnterDiv = isMobile ? styled.div`
+    background: clear;
+    height: 100%;
+    float: right;
+    margin-top: -85px;
+` : styled.div`
     background: clear;
     height: 100%;
     float: right;

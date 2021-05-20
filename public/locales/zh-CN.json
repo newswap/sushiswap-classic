@@ -115,7 +115,7 @@
   "Address of the staked token": "质押通证的地址",
   "Please input the address of the reward token": "请输入奖励通证地址",
   "Pleae input the address of the staked token": "请输入质押通证地址",
-  "Fee For Opening New Mining Pool": "开矿手续费",
+  "Fee For New Mining Pool": "开矿手续费",
   "Please choose a liquidity token": "请选择一个流动性通证",
   "Search for liquidity token name": "搜索流动性通证名称",
   "Liquidity Token Name": "流动性通证名称",

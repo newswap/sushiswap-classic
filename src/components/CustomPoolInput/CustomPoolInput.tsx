@@ -13,6 +13,9 @@ import useModal from '../../hooks/useModal'
 import TokenSelectProviderModel from '../../components/TokenSelectProviderModel'
 import ResultModal from '../../components/ResultModal'
 import { useTranslation } from 'react-i18next'
+import moment from 'moment'
+import 'moment/locale/en-gb'
+import 'moment/locale/zh-cn'
 
 export interface CustomInputProps {
     onChange?: (e: React.FormEvent<HTMLInputElement>) => void,
@@ -32,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-
 const CustomPoolInput: React.FC<CustomInputProps> = ({
     onChange,
     placeholder,
@@ -45,7 +47,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
     date,
     data
 }) => {
-    const { t } = useTranslation()
+    const { t, i18n} = useTranslation()
 
     let inputProps = {
         placeholder: placeholder,
@@ -96,6 +98,7 @@ const CustomPoolInput: React.FC<CustomInputProps> = ({
                     (
                         <>
                         <Datetime 
+                            locale={i18n.language == "en" ? 'en-gb' : 'zh-cn'}
                             inputProps={inputProps} 
                             closeOnClickOutside={true} 
                             onChange={onDateSelected} 

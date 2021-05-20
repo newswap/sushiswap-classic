@@ -35,8 +35,6 @@ interface CustomCreateFarmProps {
 }
 
 const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => {
-    // var moment = require('moment');
-    // require('moment/locale/fr');
 
     const { t } = useTranslation()
     const history = useHistory();
@@ -291,7 +289,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
                       <CustomInput onDateSelected={handleDateChange} value={selectedDate} startAdornment={t('Start time')} placeholder={t('Singapore Time')} type={'date'}></CustomInput>
                       <CustomInput onChange={handleDuration} value={duration} startAdornment={t('Mining Duration')} placeholder={'0'} type={'duration'}></CustomInput>
-                      <CustomInput onChange={null} value={'100000'} startAdornment={t('Fee For Opening New Mining Pool')} placeholder={'100,000'} type={'fee'}></CustomInput>
+                      <CustomInput onChange={null} value={'100000'} startAdornment={t('Fee For New Mining Pool')} placeholder={'100,000'} type={'fee'}></CustomInput>
                       
                       {!allowance.toNumber() ? (
                           <Button
