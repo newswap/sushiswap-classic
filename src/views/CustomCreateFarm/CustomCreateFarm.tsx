@@ -129,7 +129,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [onPresentMiningDurationTips] = useModal(<ResultModal title={t('Mining duration must be no less than 1 day')}/>)
     const [onPresentMaxMiningDurationTips] = useModal(<ResultModal title={t('Mining duration must be no more than 365 days')}/>)
     const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All Parameters Required')}/>)
-    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Mining pool created successfully and synchronized to the list')}/>)
+    const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Created successfully and synchronized to the list')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   
@@ -302,7 +302,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
                       ) : (
                           <Button 
                             disabled={pendingTx}
-                            text={requestedLoadingCreatedMine? t('Mining pool created successfully and synchronizing on-chain data...') : (pendingTx ? t('Pending Confirmation') : t('Create Mining Pool'))}
+                            text={requestedLoadingCreatedMine? t('Created successfully and synchronizing on-chain data...') : (pendingTx ? t('Pending Confirmation') : t('Create Mining Pool'))}
                             size={'new'} 
                             variant={'green'} 
                             onClick={createMine}></Button>

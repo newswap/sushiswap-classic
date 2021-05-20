@@ -126,7 +126,7 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                 <AntTabs value={tabValue} onChange={handleChange} aria-label="ant example">
                     <Tab className = {classes.root} label={t('Live')} />
                     <Tab className = {classes.root} label={t('Upcoming')} />
-                    <Tab className = {classes.root} label={t('Finished')} />
+                    <Tab className = {classes.root} label={t('Ended')} />
                 </AntTabs>
                 {
                     isMobile ? (
@@ -407,6 +407,7 @@ const BottomDiv = styled.div`
     background: clear;
     width: 100%;
     height: 94px;
+    position: relative;
 `
 
 const TimeDiv = styled.div`
@@ -455,9 +456,10 @@ const StakeValue = styled.div`
 
 const EnterDiv = isMobile ? styled.div`
     background: clear;
-    height: 100%;
-    float: right;
-    margin-top: -85px;
+    height: 100%; 
+    position: absolute;
+    top: 16px;
+    right: 0;
 ` : styled.div`
     background: clear;
     height: 100%;
