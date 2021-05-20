@@ -555,6 +555,142 @@ export const nodeSupportedPools = [
   //   iconL: '',
   //   iconR: newcoin
   // }
+  // { // MTC-NEW
+  //   pid: 23,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xcca573275eab37e320c1fcab79e85c829c29ebba',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0xC68Cd1e7ac55De78859d0d25DC0E9344b0682e71',   
+  //   },
+  //   name: 'MTC Party!',
+  //   symbol: 'MTC-NEW LP',
+  //   tokenSymbol: 'MTC',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // CST-NEW
+  //   pid: 24,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xccf438a14b8c9c7affb731e8f4cd4022b81d11c6',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x024fa3CD02d0Cbf674F0D83eC1FBd066570a4629',   
+  //   },
+  //   name: 'CST Party!',
+  //   symbol: 'CST-NEW LP',
+  //   tokenSymbol: 'CST',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // BNN-NEW
+  //   pid: 25,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x17e847cd20f7147fa230bab82d6672320f096fdf',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x787771644bFCDf0001CeafC35d2b0233B42FBe0F',   
+  //   },
+  //   name: 'BNN Party!',
+  //   symbol: 'BNN-NEW LP',
+  //   tokenSymbol: 'BNN',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // MARS-NEW
+  //   pid: 26,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x05ba041186b25607ef1ac2d3943d2a5d749f3256',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0xB313BdEcf6fEcC64Cca0CBA49FCC0800a2D376d0',   
+  //   },
+  //   name: 'MARS Party!',
+  //   symbol: 'MARS-NEW LP',
+  //   tokenSymbol: 'MARS',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // QWCII-NEW
+  //   pid: 27,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x5c7205a2391d1a6edcaa3b5f2af4fc30a1a57882',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x93C615773C642e139cEbF5Df3a13BAd7470D634e',   
+  //   },
+  //   name: 'QWCII Party!',
+  //   symbol: 'QWCII-NEW LP',
+  //   tokenSymbol: 'QWCII',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // XYC-NEW
+  //   pid: 28,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x9cef566e9a43a6636e8460effc4f584398bb99f6',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x8d18101AA8489fbA202afd25EF3A6C98c391B23a',   
+  //   },
+  //   name: 'XYC Party!',
+  //   symbol: 'XYC-NEW LP',
+  //   tokenSymbol: 'XYC',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // FREE-NEW
+  //   pid: 29,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0xde9269b27e8e002d0ece639a6c973453604b0133',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x5A51F333725F91cB68Dc682BAB1c7dB99ad8A028',   
+  //   },
+  //   name: 'FREE Party!',
+  //   symbol: 'FREE-NEW LP',
+  //   tokenSymbol: 'FREE',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // NSB-NEW
+  //   pid: 30,
+  //   lpAddresses: {
+  //     1007: '',
+  //     1012: '0x9c4c758c8eacd97a893842d561cc43b2cfc9668a',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '', 
+  //     1012: '0x23262131c5EE341470df6A2D037d0Cd78A49A43a',   
+  //   },
+  //   name: 'NSB Party!',
+  //   symbol: 'NSB-NEW LP',
+  //   tokenSymbol: 'NSB',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // }
 
   // { // ?-NEW
   //   pid: ?,
@@ -573,7 +709,6 @@ export const nodeSupportedPools = [
   //   iconL: '',
   //   iconR: newcoin
   // }
-
   // ==================测试网
   { // DLD-NEW
     pid: 0,
@@ -609,4 +744,5 @@ export const nodeSupportedPools = [
     iconL: '',
     iconR: newcoin
   },
+
 ]

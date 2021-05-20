@@ -18,6 +18,7 @@ import { useTranslation } from 'react-i18next'
 
 const NEW_PER_BLOCK: number = parseInt(process.env.REACT_APP_NEW_PER_BLOCK_NODE ?? '1')
 const BLOCKS_PER_YEAR = new BigNumber(10512000)
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
 
 // const PendingRewards: React.FC = () => {
 //   const [start, setStart] = useState(0)
@@ -92,13 +93,12 @@ const Balances: React.FC = () => {
     // console.log(staked.tokenPriceInWeth.toNumber())
   }
 
-  //第二期结束时间 2021/04/12 12:00
-  // const endTime = 1618200000000  
-  const endTime = 16182000000000  
-
+  //第四期结束时间 2021/06/13 12:00
+  const endTime = 1623556800000  
+  
   return (
     <StyledWrapper>
-      { new Date().getTime() < endTime ? (
+      { CHAIN_ID===1007 || new Date().getTime() < endTime ? (
           <Card>
             <CardContent>
               <Label text={t('APY(Estimated)')} />
@@ -128,11 +128,11 @@ const Balances: React.FC = () => {
           <Card>
             <CardContent>
               <StyledCloseDiv>
-                {t('unMingClose', {Number:3} )}
+                {t('unMingClose', {Number:5} )}
               </StyledCloseDiv>
             </CardContent>
             <Footnote>
-              {t('unMingCloseTips', {Number:2} )}
+              {t('unMingCloseTips', {Number:4} )}
             </Footnote>
           </Card>
         )

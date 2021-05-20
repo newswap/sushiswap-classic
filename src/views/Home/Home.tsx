@@ -117,14 +117,14 @@ const Home: React.FC = () => {
             />
             <StyledTotalBaseDiv>
               <StyledTotalDiv>
-                { new Date().getTime() < endTime ? 
+                { CHAIN_ID===1007 || new Date().getTime() < endTime ? 
                      `${t('Total Stake Value')}: 
                         ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
                       : t('unMingClose', {Number:4} )
                 }
               </StyledTotalDiv>
               <StyledSpeedDiv>
-                { new Date().getTime() < endTime ? 
+                { CHAIN_ID===1007 || new Date().getTime() < endTime ? 
                       `${t('APY(Estimated)')}:
                           ${newAmount.toNumber() > 0 ? 
                               BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`

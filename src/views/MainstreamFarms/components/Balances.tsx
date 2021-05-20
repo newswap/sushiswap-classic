@@ -58,6 +58,8 @@ import { useTranslation } from 'react-i18next'
 //   )
 // }
 
+const CHAIN_ID: number = parseInt(process.env.REACT_APP_CHAIN_ID ?? '1012')
+
 const Balances: React.FC = () => {
   const { account, balance } = useWallet()
   const { t } = useTranslation()
@@ -98,7 +100,7 @@ const Balances: React.FC = () => {
 
   return (
     <StyledWrapper>
-      { new Date().getTime() < endTime ? (
+      { CHAIN_ID===1007 || new Date().getTime() < endTime ? (
           <Card>
             <CardContent>
               <Label text={t('Your Stake Value')} />
@@ -126,11 +128,11 @@ const Balances: React.FC = () => {
           <Card>
             <CardContent>
               <StyledCloseDiv>
-                {t('unMingClose')}
+                {t('unMingClose', {Number:4})}
               </StyledCloseDiv>
             </CardContent>
             <Footnote>
-              {t('unMingCloseTips')}
+              {t('unMingCloseTips', {Number:3})}
             </Footnote>
           </Card>
         )
