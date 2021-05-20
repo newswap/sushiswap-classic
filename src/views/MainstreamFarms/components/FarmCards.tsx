@@ -79,9 +79,10 @@ const FarmCards: React.FC = () => {
           </StyledRow>
         ))
       ) : (
-        <StyledLoadingWrapper>
-          <Loader text={t('Cooking the rice ...')} />
-        </StyledLoadingWrapper>
+        <></>
+        // <StyledLoadingWrapper>
+        //   <Loader text={t('Cooking the rice ...')} />
+        // </StyledLoadingWrapper>
       )}
     </StyledCards>
     </Container>
@@ -95,8 +96,8 @@ interface FarmCardProps {
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, setStartTime] = useState(0)
   const { t } = useTranslation()
-  const earnings = useNewEarningsSingle(farm.miningContract)
-  const { wethAmount, totalWethValue, reserveUSD  } = farm
+  // const earnings = useNewEarningsSingle(farm.miningContract)
+  // const { wethAmount, totalWethValue, reserveUSD  } = farm
   const sushi = useSushi()
 
   const renderer = (countdownProps: CountdownRenderProps) => {

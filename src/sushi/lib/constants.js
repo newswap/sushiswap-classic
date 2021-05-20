@@ -111,54 +111,54 @@ export const supportedPools = [
 ]
 
 export const mainstreamSupportedPools = [
-  { // NUSDT-NEW
-    miningAddresses: {
-      1007: '0xa6f3fb1557a5053af53d4b7febddafc8f03e6cbb',  //小写
-      1012: '0x8b028f0f001417e3b9c086c5740722839dab12b0'
-    },
-    lpAddresses: {
-      1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
-      1012: '',
-    },
-    tokenAddresses: {
-      1007: '0xC01A73fBF1c1953D18b48518259b36D70b07F277', // 区分大小写，否则无法获得图片
-      1012: '', 
-    },
-    newPerBlocks: {
-      1007: '1', 
-      1012: '49.603174', 
-    },
-    name: 'NUSDT Party!',
-    symbol: 'NUSDT-NEW LP',
-    tokenSymbol: 'NUSDT',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
-  { // NETH-NEW
-    miningAddresses: {
-      1007: '0x58718951f6804ce11e7a249d7ebec27125ca90b7',  //小写
-      1012: ''
-    },
-    lpAddresses: {
-      1007: '0x087b650f59a003b55fa36941365bd31c9a195c66',
-      1012: '',
-    },
-    tokenAddresses: {
-      1007: '0x56963f254186464b0be5003486d5501FC13e07D4', // 区分大小写，否则无法获得图片
-      1012: '', 
-    },
-    newPerBlocks: {
-      1007: '2', 
-      1012: '', 
-    },
-    name: 'NETH Party!',
-    symbol: 'NETH-NEW LP',
-    tokenSymbol: 'NETH',
-    icon: '',
-    iconL: '',
-    iconR: newcoin
-  },
+  // { // NUSDT-NEW
+  //   miningAddresses: {
+  //     1007: '0xa6f3fb1557a5053af53d4b7febddafc8f03e6cbb',  //小写
+  //     1012: '0x8b028f0f001417e3b9c086c5740722839dab12b0'
+  //   },
+  //   lpAddresses: {
+  //     1007: '0xf8a2db7aecac5968a68677f7b1aef2dd20a03ffb',
+  //     1012: '',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0xC01A73fBF1c1953D18b48518259b36D70b07F277', // 区分大小写，否则无法获得图片
+  //     1012: '', 
+  //   },
+  //   newPerBlocks: {
+  //     1007: '1', 
+  //     1012: '49.603174', 
+  //   },
+  //   name: 'NUSDT Party!',
+  //   symbol: 'NUSDT-NEW LP',
+  //   tokenSymbol: 'NUSDT',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
+  // { // NETH-NEW
+  //   miningAddresses: {
+  //     1007: '0x58718951f6804ce11e7a249d7ebec27125ca90b7',  //小写
+  //     1012: ''
+  //   },
+  //   lpAddresses: {
+  //     1007: '0x087b650f59a003b55fa36941365bd31c9a195c66',
+  //     1012: '',
+  //   },
+  //   tokenAddresses: {
+  //     1007: '0x56963f254186464b0be5003486d5501FC13e07D4', // 区分大小写，否则无法获得图片
+  //     1012: '', 
+  //   },
+  //   newPerBlocks: {
+  //     1007: '2', 
+  //     1012: '', 
+  //   },
+  //   name: 'NETH Party!',
+  //   symbol: 'NETH-NEW LP',
+  //   tokenSymbol: 'NETH',
+  //   icon: '',
+  //   iconL: '',
+  //   iconR: newcoin
+  // },
 ]
 
 // // community mining supported Polls

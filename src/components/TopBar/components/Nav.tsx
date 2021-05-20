@@ -27,9 +27,12 @@ const Nav: React.FC = () => {
       >
         { t('Exchange') }
       </StyledAbsoluteLink>
-      <StyledLink exact activeClassName="active" to="/mainstreamMining">
-        { t('Mining') }
+      <StyledLink exact activeClassName="active" to="/nusdtMining">
+        { t('NUSDT Mining') }
       </StyledLink>
+      {/* <StyledLink exact activeClassName="active" to="/mainstreamMining">
+        { t('Mining') }
+      </StyledLink> */}
       {/* <StyledLink exact activeClassName="active" to="/tradeMining">
         { t('Trade Mining') }
       </StyledLink> */}
