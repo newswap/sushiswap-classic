@@ -589,6 +589,18 @@ export const getTokenEarned = async (tokenMineContract, account) => {
   return tokenMineContract.methods.pendingRewardsToken(account).call()
 }
 
+export const getRewardAmount = async (tokenMineContract) => {
+  return tokenMineContract.methods.rewardAmount().call()
+}
+
+export const getRewardsTokenSupply = async (tokenMineContract) => {
+  return tokenMineContract.methods.rewardsTokenSupply().call()
+}
+
+export const getRemainingRewards = async (tokenMineContract) => {
+  return tokenMineContract.methods.getRemainingRewards().call()
+}
+
 export const harvestRewardToken = async (tokenMineContract, account) => {
   return tokenMineContract.methods
     .deposit('0')
@@ -602,7 +614,6 @@ export const harvestRewardToken = async (tokenMineContract, account) => {
 export const createMine = async (tokenMineFactoryContract, name, stakingToken, rewardsToken, 
   startTime, endTime, rewardAmount, isStakingLPToken, fee, account) => {
   
-  console.log('rewardAmount==========>'+rewardAmount)
   return tokenMineFactoryContract.methods
     .deploy(
       name,

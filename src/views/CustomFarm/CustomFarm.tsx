@@ -15,6 +15,7 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import useCustomFarm from '../../hooks/useCustomFarm'
 import useModal from '../../hooks/useModal'
+import useRemainingRewards from '../../hooks/useRemainingRewards'
 import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
 import useTotalSupply from '../../hooks/useTotalSupply'
 import useNewPrice from '../../hooks/useNewPrice'
@@ -85,6 +86,10 @@ const CustomFarm: React.FC = () => {
       return null    
   }, [ethereum, id])
 
+
+  const remainingRewards = useRemainingRewards(miningContract)
+  // console.log("remainingRewards：" + getBalanceNumber(new BigNumber(remainingRewards), rewardsTokenDecimals))
+
   const stakingTokenContract = useMemo(() => {
     if(ethereum && stakingToken)
       return getContract(ethereum as provider, stakingToken)
@@ -127,7 +132,7 @@ const CustomFarm: React.FC = () => {
       const hours = parseInt((countdown-days*86400)/3600 + '')
       const minutes = parseInt((countdown-days*86400-hours*3600)/60 + '')
       const seconds = countdown-days*86400-hours*3600-minutes*60
-      setCountTime(days + t(' D ') + hours + t(' H ') + minutes + t(' M ') + seconds + t(' S '))
+      setCountTime(days + t(' D ') + hours + t(' H ') + minutes + t(' m ') + seconds + t(' s '))
     }, 1000)
 
     return () => clearInterval(interval)

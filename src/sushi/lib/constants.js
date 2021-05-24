@@ -50,7 +50,7 @@ export const contractAddresses = {
     1012: '0xd1d4105c4dfa8f76b10fd99645f9cad73afc548b'
   },
   tokenMineFactory: { // 自定义挖矿工厂
-    1007: '0xefbf89275c87b918fb728163e756fe8043185105',  //小写
+    1007: '0x88e7cc45e594e2efd93dbc65e5859dceb6079795',  //小写
     1012: ''
   },
 
