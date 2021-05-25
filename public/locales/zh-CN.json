@@ -14,7 +14,8 @@
   "NEW Earned": "待领取的NEW",
   "Collecting ": "正在领取",
   "Collecting NEW": "正在领取奖励",
-  "Harvest": "领取奖励",
+  "Harvest Rewards": "领取奖励",
+  "Harvest": "领取",
   "Tokens Staked": "已质押通证",
   "Approve": "授权",
   "Withdraw": "解锁",
@@ -130,6 +131,7 @@
   "Created successfully and synchronizing on-chain data...": "创建成功，正在同步链上数据...",
   "customMiningTips": "参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。",
   "tokenEarned": "待领取的{{token}}",
+  "Mining Remaining Rewards": "挖矿奖励剩余",
 
   "Cooking the rice ...": "Cooking the rice ...",
   "Menu": "菜单",

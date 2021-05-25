@@ -12,13 +12,14 @@ import Page from '../../components/Page'
 import NewPageHeader from '../../components/NewPageHeader'
 import Spacer from '../../components/Spacer'
 import WalletProviderModal from '../../components/WalletProviderModal'
-import { getBalanceNumber } from '../../utils/formatBalance'
+import { getBalanceNumber, getDisplayBalance } from '../../utils/formatBalance'
 import useCustomFarm from '../../hooks/useCustomFarm'
 import useModal from '../../hooks/useModal'
 import useRemainingRewards from '../../hooks/useRemainingRewards'
 import useTokenBalanceOf from '../../hooks/useTokenBalanceOf'
 import useTotalSupply from '../../hooks/useTotalSupply'
 import useNewPrice from '../../hooks/useNewPrice'
+import useOwnerWithdrawAfterEnd from '../../hooks/useOwnerWithdrawAfterEnd'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 import { useTranslation } from 'react-i18next'
@@ -89,6 +90,7 @@ const CustomFarm: React.FC = () => {
 
   const remainingRewards = useRemainingRewards(miningContract)
   // console.log("remainingRewards：" + getBalanceNumber(new BigNumber(remainingRewards), rewardsTokenDecimals))
+  const { onOwnerWithdraw } = useOwnerWithdrawAfterEnd(miningContract)
 
   const stakingTokenContract = useMemo(() => {
     if(ethereum && stakingToken)
@@ -163,7 +165,24 @@ const CustomFarm: React.FC = () => {
                 time = {countTime}
             />
 
-            {/* <StyledSubtitle>挖矿奖励剩余 <StyledSpan>{amount} {tokenName}</StyledSpan></StyledSubtitle> */}
+            {
+              account?.toLowerCase()===owner?.toLowerCase() && status === 2 && getBalanceNumber(new BigNumber(remainingRewards), rewardsTokenDecimals) > 0.01 ?
+                <StyledSubtitle>{t('Mining Remaining Rewards')} <StyledSpan>{getDisplayBalance(new BigNumber(remainingRewards), rewardsTokenDecimals)} {rewardsTokenSymbol}</StyledSpan> 
+                  <Button
+                    size = 'new'
+                    variant = 'green'                  
+                    // disabled={!earnings.toNumber() || pendingTx}
+                    // text={pendingTx ? t('Collecting ') : t('Harvest')}
+                    text={t('Harvest')}
+                    onClick={async () => {
+                      // setPendingTx(true)
+                      await onOwnerWithdraw()
+                      // setPendingTx(false)
+                    }}
+                  />
+                </StyledSubtitle> :
+                <></>
+            }
 
             <StyledFarm>
               <StyledCardsWrapper>
@@ -349,5 +368,25 @@ const StyleLabel = styled.div`
   color: #607686;
   font-size: 20px;
 `
+
+const StyledSubtitle = styled.h3`
+  font-family: 'PingFang SC Regular', sans-serif;
+  // color: ${(props) => props.theme.color.grey[400]};
+  color: #607686;
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: -25px;
+  padding-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px
+  text-align: center;
+`
+
+const StyledSpan = styled.span`
+    color: #20C5A0;
+`
+
+
 
 export default CustomFarm

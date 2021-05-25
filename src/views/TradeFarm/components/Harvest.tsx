@@ -48,7 +48,7 @@ const Harvest: React.FC<HarvestProps> = ({icon} ) => {
               size = 'new'
               variant = 'green'
               disabled={(new BigNumber(merkleNode.amount).minus(claimedAmount)).toNumber() <= 0 || pendingTx}
-              text={pendingTx ? t('Collecting NEW') : t('Harvest')}
+              text={pendingTx ? t('Collecting NEW') : t('Harvest Rewards')}
               onClick={async () => {
                 setPendingTx(true)
                 await onClaim(merkleNode.index, merkleNode.account, merkleNode.amount, merkleNode.proof)

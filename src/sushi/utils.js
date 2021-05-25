@@ -597,8 +597,22 @@ export const getRewardsTokenSupply = async (tokenMineContract) => {
   return tokenMineContract.methods.rewardsTokenSupply().call()
 }
 
+export const isOwnerWithdrawAfterEnd = async (tokenMineContract) => {
+  return tokenMineContract.methods.isOwnerWithdrawAfterEnd().call()
+}
+
 export const getRemainingRewards = async (tokenMineContract) => {
   return tokenMineContract.methods.getRemainingRewards().call()
+}
+
+export const ownerWithdrawAfterEnd = async (tokenMineContract, account) => {
+  return tokenMineContract.methods
+    .ownerWithdrawAfterEnd()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
 }
 
 export const harvestRewardToken = async (tokenMineContract, account) => {

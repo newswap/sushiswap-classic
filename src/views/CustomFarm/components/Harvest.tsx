@@ -42,7 +42,7 @@ const Harvest: React.FC<HarvestProps> = ({miningContract, rewardsToken, tokenNam
               size = 'new'
               variant = 'green'
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? t('Collecting ') + tokenName : t('Harvest')}
+              text={pendingTx ? t('Collecting ') + tokenName : t('Harvest Rewards')}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()
