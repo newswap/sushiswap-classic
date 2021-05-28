@@ -19,7 +19,7 @@ import { getBalanceNumber } from '../../../utils/formatBalance'
 
 import { CustomFarm } from '../../../contexts/CustomFarms'
 import useCustomFarms from '../../../hooks/useCustomFarms'
-
+import useAllStakedUSDValueForCustom from '../../../hooks/useAllStakedUSDValueForCustom'
 import { NodeFarm } from '../../../contexts/NodeFarms'
 import { Link } from 'react-router-dom'
 import {isMobile} from 'react-device-detect'
@@ -65,7 +65,7 @@ const useStyles = makeStyles({
 });
 
 interface FarmWithStakedValue extends CustomFarm {
-    // reserveUSD: BigNumber,
+    reserveUSD: BigNumber,
 }
 
 const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
@@ -90,15 +90,18 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
     };
 
     const [customFarms] = useCustomFarms()
+    const stakedValue = useAllStakedUSDValueForCustom()
     // console.log("FarmTable=====================>")
     // console.log(customFarms)
+    // console.log("stakedValue=====================>")
+    // console.log(stakedValue)
 
     const currentTime = new Date().getTime()/1000
     const rows = customFarms.reduce<FarmWithStakedValue[][]>(
         (farmRows, farm, i) => {
             const farmWithStakedValue = {
                 ...farm,
-                // reserveUSD: 100,  // TODO  添加锁仓价值，见MainstreamFarms/components/FarmCards
+                reserveUSD: stakedValue[i] ? stakedValue[i].stakingTokenUSDValue : null           
             }
        
             const newFarmRows = [...farmRows]
@@ -182,11 +185,16 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                                                     (
                                                         <TimeDiv>
                                                             <StakeTitle>{t('Total Rewards')}</StakeTitle>
-                                                            <StakeValue>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</StakeValue>
+                                                            <StakeValue>{getBalanceNumber(new BigNumber(farm.rewardAmount), farm.rewardsTokenDecimals).toLocaleString('en-US')}</StakeValue>    
+                                                            <StakeTitle>{t('Total Stake Value')}</StakeTitle>
+                                                            <StakeValue>{farm.reserveUSD
+                                                                            ? `$${farm.reserveUSD
+                                                                            .toNumber()
+                                                                            .toLocaleString('en-US')}`
+                                                                            : t('Loading ...')}</StakeValue>
                                                             <TimeTitle>{t('Stake Time')}</TimeTitle>
                                                             <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
-                                                            {/* <StakeTitle>{t('Total Stake Value')}</StakeTitle>
-                                                            <StakeValue>--</StakeValue> */}
+                                                            
                                                         </TimeDiv>
                                                       ) : (
                                                         <>
@@ -194,10 +202,14 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                                                             <TimeTitle>{t('Stake Time')}</TimeTitle>
                                                             <TimeValue>{dayjs.unix(farm.startTime).format('YYYY-MM-DD HH:mm') + " - " + dayjs.unix(farm.endTime).format('YYYY-MM-DD HH:mm')}</TimeValue>
                                                         </TimeDiv>
-                                                        {/* <StakeDiv>
+                                                        <StakeDiv>
                                                             <StakeTitle>{t('Total Stake Value')}</StakeTitle>
-                                                            <StakeValue>--</StakeValue>
-                                                        </StakeDiv> */}
+                                                            <StakeValue>{farm.reserveUSD
+                                                                            ? `$${farm.reserveUSD
+                                                                            .toNumber()
+                                                                            .toLocaleString('en-US')}`
+                                                                            : t('Loading ...')}</StakeValue>
+                                                        </StakeDiv>
                                                         </>
                                                       )
                                                 }
@@ -312,7 +324,7 @@ const CreateFarmDiv = styled.button`
 `
 
 const CardDiv = isMobile ? styled.div`
-    height: 190px;
+    height: 220px;
     width: 100%;
     border-radius: 24px;
     background: white;
@@ -458,7 +470,7 @@ const EnterDiv = isMobile ? styled.div`
     background: clear;
     height: 100%; 
     position: absolute;
-    top: 16px;
+    top: 35px;
     right: 0;
 ` : styled.div`
     background: clear;

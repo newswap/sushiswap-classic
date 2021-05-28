@@ -49,3 +49,15 @@ export const ALL_PAIRS = gql`
     }
   }
 `
+
+export const ALL_TOKENS = gql`
+  query tokens($skip: Int!) {
+    tokens(first: 500, skip: $skip, orderBy: totalLiquidity, orderDirection: desc) {
+      id
+      name
+      symbol
+      derivedETH
+      totalLiquidity
+    }
+  }
+`

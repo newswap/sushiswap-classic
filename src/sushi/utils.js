@@ -6,7 +6,8 @@ import TokenMineAbi from './lib/abi/tokenmine.json'
 
 import {
   ALL_TOKEN_MINES,
-  ALL_PAIRS
+  ALL_PAIRS,
+  ALL_TOKENS
 } from '../apollo/queries'
 
 BigNumber.config({
@@ -294,6 +295,65 @@ export const getTotalLPWethValue = async (
   }
 }
 
+export const getStakingTokenUSDValue = async (
+  miningContract,
+  wethContract,
+  stakingContract,  
+  isStakingLPToken,
+  stakingTokenDecimals,
+  wethPrice,
+  account,
+  allTokens
+) => {
+  try {
+    if(isStakingLPToken) {
+      // Get the share of stakingContract that miningContract owns
+      const balance = await stakingContract.methods
+        .balanceOf(miningContract.options.address)
+        .call()
+      // Convert that into the portion of total stakingContract = p1
+      const totalSupply = await stakingContract.methods.totalSupply().call()
+      // Get total weth value for the stakingContract = w1
+      const lpContractWeth = await wethContract.methods
+        .balanceOf(stakingContract.options.address)
+        .call()
+
+      const portionLp = new BigNumber(balance).div(new BigNumber(totalSupply))
+      const totalLpWethValue = portionLp.times(new BigNumber(lpContractWeth)).times(new BigNumber(2)).div(new BigNumber(10).pow(18))
+      // const { amount } = !account ? {amount:0} : await miningContract.methods.userInfo(account).call()
+
+      return {
+        stakingTokenUSDValue : totalLpWethValue.times(wethPrice),
+        // myStakingTokenUSDValue : new BigNumber(amount).div(new BigNumber(balance)).times(totalLpWethValue).times(wethPrice)
+      }
+  
+    } else {
+      const stakingToken = allTokens.find((token) => token.id.toLowerCase() === stakingContract?.options?.address?.toLowerCase())    
+      if(!stakingToken || stakingToken.derivedETH == 0) {
+        return {
+          stakingTokenUSDValue : new BigNumber(0),
+          // myStakingTokenUSDValue : new BigNumber(0)
+        }
+      }
+
+      const stakingTokenAmount = await miningContract.methods.stakingSupply().call()
+      // const { amount } = !account ? {amount:0} : await miningContract.methods.userInfo(account).call()
+
+      return {
+        stakingTokenUSDValue: new BigNumber(stakingTokenAmount).div(new BigNumber(10).pow(stakingTokenDecimals)).times(stakingToken.derivedETH).times(wethPrice),
+        // myStakingTokenUSDValue : new BigNumber(amount).div(new BigNumber(10).pow(stakingTokenDecimals)).times(stakingToken.derivedETH).times(wethPrice)
+      }
+    }
+
+  } catch (e) {
+    console.log(e)
+    return {
+      stakingTokenUSDValue : new BigNumber(0),
+      // myStakingTokenUSDValue : new BigNumber(0)
+    }
+  }
+}
+
 export const approve = async (lpContract, spenderContract, account) => {
   return lpContract.methods
     .approve(spenderContract.options.address, ethers.constants.MaxUint256)
@@ -546,7 +606,7 @@ export const getAllTokenMines = async () => {
 }
 
 const PAIRS_TO_FETCH = 500
-// Loop through every pair on uniswap, used for search
+// Loop through every pair on newSwap, used for search
 export const getAllPairs = async () => {
   try {
     let allFound = false
@@ -575,6 +635,34 @@ export const getAllPairs = async () => {
   }
 }
 
+// Loop through every token on newSwap, used for search
+export const getAllTokens = async () => {
+  try {
+    let allFound = false
+    let tokens = []
+    let skipCount = 0
+    while (!allFound) {
+      let result = await newSwapClient.query({
+        query: ALL_TOKENS,
+        variables: {
+          skip: skipCount
+        },
+        fetchPolicy: 'cache-first'
+      })
+      skipCount = skipCount + 500
+      // console.log("getAllTokens----------->")
+      // console.log(result)
+      tokens = tokens.concat(result?.data?.tokens)
+      if (result?.data?.tokens.length < 500 || tokens.length > 500) {
+        allFound = true
+      }
+    }
+    return tokens
+  } catch (e) {
+    console.log(e)
+    return []
+  }
+}
 
 export const getTokenMineContract = (provider, address) => {
   const web3 = new Web3(provider)
