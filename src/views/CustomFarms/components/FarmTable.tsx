@@ -324,7 +324,7 @@ const CreateFarmDiv = styled.button`
 `
 
 const CardDiv = isMobile ? styled.div`
-    height: 220px;
+    height: 225px;
     width: 100%;
     border-radius: 24px;
     background: white;
