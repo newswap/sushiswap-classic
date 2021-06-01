@@ -70,8 +70,10 @@ const TokenSelectProviderModel: React.FC<TokenSelectProps> = ({ onDismiss, token
                   }
                 })
  
+                setPage(0)
                 setShowPairs(pairsFound)
             } else {
+              setPage(0)
               setShowPairs(tokenList)
             }    
         },
