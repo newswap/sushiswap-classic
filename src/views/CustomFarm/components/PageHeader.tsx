@@ -74,7 +74,7 @@ const iconStyle: React.CSSProperties = {
   width: '95px',
   height: '95px',
   textAlign: 'center',
-  borderRadius: '22.5px',
+  borderRadius: '47.5px',
 }
 
 
