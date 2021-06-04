@@ -58,8 +58,8 @@ export const getTotalSupply = async (
   provider: provider,
   tokenAddress: string,
 ): Promise<string> => {
-  const contract = getContract(provider, tokenAddress)
   try {
+    const contract = getContract(provider, tokenAddress)
     const totalSupply: string = await contract.methods
       .totalSupply()
       .call()
@@ -74,8 +74,8 @@ export const getBalance = async (
   tokenAddress: string,
   userAddress: string,
 ): Promise<string> => {
-  const lpContract = getContract(provider, tokenAddress)
   try {
+    const lpContract = getContract(provider, tokenAddress)
     const balance: string = await lpContract.methods
       .balanceOf(userAddress)
       .call()

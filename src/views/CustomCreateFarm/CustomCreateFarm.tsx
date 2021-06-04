@@ -22,6 +22,7 @@ import useERC20Symbol from '../../hooks/useERC20Symbol'
 import Container from '../../components/Container'
 import useAllPairs from '../../hooks/useAllPairs'
 import useCreateMine from '../../hooks/useCreateMine'
+import useTokenBalance from '../../hooks/useTokenBalance'
 import { getTokenMineFactoryContract} from '../../sushi/utils'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
@@ -79,6 +80,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         },
         [setRewardAddress],
     )
+    const rewardTokenBalance = useTokenBalance(rewardAddress)
 
     /// Farm Amount
     const [rewardAmount, setRewardAmount] = useState('')
@@ -130,6 +132,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const [onPresentMaxMiningDurationTips] = useModal(<ResultModal title={t('Mining duration must be no more than 365 days')}/>)
     const [onPresentAllFieldRequired] = useModal(<ResultModal title={t('All Parameters Required')}/>)
     const [onPresentCreatedSuccessTips] = useModal(<ResultModal title={t('Created successfully and synchronized to the list')}/>)
+    const [onPresentInsufficient] = useModal(<ResultModal title={rewardTokenSymbol + ' '+ t('insufficient balance')}/>)
 
     const { onApprove } = useApproveGeneral(rewardTokenContract, tokenMineFactoryContract)
   
@@ -237,6 +240,11 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
           if(parseInt(duration) > 365) {
             onPresentMaxMiningDurationTips()
             return           
+          }
+
+          if(rewardTokenBalance.div(new BigNumber(10).pow(rewardTokenDecimals)).toNumber() < parseFloat(rewardAmount)) {
+            onPresentInsufficient()
+            return
           }
 
           setPendingTx(true)
