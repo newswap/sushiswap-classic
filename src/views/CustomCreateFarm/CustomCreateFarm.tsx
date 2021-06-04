@@ -80,7 +80,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         },
         [setRewardAddress],
     )
-    const rewardTokenBalance = useTokenBalance(rewardAddress)
+    const rewardTokenBalance = useTokenBalance(getHexAddress(rewardAddress))
 
     /// Farm Amount
     const [rewardAmount, setRewardAmount] = useState('')
@@ -122,7 +122,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const rewardTokenSymbol = useERC20Symbol(rewardTokenContract)
     const rewardTokenDecimals = useERC20Decimals(rewardTokenContract)
 
-    // TODO 合并
+    // TODO 合并 用useState
     const [onPresentRewardAddressError] = useModal(<ResultModal title={t('Incorrect Reward Token Address')}/>)
     const [onPresentStakeAddressError] = useModal(<ResultModal title={t('Incorrect Staked Token Address')}/>)
     const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('Reward amount cannot be less than 0')}/>)
