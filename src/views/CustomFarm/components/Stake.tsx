@@ -105,7 +105,7 @@ const Stake: React.FC<StakeProps> = ({ stakingContract, miningContract, stakingT
               }
             </StyledDiv>
             <Spacer height={20} />
-            <Value value={getDisplayBalance(stakedBalance, stakingTokenDecimals)} />
+            <Value value={getBalanceNumber(stakedBalance, stakingTokenDecimals)} />
             <Label text={`${stakingTokenName} ` + t('Tokens Staked')} />
           </StyledCardHeader>
           <StyledCardActions>
