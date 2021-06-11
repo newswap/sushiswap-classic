@@ -156,18 +156,18 @@ const CustomFarm: React.FC = () => {
                 title={name}
                 subtitle= {
                   isStakingLPToken ?
-                    t('stakeSubtitle', {tokenSymbol: token0Symbol==='WNEW' ? 'NEW' : token0Symbol, new: token1Symbol==='WNEW' ? 'NEW' : token1Symbol, token: rewardsTokenSymbol}) :
-                    t('stakeSingleSubtitle', {tokenSymbol: stakingTokenSymbol, token: rewardsTokenSymbol})
+                    t('stakeSubtitle', {tokenSymbol: token0Symbol==='WNEW' ? 'NEW' : token0Symbol, new: token1Symbol==='WNEW' ? 'NEW' : token1Symbol, token: rewardsTokenSymbol==='WNEW' ? 'NEW' : rewardsTokenSymbol}) :
+                    t('stakeSingleSubtitle', {tokenSymbol: stakingTokenSymbol==='WNEW' ? 'NEW': stakingTokenSymbol, token: rewardsTokenSymbol==='WNEW' ? 'NEW': rewardsTokenSymbol})
                 }               
                 status = {status}
-                tokenName = {rewardsTokenSymbol}
+                tokenName = {rewardsTokenSymbol==='WNEW' ? 'NEW': rewardsTokenSymbol}
                 amount = {getBalanceNumber(new BigNumber(rewardAmount), rewardsTokenDecimals).toLocaleString('en-US')}
                 time = {countTime}
             />
 
             {
               account?.toLowerCase()===owner?.toLowerCase() && status === 2 && getBalanceNumber(new BigNumber(remainingRewards), rewardsTokenDecimals) > 0.01 ?
-                <StyledSubtitle>{t('Mining Remaining Rewards')} <StyledSpan>{getDisplayBalance(new BigNumber(remainingRewards), rewardsTokenDecimals)} {rewardsTokenSymbol}</StyledSpan> 
+                <StyledSubtitle>{t('Mining Remaining Rewards')} <StyledSpan>{getDisplayBalance(new BigNumber(remainingRewards), rewardsTokenDecimals)} {rewardsTokenSymbol==='WNEW' ? 'NEW': rewardsTokenSymbol}</StyledSpan> 
                   <Button
                     size = 'new'
                     variant = 'green'                  
@@ -190,7 +190,7 @@ const CustomFarm: React.FC = () => {
                   <Harvest 
                     miningContract={miningContract}
                     rewardsToken={rewardsToken}
-                    tokenName={rewardsTokenSymbol}
+                    tokenName={rewardsTokenSymbol==='WNEW' ? 'NEW': rewardsTokenSymbol}
                     tokenDecimals = {rewardsTokenDecimals}
                   />
                 </StyledCardWrapper>
@@ -207,7 +207,7 @@ const CustomFarm: React.FC = () => {
                     stakingTokenName={
                       isStakingLPToken ?
                         (token0Symbol==='WNEW' ? 'NEW' : token0Symbol) + '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol) :
-                        stakingTokenSymbol
+                        stakingTokenSymbol==='WNEW' ? 'NEW' : stakingTokenSymbol
                     }
                   />
                 </StyledCardWrapper>
@@ -225,7 +225,7 @@ const CustomFarm: React.FC = () => {
                   target="__blank"
                   href={EXPLORER_URL + `/token/${rewardsToken}`}  
                 >
-                  { rewardsTokenSymbol + " " + t('Address') }        
+                  { rewardsTokenSymbol === 'WNEW' ? '' : rewardsTokenSymbol + " " + t('Address') }        
                 </StyledLink>
                 <StyledLink
                   target="__blank"
@@ -233,7 +233,7 @@ const CustomFarm: React.FC = () => {
                 >
                   { isStakingLPToken ?
                       (token0Symbol==='WNEW' ? 'NEW' : token0Symbol)+ '-' + (token1Symbol==='WNEW' ? 'NEW' : token1Symbol) + ' ' + t('Info') :
-                      rewardsToken !== stakingToken ? stakingTokenSymbol + " " + t('Address') : ''
+                      rewardsToken !== stakingToken  ? stakingTokenSymbol + " " + t('Address') : ''
                   }
                 </StyledLink>
               </div>

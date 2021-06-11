@@ -56,7 +56,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
   return (
     <Modal>
       <div>
-        <ModalTitle text={t('Deposit') + ` ${tokenName}` + t('Tokens')} style={style}/>
+        <ModalTitle text={t('Deposit') + ` ${tokenName}`} style={style}/>
         {/* <StyledHelpBtn data-tip="hello world">
           <StyledImg src={help}/>
         </StyledHelpBtn>

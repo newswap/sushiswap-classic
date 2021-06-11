@@ -2,7 +2,7 @@
   "NUSDT Mining": "NUSDT挖矿",
   "estimateMiningEfficient": "全局挖矿效率",
   "stakeSubtitle": "将 {{tokenSymbol}}-{{new}} 流动性通证质押入矿池，获得 {{token}} 奖励。",
-  "stakeSingleSubtitle": "将 {{tokenSymbol}} 通证质押入矿池，获得 {{token}} 奖励。",
+  "stakeSingleSubtitle": "将 {{tokenSymbol}} 质押入矿池，获得 {{token}} 奖励。",
 
   "MINING": "矿池",
   "Unlock Wallet": "连接钱包",
@@ -16,6 +16,7 @@
   "Collecting NEW": "正在领取奖励",
   "Harvest Rewards": "领取奖励",
   "Harvest": "领取",
+  "Staked": "已质押",
   "Tokens Staked": "已质押通证",
   "Approve": "授权",
   "Withdraw": "解锁",

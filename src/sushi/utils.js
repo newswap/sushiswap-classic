@@ -746,6 +746,18 @@ export const stakeGeneral = async (mineContract, amount, tokenDecimals, account)
     })
 }
 
+export const stakeNEW = async (mineContract, amount, account) => {
+  return mineContract.methods
+    .deposit(
+      new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
+    )
+    .send({ from: account, value: new BigNumber(amount).times(new BigNumber(10).pow(18)).toString() })
+    .on('transactionHash', (tx) => {
+      // console.log(tx)
+      return tx.transactionHash
+    })
+}
+
 export const unstakeGeneral= async (mineContract, amount, tokenDecimals, account) => {
   return mineContract.methods
     .withdraw(

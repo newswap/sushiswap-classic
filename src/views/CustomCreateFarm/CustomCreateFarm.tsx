@@ -23,7 +23,7 @@ import Container from '../../components/Container'
 import useAllPairs from '../../hooks/useAllPairs'
 import useCreateMine from '../../hooks/useCreateMine'
 import useTokenBalance from '../../hooks/useTokenBalance'
-import { getTokenMineFactoryContract} from '../../sushi/utils'
+import { getTokenMineFactoryContract, getWNewAddress} from '../../sushi/utils'
 import styled from 'styled-components'
 import CustomInput from '../../components/CustomPoolInput'
 import ResultModal from '../../components/ResultModal'
@@ -39,12 +39,15 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
 
     const { t } = useTranslation()
     const history = useHistory();
+    const sushi = useSushi()
 
     const { account, ethereum } = useWallet()
     const [customFarms] = useCustomFarms()
     const pairs = useAllPairs()   // [{name: "NEW-USDT",id:**, token0:{id:**,symbol:**,name:**},token1:{...}}, {name: "MCT-CICI",...}]
 
     const [requestedLoadingCreatedMine, setRequestedLoadingCreatedMine] = useState(false)
+
+    const wnewAddress = getWNewAddress(sushi)
 
     /// Farm Name
     const [name, setName] = useState('')
@@ -108,7 +111,6 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
         [setDuration, requestedLoadingCreatedMine],
     )
 
-    const sushi = useSushi()
     const [requestedApproval, setRequestedApproval] = useState(false)
     const tokenMineFactoryContract = getTokenMineFactoryContract(sushi)
     const rewardTokenContract = useMemo(() => {
@@ -122,7 +124,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
     const rewardTokenSymbol = useERC20Symbol(rewardTokenContract)
     const rewardTokenDecimals = useERC20Decimals(rewardTokenContract)
 
-    // TODO 合并 用useState
+    // TODO 合并优化
     const [onPresentRewardAddressError] = useModal(<ResultModal title={t('Incorrect Reward Token Address')}/>)
     const [onPresentStakeAddressError] = useModal(<ResultModal title={t('Incorrect Staked Token Address')}/>)
     const [onPresentMinRewardAmount] = useModal(<ResultModal title={t('Reward amount cannot be less than 0')}/>)
@@ -242,7 +244,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             return           
           }
 
-          if(rewardTokenBalance.div(new BigNumber(10).pow(rewardTokenDecimals)).toNumber() < parseFloat(rewardAmount)) {
+          if(getHexAddress(rewardAddress) != getHexAddress(wnewAddress) && rewardTokenBalance.div(new BigNumber(10).pow(rewardTokenDecimals)).toNumber() < parseFloat(rewardAmount)) {
             onPresentInsufficient()
             return
           }
@@ -253,7 +255,8 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
             new BigNumber(selectedDate).plus(new BigNumber(duration).times(86400000)).dividedToIntegerBy(1000).toNumber(),
             new BigNumber(rewardAmount).times(new BigNumber(10).pow(rewardTokenDecimals)).toString(),
             stakeTokenType === 'lpToken' ? true : false,
-            new BigNumber(100000).times(new BigNumber(10).pow(18)).toString()
+            getHexAddress(rewardAddress) != getHexAddress(wnewAddress) ? new BigNumber(100000).times(new BigNumber(10).pow(18)).toString() 
+              : new BigNumber(rewardAmount).plus(100000).times(new BigNumber(10).pow(18)).toString()
           )
           // sleep(3000)
           if(txHash) {
@@ -299,7 +302,7 @@ const CustomCreateFarm: React.FC<CustomCreateFarmProps> = ({stakeTokenType}) => 
                       <CustomInput onChange={handleDuration} value={duration} startAdornment={t('Mining Duration')} placeholder={'0'} type={'duration'}></CustomInput>
                       <CustomInput onChange={null} value={'100000'} startAdornment={t('Fee For New Mining Pool')} placeholder={'100,000'} type={'fee'}></CustomInput>
                       
-                      {!allowance.toNumber() ? (
+                      {!allowance.toNumber() && getHexAddress(rewardAddress) != getHexAddress(wnewAddress) ? (
                           <Button
                               disabled={requestedApproval}
                               onClick={handleApprove}

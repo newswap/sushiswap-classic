@@ -17,8 +17,12 @@ import { getLogoURLByAddress } from '../../../utils/addressUtil'
 import useAllowanceGeneral from '../../../hooks/useAllowanceGeneral'
 import useApproveGeneral from '../../../hooks/useApproveGeneral'
 import useStakeGeneral from '../../../hooks/useStakeGeneral'
+import useStakeNEW from '../../../hooks/useStakeNEW'
 import useStakedBalanceByAccount from '../../../hooks/useStakedBalanceByAccount'
 import useUnstakeGeneral from '../../../hooks/useUnstakeGeneral'
+import useSushi from '../../../hooks/useSushi'
+import { getWNewAddress } from '../../../sushi/utils'
+import useNewBalance from '../../../hooks/useNewBalance'
 import { getBalanceNumber, getDisplayBalance } from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
@@ -40,20 +44,24 @@ const Stake: React.FC<StakeProps> = ({ stakingContract, miningContract, stakingT
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { account } = useWallet()
   const { t } = useTranslation()
+  const sushi = useSushi()
+  const wnewAddress = getWNewAddress(sushi)
 
+  const newBalance = useNewBalance()
   const allowance = useAllowanceGeneral(stakingContract, miningContract)
   const tokenBalance = useTokenBalance(stakingContract?.options.address)
   const stakedBalance = useStakedBalanceByAccount(miningContract)
 
   const { onApprove } = useApproveGeneral(stakingContract, miningContract)
   const { onStake } = useStakeGeneral(miningContract)
+  const { onStakeNEW } = useStakeNEW(miningContract)
   const { onUnstake } = useUnstakeGeneral(miningContract)
 
   const [onPresentDeposit] = useModal(
     <DepositModal
-      max={tokenBalance}
+      max={ wnewAddress?.toLowerCase() != stakingContract?.options.address?.toLowerCase() ? tokenBalance : newBalance }
       tokenDecimals = {stakingTokenDecimals}
-      onConfirm={onStake}
+      onConfirm={ wnewAddress?.toLowerCase() != stakingContract?.options.address?.toLowerCase() ? onStake : onStakeNEW }
       tokenName={stakingTokenName}
     />,
   )
@@ -106,10 +114,10 @@ const Stake: React.FC<StakeProps> = ({ stakingContract, miningContract, stakingT
             </StyledDiv>
             <Spacer height={20} />
             <Value value={getBalanceNumber(stakedBalance, stakingTokenDecimals)} />
-            <Label text={`${stakingTokenName} ` + t('Tokens Staked')} />
+            <Label text={`${stakingTokenName} ` + t('Staked')} />
           </StyledCardHeader>
           <StyledCardActions>
-            {!allowance.toNumber() ? (
+            {!allowance.toNumber() && wnewAddress?.toLowerCase() != stakingContract?.options.address?.toLowerCase() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}

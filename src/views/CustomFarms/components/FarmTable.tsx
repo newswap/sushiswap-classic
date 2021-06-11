@@ -163,8 +163,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
                                                         <TitleDetailDiv>{t('Deposit')} <StyledSpan>{ 
                                                             stakeTokenType === 'lpToken' ?
                                                                 ((farm.token0Symbol==='WNEW' ? 'NEW' : farm.token0Symbol) + '-' + (farm.token1Symbol==='WNEW' ? 'NEW' : farm.token1Symbol)) :
-                                                                farm.stakingTokenSymbol
-                                                            }</StyledSpan>, {t('Earn')} <StyledSpan>{farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
+                                                                farm.stakingTokenSymbol==='WNEW' ? 'NEW' : farm.stakingTokenSymbol
+                                                            }</StyledSpan>, {t('Earn')} <StyledSpan>{farm.rewardsTokenSymbol === 'WNEW' ? 'NEW' : farm.rewardsTokenSymbol}</StyledSpan></TitleDetailDiv>
                                                     </DetailDiv>
                                 
                                                 </TopLeftDiv>
