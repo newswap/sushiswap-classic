@@ -51,7 +51,7 @@ export const contractAddresses = {
   },
   tokenMineFactory: { // 自定义挖矿工厂
     1007: '0x88e7cc45e594e2efd93dbc65e5859dceb6079795',  //小写
-    1012: ''
+    1012: '0x72b1ac9a97cc37c7abf76d8617eb485f2248eeba'
   },
 
   masterChef: {
@@ -163,7 +163,7 @@ export const mainstreamSupportedPools = [
 
 // // community mining supported Polls
 export const nodeSupportedPools = [
-  // mainnet
+  // // mainnet
   // { // IMX-NEW
   //   pid: 0,
   //   lpAddresses: {
@@ -486,7 +486,7 @@ export const nodeSupportedPools = [
   //   icon: '',
   //   iconL: '',
   //   iconR: newcoin
-  // }
+  // },
   // { // TICT-NEW
   //   pid: 19,
   //   lpAddresses: {
@@ -554,7 +554,7 @@ export const nodeSupportedPools = [
   //   icon: '',
   //   iconL: '',
   //   iconR: newcoin
-  // }
+  // },
   // { // MTC-NEW
   //   pid: 23,
   //   lpAddresses: {

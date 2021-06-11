@@ -69,9 +69,9 @@ const TokenSelectProviderModel: React.FC<TokenSelectProps> = ({ onDismiss, token
                     pairsFound.push(pair)
                   }
                 })
- 
-                setPage(0)
-                setShowPairs(pairsFound)
+
+              setPage(0)
+              setShowPairs(pairsFound)
             } else {
               setPage(0)
               setShowPairs(tokenList)

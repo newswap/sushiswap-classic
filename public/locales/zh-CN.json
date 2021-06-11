@@ -132,6 +132,7 @@
   "customMiningTips": "参与由牛顿社群成员创建的自定义挖矿，将对应的通证质押入矿池，获得对应的通证奖励。",
   "tokenEarned": "待领取的{{token}}",
   "Mining Remaining Rewards": "挖矿奖励剩余",
+  "insufficient balance": "余额不足",
 
   "Cooking the rice ...": "Cooking the rice ...",
   "Menu": "菜单",

@@ -108,7 +108,7 @@ const Balances: React.FC = () => {
                           .times(new BigNumber(100))
                           .toNumber()
                           .toLocaleString('en-US')}%`
-                        : '—'}
+                        : t('Loading ...')}
               />
             </CardContent>
             <Footnote>
@@ -119,7 +119,7 @@ const Balances: React.FC = () => {
                     ? `$${newPrice.times(totalNew)
                     .toNumber()
                     .toLocaleString('en-US')}` 
-                    : '$0.00'
+                    : t('Loading ...')
                 }
               </FootnoteValue>
             </Footnote>

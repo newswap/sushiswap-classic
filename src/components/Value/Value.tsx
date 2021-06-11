@@ -21,7 +21,7 @@ const Value: React.FC<ValueProps> = ({ value, decimals }) => {
   }, [value])
 
   return (
-    <StyledValue fontSize={ typeof value === 'object' ? 30 : (new BigNumber(value).toNumber() > 10000000000 ? 28 : 30)}>
+    <StyledValue fontSize={ typeof value === 'object' ? 30 : (new BigNumber(value).toNumber() > 1000000000 ? 28 : 30)}>
       {typeof value == 'string' ? (
         value
       ) : (
