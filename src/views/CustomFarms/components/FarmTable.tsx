@@ -145,8 +145,8 @@ const FarmTable: React.FC<FarmTableProps> = ({dataSource, stakeTokenType}) => {
             </HeadDiv>
             <Table className={classes.table} aria-label="simple table">
             <TableBody>
-                {   rows[tabValue].length === 0 ? (     
-                        <TitleDiv>{t('No Mining Pool Temporarily')}</TitleDiv>
+                {   rows[tabValue].length === 0 ? (    
+                        <TitleDiv>{ customFarms?.length === 0 ? t('Loading ...') : t('No Mining Pool Temporarily')}</TitleDiv>
                     ) :
                     (rows[tabValue].slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((farm, j) => {
                             // let address = farm.tokenAddress

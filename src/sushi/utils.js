@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import Web3 from 'web3'
 import { ethers } from 'ethers'
-import { client, newSwapClient } from '../apollo/client'
+import { tokenMineClient, tokenMineV2Client, newSwapClient } from '../apollo/client'
 import TokenMineAbi from './lib/abi/tokenmine.json'
 
 import {
@@ -581,8 +581,21 @@ export const getAllTokenMines = async () => {
     let allFound = false
     let tokenMines = []
     let skipCount = 0
+
+    // 先拿V1，再拿V2版
+    const v1Result = await tokenMineClient.query({
+      query: ALL_TOKEN_MINES,
+      variables: {
+        skip: 0
+      },
+      fetchPolicy: 'network-only'       
+    })
+    tokenMines = tokenMines.concat(v1Result?.data?.tokenMines)
+    // console.log("getAllTokenMines V1----------->")
+    // console.log(v1Result?.data?.tokenMines)
+
     while (!allFound) {
-      let result = await client.query({
+      let result = await tokenMineV2Client.query({
         query: ALL_TOKEN_MINES,
         variables: {
           skip: skipCount
@@ -591,8 +604,10 @@ export const getAllTokenMines = async () => {
         fetchPolicy: 'network-only'       
       })
       skipCount = skipCount + TOKENMINES_TO_FETCH
-      // console.log("getAllTokenMines----------->")
+      // console.log("getAllTokenMines V2----------->")
       // console.log(result)
+      // console.log(result?.data?.tokenMines)
+
       tokenMines = tokenMines.concat(result?.data?.tokenMines)
       if (result?.data?.tokenMines.length < TOKENMINES_TO_FETCH || tokenMines.length > TOKENMINES_TO_FETCH) {
         allFound = true
