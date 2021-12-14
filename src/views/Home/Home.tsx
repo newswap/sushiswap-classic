@@ -65,8 +65,8 @@ const Home: React.FC = () => {
   // console.log("newPerLP:" + newBalance.times(2).div(totalSupply))
   // console.log("newValue:"+newAmount.toNumber())
 
-  // 第四期结束时间 7月22 12:00(utc+8)
-  const endTime = 1626926400000           
+  // 第5期结束时间 12月29 12:00(utc+8)
+  const endTime = 1640750400000                          
   // const {
   //   pid,
   //   lpTokenAddress,
@@ -120,7 +120,7 @@ const Home: React.FC = () => {
                 { CHAIN_ID===1007 || new Date().getTime() < endTime ? 
                      `${t('Total Stake Value')}: 
                         ${newAmount.toNumber() > 0 ? '$'+newAmount.times(newPrice).toNumber().toLocaleString('en-US') : '$0.00'}`
-                      : t('unMingClose', {Number:5} )
+                      : t('unMingClose', {Number:6} )
                 }
               </StyledTotalDiv>
               <StyledSpeedDiv>
@@ -128,7 +128,7 @@ const Home: React.FC = () => {
                       `${t('APY(Estimated)')}:
                           ${newAmount.toNumber() > 0 ? 
                               BLOCKS_PER_YEAR.times(new BigNumber(NEW_PER_BLOCK)).div(newAmount).times(new BigNumber(100)).toNumber().toLocaleString('en-US') + '%' : '-'}`
-                      : t('unMingCloseTips', {Number:4} )
+                      : t('unMingCloseTips', {Number:5} )
                 }
               </StyledSpeedDiv>
               {/* <StyledSpeedDiv>
